@@ -3,14 +3,15 @@
 	"subHeading": "Ett enkelt enkätverktyg",
 	"invite": "Bjud in deltagare med den här länken:",
 	"createGame": "Skapa spel",
-	"participateGame": "Gå med",
+	"participateGame": "Gå med i ett spel",
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"about": "Om oss",
-	"participateInPoll": "Delta i enkäten",
 	"titlegame": "Häng Person",
 	"languagebox": "Sve",
 	"coop": "Samarbete",
-	"enterWordHere": "Skriv in ett ord här"
+	"enterWordHere": "Skriv in ett ord här",
+	"submit": "Skicka",
+	"enterGamePin": "Ange spelID"
 
 }
