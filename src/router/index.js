@@ -20,9 +20,21 @@ const router = createRouter({
       component: () => import('../views/LobbyView.vue')
     },
     {
+      path:'/hostLobby/',
+      name: 'lobbyForHost',
+      component: () => import('../views/lobbyForHost.vue')
+
+    },
+    {
       path: '/create/',
       name: 'CreateView',
       component: () => import('../views/CreateView.vue')
+    },
+    {
+      path: '/submitword/',
+      name: 'WordSubmission',
+      component: () => import('../views/WordSubmission.vue')
+
     },
     {
       path: '/result/:id',
