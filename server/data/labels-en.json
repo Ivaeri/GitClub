@@ -11,5 +11,6 @@
 	"titlegame": "Hang Person",
 	"languagebox": "Eng",
 	"coop": "Co-op",
-	"enterWordHere": "Enter a word here"
+	"enterWordHere": "Enter a word here",
+	"typeWordPlaceHolder": "Type a word here"
 }
