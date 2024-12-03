@@ -1,16 +1,29 @@
 <template>
+  <header>
+    <h1>
+      {{ uiLabels.participateGame }}
+    </h1>
+  </header>
   <div>
     {{pollId}}
-    <div v-if="!joined">
-      <input type="text" v-model="userName">
-      <button v-on:click="participateInPoll">
-        {{ this.uiLabels.participateInPoll }}
+    <div>
+      <label> 
+      <input type="number" v-model="newPollId" v-bind:placeholder="uiLabels.enterGamePin" class="enterGameInput">
+    </label>
+    <router-link v-bind:to="'/lobbyAll/' + newPollId">
+      <button class="joinGameButton">
+        {{ uiLabels.participateGame }}
+      </button>
+    </router-link>
+      <!----<input type="text" v-model="userName" placeholder="Ditt namn">
+      <button v-on:click="participateInGame">
+        {{ this.uiLabels.participateInGame }}
       </button>
     </div>
     <div v-if="joined">
-      <p>Waiting for host to start poll</p>
-      {{ participants }}
-  </div>
+      <p>Waiting for host to start game</p>
+      {{ participants }} -->
+    </div> 
   </div>
 </template>
 
@@ -23,6 +36,7 @@ export default {
   data: function () {
     return {
       userName: "",
+      newPollId: "",
       pollId: "inactive poll",
       uiLabels: {},
       joined: false,
@@ -39,10 +53,35 @@ export default {
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
-    participateInPoll: function () {
+    participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
       this.joined = true;
     }
   }
 }
 </script>
+<style scoped>
+
+header{
+
+  height: 20em;
+}
+
+header h1{
+  margin-top: 40px;
+  font-size: 7em;
+}
+
+.enterGameInput{
+  width: 40%;
+  height: 4em;
+  text-align: center;
+  font-size: larger;
+  background-color: aliceblue;
+  color: black;
+
+}
+.enterGameInput{
+}
+
+</style>
