@@ -4,7 +4,7 @@
          v-on:click="toggleNav">
     </div>
     <div class="logo">
-      <img src="/img/logo.png">
+      <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
       <img src="../assets/logo.svg">
     </div>
@@ -105,7 +105,7 @@ export default {
     padding-top: 2.5em;
   }
   .logo img {
-    height:2.5rem;
+    height:5rem;
     vertical-align: bottom;
     margin-right: 0.5rem; 
   }

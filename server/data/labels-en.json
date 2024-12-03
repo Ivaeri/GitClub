@@ -7,9 +7,10 @@
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"about": "About",
-	"participateInPoll": "Participate in poll",
+	"participateInGame": "Participate in Game",
 	"titlegame": "Hang Person",
 	"languagebox": "Eng",
 	"coop": "Co-op",
-	"enterWordHere": "Enter a word here"
+	"enterWordHere": "Enter a word here",
+	"enterGamePin": "Enter Game Pin"
 }
