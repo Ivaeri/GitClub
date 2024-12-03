@@ -12,6 +12,7 @@
 	"coop": "Samarbete",
 	"enterWordHere": "Skriv in ett ord här",
 	"submit": "Skicka",
-	"enterGamePin": "Ange spelID"
+	"enterGamePin": "Ange spelID",
+	"typeWordPlaceHolder": "Skriv in ett ord här"
 
 }
