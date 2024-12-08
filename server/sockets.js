@@ -3,6 +3,10 @@ function sockets(io, socket, data) {
   socket.on('getUILabels', function(lang) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
+  socket.on("sendWord", function (d) {
+    console.log("Word received from client:", d);
+    io.emit("sendWord", data); 
+  });
 
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang)

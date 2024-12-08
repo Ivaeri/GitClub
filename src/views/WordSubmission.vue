@@ -1,9 +1,19 @@
 <template>
   <h1>Co-op mode</h1>
   
-  <NewPageButton v-bind:text="uiLabels.sendWord" to="/hostLobby/"></newPageButton>
-  <InputField v-bind:label="uiLabels.enterWord" v-model="enteredword" placeholder="example" id="enter-word"></InputField>
-  
+  <NewPageButton
+  v-bind:text="uiLabels.sendWord" 
+  to="/hostLobby/"  
+  v-on:click="sendWord" >
+</newPageButton>
+
+  <InputField
+   v-bind:label="uiLabels.enterWord"
+    v-model="enteredword" 
+    placeholder="example" 
+    id="enter-word">
+  </InputField>
+<p>entered word:{{enteredword }}</p>
   
   
   </template>
@@ -26,7 +36,7 @@
       return {
        
         uiLabels: {},
-        enteredword: ""
+        enteredword: "ex: something"
       }
     },
     
@@ -36,8 +46,9 @@
     },
     methods: {
       sendWord: function () {
-        socket.emit( "sendWord", {word: this.enteredword} )
+        socket.emit( "sendWord", {sentWord: this.enteredword} )
       }
+      
     }
     
   }

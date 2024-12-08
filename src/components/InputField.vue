@@ -1,6 +1,13 @@
 <template>  
     <label v-bind:for="id">{{ label }}</label><br>
-    <input type="text" v-bind:id="id" v-model="inputString" v-bind:placeholder="placeholder" class="inputField">
+    <input type="text"
+     v-bind:id="id" 
+     v-bind:value="modelValue" 
+     v-bind:placeholder="placeholder"
+      class="inputField"
+      v-on:input="$emit('update:modelValue', $event.target.value)">
+
+      
     
     </template>
     
@@ -13,7 +20,7 @@ export default {
       type: String,
       required: true
     },
-    inputString: {
+    modelValue: {
       type: String,
       default: ''
     },
@@ -26,11 +33,8 @@ export default {
       default: ''
     }
   },
-  data() {
-    return {
-      inputString: ""
-    }
-  },
+
+
 
  
 }
