@@ -13,6 +13,9 @@
 	"enterWordHere": "Skriv in ett ord här",
 	"submit": "Skicka",
 	"enterGamePin": "Ange spelID",
-	"typeWordPlaceHolder": "Skriv in ett ord här"
+	"typeWordPlaceHolder": "Skriv in ett ord här",
+	"sendWord": "Använd ord",
+	"start": "Starta",
+	"enterWord": "Skriv ord här"
 
 }
