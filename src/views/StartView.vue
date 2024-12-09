@@ -6,7 +6,6 @@
     <div class="logo">
       <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
-      <img src="../assets/logo.svg">
     </div>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
