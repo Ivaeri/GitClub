@@ -16,6 +16,8 @@
 	"typeWordPlaceHolder": "Skriv in ett ord här",
 	"sendWord": "Använd ord",
 	"start": "Starta",
-	"enterWord": "Skriv ord här"
-
+	"enterWord": "Skriv ord här",
+	"name": "namn",
+	"enterUsername": "Vänligen fyll i ditt användarnamn!",
+	"awaitingHost": "Inväntar att värden startar spelet"
 }

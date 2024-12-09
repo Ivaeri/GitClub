@@ -1,14 +1,16 @@
 <template>
     <div>
       {{pollId}}
+      <h1>{{ this.uiLabels.titlegame }}</h1>
       <div v-if="!joined">
-        <input type="text" v-model="userName">
+        {{ this.uiLabels.enterUsername }}
+        <input type="text" v-bind:placeholder="uiLabels.name" v-model="userName">
         <button v-on:click="participateInPoll">
-          {{ this.uiLabels.participateInPoll }}
+          {{ this.uiLabels.participateGame }}
         </button>
       </div>
       <div v-if="joined">
-        <p>Waiting for host to start poll</p>
+        <p>{{ this.uiLabels.awaitingHost }}</p>
         {{ participants }}
     </div>
     </div>
