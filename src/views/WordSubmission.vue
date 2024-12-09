@@ -10,10 +10,11 @@
   <InputField
    v-bind:label="uiLabels.enterWord"
     v-model="enteredword" 
-    placeholder="example" 
+    placeholder="Enter word here" 
     id="enter-word">
   </InputField>
-<p>entered word:{{enteredword }}</p>
+<!-- Jag tycker det nedanför var onödigt men vill inte ta bort det om resten tycker att det är nice.
+  <p>entered word:{{enteredword }}</p> -->
   
   
   </template>
@@ -36,7 +37,7 @@
       return {
        
         uiLabels: {},
-        enteredword: "ex: something"
+        enteredword: ""
       }
     },
     
@@ -46,7 +47,8 @@
     },
     methods: {
       sendWord: function () {
-        socket.emit( "sendWord", {sentWord: this.enteredword} )
+        console.log("sending word:" + this.enteredword)
+        socket.emit( "sendWord", this.enteredword )
       }
       
     }
