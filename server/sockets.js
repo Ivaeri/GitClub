@@ -4,8 +4,9 @@ function sockets(io, socket, data) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
   socket.on("sendWord", function (d) {
+    socket.emit('updateWord', data.updateWord(d))
     console.log("Word received from client:", d);
-    io.emit("sendWord", data); 
+    io.emit("sendWord",  { enteredWord: d }); 
   });
 
   socket.on('createPoll', function(d) {
@@ -40,7 +41,7 @@ function sockets(io, socket, data) {
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-  }); 
+  });
 }
 
 export { sockets };

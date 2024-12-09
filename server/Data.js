@@ -16,7 +16,8 @@ function Data() {
     ],
     answers: [],
     currentQuestion: 0,
-    participants: []
+    participants: [],
+    enteredWord: ""
   }
 }
 
@@ -122,6 +123,11 @@ Data.prototype.submitAnswer = function(pollId, answer) {
       answers[answer] += 1
     console.log("answers looks like ", answers, typeof answers);
   }
+}
+
+Data.prototype.updateWord = function(word){
+  console.log("word received from client:", word);
+  this.polls['test'].enteredWord = word;
 }
 
 export { Data };

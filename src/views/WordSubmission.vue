@@ -3,8 +3,9 @@
   
   <NewPageButton
   v-bind:text="uiLabels.sendWord" 
-  to="/hostLobby/"  
+  v-bind:to="'/hostLobby/'"
   v-on:click="sendWord" >
+  Data: {{ enteredword }}
 </newPageButton>
 
   <InputField
@@ -49,6 +50,7 @@
       sendWord: function () {
         console.log("sending word:" + this.enteredword)
         socket.emit( "sendWord", this.enteredword )
+        
       }
       
     }
