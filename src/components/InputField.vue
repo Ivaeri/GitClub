@@ -44,7 +44,7 @@ export default {
     <style scoped>
     .inputField {
         background-color: pink;
-        color: blue;
+        color: black;
         padding: 15px 32px;
         text-align: center;
         display: inline-block;
@@ -52,7 +52,5 @@ export default {
         margin: 4px 2px;
         cursor: pointer;
     }
-    .inputField:hover {
-        background-color: rebeccapurple;
-    }
+
     </style>
