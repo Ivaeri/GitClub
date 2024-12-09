@@ -11,5 +11,9 @@
 	"languagebox": "Eng",
 	"coop": "Co-op",
 	"enterWordHere": "Enter a word here",
-	"enterGamePin": "Enter Game Pin"
+	"enterGamePin": "Enter Game Pin",
+	"typeWordPlaceHolder": "Type a word here",
+	"sendWord": "Submit word",
+	"start": "Start",
+	"enterWord": "enter word"
 }
