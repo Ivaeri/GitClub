@@ -61,7 +61,6 @@ export default {
   data: function () {
     return {
       uiLabels: {},
-      newPollId: "",
       lang: localStorage.getItem( "lang") || "en",
       hideNav: true
     }
