@@ -1,6 +1,6 @@
 <template>
     <h1>The lobby for the host</h1>
-    <h2>Word received: {{ receivedWord }}</h2>
+    <h2>Word received: {{enteredword}}</h2>
     
     
     </template>
@@ -13,17 +13,15 @@
       name: 'CreateView',
       data: function () {
         return {
-         
           uiLabels: {},
-          receivedWord: ""
+          enteredword: "",
         }
       },
       created: function () {
         socket.on( "uiLabels", labels => this.uiLabels = labels );
         socket.emit( "getUILabels", this.lang );
-        socket.on("sendWord", (data) => {
-          this.receivedWord = data.sentWord;
-        });
+        socket.on("sendWord", (data) => 
+          this.enteredword = data.enteredWord);
       }
     }
     
