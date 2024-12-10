@@ -14,8 +14,8 @@
     placeholder="Enter word here" 
     id="enter-word">
   </InputField>
-<!-- Jag tycker det nedanför var onödigt men vill inte ta bort det om resten tycker att det är nice.-->
-  <p>entered word:{{enteredword }}</p> 
+<!-- Jag tycker det nedanför var onödigt men vill inte ta bort det om resten tycker att det är nice.
+  <p>entered word:{{enteredword }}</p> -->
   
   
   </template>
