@@ -16,7 +16,7 @@
     </label>
     <button class="joinGameButton" @click="validateAndJoin">
      {{ uiLabels.participateGame }}
-  </button>
+   </button>
       <!----<input type="text" v-model="userName" placeholder="Ditt namn">
       <button v-on:click="participateInGame">
         {{ this.uiLabels.participateInGame }}
@@ -61,7 +61,7 @@ export default {
   methods: {
     validateAndJoin() {
     if (!this.newPollId.trim()) {
-      alert(uiLabels.fillNumber);
+      alert(this.uiLabels.fillNumber);
     } else {
       this.$router.push('/lobbyAll/' + this.newPollId);
     }
@@ -91,9 +91,6 @@ header h1{
   font-size: larger;
   background-color: aliceblue;
   color: black;
-
-}
-.enterGameInput{
 }
 
 </style>
