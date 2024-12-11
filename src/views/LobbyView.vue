@@ -63,7 +63,7 @@ export default {
     if (!this.newPollId.trim()) {
       alert(this.uiLabels.fillNumber);
     } else {
-      this.$router.push('/lobbyAll/' + this.PollId);
+      this.$router.push('/lobbyAll/' + this.newPollId);
     }
   },
     participateInGame: function () {
@@ -91,9 +91,6 @@ header h1{
   font-size: larger;
   background-color: aliceblue;
   color: black;
-
-}
-.enterGameInput{
 }
 
 </style>
