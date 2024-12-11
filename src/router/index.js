@@ -22,7 +22,7 @@ const router = createRouter({
       component: () => import('../views/LobbyView.vue')
     },
     {
-      path: '/lobbyAll/',
+      path: '/lobbyAll/:id',
       name: 'LobbyAllView',
       component: () => import('../views/LobbyAllView.vue')
     },
