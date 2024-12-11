@@ -182,10 +182,10 @@ background-color: #a02666;
     border-radius: 10%;
   }
   .swedishbutton{
-    background-image: url("public/img/svenskflagga.jpg");
+    background-image: url("/img/svenskflagga.jpg");
   }
   .englishbutton{
-    background-image: url("public/img/uk.png");
+    background-image: url("/img/uk.png");
   }
 
 @media screen and (max-width:50em) {
