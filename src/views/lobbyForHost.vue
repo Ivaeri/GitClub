@@ -1,7 +1,7 @@
 <template>
     <h1>{{ uiLabels.awaitingPlayers }}</h1>
     <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
-    <h2>{{ pollId }}</h2>
+    <h2>{{ uiLabels.id }}{{ pollId }}</h2>
     
     
     </template>

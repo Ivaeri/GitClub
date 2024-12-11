@@ -11,7 +11,7 @@
         <InputField  
           v-bind:label="uiLabels.enterGamePin"
           v-model="newPollId" 
-          placeholder="spel-id" >
+          :placeholder="uiLabels.id" >
         </InputField>
     </label>
     <button class="joinGameButton" @click="validateAndJoin">
@@ -61,7 +61,7 @@ export default {
   methods: {
     validateAndJoin() {
     if (!this.newPollId.trim()) {
-      alert('Du måste skriva in ett spel-ID för att gå med!');
+      alert(uiLabels.fillNumber);
     } else {
       this.$router.push('/lobbyAll/' + this.newPollId);
     }
