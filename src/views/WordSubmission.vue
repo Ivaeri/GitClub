@@ -5,15 +5,16 @@
   v-bind:text="uiLabels.sendWord" 
   v-bind:to="'/hostLobby/' + pollId"
   v-on:click="handleClick">
-  Data: {{ enteredword, pollId }}
+  Data: {{ enteredword}}
   Data: {{ pollId }}
 </newPageButton>
 
   <InputField
    v-bind:label="uiLabels.enterWord"
     v-model="enteredword" 
-    placeholder="Enter word here" 
-    id="enter-word">
+    :placeholder="uiLabels.enterWord" 
+    id="enter-word"
+    @keydown.enter="handleClick">
   </InputField>
 <!-- Jag tycker det nedanför var onödigt men vill inte ta bort det om resten tycker att det är nice.
   <p>entered word:{{enteredword }}</p> -->
