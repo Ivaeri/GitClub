@@ -1,10 +1,14 @@
 <template>
     <div>
-      {{pollId}}
+      {{ this.uiLabels.id }}{{pollId}}
       <h1>{{ this.uiLabels.titlegame }}</h1>
       <div v-if="!joined">
         {{ this.uiLabels.enterUsername }}
-        <input type="text" v-bind:placeholder="uiLabels.name" v-model="userName">
+        <InputField  
+          v-model="userName" 
+          placeholder="skriv ditt namn här" 
+          id="username">
+        </InputField>
         <button v-on:click="participateInPoll">
           {{ this.uiLabels.participateGame }}
         </button>
@@ -18,10 +22,14 @@
   
   <script>
   import io from 'socket.io-client';
+import InputField from '../components/InputField.vue';
   const socket = io("localhost:3000");
   
   export default {
     name: 'LobbyView',
+    components: {
+      InputField
+    },
     data: function () {
       return {
         userName: "",

@@ -8,7 +8,11 @@
     {{pollId}}
     <div>
       <label> 
-      <input type="number" v-model="newPollId" v-bind:placeholder="uiLabels.enterGamePin" class="enterGameInput">
+        <InputField  
+          v-bind:label="uiLabels.enterGamePin"
+          v-model="newPollId" 
+          placeholder="spel-id" >
+        </InputField>
     </label>
     <router-link v-bind:to="'/lobbyAll/' + newPollId">
       <button class="joinGameButton">
@@ -28,11 +32,15 @@
 </template>
 
 <script>
+import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
 
 export default {
   name: 'LobbyView',
+  components: {
+    InputField
+  },
   data: function () {
     return {
       userName: "",

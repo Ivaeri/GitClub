@@ -21,5 +21,6 @@
 	"enterUsername": "Vänligen fyll i ditt användarnamn!",
 	"awaitingHost": "Inväntar att värden startar spelet",
 	"awaitingPlayers": "Inväntar att alla spelare ansluter",
-	"wordRecieved": "Ordet för denna omgång är:"
+	"wordRecieved": "Ordet för denna omgång är:",
+	"id": "Spel-id:"
 }
