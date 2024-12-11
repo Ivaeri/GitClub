@@ -1,7 +1,6 @@
 <template>  
     <button v-on:click="handleClick" class="blueButton">
         {{ text }}
-    
     </button>
     
     </template>

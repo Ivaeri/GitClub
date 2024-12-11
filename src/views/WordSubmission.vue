@@ -1,25 +1,26 @@
 <template>
   <h1>{{uiLabels.coop}}</h1>
-  
-  <NewPageButton
-  v-bind:text="uiLabels.sendWord" 
-  v-bind:to="'/hostLobby/' + pollId"
-  v-on:click="handleClick">
-  Data: {{ enteredword}}
-  Data: {{ pollId }}
-</newPageButton>
 
-  <InputField
-   v-bind:label="uiLabels.enterWord"
-    v-model="enteredword" 
-    :placeholder="uiLabels.enterWord" 
-    id="enter-word">
-  </InputField>
-<!-- Jag tycker det nedanför var onödigt men vill inte ta bort det om resten tycker att det är nice.
-  <p>entered word:{{enteredword }}</p> -->
-  
-  
-  </template>
+  <div class="container">
+    <div class="item">
+      <InputField
+        v-bind:label="uiLabels.enterWord"
+        v-model="enteredword" 
+        :placeholder="uiLabels.enterWord" 
+        id="enter-word">
+      </InputField>
+    </div>
+    <div class="item">
+      <NewPageButton
+        v-bind:text="uiLabels.sendWord" 
+        v-bind:to="'/hostLobby/' + pollId"
+        v-on:click="handleClick">
+        Data: {{ enteredword}}
+        Data: {{ pollId }}
+      </newPageButton>
+    </div>
+  </div>
+</template>
   
   <script>
   import io from 'socket.io-client';
@@ -67,16 +68,27 @@
         socket.emit( "generateId", this.pollId )
       }
 
-      
+
     }
     
-  }
-  
-  
-  
+  };
   
   </script>
   
   <style scoped>
+
+  .container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+
+
   
   </style>
