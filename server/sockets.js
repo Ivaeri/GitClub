@@ -9,6 +9,12 @@ function sockets(io, socket, data) {
     io.emit("sendWord",  { enteredWord: d }); 
   });
 
+  socket.on("generateId", function(d) {
+    socket.emit('setPollId', data.setPollId(d))
+    console.log("poll Id set to:", d);
+    io.emit("generateId",  { pollId: d });
+  });
+
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang)
     socket.emit('pollData', data.getPoll(d.pollId));

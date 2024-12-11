@@ -26,7 +26,7 @@ const router = createRouter({
       component: () => import('../views/LobbyAllView.vue')
     },
     {
-      path:'/hostLobby/',
+      path:'/hostLobby/:id',
       name: 'lobbyForHost',
       component: () => import('../views/lobbyForHost.vue')
 

@@ -3,9 +3,10 @@
   
   <NewPageButton
   v-bind:text="uiLabels.sendWord" 
-  v-bind:to="'/hostLobby/'"
-  v-on:click="sendWord" >
-  Data: {{ enteredword }}
+  v-bind:to="'/hostLobby/' + pollId"
+  v-on:click="handleClick">
+  Data: {{ enteredword, pollId }}
+  Data: {{ pollId }}
 </newPageButton>
 
   <InputField
@@ -38,7 +39,9 @@
       return {
        
         uiLabels: {},
-        enteredword: ""
+        enteredword: "",
+        pollId: 1
+
       }
     },
     
@@ -47,11 +50,20 @@
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
+      handleClick: function () {
+        this.sendWord()
+        this.generateId()
+      },
       sendWord: function () {
         console.log("sending word:" + this.enteredword)
         socket.emit( "sendWord", this.enteredword )
-        
+      },
+      generateId: function () {
+        this.pollId = Math.floor(Math.random() * 1000000);
+        console.log("generated id:" + this.pollId)
+        socket.emit( "generateId", this.pollId )
       }
+
       
     }
     

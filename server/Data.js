@@ -17,7 +17,8 @@ function Data() {
     answers: [],
     currentQuestion: 0,
     participants: [],
-    enteredWord: ""
+    enteredWord: "",
+    pollIdInData: 0
   }
 }
 
@@ -30,6 +31,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 Data.prototype.pollExists = function (pollId) {
   return typeof this.polls[pollId] !== "undefined"
 }
+
 
 Data.prototype.getUILabels = function (lang) {
   //check if lang is valid before trying to load the dictionary file
@@ -128,6 +130,12 @@ Data.prototype.submitAnswer = function(pollId, answer) {
 Data.prototype.updateWord = function(word){
   console.log("word received from client:", word);
   this.polls['test'].enteredWord = word;
+}
+
+Data.prototype.setPollId = function(pollId){
+  console.log("Id received from client:", pollId);
+  this.polls['test'].pollIdInData = pollId;
+  
 }
 
 export { Data };
