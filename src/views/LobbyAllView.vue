@@ -4,17 +4,20 @@
       <h1>{{ this.uiLabels.titlegame }}</h1>
       <div v-if="!joined">
         {{ this.uiLabels.enterUsername }}
-        <InputField  
+        <InputField 
           v-model="userName" 
-          placeholder="skriv ditt namn här" 
+          :placeholder="uiLabels.name" 
           id="username">
         </InputField>
-        <button v-on:click="participateInPoll">
-          {{ this.uiLabels.participateGame }}
+        <button class="joinGameButton" @click="validateAndParticipate">
+           {{ uiLabels.participateGame }}
         </button>
+
       </div>
       <div v-if="joined">
-        <p>{{ this.uiLabels.awaitingHost }}</p>
+        <p>{{ uiLabels.welcome }} {{ userName }}!
+          {{ this.uiLabels.awaitingHost }}
+        </p>
         {{ participants }}
     </div>
     </div>
@@ -22,7 +25,7 @@
   
   <script>
   import io from 'socket.io-client';
-  import InputField from '../components/InputField.vue';
+import InputField from '../components/InputField.vue';
   const socket = io("localhost:3000");
   
   export default {
@@ -49,11 +52,11 @@
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
-      validateAndJoin() {
-    if (!this.PollId.trim()) {
-      alert('Du måste skriva in ett spel-ID för att gå med!');
+  validateAndParticipate() {
+    if (!this.userName.trim()) {
+      alert(this.uiLabels.fillName);
     } else {
-      this.$router.push('/lobbyAll/' + this.PollId);
+      this.participateInPoll();
     }
   },
       participateInPoll: function () {

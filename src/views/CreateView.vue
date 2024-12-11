@@ -55,7 +55,7 @@ export default {
       answers: ["", ""],
       questionNumber: 0,
       pollData: {},
-      uiLabels: {},
+      uiLabels: {}
     }
   },
   created: function () {

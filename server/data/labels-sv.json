@@ -18,9 +18,12 @@
 	"start": "Starta",
 	"enterWord": "Skriv ord här",
 	"name": "namn",
-	"enterUsername": "Vänligen fyll i ditt användarnamn!",
+	"enterUsername": "Vänligen fyll i ditt användarnamn",
 	"awaitingHost": "Inväntar att värden startar spelet",
 	"awaitingPlayers": "Inväntar att alla spelare ansluter",
 	"wordRecieved": "Ordet för denna omgång är:",
-	"id": "Spel-id:"
+	"id": "Spel-id: ",
+	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
+	"fillNumber": "vänligen fyll i ett spel-id innan du fortsätter",
+	"welcome": "Välkommen till spelet "
 }
