@@ -14,11 +14,9 @@
           placeholder="spel-id" >
         </InputField>
     </label>
-    <router-link v-bind:to="'/lobbyAll/' + newPollId">
-      <button class="joinGameButton">
-        {{ uiLabels.participateGame }}
-      </button>
-    </router-link>
+    <button class="joinGameButton" @click="validateAndJoin">
+     {{ uiLabels.participateGame }}
+  </button>
       <!----<input type="text" v-model="userName" placeholder="Ditt namn">
       <button v-on:click="participateInGame">
         {{ this.uiLabels.participateInGame }}
@@ -61,17 +59,23 @@ export default {
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
+    validateAndJoin() {
+    if (!this.newPollId.trim()) {
+      alert('Du måste skriva in ett spel-ID för att gå med!');
+    } else {
+      this.$router.push('/lobbyAll/' + this.newPollId);
+    }
+  },
     participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
       this.joined = true;
     }
-  }
+   }
 }
 </script>
 <style scoped>
 
 header{
-
   height: 20em;
 }
 

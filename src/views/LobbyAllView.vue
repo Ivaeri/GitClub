@@ -22,7 +22,7 @@
   
   <script>
   import io from 'socket.io-client';
-import InputField from '../components/InputField.vue';
+  import InputField from '../components/InputField.vue';
   const socket = io("localhost:3000");
   
   export default {
@@ -49,6 +49,13 @@ import InputField from '../components/InputField.vue';
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
+      validateAndJoin() {
+    if (!this.PollId.trim()) {
+      alert('Du måste skriva in ett spel-ID för att gå med!');
+    } else {
+      this.$router.push('/lobbyAll/' + this.PollId);
+    }
+  },
       participateInPoll: function () {
         socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
         this.joined = true;
