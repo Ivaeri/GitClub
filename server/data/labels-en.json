@@ -18,5 +18,8 @@
 	"enterWord": "enter word",
 	"name": "name",
 	"enterUsername": "Go ahead and enter your username!",
-	"awaitingHost": "Waiting for host to start the game"
+	"awaitingHost": "Waiting for host to start the game",
+	"awaitingPlayers": "Waiting for all the players to join",
+	"wordRecieved": "The word for this round is:",
+	"id": "Game-id:"
 }

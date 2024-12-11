@@ -1,6 +1,6 @@
 <template>
-    <h1>The lobby for the host</h1>
-    <h2>Word received: {{enteredword}}</h2>
+    <h1>{{ uiLabels.awaitingPlayers }}</h1>
+    <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
     
     
     </template>
