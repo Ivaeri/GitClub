@@ -5,7 +5,6 @@
      
   <newPageButton v-bind:text="uiLabels.coop" to="/submitword/" /> <!--newPageutton är en komponent som skapas i Button.vue, den har props: text, to. I text anger man vad som ska stå på knappen. I to anger man den sida man vill skickas till vid klick på knappen -->
 
-
   <div>
   
   

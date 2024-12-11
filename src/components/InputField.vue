@@ -1,5 +1,5 @@
 <template>  
-    <label v-bind:for="id">{{ label }}</label><br>
+    <label v-bind:for="id"></label><br>
     <input type="text"
      v-bind:id="id" 
      v-bind:value="modelValue" 
