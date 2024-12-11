@@ -1,5 +1,5 @@
 <template>
-  <h1>Co-op mode</h1>
+  <h1>{{uiLabels.coop}}</h1>
   
   <NewPageButton
   v-bind:text="uiLabels.sendWord" 
@@ -13,8 +13,7 @@
    v-bind:label="uiLabels.enterWord"
     v-model="enteredword" 
     :placeholder="uiLabels.enterWord" 
-    id="enter-word"
-    @keydown.enter="handleClick">
+    id="enter-word">
   </InputField>
 <!-- Jag tycker det nedanför var onödigt men vill inte ta bort det om resten tycker att det är nice.
   <p>entered word:{{enteredword }}</p> -->
@@ -40,6 +39,7 @@
       return {
        
         uiLabels: {},
+        lang: localStorage.getItem( "lang") || "en",
         enteredword: "",
         pollId: 1
 
@@ -47,7 +47,9 @@
     },
     
     created: function () {
-      socket.on( "uiLabels", labels => this.uiLabels = labels );
+      socket.on("uiLabels", labels => {
+      this.uiLabels = labels;
+      });
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
