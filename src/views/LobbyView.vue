@@ -51,7 +51,7 @@ export default {
     return {
       userName: "",
       newPollId: "",
-      pollId: "inactive poll",
+      pollId: 1,
       uiLabels: {},
       joined: false,
       lang: localStorage.getItem("lang") || "en",
@@ -87,6 +87,11 @@ export default {
     participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
       this.joined = true;
+    },
+
+    startGame: function () {
+      console.log("to start Game enter this ID: " + this.pollId);
+      socket.emit( "startPoll", this.pollId );
     }
    }
 }
