@@ -58,6 +58,12 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('questionUpdate', question);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
+  
+  socket.on('getActivePolls', () => {
+    const activePolls = Object.keys(data.polls); // Hämta alla aktiva spel-ID:n
+    console.log("Aktiva spel skickas:", activePolls);
+    socket.emit('activePolls', activePolls); // Skicka tillbaka till klienten
+});
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);

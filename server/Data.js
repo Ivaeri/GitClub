@@ -4,6 +4,7 @@ import {readFileSync} from "fs";
 // Store data in an object to keep the global namespace clean. In an actual implementation this would be interfacing a database...
 function Data() {
   this.polls = {};
+<<<<<<< HEAD
   this.polls['test'] = {
     lang: "en",
     questions: [
@@ -20,6 +21,8 @@ function Data() {
     enteredWord: "",
     pollId: 0
   }
+=======
+>>>>>>> a6a92de9a4ff036ba8acc62111a60ef708710077
 }
 
 /***********************************************
@@ -127,17 +130,37 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-Data.prototype.updateWord = function(word){
-  console.log("word received from client:", word);
-  this.polls['test'].enteredWord = word;
-}
+Data.prototype.updateWord = function (pollId, word) {
+  console.log("Word received from client for poll:", pollId, word);
+  if (this.pollExists(pollId)) {
+    this.polls[pollId].enteredWord = word;
+  }
+};
 
 
+<<<<<<< HEAD
 Data.prototype.setPollId = function(pollId){
   console.log("Id received from client:", pollId);
   this.polls['test'].pollId = pollId;
   
 }
+=======
+Data.prototype.setPollId = function (pollId) {
+  console.log("Id received from client:", pollId);
+  if (!this.pollExists(pollId)) {
+    this.polls[pollId] = {
+      lang: "en",
+      questions: [],
+      answers: [],
+      currentQuestion: 0,
+      participants: [],
+      enteredWord: "",
+      pollIdInData: pollId
+    };
+  }
+};
+
+>>>>>>> a6a92de9a4ff036ba8acc62111a60ef708710077
 
 
 export { Data };
