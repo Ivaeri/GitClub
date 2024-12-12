@@ -13,11 +13,13 @@ function sockets(io, socket, data) {
     socket.emit('setPollId', data.setPollId(d))
     console.log("poll Id set to:", d);
     io.emit("generateId",  { pollId: d });
+    io.emit("activePollsUpdate", Object.keys(data.polls));
   });
 
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang)
     socket.emit('pollData', data.getPoll(d.pollId));
+    io.emit('activePollsUpdate', Object.keys(data.polls));
   });
 
   socket.on('addQuestion', function(d) {
@@ -43,11 +45,12 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('questionUpdate', question);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
-  
+
   socket.on('getActivePolls', () => {
-    const activePolls = Object.keys(data.polls); // Hämta alla aktiva spel-ID:n
+    const activePolls = Object.keys(data.polls); 
     console.log("Aktiva spel skickas:", activePolls);
-    socket.emit('activePolls', activePolls); // Skicka tillbaka till klienten
+    socket.emit('activePolls', activePolls); 
+    io.emit("activePollsUpdate", Object.keys(data.polls));
 });
 
   socket.on('submitAnswer', function(d) {

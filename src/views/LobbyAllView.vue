@@ -18,7 +18,14 @@
         <p>{{ uiLabels.welcome }} {{ userName }}!
           {{ this.uiLabels.awaitingHost }}
         </p>
-        {{ participants }}
+        <div v-if="participants.length > 0">
+  <h2>Deltagare:</h2>
+  <ul>
+    <div v-for="participant in participants" :key="participant.name">
+      {{ participant.name }}
+    </div>
+  </ul>
+</div>
     </div>
     </div>
   </template>

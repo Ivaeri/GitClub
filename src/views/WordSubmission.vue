@@ -66,6 +66,7 @@
         this.pollId = Math.floor(Math.random() * 1000000);
         console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
+        socket.emit("getActivePolls");
       }
 
 

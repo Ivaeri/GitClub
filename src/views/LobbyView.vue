@@ -51,7 +51,7 @@ export default {
     return {
       userName: "",
       newPollId: "",
-      pollId: 1,
+      pollId: "inactive poll",
       uiLabels: {},
       joined: false,
       lang: localStorage.getItem("lang") || "en",
@@ -62,6 +62,9 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
+    socket.on("activePollsUpdate", (polls) => {
+      console.log("Aktiva spel mottagna:", polls);
+      this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
     socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
     socket.emit( "joinPoll", this.pollId );
@@ -77,7 +80,7 @@ export default {
     if (!this.newPollId.trim()) {
       alert(this.uiLabels.fillNumber);
     } else {
-      this.$router.push('/lobbyAll/' + this.newPollId);
+      this.$router.push('/lobbyAll/' + this.newPollId); /*allt inom citat?*/
     }
   },
   joinPoll(pollId) {
@@ -87,11 +90,6 @@ export default {
     participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
       this.joined = true;
-    },
-
-    startGame: function () {
-      console.log("to start Game enter this ID: " + this.pollId);
-      socket.emit( "startPoll", this.pollId );
     }
    }
 }
