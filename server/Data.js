@@ -18,7 +18,7 @@ function Data() {
     currentQuestion: 0,
     participants: [],
     enteredWord: "",
-    pollIdInData: 0
+    pollId: 0
   }
 }
 
@@ -132,11 +132,13 @@ Data.prototype.updateWord = function(word){
   this.polls['test'].enteredWord = word;
 }
 
+
 Data.prototype.setPollId = function(pollId){
   console.log("Id received from client:", pollId);
-  this.polls['test'].pollIdInData = pollId;
+  this.polls['test'].pollId = pollId;
   
 }
+
 
 export { Data };
 

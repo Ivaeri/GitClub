@@ -1,26 +1,25 @@
 <template>
-  <h1>{{uiLabels.coop}}</h1>
+  <h1>Co-op mode</h1>
+  
+  <NewPageButton
+  v-bind:text="uiLabels.sendWord" 
+  v-bind:to="'/hostLobby/' + pollId"
+  v-on:click="handleClick">
+  Data: {{ enteredword, pollId }}
+  Data: {{ pollId }}
+</newPageButton>
 
-  <div class="container">
-    <div class="item">
-      <InputField
-        v-bind:label="uiLabels.enterWord"
-        v-model="enteredword" 
-        :placeholder="uiLabels.enterWord" 
-        id="enter-word">
-      </InputField>
-    </div>
-    <div class="item">
-      <NewPageButton
-        v-bind:text="uiLabels.sendWord" 
-        v-bind:to="'/hostLobby/' + pollId"
-        v-on:click="handleClick">
-        Data: {{ enteredword}}
-        Data: {{ pollId }}
-      </newPageButton>
-    </div>
-  </div>
-</template>
+  <InputField
+   v-bind:label="uiLabels.enterWord"
+    v-model="enteredword" 
+    placeholder="Enter word here" 
+    id="enter-word">
+  </InputField>
+<!-- Jag tycker det nedanför var onödigt men vill inte ta bort det om resten tycker att det är nice.
+  <p>entered word:{{enteredword }}</p> -->
+  
+  
+  </template>
   
   <script>
   import io from 'socket.io-client';
@@ -40,7 +39,6 @@
       return {
        
         uiLabels: {},
-        lang: localStorage.getItem( "lang") || "en",
         enteredword: "",
         pollId: 1
 
@@ -48,9 +46,7 @@
     },
     
     created: function () {
-      socket.on("uiLabels", labels => {
-      this.uiLabels = labels;
-      });
+      socket.on( "uiLabels", labels => this.uiLabels = labels );
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
@@ -64,31 +60,20 @@
       },
       generateId: function () {
         this.pollId = Math.floor(Math.random() * 1000000);
-        console.log("generated id:" + this.pollId)
-        socket.emit( "generateId", this.pollId )
+        console.log("generated id:" + this.pollId);
+        socket.emit( "generateId", this.pollId );
       }
 
-
+      
     }
     
-  };
+  }
+  
+  
+  
   
   </script>
   
   <style scoped>
-
-  .container {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-  }
-
-  .item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    }
-
-
   
   </style>
