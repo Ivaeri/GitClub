@@ -138,13 +138,6 @@ Data.prototype.updateWord = function (pollId, word) {
 };
 
 
-<<<<<<< HEAD
-Data.prototype.setPollId = function(pollId){
-  console.log("Id received from client:", pollId);
-  this.polls['test'].pollId = pollId;
-  
-}
-=======
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
   if (!this.pollExists(pollId)) {
@@ -160,7 +153,6 @@ Data.prototype.setPollId = function (pollId) {
   }
 };
 
->>>>>>> a6a92de9a4ff036ba8acc62111a60ef708710077
 
 
 export { Data };
