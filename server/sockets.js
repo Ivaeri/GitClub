@@ -3,11 +3,26 @@ function sockets(io, socket, data) {
   socket.on('getUILabels', function(lang) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
+
   socket.on("sendWord", function (d) {
     socket.emit('updateWord', data.updateWord(d))
     console.log("Word received from client:", d);
     io.emit("sendWord",  { enteredWord: d }); 
   });
+
+    // den här funktionen är helt jävla underbar den löser allt.
+    // Varje gång någon ansluter så skickar vi det senaste ordet och det senaste pollId:t
+  io.on("connection", function (socket) {
+    console.log("Ny klient ansluten:", socket.id);
+    const latestWord = data.polls['test'].enteredWord || "";
+    const latestPollId = data.polls['test'].pollId || "";
+    socket.emit("sendWord", { enteredWord: latestWord });
+    socket.emit("generateId", { pollId: latestPollId });
+  });
+
+  
+
+
 
   socket.on("generateId", function(d) {
     socket.emit('setPollId', data.setPollId(d))

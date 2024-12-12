@@ -4,6 +4,25 @@ import {readFileSync} from "fs";
 // Store data in an object to keep the global namespace clean. In an actual implementation this would be interfacing a database...
 function Data() {
   this.polls = {};
+<<<<<<< HEAD
+  this.polls['test'] = {
+    lang: "en",
+    questions: [
+      {q: "How old are you?", 
+       a: ["0-13", "14-18", "19-25", "26-35", "36-45","45-"]
+      },
+      {q: "How much do you enjoy coding?", 
+       a: ["1", "2", "3", "4", "5"]
+      }
+    ],
+    answers: [],
+    currentQuestion: 0,
+    participants: [],
+    enteredWord: "",
+    pollId: 0
+  }
+=======
+>>>>>>> a6a92de9a4ff036ba8acc62111a60ef708710077
 }
 
 /***********************************************
@@ -119,6 +138,13 @@ Data.prototype.updateWord = function (pollId, word) {
 };
 
 
+<<<<<<< HEAD
+Data.prototype.setPollId = function(pollId){
+  console.log("Id received from client:", pollId);
+  this.polls['test'].pollId = pollId;
+  
+}
+=======
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
   if (!this.pollExists(pollId)) {
@@ -133,6 +159,8 @@ Data.prototype.setPollId = function (pollId) {
     };
   }
 };
+
+>>>>>>> a6a92de9a4ff036ba8acc62111a60ef708710077
 
 
 export { Data };
