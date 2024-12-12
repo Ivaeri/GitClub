@@ -26,6 +26,14 @@
       <p>Waiting for host to start game</p>
       {{ participants }} -->
     </div> 
+    <div v-if="activePolls.length > 0">
+  <h2>Aktiva spel:</h2>
+  <div v-for="poll in activePolls" :key="poll" class="poll-item">
+    <button class="poll-button" @click="joinPoll(poll)">
+      {{ poll }}
+    </button>
+  </div>
+</div>
   </div>
 </template>
 
@@ -47,7 +55,8 @@ export default {
       uiLabels: {},
       joined: false,
       lang: localStorage.getItem("lang") || "en",
-      participants: []
+      participants: [],
+      activePolls: []
     }
   },
   created: function () {
@@ -57,6 +66,11 @@ export default {
     socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
+    socket.emit("getActivePolls"); 
+    socket.on("activePolls", (polls) => {
+        console.log("Mottagna spel:", polls); 
+        this.activePolls = polls; 
+    });
   },
   methods: {
     validateAndJoin() {
@@ -65,6 +79,10 @@ export default {
     } else {
       this.$router.push('/lobbyAll/' + this.newPollId);
     }
+  },
+  joinPoll(pollId) {
+    this.newPollId = pollId; 
+    this.$router.push(`/lobbyAll/${pollId}`); 
   },
     participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
