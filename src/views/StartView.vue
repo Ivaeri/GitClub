@@ -9,8 +9,19 @@
     </div>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
-      <div v-on:click="switchLanguage">
+      <div class="switchLanguageDiv" v-on:click="switchLanguage">
         {{ uiLabels.languagebox }}
+      </div>
+      <div class="gameRules">
+        <h5 v-on:click="showGameRules"> 
+          <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
+          <p v-else> {{ uiLabels.GameRules }}</p>
+        </h5>
+        <div v-if="gameRules">
+          <ul>
+              <li v-for="rule in currentGameRules" :key="rule">{{ rule }}</li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -50,6 +61,7 @@
 <script>
 import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
+import gameRules from '/server/gamerules.json';
 const socket = io("localhost:3000");
 
 export default {
@@ -61,14 +73,23 @@ export default {
     return {
       uiLabels: {},
       lang: localStorage.getItem( "lang") || "en",
-      hideNav: true
+      hideNav: true,
+      gameRules: false,
+      currentGameRules: []
     }
   },
   created: function () {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.emit( "getUILabels", this.lang );
+    this.loadGameRules();
   },
   methods: {
+    showGameRules: function() {
+      this.gameRules = !this.gameRules;
+      console.log(this.gameRules);
+      console.log(this.currentGameRules);
+
+    },
     switchLanguage: function() {
       if (this.lang === "en") {
         this.lang = "sv"
@@ -76,11 +97,19 @@ export default {
       else {
         this.lang = "en"
       }
+      this.loadGameRules();
       localStorage.setItem( "lang", this.lang );
       socket.emit( "getUILabels", this.lang );
     },
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
+    },
+    loadGameRules(){
+      if (this.lang === "en") {
+        this.currentGameRules = gameRules.gameRules_sv;
+      } else {
+        this.currentGameRules = gameRules.gameRules_en; 
+      }
     }
   }
 }
@@ -150,20 +179,23 @@ export default {
 background-color: #a02666; 
 }
   .languagecontainer{
-    position:absolute;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    position: absolute;
     width: 240px;
-    height: 60px;
+    height: px;
     margin-top: 20px;
     margin-right: 10px;
-    right: 0;
+    right: 0px;
   }
-  .languagecontainer div{
-    position: absolute;
+  .switchLanguageDiv{
+    grid-row : 1;
+    grid-column: 2;
     width: 80px;
     height: 30px;
     right: 0;
     margin-top: 15px;
-    margin-right: 5px;
     background-color: lightgrey;
     border-radius: 10%;
     padding-top: 7px;
@@ -171,8 +203,33 @@ background-color: #a02666;
     border: 2px solid black
 
   }
-  .languagecontainer button{
+  .gameRules{
+    grid-row: 2;
+    grid-column: 1/ span 2;
+    width: 240px;
+
+  }
+  .gameRules h5{
+    cursor: pointer;
+    text-align: center;
+  }
+  .gameRules div{
     position: absolute;
+    background-color: pink;
+    margin-left: 5px;
+    grid-row: 3;
+    grid-column: 1;
+    border-radius: 10%;
+  }
+  .gameRules ul{
+    padding-right: 10px;
+  }
+  .gameRules li{
+    padding-top: 10px;
+  }
+  .languagecontainer button{
+    grid-row : 1;
+    grid-column: 1;
     height: 60px;
     width: 140px;
     background-size: cover;
