@@ -19,7 +19,7 @@
         </h5>
         <div v-if="gameRules">
           <ul>
-              <li v-for="rule in currentGameRules" :key="rule">{{ rule }}</li>
+              <li v-for="rule in currentGameRules" v-bind:key="rule">{{ rule }}</li>
           </ul>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default {
       this.hideNav = ! this.hideNav;
     },
     loadGameRules(){
-      if (this.lang === "en") {
+      if (this.lang === "sv") {
         this.currentGameRules = gameRules.gameRules_sv;
       } else {
         this.currentGameRules = gameRules.gameRules_en; 
