@@ -25,6 +25,6 @@
 	"fillName": "Please enter a username before continuing",
 	"fillNumber": "Please enter a game-id before continuing",
 	"welcome": "Welcome to the game ",
-	"GameRules": "Klicka för spelregler",
-	"HideGameRules": "Klicka för att dölja spelregler"
+	"GameRules": "Press for gamerules",
+	"HideGameRules": "Press to hide gamerules"
 }
