@@ -2,8 +2,8 @@
   <h1>{{ uiLabels.awaitingPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
-  <div>
-  <HomeButton /> <!-- Jag försöker skapa en komponent som alltid ska finnas ifall man vill hem alternativt byta språk och fråga om spelregler också på varje sida-->
+  <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
   </div>
   </template>
   

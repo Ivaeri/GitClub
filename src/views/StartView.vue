@@ -7,9 +7,7 @@
       <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
     </div>
-    <div>
-    <HomeButton/> <!-- Jag försöker skapa en komponent som alltid ska finnas ifall man vill hem alternativt byta språk och fråga om spelregler också på varje sida-->
-    </div>
+
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
       <div class="switchLanguageDiv" v-on:click="switchLanguage">
@@ -25,6 +23,9 @@
               <li v-for="rule in currentGameRules" v-bind:key="rule">{{ rule }}</li>
           </ul>
         </div>
+      </div>
+      <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
       </div>
     </div>
   </header>

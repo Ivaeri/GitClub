@@ -1,6 +1,8 @@
 <template>
   <h1>{{uiLabels.coop}}</h1>
-
+  <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
+  </div> 
   <div class="container">
     <div class="item">
       <InputField
@@ -24,6 +26,7 @@
   import io from 'socket.io-client';
   import NewPageButton from '../components/NewPageButton.vue';
   import InputField from '../components/InputField.vue';
+  import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
   
   
@@ -32,7 +35,8 @@
     name: 'wordSubmission',
     components: {
       NewPageButton,
-      InputField
+      InputField,
+      HomeButton
     },
     data: function () {
       return {
