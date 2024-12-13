@@ -7,6 +7,9 @@
       <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
     </div>
+    <div>
+    <HomeButton/> <!-- Jag försöker skapa en komponent som alltid ska finnas ifall man vill hem alternativt byta språk och fråga om spelregler också på varje sida-->
+    </div>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
       <div v-on:click="switchLanguage">
@@ -50,12 +53,14 @@
 <script>
 import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
+import HomeButton from '../components/HomeButton.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'StartView',
   components: {
-    ResponsiveNav
+    ResponsiveNav,
+    HomeButton
   },
   data: function () {
     return {

@@ -25,5 +25,7 @@
 	"id": "Spel-id: ",
 	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
 	"fillNumber": "vänligen fyll i ett spel-id innan du fortsätter",
-	"welcome": "Välkommen till spelet "
+	"welcome": "Välkommen till spelet ",
+	"activeGames": "Aktiva spel",
+	"goHome": "Gå till startsidan"
 }

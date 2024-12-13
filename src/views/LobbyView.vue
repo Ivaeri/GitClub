@@ -27,7 +27,7 @@
       {{ participants }} -->
     </div> 
     <div v-if="activePolls.length > 0">
-  <h2>Aktiva spel:</h2>
+  <h2>{{ uiLabels.activeGames }}</h2>
   <div v-for="poll in activePolls" :key="poll" class="poll-item">
     <button class="poll-button" @click="joinPoll(poll)">
       {{ poll }}

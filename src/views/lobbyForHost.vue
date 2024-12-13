@@ -3,14 +3,21 @@
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2 v-if="pollId">{{ uiLabels.id }}{{ pollId }}</h2>
   <h2 v-else>pollID har inte uppdaterats.. </h2>
+  <div>
+  <HomeButton /> <!-- Jag försöker skapa en komponent som alltid ska finnas ifall man vill hem alternativt byta språk och fråga om spelregler också på varje sida-->
+  </div>
   </template>
   
   <script>
   import io from 'socket.io-client';
+  import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
   
   export default {
     name: 'CreateView',
+    components: {
+      HomeButton
+    },
     socket,
     beforeDestroy() {
   socket.disconnect(); //försökte förhindra att massa sockets skapas, inte lyckats
