@@ -25,6 +25,11 @@
 	"fillName": "Please enter a username before continuing",
 	"fillNumber": "Please enter a game-id before continuing",
 	"welcome": "Welcome to the game ",
+<<<<<<< HEAD
 	"activeGames": "Active games",
 	"goHome": "Go to home"
+=======
+	"GameRules": "Press for gamerules",
+	"HideGameRules": "Press to hide gamerules"
+>>>>>>> 58a11a6338699747f5053397e3339f010fcab732
 }

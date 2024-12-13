@@ -26,6 +26,8 @@
 	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
 	"fillNumber": "vänligen fyll i ett spel-id innan du fortsätter",
 	"welcome": "Välkommen till spelet ",
+	"GameRules":  "Visa spelregler",
+	"HideGameRules": "Dölj spelregler",
 	"activeGames": "Aktiva spel",
 	"goHome": "Gå till startsidan"
 }
