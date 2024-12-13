@@ -1,8 +1,7 @@
 <template>
   <h1>{{ uiLabels.awaitingPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
-  <h2 v-if="pollId">{{ uiLabels.id }}{{ pollId }}</h2>
-  <h2 v-else>pollID har inte uppdaterats.. </h2>
+  <h2>{{ uiLabels.id }}{{ pollId }}</h2>
   <div>
   <HomeButton /> <!-- Jag försöker skapa en komponent som alltid ska finnas ifall man vill hem alternativt byta språk och fråga om spelregler också på varje sida-->
   </div>
@@ -14,15 +13,10 @@
   const socket = io("localhost:3000");
   
   export default {
-    name: 'CreateView',
+    name: 'lobbyForHost',
     components: {
       HomeButton
     },
-    socket,
-    beforeDestroy() {
-  socket.disconnect(); //försökte förhindra att massa sockets skapas, inte lyckats
-  console.log("Socket frånkopplad.");
-},
     data: function () {
       return {
         uiLabels: {},
@@ -33,39 +27,29 @@
     },
 
 created: function () {
- 
+  this.pollId = this.$route.params.id;
+  this.enteredword = this.$route.params.id2;
 
-socket.on("uiLabels", (labels) => {
-  this.uiLabels = labels;
-  console.log("Mottog UI-labels från servern:", this.uiLabels);
-});
+  socket.on("uiLabels", (labels) => {
+    this.uiLabels = labels;
+    console.log("Mottog UI-labels från servern:", this.uiLabels);
+  });
+
 
 socket.on("sendWord", (data) => {
-  this.enteredword = data.enteredWord;
-  localStorage.setItem("enteredWord", this.enteredword); // Spara lokalt så att det inte försvinner vid siduppdateringar
+  // this.enteredword = data.enteredWord; Hämtar ordet från sökvägen istället
   console.log("Mottog ord från servern:", this.enteredword);
 });
 
 socket.on("generateId", (data) => {
-  this.pollId = data.pollId;
-  localStorage.setItem("pollId", this.pollId); // Sparar lokalt så att det inte försvinner vid siduppdateringar
+  // this.pollId = data.pollId; Hämtar ordet från sökvägen istället
   console.log("Mottog pollId från servern:", this.pollId);
 });
 
 socket.emit( "getUILabels", this.lang );
 },
-beforeDestroy() { //försökte förhindra att massa sockets skapas, inte lyckats
-  this.cleanupSocket();
-},
 
 methods: {
-cleanupSocket() { //försökte förhindra att massa sockets skapas, inte lyckats
-    socket.off("uiLabels", this.updateUILabels);
-    socket.off("sendWord", this.updateEnteredWord);
-    socket.off("generateId", this.updatePollId);
-  },
-
-
 }
 }
   </script>

@@ -11,13 +11,11 @@
       </InputField>
     </div>
     <div class="item">
-      <NewPageButton
+      <Button
         v-bind:text="uiLabels.sendWord" 
-        v-bind:to="'/hostLobby/' + pollId"
         v-on:click="handleClick">
-        Data: {{ enteredword}}
-        Data: {{ pollId }}
-      </newPageButton>
+        Press me
+    </Button>
     </div>
   </div>
 </template>
@@ -55,15 +53,16 @@
     },
     methods: {
       handleClick: function () {
-        this.sendWord()
+        this.pollId = Math.floor(Math.random() * 1000000);
         this.generateId()
+        this.sendWord()
+        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword);
       },
       sendWord: function () {
         console.log("sending word:" + this.enteredword)
-        socket.emit( "sendWord", this.enteredword )
+        socket.emit( "sendWord", {enteredword: this.enteredword, pollId: this.pollId} )
       },
       generateId: function () {
-        this.pollId = Math.floor(Math.random() * 1000000);
         console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
       }
@@ -88,6 +87,13 @@
     flex-direction: column;
     justify-content: center;
     }
+  .item button{
+    display: flex;
+    flex-direction: column;
+    height: 4em;
+    justify-content: center;
+    align-items: center;  
+  }
 
 
   

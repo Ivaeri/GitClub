@@ -129,22 +129,38 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-Data.prototype.updateWord = function (pollId, word) {
+/*Data.prototype.updateWord = function (pollId, word) {
   console.log("Word received from client for poll:", pollId, word);
   if (this.pollExists(pollId)) {
     this.polls[pollId].enteredWord = word;
+    console.log(this.polls[pollId].enteredWord);
   }
-};
+};*/
 
-Data.prototype.updateWord = function (word){
+Data.prototype.updateWord = function (word, pollId) {
   console.log("Word received from client:", word);
-  this.polls['test'].enteredWord = word;
+  console.log("pollId received from client:", pollId);
+  if (this.polls[pollId]) {
+      this.polls[pollId].enteredWord = word;
+  }
+  console.log(this.polls[pollId]);
 }
+
 
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
-  this.polls['test'].pollId = pollId;
-  };
+  if (!this.polls[pollId]) {
+    this.polls[pollId] = {
+      enteredWord: "",
+      pollId: pollId,
+      participants: [],
+      questions: [],
+      answers: [],
+      currentQuestion: 0
+    };
+  }
+  this.polls[pollId].pollId = pollId;
+};
 
 
 
