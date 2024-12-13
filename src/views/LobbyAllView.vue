@@ -3,6 +3,9 @@
       {{ this.uiLabels.id }}{{pollId}}
       <h1>{{ this.uiLabels.titlegame }}</h1>
       <div v-if="!joined">
+      <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
+      </div> 
         {{ this.uiLabels.enterUsername }}
         <InputField 
           v-model="userName" 
@@ -32,13 +35,15 @@
   
   <script>
   import io from 'socket.io-client';
-import InputField from '../components/InputField.vue';
+  import InputField from '../components/InputField.vue';
+  import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
   
   export default {
     name: 'LobbyView',
     components: {
-      InputField
+      InputField,
+      HomeButton
     },
     data: function () {
       return {

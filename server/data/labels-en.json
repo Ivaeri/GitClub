@@ -26,7 +26,7 @@
 	"fillNumber": "Please enter a game-id before continuing",
 	"welcome": "Welcome to the game ",
 	"activeGames": "Active games",
-	"goHome": "Go to home",
+	"goHome": "Go to home page",
 	"GameRules": "Press for gamerules",
 	"HideGameRules": "Press to hide gamerules"
 }
