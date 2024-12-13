@@ -14,8 +14,8 @@ function sockets(io, socket, data) {
     // Varje gång någon ansluter så skickar vi det senaste ordet och det senaste pollId:t
   io.on("connection", function (socket) {
     console.log("Ny klient ansluten:", socket.id);
-    const latestWord = data.polls['test'].enteredWord || "";
-    const latestPollId = data.polls['test'].pollId || "";
+    const latestWord = data.polls['test']?.enteredWord || "det här gick fel";
+    const latestPollId = data.polls['test']?.pollId || "";
     socket.emit("sendWord", { enteredWord: latestWord });
     socket.emit("generateId", { pollId: latestPollId });
   });
