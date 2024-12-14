@@ -27,5 +27,10 @@
 	"fillNumber": "vänligen fyll i ett spel-id innan du fortsätter",
 	"welcome": "Välkommen till spelet ",
 	"GameRules":  "Press here for gamerules",
-	"HideGameRules": "Press here to hide gamerules"
+	"HideGameRules": "Press here to hide gamerules",
+	"wordOnlyLetters": "Ordet får endast innehålla bokstäver från det svenska alfabetet.",
+	"wordTooShort": "Ordet måste vara minst 3 bokstäver långt.",
+	"wordTooLong": "Ordet får vara max 12 bokstäver långt.",
+	"wordNotInLexicon": "Ordet finns inte i det svenska lexikonet.",
+	"validationApiError": "Kunde inte validera ordet mot lexikonet."
 }

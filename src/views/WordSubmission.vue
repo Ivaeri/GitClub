@@ -13,11 +13,10 @@
     <div class="item">
       <NewPageButton
         v-bind:text="uiLabels.sendWord" 
-        v-bind:to="'/hostLobby/' + pollId"
+        v-bind:to="'/hostLobby/' + pollId" 
         v-on:click="handleClick">
         Data: {{ enteredword}}
-        Data: {{ pollId }}
-      </newPageButton>
+      </newPageButton><!-- skickar nu vidare när man klickar ok på varningen, försöker lösa med router push i funktionen och ta vort v-bind.to men kanske måste göra om kanppen, kräver to för att vara clickable -->
     </div>
   </div>
 </template>
@@ -54,13 +53,57 @@
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
-      handleClick: function () {
-        this.sendWord()
-        this.generateId()
+      async validateWord(word, language) {
+        let regex;
+        if (language === "sv") {
+          regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
+        } else {
+          regex = /^[a-zA-Z]+$/; 
+        }
+        if (!regex.test(word)) {
+          return this.uiLabels.wordOnlyLetters[language];
+        }
+        if (word.length < 3) {
+          return this.uiLabels.wordTooShort[language];
+        }
+        if (word.length > 12) {
+          return this.uiLabels.wordTooLong[language]; 
+          }
+
+        const apiUrl = language === "sv"
+          ? `https://api.datamuse.com/words?sp=${word}&lang=sv`
+          : `https://api.datamuse.com/words?sp=${word}&lang=en`;
+
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+
+          if (!data.length) {
+            return this.uiLabels.wordNotInLexicon[language];
+          }
+        } catch (error) {
+          console.error("API-fel:", error);
+          return this.uiLabels.validationApiError[language];
+        }
+        return null; 
+      },
+      async handleClick() {
+        console.log("handleClick körs");
+        const validationError = await this.validateWord(this.enteredword, this.lang);
+        if (validationError) {
+          alert(validationError); 
+          console.log("Validering misslyckades med:", validationError);
+          return;
+        }
+        this.generateId();
+        console.log("Poll ID genererat:", this.pollId);
+        this.sendWord();
+        /*this.$router.push(`/hostLobby/${this.pollId}`);*/
       },
       sendWord: function () {
         console.log("sending word:" + this.enteredword)
         socket.emit( "sendWord", this.enteredword )
+        console.log("Navigering påbörjad");
       },
       generateId: function () {
         this.pollId = Math.floor(Math.random() * 1000000);

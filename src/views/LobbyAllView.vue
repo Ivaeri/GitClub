@@ -19,11 +19,11 @@
           {{ this.uiLabels.awaitingHost }}
         </p>
         <div v-if="participants.length > 0">
-  <h2>Deltagare:</h2>
-  <ul>
-    <div v-for="participant in participants" :key="participant.name">
-      {{ participant.name }}
-    </div>
+          <h2>Deltagare:</h2>
+          <ul>
+            <div v-for="participant in participants" :key="participant.name">
+              {{ participant.name }}
+        </div>
   </ul>
 </div>
     </div>
@@ -36,7 +36,7 @@ import InputField from '../components/InputField.vue';
   const socket = io("localhost:3000");
   
   export default {
-    name: 'LobbyView',
+    name: 'LobbyAll',
     components: {
       InputField
     },
