@@ -14,7 +14,7 @@
 	"enterGamePin": "Enter Game Pin",
 	"typeWordPlaceHolder": "Type a word here",
 	"sendWord": "Submit word",
-	"start": "Start",
+	"start": "Start Game",
 	"enterWord": "enter word here",
 	"name": "name",
 	"enterUsername": "Go ahead and enter your username",
@@ -28,5 +28,6 @@
 	"activeGames": "Active games",
 	"goHome": "Go to home",
 	"GameRules": "Press for gamerules",
-	"HideGameRules": "Press to hide gamerules"
+	"HideGameRules": "Press to hide gamerules",
+	"players": "players"
 }

@@ -42,15 +42,17 @@ export default {
     </script>
     
     <style scoped>
-    .inputField {
-        background-color: pink;
-        color: black;
-        padding: 15px 32px;
-        text-align: center;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
+  .inputField {
+  background-color: pink;
+  color: black;
+  padding: 10px 20px; /* Justera padding för att kompensera för större text */
+  text-align: center;
+  display: inline-block;
+  font-size: 24px; /* Ändra textstorleken här */
+  margin: 4px 2px;
+  cursor: pointer;
+  height: 3em; /* Justera höjden för att kompensera för större text */
+  width: 20em; /* Justera bredden om nödvändigt */
+}
 
     </style>

@@ -75,7 +75,7 @@ Data.prototype.getParticipants = function(pollId) {
   const poll = this.polls[pollId];
   console.log("participants requested for", pollId);
   if (this.pollExists(pollId)) { 
-    return this.polls[pollId].participants
+    return this.polls[pollId].participants;
   }
   return [];
 }

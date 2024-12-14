@@ -5,6 +5,7 @@
   <div>
   <HomeButton /> <!-- Jag försöker skapa en komponent som alltid ska finnas ifall man vill hem alternativt byta språk och fråga om spelregler också på varje sida-->
   </div>
+  <button v-on:click="startGame">{{uiLabels.start}}</button>
   </template>
   
   <script>
@@ -23,6 +24,8 @@
         enteredword: "",
         pollId: null,
         lang: localStorage.getItem("lang") || "en",
+      
+
       }
     },
 
@@ -50,6 +53,10 @@ socket.emit( "getUILabels", this.lang );
 },
 
 methods: {
+  startGame: function () {
+    socket.emit("startPoll", this.pollId);
+    this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword);
+  }
 }
 }
   </script>

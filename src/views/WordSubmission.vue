@@ -11,11 +11,13 @@
       </InputField>
     </div>
     <div class="item">
-      <Button
+      <button
         v-bind:text="uiLabels.sendWord" 
-        v-on:click="handleClick">
+        v-on:click="handleClick"
+        v-on:keydown.enter="handleClick"
+        >
         Press me
-    </Button>
+    </button>
     </div>
   </div>
 </template>
@@ -80,6 +82,7 @@
     display: flex;
     justify-content: center; 
     align-items: center; 
+    margin-top: 12em
   }
 
   .item {

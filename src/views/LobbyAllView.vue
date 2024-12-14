@@ -1,6 +1,7 @@
 <template>
   <div>
     {{ this.uiLabels.id }}{{pollId}}
+   {
     <h1>{{ this.uiLabels.titlegame }}</h1>
     <div v-if="!joined">
       {{ this.uiLabels.enterUsername }}
@@ -53,7 +54,7 @@
       this.pollId = this.$route.params.id;
       socket.on( "uiLabels", labels => this.uiLabels = labels );
       socket.on( "participantsUpdate", p => this.participants = p );
-      socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
+      socket.on( "startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
     },

@@ -40,6 +40,12 @@ function sockets(io, socket, data) {
     data.participateInPoll(d.pollId, d.name);
     io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
   });
+
+  socket.on("getParticipants", function(d) {
+    socket.emit('participantsUpdate', data.getParticipants(d.pollId));
+    console.log("called for participants:", d.pollId);
+  });
+
   socket.on('startPoll', function(pollId) {
     io.to(pollId).emit('startPoll');
   })
