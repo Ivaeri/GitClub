@@ -67,6 +67,7 @@ socket.on( "participantsUpdate", p => {
         console.log("Uppdaterade deltagare:", p);
       this.participants = p });
 socket.emit( "getUILabels", this.lang );
+socket.emit("getParticipants", { pollId: this.pollId });
 },
 
 methods: {

@@ -31,35 +31,9 @@
         </div>
   </ul>
 </div>
-  <div>
-    {{ this.uiLabels.id }}{{pollId}}
+
    
-    <h1>{{ this.uiLabels.titlegame }}</h1>
-    <div v-if="!joined">
-      {{ this.uiLabels.enterUsername }}
-      <InputField 
-        v-model="userName" 
-        :placeholder="uiLabels.name" 
-        id="username">
-      </InputField>
-      <button class="joinGameButton" v-on:click="validateAndParticipate">
-          {{ uiLabels.participateGame }}
-      </button>
-    </div>
-    <div v-if="joined">
-      <p>{{ uiLabels.welcome }} {{ userName }}!
-        {{ this.uiLabels.awaitingHost }}
-      </p>
-      <div v-if="participants.length > 0">
-        <h2>Deltagare:</h2>
-        <ul>
-          <div v-for="participant in participants" :key="participant.name">
-            {{ participant.name }}
-          </div>
-        </ul>
-      </div>
-    </div>
-  </div>
+
 </template>
   
   <script>
