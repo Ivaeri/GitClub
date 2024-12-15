@@ -43,7 +43,7 @@
     });
     
   
-  
+  /*
   socket.on("sendWord", (data) => {
     // this.enteredword = data.enteredWord; Hämtar ordet från sökvägen istället
     console.log("Mottog ord från servern:", this.enteredword);
@@ -53,7 +53,7 @@
     // this.pollId = data.pollId; H��mtar ordet från sökvägen istället
     console.log("Mottog pollId från servern:", this.pollId);
   });
-  
+  */
   socket.emit( "getUILabels", this.lang );
   socket.emit("getParticipants", { pollId: this.pollId });
   },
@@ -65,6 +65,7 @@
     </script>
     
     <style scoped>
+
 .participants-container {
     color: black;
     padding: 1em;
@@ -78,5 +79,4 @@
 .participant {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
 }
-    
     </style>
