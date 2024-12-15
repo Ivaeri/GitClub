@@ -11,15 +11,15 @@
   <div class="participants-container">
     <div v-for="participant in participants" :key="participant.name" class="participant">
       {{ participant.name }}
-      
-      </div>
-    
-   
-  </div> 
-  
+    </div>
+  </div>
+  <!--biten under gör inget men tänkte att man kan göra något sådant där
+  index ökar varje gång någon anger en bokstav
   <div v-if="participants[index] && this.userName == participants[index].name">
     Det är din tur att gissa!
   </div>
+  <div>hej {{ this.participants }}</div>
+-->
 </template>
 
 <script>
@@ -54,7 +54,7 @@ export default {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => {
       this.participants = p;
-      console.log("Updated participants in player in game:", this.participants);
+      
     });
     
     socket.emit( "getUILabels", this.lang );
