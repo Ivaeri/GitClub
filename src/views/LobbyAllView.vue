@@ -22,7 +22,7 @@
           {{ this.uiLabels.awaitingHost }}
         </p>
         <div v-if="participants.length > 0">
-          <h2>Deltagare:</h2>
+          <h2>{{ uiLabels.joinedPlayers }}</h2>
           <ul>
             <div v-for="participant in participants" :key="participant.name">
               {{ participant.name }}

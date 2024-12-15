@@ -144,8 +144,6 @@ Data.prototype.updateWord = function (word, pollId) {
       this.polls[pollId].enteredWord = word;
   }
   console.log(this.polls[pollId]);
-}
-
 };
 
 Data.prototype.setPollId = function (pollId) {

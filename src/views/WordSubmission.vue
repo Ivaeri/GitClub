@@ -15,12 +15,9 @@
     <div class="item">
       <Button
         v-bind:text="uiLabels.sendWord" 
-        v-bind:to="'/hostLobby/' + pollId" 
         v-on:click="handleClick">
-        Press me
-    </Button>
-        Data: {{ enteredword}}
-      </newPageButton><!-- skickar nu vidare när man klickar ok på varningen, försöker lösa med router push i funktionen och ta vort v-bind.to men kanske måste göra om kanppen, kräver to för att vara clickable -->
+        {{ uiLabels.sendWord }}
+      </Button><!-- v-bind:to="'/hostLobby/' + pollId"skickar nu vidare när man klickar ok på varningen, försöker lösa med router push i funktionen och ta vort v-bind.to men kanske måste göra om kanppen, kräver to för att vara clickable -->
     </div>
   </div>
 </template>
@@ -43,15 +40,12 @@
     },
     data: function () {
       return {
-       
         uiLabels: {},
         lang: localStorage.getItem( "lang") || "en",
         enteredword: "",
         pollId: 1
-
       }
     },
-    
     created: function () {
       socket.on("uiLabels", labels => {
       this.uiLabels = labels;
@@ -59,12 +53,9 @@
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
-      handleClick: function () {
-        this.pollId = Math.floor(Math.random() * 1000000);
-        this.generateId()
-        this.sendWord()
-        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword);
       async validateWord(word, language) {
+        console.log("validateWord körs");
+        console.log(word);
         let regex;
         if (language === "sv") {
           regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
@@ -88,7 +79,6 @@
         try {
           const response = await fetch(apiUrl);
           const data = await response.json();
-
           if (!data.length) {
             return this.uiLabels.wordNotInLexicon[language];
           }
@@ -106,25 +96,22 @@
           console.log("Validering misslyckades med:", validationError);
           return;
         }
+        this.pollId = Math.floor(Math.random() * 1000000);
         this.generateId();
         console.log("Poll ID genererat:", this.pollId);
         this.sendWord();
-        /*this.$router.push(`/hostLobby/${this.pollId}`);*/
+        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword);
       },
       sendWord: function () {
         console.log("sending word:" + this.enteredword)
         socket.emit( "sendWord", {enteredword: this.enteredword, pollId: this.pollId} )
-        socket.emit( "sendWord", this.enteredword )
         console.log("Navigering påbörjad");
       },
       generateId: function () {
         console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
       }
-
-
     }
-    
   };
   
   </script>

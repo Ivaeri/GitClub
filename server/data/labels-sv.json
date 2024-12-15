@@ -29,12 +29,11 @@
 	"GameRules":  "Visa spelregler",
 	"HideGameRules": "Dölj spelregler",
 	"activeGames": "Aktiva spel",
-	"goHome": "Gå till startsidan"
-	"GameRules":  "Press here for gamerules",
-	"HideGameRules": "Press here to hide gamerules",
+	"goHome": "Gå till startsidan",
 	"wordOnlyLetters": "Ordet får endast innehålla bokstäver från det svenska alfabetet.",
 	"wordTooShort": "Ordet måste vara minst 3 bokstäver långt.",
 	"wordTooLong": "Ordet får vara max 12 bokstäver långt.",
 	"wordNotInLexicon": "Ordet finns inte i det svenska lexikonet.",
-	"validationApiError": "Kunde inte validera ordet mot lexikonet."
+	"validationApiError": "Kunde inte validera ordet mot lexikonet.",
+	"joinedPlayers": "Anslutna spelare:"
 }

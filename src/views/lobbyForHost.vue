@@ -1,26 +1,38 @@
 <template>
+  <header>
   <h1>{{ uiLabels.awaitingPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
+  </header>
   <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
+  </div>
+  <div v-if="participants.length > 0">
+          <h2>{{ uiLabels.joinedPlayers }}</h2>
+          <ul>
+            <li v-for="participant in participants" :key="participant.name">
+              {{ participant.name }}
+            </li>
+      </ul>
   </div>
   </template>
   
   <script>
   import io from 'socket.io-client';
   import HomeButton from '../components/HomeButton.vue';
+  import InputField from '../components/InputField.vue';
   const socket = io("localhost:3000");
   
   export default {
-    name: 'lobbyForHost',
+    name: 'LobbyForHost',
     components: {
       HomeButton
     },
     data: function () {
       return {
         userName: "",
-        pollId: "inactive poll",
+        enteredword: "",
+        pollId: null,
         uiLabels: {},
         joined: false,
         lang: localStorage.getItem("lang") || "en",
@@ -48,10 +60,28 @@ socket.on("generateId", (data) => {
   console.log("Mottog pollId från servern:", this.pollId);
 });
 
+socket.on( "participantsUpdate", p => {
+        console.log("Uppdaterade deltagare:", p);
+      this.participants = p });
 socket.emit( "getUILabels", this.lang );
 },
 
-methods: {
+methods: { 
+  validateAndParticipate() {
+    if (!this.userName.trim()) {
+      alert(this.uiLabels.fillName);
+    } else {
+      this.participateInPoll();
+    }
+  },
+  participateInPoll: function () {
+    socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
+    this.joined = true;
+  }
 }
 }
   </script>
+  
+  <style scoped>
+  
+  </style>
