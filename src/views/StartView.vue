@@ -3,10 +3,11 @@
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
     </div>
-    <div class="logo">
+    <div class="logo" >
       <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
     </div>
+
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
       <div class="switchLanguageDiv" v-on:click="switchLanguage">
@@ -17,12 +18,15 @@
           <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
           <p v-else> {{ uiLabels.GameRules }}</p>
         </h5>
-        <div v-if="gameRules">
+        <div v-if="gameRules" >
           <ul>
-              <li v-for="rule in currentGameRules" :key="rule">{{ rule }}</li>
+              <li v-for="rule in currentGameRules" v-bind:key="rule" class="animate__animated animate__backInUp">{{ rule }}</li>
           </ul>
         </div>
       </div>
+    </div>
+    <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
     </div>
   </header>
     <div class="create-join">
@@ -62,12 +66,14 @@
 import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
+import HomeButton from '../components/HomeButton.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'StartView',
   components: {
-    ResponsiveNav
+    ResponsiveNav,
+    HomeButton
   },
   data: function () {
     return {
@@ -105,7 +111,7 @@ export default {
       this.hideNav = ! this.hideNav;
     },
     loadGameRules(){
-      if (this.lang === "en") {
+      if (this.lang === "sv") {
         this.currentGameRules = gameRules.gameRules_sv;
       } else {
         this.currentGameRules = gameRules.gameRules_en; 
@@ -211,7 +217,7 @@ background-color: #a02666;
   }
   .gameRules h5{
     cursor: pointer;
-    text-align: center;
+
   }
   .gameRules div{
     position: absolute;

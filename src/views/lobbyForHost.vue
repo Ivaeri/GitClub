@@ -1,29 +1,21 @@
 <template>
-  <header>
-    <h1>{{ uiLabels.awaitingPlayers }}</h1>
-    <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
-    <h2 v-if="pollId">{{ uiLabels.id }}{{ pollId }}</h2>
-    <h2 v-else>pollID har inte uppdaterats.. </h2>
-  </header>
-  <div v-if="participants.length > 0">
-          <h2>Deltagare:</h2>
-          <ul>
-            <li v-for="participant in participants" :key="participant.name">
-              {{ participant.name }}
-            </li>
-      </ul>
-      </div>
+  <h1>{{ uiLabels.awaitingPlayers }}</h1>
+  <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
+  <h2>{{ uiLabels.id }}{{ pollId }}</h2>
+  <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
+  </div>
   </template>
   
   <script>
   import io from 'socket.io-client';
-  import InputField from '../components/InputField.vue';
+  import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
   
   export default {
-    name: 'LobbyForHost',
+    name: 'lobbyForHost',
     components: {
-      InputField
+      HomeButton
     },
     data: function () {
       return {
@@ -35,28 +27,31 @@
         participants: []
       }
     },
-    created: function () {
-      this.pollId = this.$route.params.id;
-      socket.on( "uiLabels", labels => this.uiLabels = labels );
-      socket.on( "participantsUpdate", p => {
-        console.log("Uppdaterade deltagare:", p);
-      this.participants = p });
-      socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
-      socket.emit( "joinPoll", this.pollId );
-      socket.emit( "getUILabels", this.lang );
-    },
-    methods: {
-  validateAndParticipate() {
-    if (!this.userName.trim()) {
-      alert(this.uiLabels.fillName);
-    } else {
-      this.participateInPoll();
-    }
-  },
-      participateInPoll: function () {
-        socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-        this.joined = true;
-      }
-    }
-  }
+
+created: function () {
+  this.pollId = this.$route.params.id;
+  this.enteredword = this.$route.params.id2;
+
+  socket.on("uiLabels", (labels) => {
+    this.uiLabels = labels;
+    console.log("Mottog UI-labels från servern:", this.uiLabels);
+  });
+
+
+socket.on("sendWord", (data) => {
+  // this.enteredword = data.enteredWord; Hämtar ordet från sökvägen istället
+  console.log("Mottog ord från servern:", this.enteredword);
+});
+
+socket.on("generateId", (data) => {
+  // this.pollId = data.pollId; Hämtar ordet från sökvägen istället
+  console.log("Mottog pollId från servern:", this.pollId);
+});
+
+socket.emit( "getUILabels", this.lang );
+},
+
+methods: {
+}
+}
   </script>

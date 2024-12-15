@@ -3,6 +3,9 @@
     <h1>
       {{ uiLabels.participateGame }}
     </h1>
+    <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
+   </div> 
   </header>
   <div>
     {{pollId}}
@@ -27,7 +30,7 @@
       {{ participants }} -->
     </div> 
     <div v-if="activePolls.length > 0">
-  <h2>Aktiva spel:</h2>
+  <h2>{{ uiLabels.activeGames }}</h2>
   <div v-for="poll in activePolls" :key="poll" class="poll-item">
     <button class="poll-button" @click="joinPoll(poll)">
       {{ poll }}
@@ -40,12 +43,14 @@
 <script>
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
+import HomeButton from '../components/HomeButton.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'LobbyView',
   components: {
-    InputField
+    InputField,
+    HomeButton
   },
   data: function () {
     return {

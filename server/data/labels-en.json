@@ -25,6 +25,10 @@
 	"fillName": "Please enter a username before continuing",
 	"fillNumber": "Please enter a game-id before continuing",
 	"welcome": "Welcome to the game ",
+	"activeGames": "Active games",
+	"goHome": "Go to home page",
+	"GameRules": "Press for gamerules",
+	"HideGameRules": "Press to hide gamerules"
 	"GameRules": "Klicka för spelregler",
 	"HideGameRules": "Klicka för att dölja spelregler",
 	"wordOnlyLetters": "The word must only contain letters from the English alphabet.",

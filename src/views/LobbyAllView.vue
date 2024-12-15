@@ -3,6 +3,9 @@
       {{ this.uiLabels.id }}{{pollId}}
       <h1>{{ this.uiLabels.titlegame }}</h1>
       <div v-if="!joined">
+      <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
+      </div> 
         {{ this.uiLabels.enterUsername }}
         <InputField 
           v-model="userName" 
@@ -27,18 +30,20 @@
   </ul>
 </div>
     </div>
-    </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import io from 'socket.io-client';
-import InputField from '../components/InputField.vue';
+  import InputField from '../components/InputField.vue';
+  import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
   
   export default {
     name: 'LobbyAll',
     components: {
-      InputField
+      InputField,
+      HomeButton
     },
     data: function () {
       return {
@@ -59,12 +64,13 @@ import InputField from '../components/InputField.vue';
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
-  validateAndParticipate() {
-    if (!this.userName.trim()) {
-      alert(this.uiLabels.fillName);
-    } else {
-      this.participateInPoll();
-    }
+      validateAndParticipate() {
+        if (!this.userName.trim()) {
+          alert(this.uiLabels.fillName);
+        }
+        else {
+          this.participateInPoll();
+        }
   },
       participateInPoll: function () {
         socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )

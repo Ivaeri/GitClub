@@ -1,6 +1,8 @@
 <template>
   <h1>{{uiLabels.coop}}</h1>
-
+  <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
+  </div> 
   <div class="container">
     <div class="item">
       <InputField
@@ -11,10 +13,12 @@
       </InputField>
     </div>
     <div class="item">
-      <NewPageButton
+      <Button
         v-bind:text="uiLabels.sendWord" 
         v-bind:to="'/hostLobby/' + pollId" 
         v-on:click="handleClick">
+        Press me
+    </Button>
         Data: {{ enteredword}}
       </newPageButton><!-- skickar nu vidare när man klickar ok på varningen, försöker lösa med router push i funktionen och ta vort v-bind.to men kanske måste göra om kanppen, kräver to för att vara clickable -->
     </div>
@@ -25,6 +29,7 @@
   import io from 'socket.io-client';
   import NewPageButton from '../components/NewPageButton.vue';
   import InputField from '../components/InputField.vue';
+  import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
   
   
@@ -33,7 +38,8 @@
     name: 'wordSubmission',
     components: {
       NewPageButton,
-      InputField
+      InputField,
+      HomeButton
     },
     data: function () {
       return {
@@ -53,6 +59,11 @@
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
+      handleClick: function () {
+        this.pollId = Math.floor(Math.random() * 1000000);
+        this.generateId()
+        this.sendWord()
+        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword);
       async validateWord(word, language) {
         let regex;
         if (language === "sv") {
@@ -102,11 +113,11 @@
       },
       sendWord: function () {
         console.log("sending word:" + this.enteredword)
+        socket.emit( "sendWord", {enteredword: this.enteredword, pollId: this.pollId} )
         socket.emit( "sendWord", this.enteredword )
         console.log("Navigering påbörjad");
       },
       generateId: function () {
-        this.pollId = Math.floor(Math.random() * 1000000);
         console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
       }
@@ -131,6 +142,13 @@
     flex-direction: column;
     justify-content: center;
     }
+  .item button{
+    display: flex;
+    flex-direction: column;
+    height: 4em;
+    justify-content: center;
+    align-items: center;  
+  }
 
 
   
