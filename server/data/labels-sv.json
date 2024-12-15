@@ -30,5 +30,12 @@
 	"HideGameRules": "Dölj spelregler",
 	"activeGames": "Aktiva spel",
 	"goHome": "Gå till startsidan",
+	"wordOnlyLetters": "Ordet får endast innehålla bokstäver från det svenska alfabetet.",
+	"wordTooShort": "Ordet måste vara minst 3 bokstäver långt.",
+	"wordTooLong": "Ordet får vara max 12 bokstäver långt.",
+	"wordNotInLexicon": "Ordet finns inte i det svenska lexikonet.",
+	"validationApiError": "Kunde inte validera ordet mot lexikonet.",
+	"joinedPlayers": "Anslutna spelare:",
+	"goHome": "Gå till startsidan",
 	"players": "spelare"
 }

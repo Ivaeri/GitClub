@@ -3,7 +3,7 @@ import {readFileSync} from "fs";
 
 function Data() {
   this.polls = {};
-  this.polls['test'] = {
+  /*this.polls['test'] = {
     lang: "en",
     questions: [
       {q: "How old are you?", 
@@ -18,7 +18,7 @@ function Data() {
     participants: [],
     enteredWord: "",
     pollId: 0
-  }
+  }*/
 }
 
 
@@ -144,8 +144,7 @@ Data.prototype.updateWord = function (word, pollId) {
       this.polls[pollId].enteredWord = word;
   }
   console.log(this.polls[pollId]);
-}
-
+};
 
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
@@ -188,4 +187,14 @@ export { Data };
       enteredWord: "",
       pollIdInData: pollId
     };
-  }};*/
+  }
+};
+
+
+export { Data };
+
+
+/*function Data() {
+  this.polls = {};
+}*/
+

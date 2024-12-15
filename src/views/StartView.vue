@@ -3,13 +3,11 @@
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
     </div>
-    <div class="logo">
+    <div class="logo" >
       <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
     </div>
-    <div>
-    <HomeButton/> <!-- Jag försöker skapa en komponent som alltid ska finnas ifall man vill hem alternativt byta språk och fråga om spelregler också på varje sida-->
-    </div>
+
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
       <div class="switchLanguageDiv" v-on:click="switchLanguage">
@@ -20,12 +18,15 @@
           <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
           <p v-else> {{ uiLabels.GameRules }}</p>
         </h5>
-        <div v-if="gameRules">
+        <div v-if="gameRules" >
           <ul>
-              <li v-for="rule in currentGameRules" v-bind:key="rule">{{ rule }}</li>
+              <li v-for="rule in currentGameRules" v-bind:key="rule" class="animate__animated animate__backInUp">{{ rule }}</li>
           </ul>
         </div>
       </div>
+    </div>
+    <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
     </div>
   </header>
     <div class="create-join">
@@ -216,7 +217,7 @@ background-color: #a02666;
   }
   .gameRules h5{
     cursor: pointer;
-    text-align: center;
+
   }
   .gameRules div{
     position: absolute;

@@ -3,9 +3,9 @@
 
         "Tävla med dina medspelare mot en spelledare.",
         "Gissa en bokstav i taget för att försöka lista ut ordet.",
-        "Om du gissar rätt, visas bokstaven på rätt plats i ordet.",
-        "Om du gissar fel, ritas en del av häng-personen.",
-        "Spelet är över när ni antingen har gissat hela ordet eller hängmannen är komplett."
+        "Om ni gissar rätt, visas bokstaven på rätt plats i ordet.",
+        "Om ni gissar fel, ritas en del av häng-personen.",
+        "Spelet är över när ni antingen har gissat hela ordet eller häng-personen är komplett."
 
 ],
 
@@ -14,7 +14,7 @@
     "Guess one letter at a time to try to figure out the word.",
     "You have a limited number of guesses before the game is over.",
     "If you guess correctly, the letter will appear in the correct place in the word.",
-    "If you guess incorrectly, a part of the hangman is drawn.",
-    "The game is over when you either guess the entire word or the hangman is complete."
+    "If you guess incorrectly, a part of the hang-person is drawn.",
+    "The game is over when you either guess the entire word or the hang-person is complete."
 ]
 }

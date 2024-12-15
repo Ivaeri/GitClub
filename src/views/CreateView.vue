@@ -1,13 +1,11 @@
 <template>
   <h1>{{uiLabels.createGame}}</h1>
-      
-      
-     
+  <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
+  </div> 
   <newPageButton v-bind:text="uiLabels.coop" to="/submitword/" /> <!--newPageutton är en komponent som skapas i Button.vue, den har props: text, to. I text anger man vad som ska stå på knappen. I to anger man den sida man vill skickas till vid klick på knappen -->
 
   <div>
-  
-  
     <div>
       {{ uiLabels.question }}:
       <input type="text" v-model="question">
@@ -39,12 +37,14 @@
 <script>
 import newPageButton from '../components/NewPageButton.vue';
 import io from 'socket.io-client';
+import HomeButton from '../components/HomeButton.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'CreateView',
   components: {
-    newPageButton
+    newPageButton,
+    HomeButton
   },
   data: function () {
     return {

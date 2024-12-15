@@ -1,18 +1,25 @@
 <template>
     <div class="toppbar">
       <RouterLink to="/">
-        <button class="homeButton">{{ uiLabels.goHome }}</button> <!-- Denna knapp ska få namn i labels sen -->
+        <button class="homeButton">
+          {{ text }}
+        </button> 
       </RouterLink>
     </div>
   </template>
   
   <script>
-  import { RouterLink } from 'vue-router';
   import io from 'socket.io-client';
   const socket = io('http://localhost:3000'); // Justera URL efter behov
   
   export default {
     name: 'HomeButton',
+    props: {
+      text: {
+        type: String,
+        default: ""
+      }
+    },
     data: function () {
       return {
         uiLabels: {},
@@ -22,21 +29,23 @@
     
     created() {
         socket.on("uiLabels", (labels) => {
-        this.uiLabels = labels;
+          console.log("Uppdaterade label:", labels.goHome);
+          this.uiLabels = labels;
         });
         socket.emit("getUILabels", this.lang);
-    }
+    },
+
   }
   </script>
   
   <style scoped>
-  .toppbar {
+  /*.toppbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     background-color: #f8f9fa;
-  }
+  }*/
   
   .homeButton {
     background-color: #007bff;

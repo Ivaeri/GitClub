@@ -3,6 +3,9 @@
     <h1>
       {{ uiLabels.participateGame }}
     </h1>
+    <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
+   </div> 
   </header>
   <div>
     {{pollId}}
@@ -17,7 +20,7 @@
     <button class="joinGameButton" @click="validateAndJoin">
      {{ uiLabels.participateGame }}
    </button>
-      <!----<input type="text" v-model="userName" placeholder="Ditt namn">
+      <!--<input type="text" v-model="userName" placeholder="Ditt namn">
       <button v-on:click="participateInGame">
         {{ this.uiLabels.participateInGame }}
       </button>
@@ -40,12 +43,14 @@
 <script>
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
+import HomeButton from '../components/HomeButton.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'LobbyView',
   components: {
-    InputField
+    InputField,
+    HomeButton
   },
   data: function () {
     return {

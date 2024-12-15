@@ -1,7 +1,39 @@
 <template>
+    <div>
+      {{ this.uiLabels.id }}{{pollId}}
+      <h1>{{ this.uiLabels.titlegame }}</h1>
+      </div>
+      <div v-if="!joined">
+      <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
+      </div> 
+        {{ this.uiLabels.enterUsername }}
+        <InputField 
+          v-model="userName" 
+          :placeholder="uiLabels.name" 
+          id="username">
+        </InputField>
+        <button class="joinGameButton" @click="validateAndParticipate">
+           {{ uiLabels.participateGame }}
+        </button>
+
+      </div>
+      <div v-if="joined">
+        <p>{{ uiLabels.welcome }} {{ userName }}!
+          {{ this.uiLabels.awaitingHost }}
+        </p>
+        </div>
+        <div v-if="participants.length > 0">
+          <h2>{{ uiLabels.joinedPlayers }}</h2>
+          <ul>
+            <div v-for="participant in participants" :key="participant.name">
+              {{ participant.name }}
+        </div>
+  </ul>
+</div>
   <div>
     {{ this.uiLabels.id }}{{pollId}}
-   {
+   
     <h1>{{ this.uiLabels.titlegame }}</h1>
     <div v-if="!joined">
       {{ this.uiLabels.enterUsername }}
@@ -33,12 +65,14 @@
   <script>
   import io from 'socket.io-client';
   import InputField from '../components/InputField.vue';
+  import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
   
   export default {
-    name: 'LobbyView',
+    name: 'LobbyAll',
     components: {
-      InputField
+      InputField,
+      HomeButton
     },
     data: function () {
       return {
