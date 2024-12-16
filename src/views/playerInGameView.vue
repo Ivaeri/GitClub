@@ -10,15 +10,25 @@
               v-on:answer="submitAnswer($event)"/> 
   -->
     <hr>
-    <span v-for="letter in allGuessedLetters" :key="letter">
-      <span v-if="!allGuessedLetters.includes(letter)">{{ letter }}</span> 
-    </span>
     <p>{{ this.userName }}</p>
+    <div class="failedLettersContainer">
+      <h3>Wrong guesses:</h3>
+      <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
+        <div v-if="!trueWord.includes(letter)" class="failedLetter">
+          {{ letter }}
 
+        </div> 
+      </div>
+    </div>
     <span v-for="letter in trueWord" class="trueWord">
        <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
        <span v-else> _ </span>
     </span>
+    <div class="letterBoxContainer">
+      <div class="letterBox">
+        {{ this.current_letter }}
+      </div>
+    </div>
     
 
     <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
@@ -43,9 +53,9 @@
   <div class="participants-container">
     
     <div v-for="participant in participants" :key="participant.name" class="participant">
-       <span v-if="participant.name == participants[this.index].name">
+       <div v-if="participant.name == participants[this.index].name">
         <img src="/img/speechbubble.png" class="speechBubble"> 
-       </span>
+       </div>
       {{ participant.name }}
     </div>
   </div>
@@ -83,8 +93,9 @@ export default {
       row2: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä'],
       row3: ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
       allGuessedLetters: "",
-      trueWord: ""
-        };
+      trueWord: "",
+      current_letter: ""
+    };
       
   },
   created: function () {
@@ -123,6 +134,10 @@ export default {
     handleSubmit: function () {
       this.toggleIndexViaData();
       this.updateThoseLetters();
+      this.setcurrentLetterToEmpty();
+    },
+    setcurrentLetterToEmpty: function () {
+      this.current_letter = ""
     },
 
     toggleIndexViaData: function () { 
@@ -136,6 +151,7 @@ export default {
     },
     keyPressed: function (key) {
       this.key = key;
+      this.current_letter = key;
       /*
       socket.emit("updateGuessedLetters", {pollId: this.pollId, key: key})
       socket.emit("getGuessedLetters", this.pollId)*/
@@ -172,7 +188,7 @@ export default {
   }
   
   .key {
-    margin: 0.4em;
+    margin: 0.3em;
     font-size: 1em;
     cursor: pointer;
     color: white;
@@ -181,6 +197,7 @@ export default {
     height: 2.5em;
     align-items: center;
     justify-content: center;
+    border-radius: 20%;
   }
 
   .key:hover {
@@ -188,8 +205,18 @@ export default {
   }
 
   .keyboardContainer {
-    margin-top: 20em
+    margin-top: 3em
   }
+
+  .letterBox {
+   
+    height: 1.8em;
+    width: 1.5em;
+    border: solid black;
+    border: 0.2em solid black; /* Lägg till en kantlinje */
+    justify-content: center; /* Centrera innehållet horisontellt */
+    align-items: center; /* Centrera innehållet vertikalt */
+}
 
   .submitButton {
     background-color: lightcoral
@@ -204,11 +231,35 @@ export default {
     letter-spacing: 0.25em;
     font-size: 5rem;
     color: black;
-    padding-top: 2.5em;
     size: 0.5em;
     width: 1em;
     height: auto;
   }
+
+  .failedLettersContainer {
+    margin-top: 2em;
+    width: 5em;
+    height: 5em;
+  }
+
+  .failedLetters {
+    top: 2em;
+    width: 5em;
+    color: red
+  }
+  .failedLetter {
+ 
+  }
+  .letterBoxContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em
+  }
+
+  .trueWord {
+    color: rgb(42, 205, 20);
+  }
   
+
  
 </style>
