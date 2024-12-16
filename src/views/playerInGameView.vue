@@ -11,7 +11,7 @@
   -->
     <hr>
     <p>{{ this.userName }}</p>
-    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name">
+    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
       <div id="keyboard" class="keyboard">
       <div class="row">
         <button class="key" v-for="key in row1" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
@@ -24,14 +24,18 @@
       </div>
     </div>
     
-    <button v-on:click="toggleIndexViaData">{{ uiLabels.submit }}</button>
+    <button class="submitButton" v-on:click="toggleIndexViaData">{{ uiLabels.submit }}</button>
   </div>
   <div v-else>hänga-gubbe-animationen</div>
 
   </div>
   
   <div class="participants-container">
+    
     <div v-for="participant in participants" :key="participant.name" class="participant">
+       <span v-if="participant.name == participants[this.index].name">
+        <img src="/img/speechbubble.png" class="speechBubble">
+       </span>
       {{ participant.name }}
     </div>
   </div>
@@ -109,48 +113,70 @@ export default {
 </script>
 <style scoped>
 .participants-container {
-    color: black;
+    color: darkgray;
     padding: 1em;
     display: grid;
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; /* Fyll hela skärmen */
-    margin-top: 20em;
+    margin-top: 3em;
 }
 
 .participant {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
 }
 
-.inputBox {
-  background-color: pink;
-  color: black;
-  padding: 10px 20px; /* Justera padding för att kompensera för större text */
-  text-align: center;
-  display: inline-block;
-  font-size: 24px; /* Ändra textstorleken här */
-  margin: 4px 2px;
-  cursor: pointer;
-  height: 8em; /* Justera höjden för att kompensera för större text */
-  width: 20em; /* Justera bredden om nödvändigt */
-}
-
 .keyboard {
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: blue;
   }
   
   .row {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 0.4em;
   }
   
   .key {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
+    margin: 0.4em;
+    font-size: 1em;
     cursor: pointer;
+    color: white;
+    background-color: #007bff;
+    width: 2em;
+    height: 2.5em;
+    align-items: center;
+    justify-content: center;
   }
+
+  .key:hover {
+    background-color:#0056b3;
+  }
+
+  .keyboardContainer {
+    margin-top: 20em
+  }
+
+  .submitButton {
+    background-color: lightcoral
+  }
+
+  .submitButton:hover {
+    background-color: coral
+  }
+
+  .speechBubble {
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 5rem;
+    color: black;
+    padding-top: 2.5em;
+    size: 0.5em;
+    width: 1em;
+    height: auto;
+  }
+  
+ 
 </style>

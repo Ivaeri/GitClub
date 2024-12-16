@@ -47,7 +47,7 @@ export default {
   name: 'CreateView',
   components: {
     newPageButton,
-    homeButton
+    HomeButton
   },
   data: function () {
     return {
