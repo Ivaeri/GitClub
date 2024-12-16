@@ -45,12 +45,19 @@ function sockets(io, socket, data) {
     socket.emit('participantsUpdate', data.getParticipants(d.pollId));
     console.log("called for participants:", d.pollId);
   });
-
-  socket.on("updateIndex", function(d) {
-    console.log("update index reached sockets", d.pollId, d.index);
+  socket.on("getIndex", function(pollId) {
+    let index = data.getIndex(pollId);
+    io.emit('index', index);
+    console.log("get index in socket:", index);
+  });
+  socket.on("updateIndex", function(pollId) {
+    console.log("update index reached sockets for id:", pollId);
+    data.updateIndex(pollId);
+    /*
     let index = data.updateIndex(d.pollId, d.index);
     io.emit("index", index);
     console.log("index sent back to playerview:", index)
+    */
     
   });
 

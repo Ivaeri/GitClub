@@ -69,6 +69,12 @@ export default {
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
     socket.emit("getParticipants", { pollId: this.pollId });
+    socket.emit("getIndex", this.pollId )
+    /*
+    socket.emit("getIndex", { pollId: this.pollId })
+    socket.emit("updateIndex", { pollId: this.pollId, index: this.index })
+    */
+    
    
   },
   methods: {
@@ -77,7 +83,8 @@ export default {
     },
 
          toggleIndexViaData: function (){
-          socket.emit("updateIndex", { pollId: this.pollId, index: this.index })
+          socket.emit("updateIndex", this.pollId)
+          socket.emit("getIndex", this.pollId )
          }
       }
 }
