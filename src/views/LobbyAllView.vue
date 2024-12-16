@@ -2,11 +2,11 @@
     <div>
       {{ this.uiLabels.id }}{{pollId}}
       <h1>{{ this.uiLabels.titlegame }}</h1>
-      </div>
-      <div v-if="!joined">
       <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
-      </div> 
+      </div>
+      </div>
+      <div v-if="!joined">
         {{ this.uiLabels.enterUsername }}
         <InputField 
           v-model="userName" 

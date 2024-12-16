@@ -2,6 +2,9 @@
     <h1>{{ uiLabels.titlegame }}</h1>
     <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
     <h3>{{ uiLabels.players }}:</h3>
+    <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
+    </div>
     <div class="participants-container">
     <div v-for="participant in participants" :key="participant.name" class="participant">
       {{ participant.name }}
@@ -11,11 +14,13 @@
     
     <script>
     import io from 'socket.io-client';
+    import HomeButton from '../components/HomeButton.vue';
     const socket = io("localhost:3000");
     
     export default {
       name: 'lobbyForHost',
       components: {
+        HomeButton
       },
       data: function () {
         return {
