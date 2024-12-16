@@ -146,6 +146,22 @@ Data.prototype.updateWord = function (word, pollId) {
   console.log(this.polls[pollId]);
 };
 
+Data.prototype.updateGuessedLetters = function (pollId, key) {
+  console.log("Letter received in data:", key);
+  console.log("pollId received in data", pollId);
+  if (this.polls[pollId]) {
+      this.polls[pollId].guessedLetters.push(key);
+  }
+};
+
+Data.prototype.getGuessedLetter = function (pollId) {
+  console.log("letters requested for", pollId);
+  if (this.pollExists(pollId)) { 
+    return this.polls[pollId].guessedLetters;
+  }
+  return [];
+};
+
 Data.prototype.updateIndex = function (pollId) {
   console.log("updating index in data:", this.polls[pollId].index)
   if (this.polls[pollId]) {
@@ -179,7 +195,8 @@ Data.prototype.setPollId = function (pollId) {
       questions: [],
       answers: [],
       currentQuestion: 0,
-      index: 0
+      index: 0,
+      guessedLetters: []
 
     };
   }

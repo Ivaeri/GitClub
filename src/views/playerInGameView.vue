@@ -10,6 +10,9 @@
               v-on:answer="submitAnswer($event)"/> 
   -->
     <hr>
+    <div v-for="letter in allGuessedLetters" :key="letter">
+        {{ letter }}
+      </div>
     <p>{{ this.userName }}</p>
     <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
       <div id="keyboard" class="keyboard">
@@ -24,7 +27,7 @@
       </div>
     </div>
     
-    <button class="submitButton" v-on:click="toggleIndexViaData">{{ uiLabels.submit }}</button>
+    <button class="submitButton" v-on:click="handleSubmit">{{ uiLabels.submit }}</button>
   </div>
   <div v-else>hänga-gubbe-animationen</div>
 
@@ -34,11 +37,12 @@
     
     <div v-for="participant in participants" :key="participant.name" class="participant">
        <span v-if="participant.name == participants[this.index].name">
-        <img src="/img/speechbubble.png" class="speechBubble">
+        <img src="/img/speechbubble.png" class="speechBubble"> 
        </span>
       {{ participant.name }}
     </div>
   </div>
+
 
  
 
@@ -70,8 +74,11 @@ export default {
       uiLabels: {},
       row1: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å'],
       row2: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä'],
-      row3: ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
-        }
+      row3: ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+      allGuessedLetters: "",
+      trueWord: ""
+        };
+      
   },
   created: function () {
     this.pollId = this.$route.params.id;
@@ -86,16 +93,17 @@ export default {
     socket.on( "index", index => {
       this.index = index });
     
+    socket.on( "letters", letters => this.allGuessedLetters = letters );
+    socket.on("sendWord", word => this.trueWord = word );
+    console.log("ordet i player:", this.trueWord)
     
     
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
     socket.emit("getParticipants", { pollId: this.pollId });
     socket.emit("getIndex", this.pollId )
-    /*
-    socket.emit("getIndex", { pollId: this.pollId })
-    socket.emit("updateIndex", { pollId: this.pollId, index: this.index })
-    */
+    socket.emit("getGuessedLetters", this.pollId)
+   
     
    
   },
@@ -104,10 +112,26 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
 
-         toggleIndexViaData: function (){
-          socket.emit("updateIndex", this.pollId)
-          socket.emit("getIndex", this.pollId )
-         }
+    handleSubmit: function () {
+      this.toggleIndexViaData();
+      this.updateThoseLetters();
+    },
+
+    toggleIndexViaData: function () { 
+    socket.emit("updateIndex", this.pollId)
+    socket.emit("getIndex", this.pollId )
+    },
+
+    updateThoseLetters: function () {
+      socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})
+      socket.emit("getGuessedLetters", this.pollId)
+    },
+    keyPressed: function (key) {
+      this.key = key;
+      /*
+      socket.emit("updateGuessedLetters", {pollId: this.pollId, key: key})
+      socket.emit("getGuessedLetters", this.pollId)*/
+    }
       }
 }
 </script>

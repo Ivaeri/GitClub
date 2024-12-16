@@ -81,6 +81,15 @@ function sockets(io, socket, data) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
+
+  socket.on("updateGuessedLetters", function(d){
+    data.updateGuessedLetters(d.pollId, d.key);
+  })
+
+  socket.on("getGuessedLetters", function(pollId){
+    let letters = data.getGuessedLetter(pollId);
+    io.emit("letters", letters);
+  })
 }
 
 export { sockets };
