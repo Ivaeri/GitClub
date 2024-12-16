@@ -7,15 +7,34 @@
   <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
   </div>
-  <div v-if="participants.length > 0">
-          <h2>{{ uiLabels.joinedPlayers }}</h2>
-          <ul>
-            <li v-for="participant in participants" :key="participant.name">
-              {{ participant.name }}
-            </li>
-      </ul>
+  <div class="participantsLobby">
+    <h2 class="lobbyHeader">{{ uiLabels.joinedPlayers }}</h2>
+    <div class="gridContainer">
+      <p v-if="participants.length > 0" v-for="(participant, index) in participants" 
+        v-bind:key="participant.name"
+        v-bind:style="{gridColumnStart: (index % 3) + 1, gridRowStart: Math.floor(index / 3) + 1}"
+        class="playerGrid">
+          {{ participant.name }}
+      </p>
+    </div>
+    <div class="buttonContainer">
+      <div v-if="participants.length > 0">
+        <button v-on:click="startGame" class="startGameButtonGreen">
+            {{uiLabels.start}}
+        </button>
+      </div>
+      <div v-else>
+        <button  v-on:click="alertErrorMessage" class="startGameButtonGray">
+          {{uiLabels.start}}
+        </button>
+        <p v-if="noPlayers":class="{ active1: noPlayers }"> {{ uiLabels.waitForPlayers }}</p>
+      </div>
+    </div>
   </div>
-  <button v-on:click="startGame">{{uiLabels.start}}</button>
+      
+
+
+
   </template>
   
   <script>
@@ -37,9 +56,8 @@
         uiLabels: {},
         joined: false,
         lang: localStorage.getItem("lang") || "en",
-      
-
-        participants: []
+        participants: [],
+        noPlayers: false
       }
     },
 
@@ -86,7 +104,10 @@ methods: {
   participateInPoll: function () {
     socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
     this.joined = true;
-  }
+  },
+  alertErrorMessage(){
+  this.noPlayers = true;
+}
 }
 }
 
@@ -94,5 +115,71 @@ methods: {
   </script>
   
   <style scoped>
+
+  .participantsLobby{
+      position: relative;
+      font-size: 1.5em;
+      padding: 20px;
+      border: 1px solid #ccc;
+      height: 400px;
+      background-color: lightblue
+
+    }
+  .homebutton{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  .buttonContainer{
+    position: absolute;
+    bottom: 10px;
+    right: 10px; 
+    font-size: 0.8em;
+    margin-right: 1em;
+
+  }
+
+  .startGameButtonGreen{
+    width: 10em;
+    height: 6em;
+    background-color: lightgreen;
+    cursor: pointer;
+    border-radius: 10%;
+
+  }
+  .startGameButtonGray{
+    width: 10em;
+    height: 6em;
+    border-radius: 10%;
+  }
+  .lobbyHeader{
+    text-align: left;
+    font-size: 1.5em;
+  }
+  .gridContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* skapar 3 kolumner */
+    grid-auto-rows: 100px;
+    gap: 20px; 
+    justify-items: center;
+    align-items: center; 
+    padding: 20px;
+
+  }
+  .playerGrid{
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+    font-style: italic;
+  }
+  .active1{
+    margin-left: 5px;
+    display: inline-block;
+    color: red
+
+  }
   
   </style>

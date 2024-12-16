@@ -13,19 +13,11 @@
       </InputField>
     </div>
     <div class="item">
-      <button
+      <Button
         v-bind:text="uiLabels.sendWord" 
         v-on:click="handleClick">
         {{ uiLabels.sendWord }}
-     
-      </Button><!-- v-bind:to="'/hostLobby/' + pollId"skickar nu vidare när man klickar ok på varningen, försöker lösa med router push i funktionen och ta vort v-bind.to men kanske måste göra om kanppen, kräver to för att vara clickable -->
-       
-      <button
-        v-on:click="handleClick"
-        v-on:keydown.enter="handleClick"
-        >
-        Press me
-    </button>
+      </Button>
     </div>
   </div>
 </template>
@@ -63,7 +55,6 @@
     methods: {
       async validateWord(word, language) {
         console.log("validateWord körs");
-        console.log(word);
         let regex;
         if (language === "sv") {
           regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
@@ -71,28 +62,40 @@
           regex = /^[a-zA-Z]+$/; 
         }
         if (!regex.test(word)) {
-          return this.uiLabels.wordOnlyLetters[language];
+          return this.uiLabels.wordOnlyLetters;
         }
         if (word.length < 3) {
-          return this.uiLabels.wordTooShort[language];
+          return this.uiLabels.wordTooShort;
         }
         if (word.length > 12) {
-          return this.uiLabels.wordTooLong[language]; 
-          }
-
-        const apiUrl = language === "sv"
-          ? `https://api.datamuse.com/words?sp=${word}&lang=sv`
-          : `https://api.datamuse.com/words?sp=${word}&lang=en`;
+          return this.uiLabels.wordTooLong; 
+        }
+        let apiUrl;
+        if (language === "sv") {
+          // Använd ett API eller lokal ordbok för svenska
+          apiUrl = `https://ws.spraakbanken.gu.se/ws/sparv=${word}`;
+        } else {
+          // Använd Datamuse API för engelska
+          apiUrl = `https://api.datamuse.com/words?sp=${word}`;
+        }
 
         try {
           const response = await fetch(apiUrl);
           const data = await response.json();
-          if (!data.length) {
-            return this.uiLabels.wordNotInLexicon[language];
+
+          // För svenska API-svar
+          if (language === "sv" && (!data || !data.found)) {
+            return this.uiLabels.wordNotInLexicon;
           }
+
+          // För Datamuse API-svar (engelska)
+          if (language === "en" && (!data.length)) {
+            return this.uiLabels.wordNotInLexicon;
+          }
+
         } catch (error) {
           console.error("API-fel:", error);
-          return this.uiLabels.validationApiError[language];
+          return this.uiLabels.validationApiError;
         }
         return null; 
       },
@@ -108,11 +111,11 @@
         this.generateId();
         console.log("Poll ID genererat:", this.pollId);
         this.sendWord();
-        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword);
+        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
-        console.log("sending word:" + this.enteredword)
-        socket.emit( "sendWord", {enteredword: this.enteredword, pollId: this.pollId} )
+        console.log("sending word:" + this.enteredword.toUpperCase())
+        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId} )
         console.log("Navigering påbörjad");
       },
       generateId: function () {
@@ -130,7 +133,6 @@
     display: flex;
     justify-content: center; 
     align-items: center; 
-    margin-top: 12em
   }
 
   .item {
