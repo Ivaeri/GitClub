@@ -108,11 +108,11 @@
         this.generateId();
         console.log("Poll ID genererat:", this.pollId);
         this.sendWord();
-        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword);
+        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
-        console.log("sending word:" + this.enteredword)
-        socket.emit( "sendWord", {enteredword: this.enteredword, pollId: this.pollId} )
+        console.log("sending word:" + this.enteredword.toUpperCase())
+        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId} )
         console.log("Navigering påbörjad");
       },
       generateId: function () {

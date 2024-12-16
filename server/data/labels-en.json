@@ -20,7 +20,7 @@
 	"enterUsername": "Go ahead and enter your username",
 	"awaitingHost": "Waiting for host to start the game",
 	"awaitingPlayers": "Waiting for all the players to join",
-	"wordRecieved": "The word for this round is:",
+	"wordRecieved": "This round's word:",
 	"id": "Game-id: ",
 	"fillName": "Please enter a username before continuing",
 	"fillNumber": "Please enter a game-id before continuing",
@@ -37,5 +37,6 @@
 	"joinedPlayers": "Joined players:",
 	"HideGameRules": "Press to hide gamerules",
 	"players": "players",
-	"submit": "submit"
+	"submit": "submit",
+	"waitForPlayers": "Waiting for players to join"
 }

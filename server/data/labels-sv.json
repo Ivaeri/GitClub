@@ -21,7 +21,7 @@
 	"enterUsername": "Vänligen fyll i ditt användarnamn",
 	"awaitingHost": "Inväntar att värden startar spelet",
 	"awaitingPlayers": "Inväntar att alla spelare ansluter",
-	"wordRecieved": "Ordet för denna omgång är:",
+	"wordRecieved": "Omgångens ord:",
 	"id": "Spel-id: ",
 	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
 	"fillNumber": "vänligen fyll i ett spel-id innan du fortsätter",
@@ -38,5 +38,7 @@
 	"joinedPlayers": "Anslutna spelare:",
 	"goHome": "Gå till startsidan",
 	"players": "spelare",
-	"submit": "skicka"
+	"submit": "skicka",
+	"waitForPlayers": "Vänta på att spelare ansluter"
+
 }
