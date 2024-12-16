@@ -11,9 +11,9 @@ const router = createRouter({
       component: StartView
     },
       {
-      path: '/poll/:id',
-      name: 'PollView',
-      component: () => import('../views/PollView.vue')
+      path: '/playerInGame/:id/:id2',
+      name: 'playerInGameView',
+      component: () => import('../views/playerInGameView.vue')
     },
     {
       path: '/lobby/',
@@ -29,6 +29,12 @@ const router = createRouter({
       path:'/hostLobby/:id/:id2',
       name: 'lobbyForHost',
       component: () => import('../views/lobbyForHost.vue')
+
+    },
+    {
+      path: '/inGameForHost/:id/:id2',
+      name: 'inGameForHostView',
+      component: () => import('../views/inGameForHostView.vue')
 
     },
     {

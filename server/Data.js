@@ -3,7 +3,7 @@ import {readFileSync} from "fs";
 
 function Data() {
   this.polls = {};
-  this.polls['test'] = {
+  /*this.polls['test'] = {
     lang: "en",
     questions: [
       {q: "How old are you?", 
@@ -18,7 +18,7 @@ function Data() {
     participants: [],
     enteredWord: "",
     pollId: 0
-  }
+  }*/
 }
 
 
@@ -75,7 +75,7 @@ Data.prototype.getParticipants = function(pollId) {
   const poll = this.polls[pollId];
   console.log("participants requested for", pollId);
   if (this.pollExists(pollId)) { 
-    return this.polls[pollId].participants
+    return this.polls[pollId].participants;
   }
   return [];
 }
@@ -144,8 +144,30 @@ Data.prototype.updateWord = function (word, pollId) {
       this.polls[pollId].enteredWord = word;
   }
   console.log(this.polls[pollId]);
-}
+};
 
+Data.prototype.updateIndex = function (pollId) {
+  console.log("updating index in data:", this.polls[pollId].index)
+  if (this.polls[pollId]) {
+
+    console.log("index before toggle:", this.polls[pollId].index)
+      if(this.polls[pollId].participants.length -1 == this.polls[pollId].index){
+        this.polls[pollId].index = 0;
+      }
+      else{
+        this.polls[pollId].index += 1;
+            }
+            console.log("index after toggle:", this.polls[pollId].index)
+         }
+        
+    };
+  Data.prototype.getIndex = function (pollId) {
+
+    console.log("reached get index in data:", this.polls[pollId].index )
+    if (this.pollExists(pollId)) {
+      return this.polls[pollId].index
+      };
+    };
 
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
@@ -156,7 +178,9 @@ Data.prototype.setPollId = function (pollId) {
       participants: [],
       questions: [],
       answers: [],
-      currentQuestion: 0
+      currentQuestion: 0,
+      index: 0
+
     };
   }
   this.polls[pollId].pollId = pollId;
@@ -188,4 +212,14 @@ export { Data };
       enteredWord: "",
       pollIdInData: pollId
     };
-  }};*/
+  }
+};
+
+
+export { Data };
+
+
+/*function Data() {
+  this.polls = {};
+}*/
+

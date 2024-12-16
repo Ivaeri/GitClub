@@ -13,11 +13,19 @@
       </InputField>
     </div>
     <div class="item">
-      <Button
+      <button
         v-bind:text="uiLabels.sendWord" 
         v-on:click="handleClick">
+        {{ uiLabels.sendWord }}
+     
+      </Button><!-- v-bind:to="'/hostLobby/' + pollId"skickar nu vidare när man klickar ok på varningen, försöker lösa med router push i funktionen och ta vort v-bind.to men kanske måste göra om kanppen, kräver to för att vara clickable -->
+       
+      <button
+        v-on:click="handleClick"
+        v-on:keydown.enter="handleClick"
+        >
         Press me
-    </Button>
+    </button>
     </div>
   </div>
 </template>
@@ -40,15 +48,12 @@
     },
     data: function () {
       return {
-       
         uiLabels: {},
         lang: localStorage.getItem( "lang") || "en",
         enteredword: "",
         pollId: 1
-
       }
     },
-    
     created: function () {
       socket.on("uiLabels", labels => {
       this.uiLabels = labels;
@@ -56,24 +61,65 @@
       socket.emit( "getUILabels", this.lang );
     },
     methods: {
-      handleClick: function () {
+      async validateWord(word, language) {
+        console.log("validateWord körs");
+        console.log(word);
+        let regex;
+        if (language === "sv") {
+          regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
+        } else {
+          regex = /^[a-zA-Z]+$/; 
+        }
+        if (!regex.test(word)) {
+          return this.uiLabels.wordOnlyLetters[language];
+        }
+        if (word.length < 3) {
+          return this.uiLabels.wordTooShort[language];
+        }
+        if (word.length > 12) {
+          return this.uiLabels.wordTooLong[language]; 
+          }
+
+        const apiUrl = language === "sv"
+          ? `https://api.datamuse.com/words?sp=${word}&lang=sv`
+          : `https://api.datamuse.com/words?sp=${word}&lang=en`;
+
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          if (!data.length) {
+            return this.uiLabels.wordNotInLexicon[language];
+          }
+        } catch (error) {
+          console.error("API-fel:", error);
+          return this.uiLabels.validationApiError[language];
+        }
+        return null; 
+      },
+      async handleClick() {
+        console.log("handleClick körs");
+        const validationError = await this.validateWord(this.enteredword, this.lang);
+        if (validationError) {
+          alert(validationError); 
+          console.log("Validering misslyckades med:", validationError);
+          return;
+        }
         this.pollId = Math.floor(Math.random() * 1000000);
-        this.generateId()
-        this.sendWord()
+        this.generateId();
+        console.log("Poll ID genererat:", this.pollId);
+        this.sendWord();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword);
       },
       sendWord: function () {
         console.log("sending word:" + this.enteredword)
         socket.emit( "sendWord", {enteredword: this.enteredword, pollId: this.pollId} )
+        console.log("Navigering påbörjad");
       },
       generateId: function () {
         console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
       }
-
-
     }
-    
   };
   
   </script>
@@ -84,6 +130,7 @@
     display: flex;
     justify-content: center; 
     align-items: center; 
+    margin-top: 12em
   }
 
   .item {

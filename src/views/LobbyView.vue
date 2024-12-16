@@ -20,7 +20,7 @@
     <button class="joinGameButton" @click="validateAndJoin">
      {{ uiLabels.participateGame }}
    </button>
-      <!----<input type="text" v-model="userName" placeholder="Ditt namn">
+      <!--<input type="text" v-model="userName" placeholder="Ditt namn">
       <button v-on:click="participateInGame">
         {{ this.uiLabels.participateInGame }}
       </button>

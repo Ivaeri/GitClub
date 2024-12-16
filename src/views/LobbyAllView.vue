@@ -2,6 +2,7 @@
     <div>
       {{ this.uiLabels.id }}{{pollId}}
       <h1>{{ this.uiLabels.titlegame }}</h1>
+      </div>
       <div v-if="!joined">
       <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
@@ -21,16 +22,18 @@
         <p>{{ uiLabels.welcome }} {{ userName }}!
           {{ this.uiLabels.awaitingHost }}
         </p>
+        </div>
         <div v-if="participants.length > 0">
-  <h2>Deltagare:</h2>
-  <ul>
-    <div v-for="participant in participants" :key="participant.name">
-      {{ participant.name }}
-    </div>
+          <h2>{{ uiLabels.joinedPlayers }}</h2>
+          <ul>
+            <div v-for="participant in participants" :key="participant.name">
+              {{ participant.name }}
+        </div>
   </ul>
 </div>
-    </div>
-  </div>
+
+   
+
 </template>
   
   <script>
@@ -40,7 +43,7 @@
   const socket = io("localhost:3000");
   
   export default {
-    name: 'LobbyView',
+    name: 'LobbyAll',
     components: {
       InputField,
       HomeButton
@@ -59,7 +62,7 @@
       this.pollId = this.$route.params.id;
       socket.on( "uiLabels", labels => this.uiLabels = labels );
       socket.on( "participantsUpdate", p => this.participants = p );
-      socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
+      socket.on( "startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
     },
