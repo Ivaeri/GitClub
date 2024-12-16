@@ -39,13 +39,15 @@
 
 <script>
 import newPageButton from '../components/NewPageButton.vue';
+import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
 
 export default {
   name: 'CreateView',
   components: {
-    newPageButton
+    newPageButton,
+    HomeButton
   },
   data: function () {
     return {
