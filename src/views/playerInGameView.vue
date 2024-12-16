@@ -18,7 +18,8 @@
   
   <div v-if="this.participants[this.index] && userName == this.participants[this.index].name">
     Det är din tur att gissa!
-    <button v-on:click="toggleIndexViaData">Submit, gör till UIlabel</button>
+    <input type="text" maxlength="1">
+    <button v-on:click="toggleIndexViaData">{{ uiLabels.submit }}</button>
   </div>
 
  
@@ -47,7 +48,7 @@ export default {
       participants: [],
       userName: "",
       index: 0,
-      isYourTurn: false
+      uiLabels: {},
     }
   },
   created: function () {
@@ -68,25 +69,13 @@ export default {
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
     socket.emit("getParticipants", { pollId: this.pollId });
-    //this.toggleTurn(this.userName)
+   
   },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
-    /*
-    toggleIndex: function (){
-      console.log("index before toggle:", this.index)
-      if(this.participants.length -1 == this.index){
-        this.index = 0;
-      }
-      else{
-        this.index += 1
-            }
-            console.log("index after toggle:", this.index)
-            
-         },
-         */
+
          toggleIndexViaData: function (){
           socket.emit("updateIndex", { pollId: this.pollId, index: this.index })
          }

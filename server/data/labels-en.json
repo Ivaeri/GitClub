@@ -36,5 +36,6 @@
 	"validationApiError": "Could not validate the word against the lexicon.",
 	"joinedPlayers": "Joined players:",
 	"HideGameRules": "Press to hide gamerules",
-	"players": "players"
+	"players": "players",
+	"submit": "submit"
 }
