@@ -9,11 +9,22 @@
     <hr>
     <p>{{ this.userName }}</p>
     <div v-if="this.participants[this.index] && userName == this.participants[this.index].name">
-    Det är din tur att gissa!
-    <input class="inputBox" type="text" maxlength="1" placeholder="Click here to type a letter">
+      <div id="keyboard" class="keyboard">
+      <div class="row">
+        <button class="key" v-for="key in row1" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
+      </div>
+      <div class="row">
+        <button class="key" v-for="key in row2" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
+      </div>
+      <div class="row">
+        <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
+      </div>
+    </div>
+    
     <button v-on:click="toggleIndexViaData">{{ uiLabels.submit }}</button>
   </div>
-  <div v-else>hänga-gubbe-aniamationen</div>
+  <div v-else>hänga-gubbe-animationen</div>
+
   </div>
   
   <div class="participants-container">
@@ -49,7 +60,10 @@ export default {
       userName: "",
       index: 0,
       uiLabels: {},
-    }
+      row1: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å'],
+      row2: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä'],
+      row3: ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+        }
   },
   created: function () {
     this.pollId = this.$route.params.id;
@@ -116,4 +130,23 @@ export default {
   height: 8em; /* Justera höjden för att kompensera för större text */
   width: 20em; /* Justera bredden om nödvändigt */
 }
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .key {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
 </style>
