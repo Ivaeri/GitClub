@@ -7,19 +7,19 @@
               v-on:answer="submitAnswer($event)"/> 
   -->
     <hr>
-    
+    <p>{{ this.userName }}</p>
+    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name">
+    Det är din tur att gissa!
+    <input class="inputBox" type="text" maxlength="1" placeholder="Click here to type a letter">
+    <button v-on:click="toggleIndexViaData">{{ uiLabels.submit }}</button>
   </div>
-  <p>{{ this.userName }}</p>
+  <div v-else>hänga-gubbe-aniamationen</div>
+  </div>
+  
   <div class="participants-container">
     <div v-for="participant in participants" :key="participant.name" class="participant">
       {{ participant.name }}
     </div>
-  </div>
-  
-  <div v-if="this.participants[this.index] && userName == this.participants[this.index].name">
-    Det är din tur att gissa!
-    <input type="text" maxlength="1">
-    <button v-on:click="toggleIndexViaData">{{ uiLabels.submit }}</button>
   </div>
 
  
@@ -97,11 +97,23 @@ export default {
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; /* Fyll hela skärmen */
-    margin-top: 30em;
+    margin-top: 20em;
 }
 
 .participant {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
 }
 
+.inputBox {
+  background-color: pink;
+  color: black;
+  padding: 10px 20px; /* Justera padding för att kompensera för större text */
+  text-align: center;
+  display: inline-block;
+  font-size: 24px; /* Ändra textstorleken här */
+  margin: 4px 2px;
+  cursor: pointer;
+  height: 8em; /* Justera höjden för att kompensera för större text */
+  width: 20em; /* Justera bredden om nödvändigt */
+}
 </style>
