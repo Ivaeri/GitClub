@@ -10,7 +10,7 @@ function sockets(io, socket, data) {
     socket.emit('updateWord', data.updateWord(d.enteredword, d.pollId));
     io.emit("sendWord",  d.enteredword); 
   });
-
+ 
 
   socket.on("generateId", function(d) {
     socket.emit('setPollId', data.setPollId(d))
@@ -50,6 +50,14 @@ function sockets(io, socket, data) {
     io.emit('index', index);
     console.log("get index in socket:", index);
   });
+
+  socket.on("getWord", function(pollId) {
+    console.log("reached sockets for getWord")
+    let word = data.getWord(pollId);
+    console.log("word i socket before sending back to players;", word);
+    io.emit("word", word);
+  });
+
   socket.on("updateIndex", function(pollId) {
     console.log("update index reached sockets for id:", pollId);
     data.updateIndex(pollId);

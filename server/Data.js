@@ -184,6 +184,13 @@ Data.prototype.updateIndex = function (pollId) {
       return this.polls[pollId].index
       };
     };
+    Data.prototype.getWord = function (pollId) {
+      console.log("reached getWord in data:", this.polls[pollId].enteredWord )
+      if (this.pollExists(pollId)) {
+        return this.polls[pollId].enteredWord
+        };
+        return ""
+      };
 
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);

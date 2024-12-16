@@ -10,10 +10,17 @@
               v-on:answer="submitAnswer($event)"/> 
   -->
     <hr>
-    <div v-for="letter in allGuessedLetters" :key="letter">
-        {{ letter }}
-      </div>
+    <span v-for="letter in allGuessedLetters" :key="letter">
+      <span v-if="!allGuessedLetters.includes(letter)">{{ letter }}</span> 
+    </span>
     <p>{{ this.userName }}</p>
+
+    <span v-for="letter in trueWord" class="trueWord">
+       <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
+       <span v-else> _ </span>
+    </span>
+    
+
     <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
       <div id="keyboard" class="keyboard">
       <div class="row">
@@ -94,7 +101,7 @@ export default {
       this.index = index });
     
     socket.on( "letters", letters => this.allGuessedLetters = letters );
-    socket.on("sendWord", word => this.trueWord = word );
+    socket.on("word", word => this.trueWord = word );
     console.log("ordet i player:", this.trueWord)
     
     
@@ -103,6 +110,7 @@ export default {
     socket.emit("getParticipants", { pollId: this.pollId });
     socket.emit("getIndex", this.pollId )
     socket.emit("getGuessedLetters", this.pollId)
+    socket.emit("getWord", this.pollId)
    
     
    
