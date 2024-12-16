@@ -2,6 +2,9 @@
   
   <div>
     {{pollId}}
+    <div class="homebutton">
+        <HomeButton :text="uiLabels.goHome"/> 
+    </div>
     <!--
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/> 
@@ -30,12 +33,13 @@
 // @ is an alias to /src
 
 import io from 'socket.io-client';
+import HomeButton from '../components/HomeButton.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'lobbyForHost',
   components: {
-   
+    HomeButton
   },
   data: function () {
     return {

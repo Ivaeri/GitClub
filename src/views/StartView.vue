@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="homebutton">
+      <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
     </div>
   </header>
