@@ -2,8 +2,10 @@
   
   <div>
     {{pollId}}
+    <!--
     <QuestionComponent v-bind:question="question"
-              v-on:answer="submitAnswer($event)"/>
+              v-on:answer="submitAnswer($event)"/> 
+  -->
     <hr>
     
   </div>
@@ -13,13 +15,14 @@
       {{ participant.name }}
     </div>
   </div>
-  <!--biten under gör inget men tänkte att man kan göra något sådant där
-  index ökar varje gång någon anger en bokstav
-  <div v-if="participants[index] && this.userName == participants[index].name">
+  
+  <div v-if="this.participants[this.index] && userName == this.participants[this.index].name">
     Det är din tur att gissa!
+    <button v-on:click="toggleIndex">Submit, gör till UIlabel</button>
   </div>
-  <div>hej {{ this.participants }}</div>
--->
+
+ 
+
 </template>
 
 <script>
@@ -43,7 +46,8 @@ export default {
       submittedAnswers: {},
       participants: [],
       userName: "",
-      index: 1
+      index: 0,
+      isYourTurn: false
     }
   },
   created: function () {
@@ -56,16 +60,34 @@ export default {
       this.participants = p;
       
     });
+    //socket.on( "index", index => this.index = index );
+    
     
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
     socket.emit("getParticipants", { pollId: this.pollId });
+    //this.toggleTurn(this.userName)
   },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
-    }
-  }
+    },
+    toggleIndex: function (){
+      console.log("index before toggle:", this.index)
+      if(this.participants.length -1 == this.index){
+        this.index = 0;
+      }
+      else{
+        this.index += 1
+            }
+            console.log("index after toggle:", this.index)
+            
+         },
+         /*
+         toggleIndexViaData: function (){
+          socket.emit("updateIndex", { pollId: this.pollId })
+         }*/
+      }
 }
 </script>
 <style scoped>

@@ -45,7 +45,12 @@ function sockets(io, socket, data) {
     socket.emit('participantsUpdate', data.getParticipants(d.pollId));
     console.log("called for participants:", d.pollId);
   });
-
+/* en ide bara
+  socket.on("updateIndex", function(d) {
+    socket.emit('index', data.updateIndex(d.pollId));
+    console.log("updated index", d.index);
+  });
+*/
   socket.on('startPoll', function(pollId) {
     io.to(pollId).emit('startPoll');
   })

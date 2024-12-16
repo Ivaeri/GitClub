@@ -145,7 +145,23 @@ Data.prototype.updateWord = function (word, pollId) {
   }
   console.log(this.polls[pollId]);
 };
+/*
+Data.prototype.updateIndex = function (pollId) {
+  console.log("updating index in data", this.index)
+  if (!this.polls[pollId]) {
 
+    console.log("index before toggle:")
+      if(this.polls[pollId].participants.length -1 == this.polls[pollId].index){
+        this.polls[pollId].index = 0;
+      }
+      else{
+        this.polls[pollId].index += 1;
+            }
+            console.log("index after toggle:", this.index)
+         }
+         return this.polls[pollId].index
+    };
+*/
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
   if (!this.polls[pollId]) {
@@ -155,7 +171,9 @@ Data.prototype.setPollId = function (pollId) {
       participants: [],
       questions: [],
       answers: [],
-      currentQuestion: 0
+      currentQuestion: 0,
+      index: 0
+
     };
   }
   this.polls[pollId].pollId = pollId;
