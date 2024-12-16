@@ -145,23 +145,23 @@ Data.prototype.updateWord = function (word, pollId) {
   }
   console.log(this.polls[pollId]);
 };
-/*
-Data.prototype.updateIndex = function (pollId) {
-  console.log("updating index in data", this.index)
-  if (!this.polls[pollId]) {
 
-    console.log("index before toggle:")
-      if(this.polls[pollId].participants.length -1 == this.polls[pollId].index){
-        this.polls[pollId].index = 0;
+Data.prototype.updateIndex = function (pollId, index) {
+  console.log("updating index in data:", index)
+  if (this.polls[pollId]) {
+
+    console.log("index before toggle:", index)
+      if(this.polls[pollId].participants.length -1 == index){
+        index = 0;
       }
       else{
-        this.polls[pollId].index += 1;
+        index += 1;
             }
-            console.log("index after toggle:", this.index)
+            console.log("index after toggle:", index)
          }
-         return this.polls[pollId].index
+         return index
     };
-*/
+
 Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
   if (!this.polls[pollId]) {

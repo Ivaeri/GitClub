@@ -18,7 +18,7 @@
   
   <div v-if="this.participants[this.index] && userName == this.participants[this.index].name">
     Det är din tur att gissa!
-    <button v-on:click="toggleIndex">Submit, gör till UIlabel</button>
+    <button v-on:click="toggleIndexViaData">Submit, gör till UIlabel</button>
   </div>
 
  
@@ -60,7 +60,9 @@ export default {
       this.participants = p;
       
     });
-    //socket.on( "index", index => this.index = index );
+    socket.on( "index", index => {
+      this.index = index });
+    
     
     
     socket.emit( "getUILabels", this.lang );
@@ -72,6 +74,7 @@ export default {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
+    /*
     toggleIndex: function (){
       console.log("index before toggle:", this.index)
       if(this.participants.length -1 == this.index){
@@ -83,10 +86,10 @@ export default {
             console.log("index after toggle:", this.index)
             
          },
-         /*
+         */
          toggleIndexViaData: function (){
-          socket.emit("updateIndex", { pollId: this.pollId })
-         }*/
+          socket.emit("updateIndex", { pollId: this.pollId, index: this.index })
+         }
       }
 }
 </script>
