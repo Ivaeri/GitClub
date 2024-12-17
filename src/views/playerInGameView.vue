@@ -28,7 +28,7 @@
        <span v-else> _ </span>
     </span>
    
-    
+
 
     <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
       <div class="letterBoxContainer">
@@ -37,15 +37,21 @@
       </div>
     </div>
       <div id="keyboard" class="keyboard">
-      <div class="row">
-        <button class="key" v-for="key in row1" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
-      </div>
-      <div class="row">
-        <button class="key" v-for="key in row2" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
-      </div>
-      <div class="row">
-        <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
-      </div>
+        <div class="row" v-if="this.lang == 'en'">
+          <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+        </div>
+        <div class="row" v-if="this.lang == 'sv'">
+          <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+        </div>
+        <div class="row" v-if="this.lang == 'en'">
+          <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+        </div>
+        <div class="row" v-if="this.lang == 'sv'">
+          <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+        </div>
+        <div class="row">
+          <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+        </div>
     </div>
     
     <button class="submitButton" v-on:click="handleSubmit">{{ uiLabels.submit }}</button>
@@ -103,13 +109,16 @@ export default {
       userName: "",
       index: 0,
       uiLabels: {},
-      row1: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å'],
-      row2: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä'],
+      row1s: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Å'],
+      row2s: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ö', 'Ä'],
+      row1e: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+      row2e: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
       row3: ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
       allGuessedLetters: "",
       trueWord: "",
       current_letter: "",
-      isGameWon: false
+      isGameWon: false,
+      lang: localStorage.getItem("lang") || "en",
     };
       
   },
@@ -198,6 +207,9 @@ export default {
       /*
       socket.emit("updateGuessedLetters", {pollId: this.pollId, key: key})
       socket.emit("getGuessedLetters", this.pollId)*/
+    },
+    isWrongKey(key) {
+      return this.allGuessedLetters.includes(key) && this.trueWord !== (key);
     }
       }
 }
@@ -246,6 +258,10 @@ export default {
   .key:hover {
     background-color:#0056b3;
   }
+
+  .wrongKey {
+  background-color: red !important; /* Gör felaktiga tangenter röda */
+}
 
   .keyboardContainer {
     margin-top: 3em
