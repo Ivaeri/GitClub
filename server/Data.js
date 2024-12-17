@@ -154,6 +154,24 @@ Data.prototype.updateGuessedLetters = function (pollId, key) {
   }
 };
 
+Data.prototype.setGameToWon = function (pollId) {
+  console.log("setting game to won in data for:", this.polls[pollId].isGameWon);
+  if (this.polls[pollId]) {
+      this.polls[pollId].isGameWon = true;
+  }
+};
+
+Data.prototype.findIfWon = function (pollId) {
+  console.log("finding if game is won in data for:", this.polls[pollId].isGameWon);
+  if (this.polls[pollId]) {
+      return this.polls[pollId].isGameWon;
+  }
+  else {
+    return false
+  }
+};
+
+
 Data.prototype.getGuessedLetter = function (pollId) {
   console.log("letters requested for", pollId);
   if (this.pollExists(pollId)) { 
@@ -203,7 +221,8 @@ Data.prototype.setPollId = function (pollId) {
       answers: [],
       currentQuestion: 0,
       index: 0,
-      guessedLetters: []
+      guessedLetters: [],
+      isGameWon: true
 
     };
   }

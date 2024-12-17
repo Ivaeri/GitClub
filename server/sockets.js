@@ -70,6 +70,16 @@ function sockets(io, socket, data) {
     
   });
 
+  socket.on("setGameToWon", function(pollId){
+    data.setGameToWon(pollId)
+  })
+
+  socket.on("findIfWon", function(pollId) {
+    let isWon = data.findIfWon(pollId)
+    console.log("having requested if won via sockets", isWon)
+    io.emit("wonOrNot", isWon)
+  })
+
   socket.on('startPoll', function(pollId) {
     io.to(pollId).emit('startPoll');
   })

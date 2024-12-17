@@ -24,14 +24,15 @@
        <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
        <span v-else> _ </span>
     </span>
-    <div class="letterBoxContainer">
+   
+    
+
+    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
+      <div class="letterBoxContainer">
       <div class="letterBox">
         {{ this.current_letter }}
       </div>
     </div>
-    
-
-    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
       <div id="keyboard" class="keyboard">
       <div class="row">
         <button class="key" v-for="key in row1" v-bind:key="key" v-on:click="keyPressed(key)">{{ key }}</button>
@@ -49,6 +50,8 @@
   <div v-else>hänga-gubbe-animationen</div>
 
   </div>
+
+  <div v-if="this.isGameWon"> you won </div>
   
   <div class="participants-container">
     
@@ -94,7 +97,8 @@ export default {
       row3: ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
       allGuessedLetters: "",
       trueWord: "",
-      current_letter: ""
+      current_letter: "",
+      isGameWon: false
     };
       
   },
@@ -113,6 +117,7 @@ export default {
     
     socket.on( "letters", letters => this.allGuessedLetters = letters );
     socket.on("word", word => this.trueWord = word );
+    socket.on("wonOrNot", isWon => this.isGameWon = isWon)
     console.log("ordet i player:", this.trueWord)
     
     
@@ -135,7 +140,24 @@ export default {
       this.toggleIndexViaData();
       this.updateThoseLetters();
       this.setcurrentLetterToEmpty();
+      this.setGameToWonViaData();
+      this.findIfGameIsWOnViaData();
     },
+
+    setGameToWonViaData() {
+  const allGuessed = this.trueWord.split('').every(letter => this.allGuessedLetters.includes(letter));
+  if (allGuessed) {
+    socket.emit("setGameToWon", this.pollId);
+    console.log("emit sent to update win status");
+  } else {
+    this.isGameWon = false;
+    console.log("win status:", this.isGameWon);
+  }
+},
+    findIfGameIsWOnViaData () {
+      socket.emit("findIfWon", this.pollId)
+    },
+
     setcurrentLetterToEmpty: function () {
       this.current_letter = ""
     },
@@ -253,7 +275,9 @@ export default {
   .letterBoxContainer {
     display: flex;
     justify-content: center;
-    margin-top: 2em
+    margin-top: 2em;
+    margin-bottom: 1em;
+
   }
 
   .trueWord {
