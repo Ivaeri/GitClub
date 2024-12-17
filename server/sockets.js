@@ -71,6 +71,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on("setGameToWon", function(pollId){
+    console.log("reached setgametowon in sockets")
     data.setGameToWon(pollId)
   })
 

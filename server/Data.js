@@ -222,7 +222,7 @@ Data.prototype.setPollId = function (pollId) {
       currentQuestion: 0,
       index: 0,
       guessedLetters: [],
-      isGameWon: true
+      isGameWon: false
 
     };
   }

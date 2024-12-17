@@ -11,6 +11,9 @@
   -->
     <hr>
     <p>{{ this.userName }}</p>
+
+    <div class="inGame" v-if="!isGameWon">
+
     <div class="failedLettersContainer">
       <h3>Wrong guesses:</h3>
       <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
@@ -50,9 +53,12 @@
   <div v-else>hänga-gubbe-animationen</div>
 
   </div>
-
-  <div v-if="this.isGameWon"> you won </div>
-  
+</div>
+  <div class="winContainer">
+    <div v-if="isGameWon" class="animate__animated animate__zoomInDown"> 
+      You won!  
+    </div>
+  </div>
   <div class="participants-container">
     
     <div v-for="participant in participants" :key="participant.name" class="participant">
@@ -127,6 +133,7 @@ export default {
     socket.emit("getIndex", this.pollId )
     socket.emit("getGuessedLetters", this.pollId)
     socket.emit("getWord", this.pollId)
+    socket.emit("findIfWon", this.pollId)
    
     
    
@@ -141,20 +148,22 @@ export default {
       this.updateThoseLetters();
       this.setcurrentLetterToEmpty();
       this.setGameToWonViaData();
-      this.findIfGameIsWOnViaData();
+      this.findIfGameIsWonViaData();
     },
 
     setGameToWonViaData() {
-  const allGuessed = this.trueWord.split('').every(letter => this.allGuessedLetters.includes(letter));
-  if (allGuessed) {
-    socket.emit("setGameToWon", this.pollId);
-    console.log("emit sent to update win status");
-  } else {
-    this.isGameWon = false;
-    console.log("win status:", this.isGameWon);
-  }
-},
-    findIfGameIsWOnViaData () {
+      for (let letter of this.trueWord) {
+        if (!this.allGuessedLetters.includes(letter)) {
+          this.isGameWon = false;
+          console.log("win status:", this.isGameWon);
+          return;
+        }
+      }
+      socket.emit("setGameToWon", this.pollId);
+      console.log("emit sent to update win status");
+      
+    },
+    findIfGameIsWonViaData () {
       socket.emit("findIfWon", this.pollId)
     },
 
@@ -282,6 +291,12 @@ export default {
 
   .trueWord {
     color: rgb(42, 205, 20);
+  }
+
+  .winContainer {
+    color: #0056b3;
+    font-size: 10em;
+
   }
   
 
