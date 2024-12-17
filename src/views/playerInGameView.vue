@@ -54,11 +54,14 @@
 
   </div>
 </div>
-  <div class="winContainer">
-    <div v-if="isGameWon" class="animate__animated animate__zoomInDown"> 
+<div v-if="isGameWon" class="animate__animated animate__zoomInDown">
       You won!  
+      <InputField
+          v-model="trueWord"
+          placeholder="uiLabels.example"
+          id="username">
+      </InputField>
     </div>
-  </div>
   <div class="participants-container">
     
     <div v-for="participant in participants" :key="participant.name" class="participant">
@@ -79,12 +82,14 @@
 
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
+import InputField from '../components/InputField.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'lobbyForHost',
   components: {
-    HomeButton
+    HomeButton,
+    InputField
   },
   data: function () {
     return {
@@ -143,6 +148,12 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
 
+    updateThoseLetters: function () {
+      console.log("running updated those letters", this.key)
+      socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})
+      socket.emit("getGuessedLetters", this.pollId)
+    },
+
     handleSubmit: function () {
       this.toggleIndexViaData();
       this.updateThoseLetters();
@@ -152,11 +163,15 @@ export default {
     },
 
     setGameToWonViaData() {
+      
       for (let letter of this.trueWord) {
         if (!this.allGuessedLetters.includes(letter)) {
-          this.isGameWon = false;
-          console.log("win status:", this.isGameWon);
-          return;
+          if(this.key !== letter) {
+            this.isGameWon = false;
+            console.log("win status:", this.isGameWon);
+            return;
+          }
+          
         }
       }
       socket.emit("setGameToWon", this.pollId);
@@ -176,10 +191,7 @@ export default {
     socket.emit("getIndex", this.pollId )
     },
 
-    updateThoseLetters: function () {
-      socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})
-      socket.emit("getGuessedLetters", this.pollId)
-    },
+   
     keyPressed: function (key) {
       this.key = key;
       this.current_letter = key;
