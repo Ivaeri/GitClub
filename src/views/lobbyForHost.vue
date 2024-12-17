@@ -40,7 +40,6 @@
   <script>
   import io from 'socket.io-client';
   import HomeButton from '../components/HomeButton.vue';
-  import InputField from '../components/InputField.vue';
   const socket = io("localhost:3000");
   
   export default {
@@ -125,13 +124,6 @@ methods: {
       background-color: lightblue
 
     }
-  .homebutton{
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin-top: 5px;
-    margin-left: 5px;
-  }
 
   .buttonContainer{
     position: absolute;

@@ -3,22 +3,6 @@ import {readFileSync} from "fs";
 
 function Data() {
   this.polls = {};
-  /*this.polls['test'] = {
-    lang: "en",
-    questions: [
-      {q: "How old are you?", 
-       a: ["0-13", "14-18", "19-25", "26-35", "36-45","45-"]
-      },
-      {q: "How much do you enjoy coding?", 
-       a: ["1", "2", "3", "4", "5"]
-      }
-    ],
-    answers: [],
-    currentQuestion: 0,
-    participants: [],
-    enteredWord: "",
-    pollId: 0
-  }*/
 }
 
 
@@ -65,7 +49,6 @@ Data.prototype.getPoll = function(pollId) {
 }
 
 Data.prototype.participateInPoll = function(pollId, name) {
-  console.log("participant will be added to", pollId, name);
   if (this.pollExists(pollId)) {
     this.polls[pollId].participants.push({name: name, answers: []})
   }
@@ -73,7 +56,6 @@ Data.prototype.participateInPoll = function(pollId, name) {
 
 Data.prototype.getParticipants = function(pollId) {
   const poll = this.polls[pollId];
-  console.log("participants requested for", pollId);
   if (this.pollExists(pollId)) { 
     return this.polls[pollId].participants;
   }
@@ -129,17 +111,7 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-/*Data.prototype.updateWord = function (pollId, word) {
-  console.log("Word received from client for poll:", pollId, word);
-  if (this.pollExists(pollId)) {
-    this.polls[pollId].enteredWord = word;
-    console.log(this.polls[pollId].enteredWord);
-  }
-};*/
-
 Data.prototype.updateWord = function (word, pollId) {
-  console.log("Word received from client:", word);
-  console.log("pollId received from client:", pollId);
   if (this.polls[pollId]) {
       this.polls[pollId].enteredWord = word;
   }

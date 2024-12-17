@@ -1,7 +1,24 @@
 <template>
     <h1>{{ uiLabels.titlegame }}</h1>
-    <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
-    <h3>{{ uiLabels.players }}:</h3>
+    <div class="wordBox">
+      <h2>{{ uiLabels.wordRecieved }}</h2>
+      <h2 v-for="letter in enteredword">
+        <span v-if="allGuessedLetters.includes(letter)" class="greenLetter"> {{ letter }} </span>
+        <span v-else> {{ letter }} </span>
+      </h2>
+      <div >
+        <h3>Letter's guessed:</h3>
+        <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
+          <span v-if="enteredword.includes(letter)" class="guessedCorrectLetter"> {{ letter }} </span>
+          <span v-else class="guessedWrongLetter"> {{ letter }}</span>
+        </div>
+      </div>
+    </div>
+    <div v-for="letter in allGuessedLetters" :key="letter" class="graveYard">
+      <div v-if="!enteredword.includes(letter)">
+        <HangPerson />
+      </div>
+    </div>
     <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
     </div>
@@ -16,11 +33,13 @@
     import io from 'socket.io-client';
     import HomeButton from '../components/HomeButton.vue';
     const socket = io("localhost:3000");
+    import HangPerson from '../components/HangPerson.vue';
     
     export default {
       name: 'lobbyForHost',
       components: {
-        HomeButton
+        HomeButton,
+        HangPerson
       },
       data: function () {
         return {
@@ -28,8 +47,8 @@
           enteredword: "",
           pollId: null,
           lang: localStorage.getItem("lang") || "en",
-          participants: []
-        
+          participants: [],
+          allGuessedLetters: []
   
         }
       },
@@ -42,35 +61,35 @@
       this.uiLabels = labels;
       console.log("Mottog UI-labels från servern:", this.uiLabels);
     });
+
+    socket.on("letters", (letters) => {
+      this.allGuessedLetters = letters;
+      console.log("Mottog bokstäver från servern:", this.allGuessedLetters);
+    });
     socket.on( "participantsUpdate", p => {
+      console.log("Mottog deltagaruppdatering från servern:", p);
       this.participants = p;
-      
     });
     
-  
-  /*
-  socket.on("sendWord", (data) => {
-    // this.enteredword = data.enteredWord; Hämtar ordet från sökvägen istället
-    console.log("Mottog ord från servern:", this.enteredword);
-  });
-  
-  socket.on("generateId", (data) => {
-    // this.pollId = data.pollId; H��mtar ordet från sökvägen istället
-    console.log("Mottog pollId från servern:", this.pollId);
-  });
-  */
   socket.emit( "getUILabels", this.lang );
   socket.emit("getParticipants", { pollId: this.pollId });
+  socket.emit("getGuessedLetters", { pollId: this.pollId });
   },
   
   methods: {
   
   }
   }
-    </script>
+   </script>
     
-    <style scoped>
+ <style scoped>
 
+h1 {
+    font-size: 4em;
+}
+h2 {
+    display: inline-block;
+}
 .participants-container {
     color: black;
     padding: 1em;
@@ -78,10 +97,49 @@
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; /* Fyll hela skärmen */
-    margin-top: 30em;
+    margin-top: 6em;
+    font-size: 2em;
 }
 
 .participant {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
 }
-    </style>
+
+.greenLetter {
+  color: green;
+}
+
+.wordBox {
+  position: relative;
+  text-align: left;
+  margin-left: 4em;
+}
+
+.lettersGuessed {
+  display: inline-block;
+}
+
+.guessedCorrectLetter{
+  font-size: 1em;
+  color: green;
+  padding: 0.3em;
+}
+
+.guessedWrongLetter{
+  font-size: 1em;
+  color: red;
+  padding: 0.3em;
+
+}
+.graveYard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+</style>
