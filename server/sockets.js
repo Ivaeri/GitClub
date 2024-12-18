@@ -107,10 +107,20 @@ function sockets(io, socket, data) {
     data.updateGuessedLetters(d.pollId, d.key);
   })
 
+  socket.on("addAmountWrongLetters", function(pollId) {
+    data.setAmountWrongLetters(pollId)
+  })
+
+  socket.on("getAmountWrongLetters", function(pollId){
+    let amount = data.getAmountWrongLetters(pollId)
+    io.emit("amountWrongLetters", amount)
+  })
+
   socket.on("getGuessedLetters", function(pollId){
     let letters = data.getGuessedLetter(pollId);
     io.emit("letters", letters);
   })
+
 }
 
 export { sockets };

@@ -170,8 +170,23 @@ export default {
       this.setcurrentLetterToEmpty();
       this.setGameToWonViaData();
       this.findIfGameIsWonViaData();
+      this.setAmountWrongLetters();
+      this.sendAmountWrongLetters();
       }
   },
+    
+    setAmountWrongLetters(){
+      console.log("entered setamount.. in player, key:", this.key)
+      if(!this.trueWord.includes(this.key)) {
+      socket.emit("addAmountWrongLetters", this.pollId)
+      console.log("emit sent", this.key)
+      }
+      
+    },
+    sendAmountWrongLetters () {
+      socket.emit("getAmountWrongLetters", this.pollId)
+    },
+
     setGameToWonViaData() {
       
       for (let letter of this.trueWord) {
