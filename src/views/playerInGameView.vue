@@ -164,13 +164,14 @@ export default {
     },
 
     handleSubmit: function () {
+      if(!this.allGuessedLetters.includes(this.key)){
       this.toggleIndexViaData();
       this.updateThoseLetters();
       this.setcurrentLetterToEmpty();
       this.setGameToWonViaData();
       this.findIfGameIsWonViaData();
-    },
-
+      }
+  },
     setGameToWonViaData() {
       
       for (let letter of this.trueWord) {
@@ -209,7 +210,7 @@ export default {
       socket.emit("getGuessedLetters", this.pollId)*/
     },
     isWrongKey(key) {
-      return this.allGuessedLetters.includes(key) && this.trueWord !== (key);
+      return this.allGuessedLetters.includes(key) && !this.trueWord.includes(key);
     }
       }
 }
