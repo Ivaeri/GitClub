@@ -38,19 +38,19 @@
     </div>
       <div id="keyboard" class="keyboard">
         <div class="row" v-if="this.lang == 'en'">
-          <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row" v-if="this.lang == 'sv'">
-          <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row" v-if="this.lang == 'en'">
-          <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row" v-if="this.lang == 'sv'">
-          <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row">
-          <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
     </div>
     
@@ -226,6 +226,9 @@ export default {
     },
     isWrongKey(key) {
       return this.allGuessedLetters.includes(key) && !this.trueWord.includes(key);
+    },
+    isCorrectKey(key) {
+      return this.allGuessedLetters.includes(key) && this.trueWord.includes(key);
     }
       }
 }
@@ -277,6 +280,10 @@ export default {
 
   .wrongKey {
   background-color: red !important; /* Gör felaktiga tangenter röda */
+}
+
+.correctKey {
+  background-color: green
 }
 
   .keyboardContainer {
