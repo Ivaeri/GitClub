@@ -30,7 +30,7 @@
    
 
 
-    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
+    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer" @keydown.enter="handleSubmit">
       <div class="letterBoxContainer">
       <div class="letterBox">
         {{ this.current_letter }}
