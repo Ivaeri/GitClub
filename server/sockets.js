@@ -4,17 +4,23 @@ function sockets(io, socket, data) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
 
+<<<<<<< HEAD
   socket.on("sendWord", function (d) { //pollId hostname?
     const { pollId, enteredword, userName} = d;
     console.log("test", d.enteredword, d.pollId, userName);
     data.updateWord(d.enteredword, d.pollId, userName);
+=======
+  socket.on("sendWord", function (d) {
+    const { pollId, enteredword } = d;
+    socket.emit('updateWord', data.updateWord(d.enteredword, d.pollId));
+>>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
     io.emit("sendWord",  d.enteredword); 
   });
  
 
+
   socket.on("generateId", function(d) {
     socket.emit('setPollId', data.setPollId(d))
-    console.log("poll Id set to:", d);
     io.emit("generateId",  { pollId: d });
     io.emit("activePollsUpdate", Object.keys(data.polls));
   });
@@ -45,40 +51,27 @@ function sockets(io, socket, data) {
 
   socket.on("getParticipants", function(d) {
     socket.emit('participantsUpdate', data.getParticipants(d.pollId));
-    console.log("called for participants:", d.pollId);
   });
   socket.on("getIndex", function(pollId) {
     let index = data.getIndex(pollId);
     io.emit('index', index);
-    console.log("get index in socket:", index);
   });
 
   socket.on("getWord", function(pollId) {
-    console.log("reached sockets for getWord")
     let word = data.getWord(pollId);
-    console.log("word i socket before sending back to players;", word);
     io.emit("word", word);
   });
 
   socket.on("updateIndex", function(pollId) {
-    console.log("update index reached sockets for id:", pollId);
     data.updateIndex(pollId);
-    /*
-    let index = data.updateIndex(d.pollId, d.index);
-    io.emit("index", index);
-    console.log("index sent back to playerview:", index)
-    */
-    
   });
 
   socket.on("setGameToWon", function(pollId){
-    console.log("reached setgametowon in sockets")
     data.setGameToWon(pollId)
   })
 
   socket.on("findIfWon", function(pollId) {
     let isWon = data.findIfWon(pollId)
-    console.log("having requested if won via sockets", isWon)
     io.emit("wonOrNot", isWon)
   })
 
@@ -92,6 +85,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('getActivePolls', () => {
+<<<<<<< HEAD
     const activePolls = Object.keys(data.polls).map(pollId => {
       const poll = data.polls[pollId]; 
         return {
@@ -100,6 +94,9 @@ function sockets(io, socket, data) {
         };
     }); 
     console.log("Aktiva spel skickas:", activePolls);
+=======
+    const activePolls = Object.keys(data.polls); 
+>>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
     socket.emit('activePolls', activePolls); 
     io.emit("activePollsUpdate", activePolls);
 });
@@ -113,10 +110,20 @@ function sockets(io, socket, data) {
     data.updateGuessedLetters(d.pollId, d.key);
   })
 
+  socket.on("addAmountWrongLetters", function(pollId) {
+    data.setAmountWrongLetters(pollId)
+  })
+
+  socket.on("getAmountWrongLetters", function(pollId){
+    let amount = data.getAmountWrongLetters(pollId)
+    io.emit("amountWrongLetters", amount)
+  })
+
   socket.on("getGuessedLetters", function(pollId){
     let letters = data.getGuessedLetter(pollId);
     io.emit("letters", letters);
   })
+
 }
 
 export { sockets };

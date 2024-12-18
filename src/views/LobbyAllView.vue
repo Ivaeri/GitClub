@@ -11,7 +11,8 @@
         <InputField 
           v-model="userName" 
           :placeholder="uiLabels.name" 
-          id="username">
+          id="username"
+          @keydown.enter="validateAndParticipate">
         </InputField>
         <button class="joinGameButton" @click="validateAndParticipate">
            {{ uiLabels.participateGame }}

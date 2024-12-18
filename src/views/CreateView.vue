@@ -1,21 +1,22 @@
 <template>
   <h1>{{uiLabels.createGame}}</h1>
   <div class="homebutton">
-      <HomeButton :text="uiLabels.goHome"/> 
-  </div> 
+      <HomeButton :text="uiLabels.goHome"/>
+  </div>
   <newPageButton v-bind:text="uiLabels.coop" to="/submitword/" /> <!--newPageutton är en komponent som skapas i Button.vue, den har props: text, to. I text anger man vad som ska stå på knappen. I to anger man den sida man vill skickas till vid klick på knappen -->
-
-
+ 
+ 
+ 
+ 
   <div>
-  
   
     <div>
       {{ uiLabels.question }}:
       <input type="text" v-model="question">
       <div>
         Answers:
-        <input v-for="(_, i) in answers" 
-               v-model="answers[i]" 
+        <input v-for="(_, i) in answers"
+               v-model="answers[i]"
                v-bind:key="'answer' + i">
         <button v-on:click="addAnswer">
           Add answer alternative
@@ -35,15 +36,17 @@
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
   </div>
-</template>
-
-<script>
-import newPageButton from '../components/NewPageButton.vue';
-import HomeButton from '../components/HomeButton.vue';
-import io from 'socket.io-client';
-const socket = io("localhost:3000");
-
-export default {
+ </template>
+ 
+ 
+ <script>
+ import newPageButton from '../components/NewPageButton.vue';
+ import HomeButton from '../components/HomeButton.vue';
+ import io from 'socket.io-client';
+ const socket = io("localhost:3000");
+ 
+ 
+ export default {
   name: 'CreateView',
   components: {
     newPageButton,
@@ -84,21 +87,19 @@ export default {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     }
   }
-}
-</script>
-<style scoped>
-.gameMode {
- 
+ }
+ </script>
+ <style scoped>
+ .gameMode {
   background-color: blue;
   justify-content: center;
   width: 300px;
   align-items: center;
-  
-}
-.coopLink {
- 
+  }
+ .coopLink {
   color: pink;
   font-size: 70px;
-}
-
-</style>
+ }
+ 
+ 
+ </style>

@@ -38,19 +38,19 @@
     </div>
       <div id="keyboard" class="keyboard">
         <div class="row" v-if="this.lang == 'en'">
-          <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row" v-if="this.lang == 'sv'">
-          <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row" v-if="this.lang == 'en'">
-          <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row" v-if="this.lang == 'sv'">
-          <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
         <div class="row">
-          <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key)}">{{ key }}</button>
+          <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
         </div>
     </div>
     
@@ -61,7 +61,7 @@
   </div>
 </div>
 <div v-if="isGameWon" class="animate__animated animate__zoomInDown">
-      You won!  
+      <div class="winText">You won! </div> 
       <InputField
           v-model="trueWord"
           placeholder="uiLabels.example"
@@ -138,7 +138,6 @@ export default {
     socket.on( "letters", letters => this.allGuessedLetters = letters );
     socket.on("word", word => this.trueWord = word );
     socket.on("wonOrNot", isWon => this.isGameWon = isWon)
-    console.log("ordet i player:", this.trueWord)
     
     
     socket.emit( "getUILabels", this.lang );
@@ -158,17 +157,30 @@ export default {
     },
 
     updateThoseLetters: function () {
-      console.log("running updated those letters", this.key)
       socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})
       socket.emit("getGuessedLetters", this.pollId)
     },
 
     handleSubmit: function () {
+      if(!this.allGuessedLetters.includes(this.key)){
       this.toggleIndexViaData();
       this.updateThoseLetters();
       this.setcurrentLetterToEmpty();
       this.setGameToWonViaData();
       this.findIfGameIsWonViaData();
+      this.setAmountWrongLetters();
+      this.sendAmountWrongLetters();
+      }
+  },
+    
+    setAmountWrongLetters(){
+      if(!this.trueWord.includes(this.key)) {
+      socket.emit("addAmountWrongLetters", this.pollId)
+      }
+      
+    },
+    sendAmountWrongLetters () {
+      socket.emit("getAmountWrongLetters", this.pollId)
     },
 
     setGameToWonViaData() {
@@ -177,16 +189,19 @@ export default {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
             this.isGameWon = false;
-            console.log("win status:", this.isGameWon);
+            console.log("game not won")
             return;
           }
           
         }
       }
       socket.emit("setGameToWon", this.pollId);
-      console.log("emit sent to update win status");
+      console.log("game won")
+      
       
     },
+  
+
     findIfGameIsWonViaData () {
       socket.emit("findIfWon", this.pollId)
     },
@@ -209,7 +224,10 @@ export default {
       socket.emit("getGuessedLetters", this.pollId)*/
     },
     isWrongKey(key) {
-      return this.allGuessedLetters.includes(key) && this.trueWord !== (key);
+      return this.allGuessedLetters.includes(key) && !this.trueWord.includes(key);
+    },
+    isCorrectKey(key) {
+      return this.allGuessedLetters.includes(key) && this.trueWord.includes(key);
     }
       }
 }
@@ -260,7 +278,18 @@ export default {
   }
 
   .wrongKey {
-  background-color: red !important; /* Gör felaktiga tangenter röda */
+  background-color: red
+}
+
+.correctKey {
+  background-color: green
+}
+
+.correctKey:hover {
+  background-color: rgb(21, 69, 21);
+}
+.wrongKey:hover {
+  background-color: rgb(143, 27, 27)
 }
 
   .keyboardContainer {
@@ -327,6 +356,10 @@ export default {
 
   }
   
+  .winText {
+    color: #0056b3;
+    font-size: 10em
+  }
 
  
 </style>

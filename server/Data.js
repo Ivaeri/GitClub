@@ -37,7 +37,10 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.participants = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
+<<<<<<< HEAD
     console.log("poll created", pollId, "by host", userName, poll);
+=======
+>>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
   }
   return this.polls[pollId];
 }
@@ -108,7 +111,8 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     // if the property already exists, increase the number
     else
       answers[answer] += 1
-    console.log("answers looks like ", answers, typeof answers);
+  
+
   }
 }
 
@@ -117,26 +121,36 @@ Data.prototype.updateWord = function (word, pollId, userName) {
       this.polls[pollId].enteredWord = word;
       this.polls[pollId].userName = userName;
   }
-  console.log(this.polls[pollId]);
+  
 };
 
 Data.prototype.updateGuessedLetters = function (pollId, key) {
-  console.log("Letter received in data:", key);
-  console.log("pollId received in data", pollId);
   if (this.polls[pollId]) {
       this.polls[pollId].guessedLetters.push(key);
   }
 };
 
 Data.prototype.setGameToWon = function (pollId) {
-  console.log("setting game to won in data for:", this.polls[pollId].isGameWon);
   if (this.polls[pollId]) {
       this.polls[pollId].isGameWon = true;
   }
 };
 
+Data.prototype.setAmountWrongLetters = function (pollId) {
+  if (this.polls[pollId]) {
+        this.polls[pollId].amountWrongLetters += 1;
+      }
+  };
+
+  Data.prototype.getAmountWrongLetters = function (pollId) {
+    if (this.polls[pollId]) {
+          return this.polls[pollId].amountWrongLetters
+        }
+      
+    };
+
+
 Data.prototype.findIfWon = function (pollId) {
-  console.log("finding if game is won in data for:", this.polls[pollId].isGameWon);
   if (this.polls[pollId]) {
       return this.polls[pollId].isGameWon;
   }
@@ -147,7 +161,6 @@ Data.prototype.findIfWon = function (pollId) {
 
 
 Data.prototype.getGuessedLetter = function (pollId) {
-  console.log("letters requested for", pollId);
   if (this.pollExists(pollId)) { 
     return this.polls[pollId].guessedLetters;
   }
@@ -155,29 +168,24 @@ Data.prototype.getGuessedLetter = function (pollId) {
 };
 
 Data.prototype.updateIndex = function (pollId) {
-  console.log("updating index in data:", this.polls[pollId].index)
   if (this.polls[pollId]) {
 
-    console.log("index before toggle:", this.polls[pollId].index)
       if(this.polls[pollId].participants.length -1 == this.polls[pollId].index){
         this.polls[pollId].index = 0;
       }
       else{
         this.polls[pollId].index += 1;
             }
-            console.log("index after toggle:", this.polls[pollId].index)
          }
         
     };
   Data.prototype.getIndex = function (pollId) {
 
-    console.log("reached get index in data:", this.polls[pollId].index )
     if (this.pollExists(pollId)) {
       return this.polls[pollId].index
       };
     };
     Data.prototype.getWord = function (pollId) {
-      console.log("reached getWord in data:", this.polls[pollId].enteredWord )
       if (this.pollExists(pollId)) {
         return this.polls[pollId].enteredWord
         };
@@ -185,7 +193,6 @@ Data.prototype.updateIndex = function (pollId) {
       };
 
 Data.prototype.setPollId = function (pollId) {
-  console.log("Id received from client:", pollId);
   if (!this.polls[pollId]) {
     this.polls[pollId] = {
       userName: "",
@@ -197,47 +204,16 @@ Data.prototype.setPollId = function (pollId) {
       currentQuestion: 0,
       index: 0,
       guessedLetters: [],
-      isGameWon: false
+      isGameWon: false,
+      amountWrongLetters: 0
 
     };
   }
   this.polls[pollId].pollId = pollId;
 };
 
-
-
-
-
-
-
-
 export { Data };
 
 
-/*function Data() {
-  this.polls = {};
-}*/
 
-/*Data.prototype.setPollId = function (pollId) {
-  console.log("Id received from client:", pollId);
-  if (!this.pollExists(pollId)) {
-    this.polls[pollId] = {
-      lang: "en",
-      questions: [],
-      answers: [],
-      currentQuestion: 0,
-      participants: [],
-      enteredWord: "",
-      pollIdInData: pollId
-    };
-  }
-};
-
-
-export { Data };
-
-
-/*function Data() {
-  this.polls = {};
-}*/
 

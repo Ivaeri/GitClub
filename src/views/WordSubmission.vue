@@ -15,7 +15,8 @@
         v-bind:label="uiLabels.enterWord"
         v-model="enteredword" 
         :placeholder="uiLabels.enterWord" 
-        id="enter-word">
+        id="enter-word"
+        @keydown.enter="handleClick">
       </InputField>
     </div>
     <div class="item">
@@ -68,11 +69,14 @@
     }},
     methods: {
       async validateWord(word, language) {
+<<<<<<< HEAD
         if (language === "sv") {
           const wordListArray = Array.from(this.swe_wordlist);
           console.log("Femtionde ordet i svenska ordlistan:", wordListArray[49]);
         }
         console.log("validateWord körs");
+=======
+>>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
         let regex;
         if (language === "sv") {
           regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
@@ -109,30 +113,34 @@
         return null; 
       },
       async handleClick() {
+<<<<<<< HEAD
         console.log("handleClick körs");
         if (!this.userName.trim()) {
           alert(this.uiLabels.fillName );
           return;
         }
+=======
+>>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
         const validationError = await this.validateWord(this.enteredword, this.lang);
         if (validationError) {
           alert(validationError); 
-          console.log("Validering misslyckades med:", validationError);
           return;
         }
         this.pollId = Math.floor(Math.random() * 1000000);
         this.generateId();
-        console.log("Poll ID genererat:", this.pollId);
         this.sendWord();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
+<<<<<<< HEAD
         console.log("sending word:" + this.enteredword.toUpperCase())
         socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, userName:this.userName} )
         console.log("Navigering påbörjad");
+=======
+        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId} )
+>>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
       },
       generateId: function () {
-        console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
       }
     }
