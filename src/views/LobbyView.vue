@@ -33,8 +33,9 @@
     <div v-if="activePolls.length > 0">
   <h2>{{ uiLabels.activeGames }}</h2>
   <div v-for="poll in activePolls" :key="poll" class="poll-item">
-    <button class="poll-button" @click="joinPoll(poll)">
-      {{ poll }}
+    <button class="poll-button" @click="joinPoll(poll.pollId)">
+      <div>{{ poll.userName }}{{ uiLabels.hanging }}</div>
+      <div>ID:{{ poll.pollId }}</div>
     </button>
   </div>
 </div>
