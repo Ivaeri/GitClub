@@ -7,7 +7,7 @@
       </div>
       </div>
       <div v-if="!joined">
-        {{ this.uiLabels.enterUsername }}
+        <h3>{{ this.uiLabels.enterUsername }}</h3>
         <InputField 
           v-model="userName" 
           :placeholder="uiLabels.name" 
@@ -84,3 +84,11 @@
     }
   }
   </script>
+  <style scoped>
+  .joinGameButton {
+  width: 5%;
+  height: 4em;
+  background-color: #c888b1;
+  cursor: pointer;
+  }
+</style>

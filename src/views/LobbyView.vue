@@ -17,29 +17,21 @@
           :placeholder="uiLabels.id" 
           @keydown.enter="validateAndJoin"> 
         </InputField>
-    </label>
-    <button class="joinGameButton" @click="validateAndJoin">
-     {{ uiLabels.participateGame }}
-   </button>
-      <!--<input type="text" v-model="userName" placeholder="Ditt namn">
-      <button v-on:click="participateInGame">
-        {{ this.uiLabels.participateInGame }}
+      </label>
+      <button class="joinGameButton" @click="validateAndJoin">
+        {{ uiLabels.participateGame }}
       </button>
-    </div>
-    <div v-if="joined">
-      <p>Waiting for host to start game</p>
-      {{ participants }} -->
     </div> 
     <div v-if="activePolls.length > 0">
-  <h2>{{ uiLabels.activeGames }}</h2>
-  <div v-for="poll in activePolls" :key="poll" class="poll-item">
-    <button class="poll-button" @click="joinPoll(poll)">
-      {{ poll }}
-    </button>
+      <h2>{{ uiLabels.activeGames }}</h2>
+      <div v-for="poll in activePolls" :key="poll" class="poll-item">
+        <button class="poll-button" @click="joinPoll(poll)">
+          {{ poll }}
+        </button>
+      </div>
+    </div>
   </div>
-</div>
-  </div>
-</template>
+</template> 
 
 <script>
 import InputField from '../components/InputField.vue';
@@ -72,7 +64,6 @@ export default {
       console.log("Aktiva spel mottagna:", polls);
       this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
-    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls"); 
@@ -118,6 +109,13 @@ header h1{
   font-size: larger;
   background-color: aliceblue;
   color: black;
+}
+
+.joinGameButton{
+  width: 5%;
+  height: 4em;
+  background-color: #c888b1;
+  cursor: pointer;
 }
 
 </style>

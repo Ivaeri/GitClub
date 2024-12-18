@@ -1,66 +1,59 @@
 <template>
-  
-  <div>
-    {{pollId}}
+    <h1>{{uiLabels.coop}}</h1>
+    <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
     <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
     </div>
-    <!--
-    <QuestionComponent v-bind:question="question"
-              v-on:answer="submitAnswer($event)"/> 
-  -->
     <hr>
-    <p>{{ this.userName }}</p>
-
-    <div class="inGame" v-if="!isGameWon">
-
-    <div class="failedLettersContainer">
-      <h3>Wrong guesses:</h3>
-      <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
-        <div v-if="!trueWord.includes(letter)" class="failedLetter">
-          {{ letter }}
-
-        </div> 
-      </div>
-    </div>
     <span v-for="letter in trueWord" class="trueWord">
-       <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
-       <span v-else> _ </span>
+        <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
+        <span v-else> _ </span>
     </span>
-   
-
-
-    <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
-      <div class="letterBoxContainer">
-      <div class="letterBox">
-        {{ this.current_letter }}
+    <div class="inGame" v-if="!isGameWon">
+      <div class="failedLettersContainer">
+        <h3>Wrong guesses:</h3>
+        <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
+          <div v-if="!trueWord.includes(letter)" class="failedLetter">
+            {{ letter }}
+          </div> 
+        </div>
       </div>
-    </div>
-      <div id="keyboard" class="keyboard">
-        <div class="row" v-if="this.lang == 'en'">
-          <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-        </div>
-        <div class="row" v-if="this.lang == 'sv'">
-          <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-        </div>
-        <div class="row" v-if="this.lang == 'en'">
-          <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-        </div>
-        <div class="row" v-if="this.lang == 'sv'">
-          <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-        </div>
-        <div class="row">
-          <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-        </div>
-    </div>
     
-    <button class="submitButton" v-on:click="handleSubmit">{{ uiLabels.submit }}</button>
-  </div>
-  <div v-else>hänga-gubbe-animationen</div>
+      <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
+        <div class="letterBoxContainer">
+          <div class="letterBox">
+            {{ this.current_letter }}
+          </div>
+        </div>
+        <div id="keyboard" class="keyboard">
+          <div class="row" v-if="this.lang == 'en'">
+            <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+          </div>
+          <div class="row" v-if="this.lang == 'sv'">
+            <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+          </div>
+          <div class="row" v-if="this.lang == 'en'">
+            <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+          </div>
+          <div class="row" v-if="this.lang == 'sv'">
+            <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+          </div>
+          <div class="row">
+            <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+          </div>
+        </div> <!-- Här stängs keyboard-diven-->
+      
+        <button class="submitButton" v-on:click="handleSubmit">
+          {{ uiLabels.submit }}
+        </button>
+      </div>
+      <div v-else class="hangMan">
+        <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
+      </div>
 
-  </div>
-</div>
-<div v-if="isGameWon" class="animate__animated animate__zoomInDown">
+    </div> <!-- Här Stängs inGame-diven-->
+
+    <div v-if="isGameWon" class="animate__animated animate__zoomInDown">
       You won!  
       <InputField
           v-model="trueWord"
@@ -68,15 +61,15 @@
           id="username">
       </InputField>
     </div>
-  <div class="participants-container">
+    <div class="participants-container">
     
-    <div v-for="participant in participants" :key="participant.name" class="participant">
-       <div v-if="participant.name == participants[this.index].name">
-        <img src="/img/speechbubble.png" class="speechBubble"> 
-       </div>
-      {{ participant.name }}
+      <div v-for="participant in participants" :key="participant.name" class="participant">
+        <div v-if="participant.name == participants[this.index].name">
+          <img src="/img/speechbubble.png" class="speechBubble"> 
+        </div>
+        {{ participant.name }}
+      </div>
     </div>
-  </div>
 
 
  
@@ -89,13 +82,15 @@
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
+import HangPerson from '../components/HangPerson.vue';
 const socket = io("localhost:3000");
 
 export default {
   name: 'lobbyForHost',
   components: {
     HomeButton,
-    InputField
+    InputField,
+    HangPerson
   },
   data: function () {
     return {
@@ -119,6 +114,7 @@ export default {
       current_letter: "",
       isGameWon: false,
       lang: localStorage.getItem("lang") || "en",
+      ammountWrongLetters: 0
     };
       
   },
@@ -138,7 +134,9 @@ export default {
     socket.on( "letters", letters => this.allGuessedLetters = letters );
     socket.on("word", word => this.trueWord = word );
     socket.on("wonOrNot", isWon => this.isGameWon = isWon)
-    console.log("ordet i player:", this.trueWord)
+    socket.on("amountWrongLetters", (wrongGuesses) => {
+      this.ammountWrongLetters = wrongGuesses;
+    });
     
     
     socket.emit( "getUILabels", this.lang );
@@ -147,10 +145,7 @@ export default {
     socket.emit("getIndex", this.pollId )
     socket.emit("getGuessedLetters", this.pollId)
     socket.emit("getWord", this.pollId)
-    socket.emit("findIfWon", this.pollId)
-   
-    
-   
+    socket.emit("findIfWon", this.pollId) 
   },
   methods: {
     submitAnswer: function (answer) {
@@ -179,12 +174,12 @@ export default {
       console.log("entered setamount.. in player, key:", this.key)
       if(!this.trueWord.includes(this.key)) {
       socket.emit("addAmountWrongLetters", this.pollId)
-      console.log("emit sent", this.key)
       }
       
     },
     sendAmountWrongLetters () {
       socket.emit("getAmountWrongLetters", this.pollId)
+
     },
 
     setGameToWonViaData() {
@@ -195,12 +190,10 @@ export default {
             this.isGameWon = false;
             console.log("win status:", this.isGameWon);
             return;
-          }
-          
-        }
+          }}
       }
-      socket.emit("setGameToWon", this.pollId);
-      console.log("emit sent to update win status");
+    socket.emit("setGameToWon", this.pollId);
+    console.log("emit sent to update win status");
       
     },
     findIfGameIsWonViaData () {
@@ -320,17 +313,18 @@ export default {
 
   .failedLettersContainer {
     margin-top: 2em;
-    width: 5em;
+    width: 8em;
     height: 5em;
+    margin-left: 1.5em;
   }
-
   .failedLetters {
     top: 2em;
     width: 5em;
     color: red
   }
-  .failedLetter {
- 
+  .inGame {
+    position: relative;
+
   }
   .letterBoxContainer {
     display: flex;
@@ -342,6 +336,7 @@ export default {
 
   .trueWord {
     color: rgb(42, 205, 20);
+    font-size: 2em;
   }
 
   .winContainer {

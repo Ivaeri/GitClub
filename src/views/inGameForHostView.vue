@@ -7,7 +7,7 @@
         <span v-if="allGuessedLetters.includes(letter)" class="greenLetter"> {{ letter }} </span>
         <span v-else> {{ letter }} </span>
       </h2>
-      <div >
+      <div> 
         <h3>Letter's guessed:</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
           <span v-if="enteredword.includes(letter)" class="guessedCorrectLetter"> {{ letter }} </span>
@@ -74,7 +74,6 @@
     });
 
     socket.on("amountWrongLetters", (wrongGuesses) => {
-      console.log("Mottog felgissningar från servern:", wrongGuesses);
       this.ammountWrongLetters = wrongGuesses;
     });
     
