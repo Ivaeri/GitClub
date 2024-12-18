@@ -1,5 +1,6 @@
 <template>
     <h1>{{ uiLabels.titlegame }}</h1>
+    {{ this.ammountWrongLetters }}
     <div class="wordBox">
       <h2>{{ uiLabels.wordRecieved }}</h2>
       <h2 v-for="letter in enteredword">
@@ -14,18 +15,18 @@
         </div>
       </div>
     </div>
-    <div v-for="letter in allGuessedLetters" :key="letter" class="graveYard">
-      <div v-if="!enteredword.includes(letter)">
-        <HangPerson />
+    <div v-if="ammountWrongLetters > 0" class="graveYard">
+      <div >
+        <HangPerson  v-bind:wrongGuesses="ammountWrongLetters"/>
       </div>
     </div>
     <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
     </div>
     <div class="participants-container">
-    <div v-for="participant in participants" :key="participant.name" class="participant">
-      {{ participant.name }}
-    </div>
+      <div v-for="participant in participants" :key="participant.name" class="participant">
+        {{ participant.name }}
+      </div>
   </div>
     </template>
     
@@ -48,7 +49,8 @@
           pollId: null,
           lang: localStorage.getItem("lang") || "en",
           participants: [],
-          allGuessedLetters: []
+          allGuessedLetters: [],
+          ammountWrongLetters: 0
   
         }
       },
@@ -70,10 +72,16 @@
       console.log("Mottog deltagaruppdatering från servern:", p);
       this.participants = p;
     });
+
+    socket.on("amountWrongLetters", (wrongGuesses) => {
+      console.log("Mottog felgissningar från servern:", wrongGuesses);
+      this.ammountWrongLetters = wrongGuesses;
+    });
     
   socket.emit( "getUILabels", this.lang );
   socket.emit("getParticipants", { pollId: this.pollId });
-  socket.emit("letters", { pollId: this.pollId });
+  socket.emit("getGuessedLetters",  this.pollId );
+  socket.emit("getAmountWrongLetters", this.pollId );
   },
   
   methods: {

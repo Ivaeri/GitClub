@@ -134,7 +134,6 @@ Data.prototype.setGameToWon = function (pollId) {
 };
 
 Data.prototype.setAmountWrongLetters = function (pollId) {
-  console.log("setting amount wrong letters in data for:", this.polls[pollId].amountWrongLetters);
   if (this.polls[pollId]) {
         this.polls[pollId].amountWrongLetters += 1;
       }
@@ -142,7 +141,6 @@ Data.prototype.setAmountWrongLetters = function (pollId) {
   };
 
   Data.prototype.getAmountWrongLetters = function (pollId) {
-    console.log("getting amount wrong letters in data for:", this.polls[pollId].amountWrongLetters);
     if (this.polls[pollId]) {
           console.log("amount in data, in get:", this.polls[pollId].amountWrongLetters)
           return this.polls[pollId].amountWrongLetters
@@ -186,8 +184,6 @@ Data.prototype.updateIndex = function (pollId) {
         
     };
   Data.prototype.getIndex = function (pollId) {
-
-    console.log("reached get index in data:", this.polls[pollId].index )
     if (this.pollExists(pollId)) {
       return this.polls[pollId].index
       };
