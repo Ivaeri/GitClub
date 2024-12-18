@@ -61,15 +61,12 @@
   
     socket.on("uiLabels", (labels) => {
       this.uiLabels = labels;
-      console.log("Mottog UI-labels från servern:", this.uiLabels);
     });
 
     socket.on("letters", (letters) => {
       this.allGuessedLetters = letters;
-      console.log("Mottog bokstäver från servern:", this.allGuessedLetters);
     });
     socket.on( "participantsUpdate", p => {
-      console.log("Mottog deltagaruppdatering från servern:", p);
       this.participants = p;
     });
 

@@ -153,7 +153,6 @@ export default {
     },
 
     updateThoseLetters: function () {
-      console.log("running updated those letters", this.key)
       socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})
       socket.emit("getGuessedLetters", this.pollId)
     },
@@ -171,7 +170,6 @@ export default {
   },
     
     setAmountWrongLetters(){
-      console.log("entered setamount.. in player, key:", this.key)
       if(!this.trueWord.includes(this.key)) {
       socket.emit("addAmountWrongLetters", this.pollId)
       }
@@ -188,7 +186,7 @@ export default {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
             this.isGameWon = false;
-            console.log("win status:", this.isGameWon);
+            console.log("game not won")
             return;
           }}
       }
@@ -196,6 +194,8 @@ export default {
     console.log("emit sent to update win status");
       
     },
+  
+
     findIfGameIsWonViaData () {
       socket.emit("findIfWon", this.pollId)
     },
@@ -272,11 +272,18 @@ export default {
   }
 
   .wrongKey {
-  background-color: red !important; /* Gör felaktiga tangenter röda */
+  background-color: red
 }
 
 .correctKey {
   background-color: green
+}
+
+.correctKey:hover {
+  background-color: rgb(21, 69, 21);
+}
+.wrongKey:hover {
+  background-color: rgb(143, 27, 27)
 }
 
   .keyboardContainer {
@@ -345,6 +352,10 @@ export default {
 
   }
   
+  .winText {
+    color: #0056b3;
+    font-size: 10em
+  }
 
  
 </style>

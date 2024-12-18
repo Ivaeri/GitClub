@@ -99,10 +99,7 @@
   methods: {
     showGameRules: function() {
       this.gameRules = !this.gameRules;
-      console.log(this.gameRules);
-      console.log(this.currentGameRules);
- 
- 
+
     },
     switchLanguage: function() {
       if (this.lang === "en") {

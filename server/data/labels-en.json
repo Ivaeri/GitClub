@@ -28,7 +28,6 @@
 	"activeGames": "Active games",
 	"goHome": "Go to home page",
 	"GameRules": "Press for gamerules",
-	"HideGameRules": "Press to hide gamerules",
 	"wordOnlyLetters": "The word must only contain letters from the English alphabet.",
 	"wordTooShort": "The word must be at least 3 letters long.",
 	"wordTooLong": "The word must be a maximum of 12 letters long.",
@@ -38,5 +37,8 @@
 	"HideGameRules": "Press to hide gamerules",
 	"players": "players",
 	"submit": "submit",
-	"waitForPlayers": "Waiting for players to join"
+	"waitForPlayers": "Waiting for players to join",
+	"hanging": "s Hanging",
+	"awaitingHost1": "waiting for ",
+	"awaitingHost2": " to commence the execution"
 }
