@@ -20,9 +20,8 @@
 
       </div>
       <div v-if="joined">
-        <p><div>{{ uiLabels.welcome }} {{ userName }}!</div>
+        <div>{{ uiLabels.welcome }} {{ userName }}!</div>
           <div>{{ this.uiLabels.awaitingHost1 }}host {{ hostUserName}}{{ this.uiLabels.awaitingHost2 }}</div>
-        </p>
         </div>
         <div v-if="participants.length > 0">
           <h2>{{ uiLabels.joinedPlayers }}</h2>
