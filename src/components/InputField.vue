@@ -50,7 +50,7 @@ export default {
   display: inline-block;
   font-size: 24px; /* Ändra textstorleken här */
   margin: 4px 2px;
-  cursor: pointer;
+  cursor: text;
   height: 3em; /* Justera höjden för att kompensera för större text */
   width: 20em; /* Justera bredden om nödvändigt */
 }

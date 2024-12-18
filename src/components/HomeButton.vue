@@ -57,7 +57,7 @@ const socket = io('http://localhost:3000'); // Justera URL efter behov
   top: 0;
   left: 0;
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 3em;
 }
  .homeButton:hover {
   background-color: #0056b3;
