@@ -73,7 +73,7 @@
     
   socket.emit( "getUILabels", this.lang );
   socket.emit("getParticipants", { pollId: this.pollId });
-  socket.emit("getGuessedLetters", { pollId: this.pollId });
+  socket.emit("letters", { pollId: this.pollId });
   },
   
   methods: {
