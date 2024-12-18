@@ -66,22 +66,18 @@ created: function () {
 
   socket.on("uiLabels", (labels) => {
     this.uiLabels = labels;
-    console.log("Mottog UI-labels från servern:", this.uiLabels);
-  });
+    });
 
 
 socket.on("sendWord", (data) => {
   // this.enteredword = data.enteredWord; Hämtar ordet från sökvägen istället
-  console.log("Mottog ord från servern:", this.enteredword);
 });
 
 socket.on("generateId", (data) => {
   // this.pollId = data.pollId; Hämtar ordet från sökvägen istället
-  console.log("Mottog pollId från servern:", this.pollId);
 });
 
 socket.on( "participantsUpdate", p => {
-        console.log("Uppdaterade deltagare:", p);
       this.participants = p });
 socket.emit( "getUILabels", this.lang );
 socket.emit("getParticipants", { pollId: this.pollId });

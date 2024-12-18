@@ -36,7 +36,6 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.participants = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
-    console.log("poll created", pollId, poll);
   }
   return this.polls[pollId];
 }
@@ -107,7 +106,8 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     // if the property already exists, increase the number
     else
       answers[answer] += 1
-    console.log("answers looks like ", answers, typeof answers);
+  
+
   }
 }
 
@@ -115,36 +115,29 @@ Data.prototype.updateWord = function (word, pollId) {
   if (this.polls[pollId]) {
       this.polls[pollId].enteredWord = word;
   }
-  console.log(this.polls[pollId]);
+  
 };
 
 Data.prototype.updateGuessedLetters = function (pollId, key) {
-  console.log("Letter received in data:", key);
-  console.log("pollId received in data", pollId);
   if (this.polls[pollId]) {
       this.polls[pollId].guessedLetters.push(key);
   }
 };
 
 Data.prototype.setGameToWon = function (pollId) {
-  console.log("setting game to won in data for:", this.polls[pollId].isGameWon);
   if (this.polls[pollId]) {
       this.polls[pollId].isGameWon = true;
   }
 };
 
 Data.prototype.setAmountWrongLetters = function (pollId) {
-  console.log("setting amount wrong letters in data for:", this.polls[pollId].amountWrongLetters);
   if (this.polls[pollId]) {
         this.polls[pollId].amountWrongLetters += 1;
       }
-    console.log("amount in data, in set:", this.polls[pollId].amountWrongLetters)
   };
 
   Data.prototype.getAmountWrongLetters = function (pollId) {
-    console.log("getting amount wrong letters in data for:", this.polls[pollId].amountWrongLetters);
     if (this.polls[pollId]) {
-          console.log("amount in data, in get:", this.polls[pollId].amountWrongLetters)
           return this.polls[pollId].amountWrongLetters
         }
       
@@ -152,7 +145,6 @@ Data.prototype.setAmountWrongLetters = function (pollId) {
 
 
 Data.prototype.findIfWon = function (pollId) {
-  console.log("finding if game is won in data for:", this.polls[pollId].isGameWon);
   if (this.polls[pollId]) {
       return this.polls[pollId].isGameWon;
   }
@@ -163,7 +155,6 @@ Data.prototype.findIfWon = function (pollId) {
 
 
 Data.prototype.getGuessedLetter = function (pollId) {
-  console.log("letters requested for", pollId);
   if (this.pollExists(pollId)) { 
     return this.polls[pollId].guessedLetters;
   }
@@ -171,29 +162,24 @@ Data.prototype.getGuessedLetter = function (pollId) {
 };
 
 Data.prototype.updateIndex = function (pollId) {
-  console.log("updating index in data:", this.polls[pollId].index)
   if (this.polls[pollId]) {
 
-    console.log("index before toggle:", this.polls[pollId].index)
       if(this.polls[pollId].participants.length -1 == this.polls[pollId].index){
         this.polls[pollId].index = 0;
       }
       else{
         this.polls[pollId].index += 1;
             }
-            console.log("index after toggle:", this.polls[pollId].index)
          }
         
     };
   Data.prototype.getIndex = function (pollId) {
 
-    console.log("reached get index in data:", this.polls[pollId].index )
     if (this.pollExists(pollId)) {
       return this.polls[pollId].index
       };
     };
     Data.prototype.getWord = function (pollId) {
-      console.log("reached getWord in data:", this.polls[pollId].enteredWord )
       if (this.pollExists(pollId)) {
         return this.polls[pollId].enteredWord
         };
@@ -201,7 +187,6 @@ Data.prototype.updateIndex = function (pollId) {
       };
 
 Data.prototype.setPollId = function (pollId) {
-  console.log("Id received from client:", pollId);
   if (!this.polls[pollId]) {
     this.polls[pollId] = {
       enteredWord: "",
@@ -220,40 +205,8 @@ Data.prototype.setPollId = function (pollId) {
   this.polls[pollId].pollId = pollId;
 };
 
-
-
-
-
-
-
-
 export { Data };
 
 
-/*function Data() {
-  this.polls = {};
-}*/
 
-/*Data.prototype.setPollId = function (pollId) {
-  console.log("Id received from client:", pollId);
-  if (!this.pollExists(pollId)) {
-    this.polls[pollId] = {
-      lang: "en",
-      questions: [],
-      answers: [],
-      currentQuestion: 0,
-      participants: [],
-      enteredWord: "",
-      pollIdInData: pollId
-    };
-  }
-};
-
-
-export { Data };
-
-
-/*function Data() {
-  this.polls = {};
-}*/
 

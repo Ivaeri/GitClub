@@ -6,15 +6,14 @@ function sockets(io, socket, data) {
 
   socket.on("sendWord", function (d) {
     const { pollId, enteredword } = d;
-    console.log("test", d.enteredword, d.pollId);
     socket.emit('updateWord', data.updateWord(d.enteredword, d.pollId));
     io.emit("sendWord",  d.enteredword); 
   });
  
 
+
   socket.on("generateId", function(d) {
     socket.emit('setPollId', data.setPollId(d))
-    console.log("poll Id set to:", d);
     io.emit("generateId",  { pollId: d });
     io.emit("activePollsUpdate", Object.keys(data.polls));
   });
@@ -45,40 +44,27 @@ function sockets(io, socket, data) {
 
   socket.on("getParticipants", function(d) {
     socket.emit('participantsUpdate', data.getParticipants(d.pollId));
-    console.log("called for participants:", d.pollId);
   });
   socket.on("getIndex", function(pollId) {
     let index = data.getIndex(pollId);
     io.emit('index', index);
-    console.log("get index in socket:", index);
   });
 
   socket.on("getWord", function(pollId) {
-    console.log("reached sockets for getWord")
     let word = data.getWord(pollId);
-    console.log("word i socket before sending back to players;", word);
     io.emit("word", word);
   });
 
   socket.on("updateIndex", function(pollId) {
-    console.log("update index reached sockets for id:", pollId);
     data.updateIndex(pollId);
-    /*
-    let index = data.updateIndex(d.pollId, d.index);
-    io.emit("index", index);
-    console.log("index sent back to playerview:", index)
-    */
-    
   });
 
   socket.on("setGameToWon", function(pollId){
-    console.log("reached setgametowon in sockets")
     data.setGameToWon(pollId)
   })
 
   socket.on("findIfWon", function(pollId) {
     let isWon = data.findIfWon(pollId)
-    console.log("having requested if won via sockets", isWon)
     io.emit("wonOrNot", isWon)
   })
 
@@ -93,7 +79,6 @@ function sockets(io, socket, data) {
 
   socket.on('getActivePolls', () => {
     const activePolls = Object.keys(data.polls); 
-    console.log("Aktiva spel skickas:", activePolls);
     socket.emit('activePolls', activePolls); 
     io.emit("activePollsUpdate", Object.keys(data.polls));
 });

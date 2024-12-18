@@ -138,7 +138,6 @@ export default {
     socket.on( "letters", letters => this.allGuessedLetters = letters );
     socket.on("word", word => this.trueWord = word );
     socket.on("wonOrNot", isWon => this.isGameWon = isWon)
-    console.log("ordet i player:", this.trueWord)
     
     
     socket.emit( "getUILabels", this.lang );
@@ -158,7 +157,6 @@ export default {
     },
 
     updateThoseLetters: function () {
-      console.log("running updated those letters", this.key)
       socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})
       socket.emit("getGuessedLetters", this.pollId)
     },
@@ -176,10 +174,8 @@ export default {
   },
     
     setAmountWrongLetters(){
-      console.log("entered setamount.. in player, key:", this.key)
       if(!this.trueWord.includes(this.key)) {
       socket.emit("addAmountWrongLetters", this.pollId)
-      console.log("emit sent", this.key)
       }
       
     },
@@ -193,16 +189,19 @@ export default {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
             this.isGameWon = false;
-            console.log("win status:", this.isGameWon);
             return;
           }
           
         }
       }
       socket.emit("setGameToWon", this.pollId);
-      console.log("emit sent to update win status");
+      changeHost();
       
     },
+    changeHost () {
+
+    },
+
     findIfGameIsWonViaData () {
       socket.emit("findIfWon", this.pollId)
     },
@@ -279,7 +278,7 @@ export default {
   }
 
   .wrongKey {
-  background-color: red !important; /* Gör felaktiga tangenter röda */
+  background-color: red
 }
 
 .correctKey {

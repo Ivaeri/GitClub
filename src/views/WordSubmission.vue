@@ -54,7 +54,6 @@
     },
     methods: {
       async validateWord(word, language) {
-        console.log("validateWord körs");
         let regex;
         if (language === "sv") {
           regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
@@ -100,26 +99,20 @@
         return null; 
       },
       async handleClick() {
-        console.log("handleClick körs");
         const validationError = await this.validateWord(this.enteredword, this.lang);
         if (validationError) {
           alert(validationError); 
-          console.log("Validering misslyckades med:", validationError);
           return;
         }
         this.pollId = Math.floor(Math.random() * 1000000);
         this.generateId();
-        console.log("Poll ID genererat:", this.pollId);
         this.sendWord();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
-        console.log("sending word:" + this.enteredword.toUpperCase())
         socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId} )
-        console.log("Navigering påbörjad");
       },
       generateId: function () {
-        console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
       }
     }

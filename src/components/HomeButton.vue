@@ -29,7 +29,7 @@
     
     created() {
         socket.on("uiLabels", (labels) => {
-          console.log("Uppdaterade label:", labels.goHome);
+
           this.uiLabels = labels;
         });
         socket.emit("getUILabels", this.lang);
