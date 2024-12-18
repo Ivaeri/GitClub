@@ -1,12 +1,12 @@
-<template>  
+<template> 
     <button v-on:click="handleClick" class="blueButton">
         {{ text }}
     </button>
-    
+   
     </template>
-    
+   
     <script>
-    
+   
     export default {
         name: 'NewPageButton',
         props: {
@@ -19,9 +19,9 @@
             }
         }
     }
-    
+   
     </script>
-    
+   
     <style scoped>
     .blueButton {
         background-color: blue;
@@ -33,5 +33,6 @@
         margin: 4px 2px;
         cursor: pointer;
     }
-
+ 
+ 
     </style>
