@@ -1,20 +1,21 @@
 <template>
   <header>
-    <div v-bind:class="['hamburger', {'close': !hideNav}]" 
+    <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
     </div>
     <div class="logo" >
       <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
     </div>
-
+ 
+ 
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
       <div class="switchLanguageDiv" v-on:click="switchLanguage">
         {{ uiLabels.languagebox }}
       </div>
       <div class="gameRules">
-        <h5 v-on:click="showGameRules"> 
+        <h5 v-on:click="showGameRules">
           <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
           <p v-else> {{ uiLabels.GameRules }}</p>
         </h5>
@@ -26,7 +27,7 @@
       </div>
     </div>
       <div class="homebutton">
-        <HomeButton :text="uiLabels.goHome"/> 
+        <HomeButton :text="uiLabels.goHome"/>
     </div>
   </header>
     <div class="create-join">
@@ -37,8 +38,10 @@
       <button>{{ uiLabels.participateGame }}</button>
       </router-link>
     </div>
-
-
+ 
+ 
+ 
+ 
     <ResponsiveNav v-bind:hideNav="hideNav">
       <button v-on:click="switchLanguage">
         {{ uiLabels.changeLanguage }}
@@ -52,24 +55,28 @@
       <a href="">FAQ</a>
     </ResponsiveNav>
     <label>
-      Write poll id: 
+      Write poll id:
       <input type="text" v-model="newPollId">
     </label>
     <router-link v-bind:to="'/lobby/' + newPollId">
       {{ uiLabels.participatePoll }}
     </router-link>
-
-
-</template>
-
-<script>
-import ResponsiveNav from '@/components/ResponsiveNav.vue';
-import io from 'socket.io-client';
-import gameRules from '/server/gamerules.json';
-import HomeButton from '../components/HomeButton.vue';
-const socket = io("localhost:3000");
-
-export default {
+ 
+ 
+ 
+ 
+ </template>
+ 
+ 
+ <script>
+ import ResponsiveNav from '@/components/ResponsiveNav.vue';
+ import io from 'socket.io-client';
+ import gameRules from '/server/gamerules.json';
+ import HomeButton from '../components/HomeButton.vue';
+ const socket = io("localhost:3000");
+ 
+ 
+ export default {
   name: 'StartView',
   components: {
     ResponsiveNav,
@@ -94,7 +101,8 @@ export default {
       this.gameRules = !this.gameRules;
       console.log(this.gameRules);
       console.log(this.currentGameRules);
-
+ 
+ 
     },
     switchLanguage: function() {
       if (this.lang === "en") {
@@ -114,33 +122,34 @@ export default {
       if (this.lang === "sv") {
         this.currentGameRules = gameRules.gameRules_sv;
       } else {
-        this.currentGameRules = gameRules.gameRules_en; 
+        this.currentGameRules = gameRules.gameRules_en;
       }
     }
   }
-}
-</script>
-<style scoped>
+ }
+ </script>
+ <style scoped>
   header {
     position: relative;
-    background-color: white;
     width: 100%;
     height: 350px;
     display: grid;
     grid-template-columns: 2em auto;
-
+ 
+ 
   }
   .logo {
+    font-family: 'Sue Ellen Francisco', cursive;
     text-transform: uppercase;
     letter-spacing: 0.25em;
     font-size: 5rem;
-    color: black;
+    color: rgb(4, 16, 131);
     padding-top: 2.5em;
   }
   .logo img {
     height:5rem;
     vertical-align: bottom;
-    margin-right: 0.5rem; 
+    margin-right: 0.5rem;
   }
   .hamburger {
     color:white;
@@ -156,34 +165,37 @@ export default {
     font-size: 1.5rem;
   }
   .create-join {
-  background-color: transparent; 
+  background-color: transparent;
   display: flex;
-  color: white; 
+  color: white;
   border: none;
-  gap: 3em; 
-  border-radius: 10px; 
-  transition: background-color 0.3s ease; 
-  margin: auto; 
-  text-align: left; 
-  width: fit-content; 
+  gap: 3em;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  margin: auto;
+  text-align: left;
+  width: fit-content;
   margin-bottom: 10em;
   }
-
+ 
+ 
   .create-join button {
-  background-color: #d63384; 
+  background-color: #cf84a9;
   color: white;
   border: none;
   border-radius: 10px;
-  cursor: pointer; 
+  cursor: pointer;
   gap: 7em;
   font-size: 1em;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease;
   width: 20em;
   height: 10em;
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
   }
-.create-join button:hover {
-background-color: #a02666; 
-}
+ .create-join button:hover {
+ background-color: #a02666;
+ transform: rotate(10deg) scale(1.1);
+ }
   .languagecontainer{
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -207,17 +219,20 @@ background-color: #a02666;
     padding-top: 7px;
     cursor: pointer;
     border: 2px solid black
-
+ 
+ 
   }
   .gameRules{
     grid-row: 2;
     grid-column: 1/ span 2;
     width: 240px;
-
+ 
+ 
   }
   .gameRules h5{
     cursor: pointer;
-
+ 
+ 
   }
   .gameRules div{
     position: absolute;
@@ -250,8 +265,9 @@ background-color: #a02666;
   .englishbutton{
     background-image: url("/img/uk.png");
   }
-
-@media screen and (max-width:50em) {
+ 
+ 
+ @media screen and (max-width:50em) {
   .logo {
     font-size: 5vw;
     display: flex;
@@ -269,5 +285,5 @@ background-color: #a02666;
   .hide {
     left:-12em;
   }
-}
-</style>
+ }
+ </style>
