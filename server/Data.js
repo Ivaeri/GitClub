@@ -30,13 +30,14 @@ Data.prototype.getUILabels = function (lang) {
 Data.prototype.createPoll = function(pollId, lang="en") {
   if (!this.pollExists(pollId)) {
     let poll = {};
-    poll.lang = lang;  
+    poll.lang = lang; 
+    poll.userName = userName; 
     poll.questions = [];
     poll.answers = [];
     poll.participants = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
-    console.log("poll created", pollId, poll);
+    console.log("poll created", pollId, "by host", userName, poll);
   }
   return this.polls[pollId];
 }
@@ -111,9 +112,10 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-Data.prototype.updateWord = function (word, pollId) {
+Data.prototype.updateWord = function (word, pollId, userName) {
   if (this.polls[pollId]) {
       this.polls[pollId].enteredWord = word;
+      this.polls[pollId].userName = userName;
   }
   console.log(this.polls[pollId]);
 };
@@ -186,6 +188,7 @@ Data.prototype.setPollId = function (pollId) {
   console.log("Id received from client:", pollId);
   if (!this.polls[pollId]) {
     this.polls[pollId] = {
+      userName: "",
       enteredWord: "",
       pollId: pollId,
       participants: [],

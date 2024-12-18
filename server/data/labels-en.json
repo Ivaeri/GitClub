@@ -38,5 +38,8 @@
 	"HideGameRules": "Press to hide gamerules",
 	"players": "players",
 	"submit": "submit",
-	"waitForPlayers": "Waiting for players to join"
+	"waitForPlayers": "Waiting for players to join",
+	"hanging": "s Hanging",
+	"awaitingHost1": "waiting for ",
+	"awaitingHost2": " to commence the execution"
 }

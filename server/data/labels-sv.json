@@ -39,6 +39,8 @@
 	"goHome": "Gå till startsidan",
 	"players": "spelare",
 	"submit": "skicka",
-	"waitForPlayers": "Vänta på att spelare ansluter"
-
+	"waitForPlayers": "Vänta på att spelare ansluter",
+	"hanging": "s Hängning",
+	"awaitingHost1": "Inväntar att ",
+	"awaitingHost2": " påbörjar avrättningen"
 }
