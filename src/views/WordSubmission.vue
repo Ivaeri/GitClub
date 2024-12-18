@@ -9,7 +9,8 @@
         v-bind:label="uiLabels.enterWord"
         v-model="enteredword" 
         :placeholder="uiLabels.enterWord" 
-        id="enter-word">
+        id="enter-word"
+        @keydown.enter="handleClick">
       </InputField>
     </div>
     <div class="item">

@@ -133,6 +133,22 @@ Data.prototype.setGameToWon = function (pollId) {
   }
 };
 
+Data.prototype.setAmountWrongLetters = function (pollId) {
+  if (this.polls[pollId]) {
+        this.polls[pollId].amountWrongLetters += 1;
+      }
+    console.log("amount in data, in set:", this.polls[pollId].amountWrongLetters)
+  };
+
+  Data.prototype.getAmountWrongLetters = function (pollId) {
+    if (this.polls[pollId]) {
+          console.log("amount in data, in get:", this.polls[pollId].amountWrongLetters)
+          return this.polls[pollId].amountWrongLetters
+        }
+      
+    };
+
+
 Data.prototype.findIfWon = function (pollId) {
   console.log("finding if game is won in data for:", this.polls[pollId].isGameWon);
   if (this.polls[pollId]) {
@@ -168,8 +184,6 @@ Data.prototype.updateIndex = function (pollId) {
         
     };
   Data.prototype.getIndex = function (pollId) {
-
-    console.log("reached get index in data:", this.polls[pollId].index )
     if (this.pollExists(pollId)) {
       return this.polls[pollId].index
       };
@@ -194,7 +208,8 @@ Data.prototype.setPollId = function (pollId) {
       currentQuestion: 0,
       index: 0,
       guessedLetters: [],
-      isGameWon: false
+      isGameWon: false,
+      amountWrongLetters: 0
 
     };
   }
