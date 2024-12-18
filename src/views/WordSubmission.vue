@@ -6,6 +6,12 @@
   <div class="container">
     <div class="item">
       <InputField
+          v-model="userName"
+          :placeholder="uiLabels.name"
+          id="username"
+          @enterPressed="handleEnter">
+      </InputField>
+      <InputField
         v-bind:label="uiLabels.enterWord"
         v-model="enteredword" 
         :placeholder="uiLabels.enterWord" 
@@ -41,20 +47,32 @@
     },
     data: function () {
       return {
+        userName: "",
         uiLabels: {},
         lang: localStorage.getItem( "lang") || "en",
         enteredword: "",
-        pollId: 1
+        pollId: 1,
+        swe_wordlist: new Set()
       }
     },
-    created: function () {
+    created: async function () {
       socket.on("uiLabels", labels => {
       this.uiLabels = labels;
       });
       socket.emit( "getUILabels", this.lang );
-    },
+      if (this.lang === "sv") {
+        const response = await fetch("/server/data/swe_wordlist.txt");
+        const text = await response.text();
+        this.swe_wordlist = new Set(text.split("\n").map(word => word.trim().toLowerCase()));
+        console.log("Svenska ordlistan laddad med", this.swe_wordlist.size, "ord");
+        console.error("Fel vid inläsning av ordlistan:", error); //bort??
+    }},
     methods: {
       async validateWord(word, language) {
+        if (language === "sv") {
+          const wordListArray = Array.from(this.swe_wordlist);
+          console.log("Femtionde ordet i svenska ordlistan:", wordListArray[49]);
+        }
         console.log("validateWord körs");
         let regex;
         if (language === "sv") {
@@ -71,56 +89,48 @@
         if (word.length > 12) {
           return this.uiLabels.wordTooLong; 
         }
-        let apiUrl;
         if (language === "sv") {
-          // Använd ett API eller lokal ordbok för svenska
-          apiUrl = `https://ws.spraakbanken.gu.se/ws/sparv=${word}`;
-        } else {
-          // Använd Datamuse API för engelska
-          apiUrl = `https://api.datamuse.com/words?sp=${word}`;
-        }
-
+          if (!this.swe_wordlist.has(word.toLowerCase())) {
+            return this.uiLabels.wordNotInLexicon;
+          }}
+        else {
+        // Använd Datamuse API för engelska
+        const apiUrl = `https://api.datamuse.com/words?sp=${word}`;
         try {
           const response = await fetch(apiUrl);
           const data = await response.json();
-
-          // För svenska API-svar
-          if (language === "sv" && (!data || !data.found)) {
+          const exactMatch = data.some(entry => entry.word.toLowerCase() === word.toLowerCase());
+          if (!exactMatch) {
             return this.uiLabels.wordNotInLexicon;
           }
-
-          // För Datamuse API-svar (engelska)
-          if (language === "en" && (!data.length)) {
-            return this.uiLabels.wordNotInLexicon;
-          }
-
         } catch (error) {
           console.error("API-fel:", error);
           return this.uiLabels.validationApiError;
-        }
+        }}
         return null; 
       },
       async handleClick() {
         console.log("handleClick körs");
+        if (!this.userName.trim()) {
+          alert(this.uiLabels.fillName );
+          return;
+        }
         const validationError = await this.validateWord(this.enteredword, this.lang);
         if (validationError) {
           alert(validationError); 
-          console.log("Validering misslyckades med:", validationError);
           return;
         }
         this.pollId = Math.floor(Math.random() * 1000000);
         this.generateId();
-        console.log("Poll ID genererat:", this.pollId);
         this.sendWord();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
         console.log("sending word:" + this.enteredword.toUpperCase())
-        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId} )
+        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, userName:this.userName} )
         console.log("Navigering påbörjad");
       },
       generateId: function () {
-        console.log("generated id:" + this.pollId)
         socket.emit( "generateId", this.pollId )
       }
     }

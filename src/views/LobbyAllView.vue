@@ -1,7 +1,7 @@
 <template>
     <div>
       {{ this.uiLabels.id }}{{pollId}}
-      <h1>{{ this.uiLabels.titlegame }}</h1>
+      <h1>{{ hostUserName }}{{ uiLabels.idButton }}</h1>
       <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
       </div>
@@ -20,8 +20,8 @@
 
       </div>
       <div v-if="joined">
-        <p>{{ uiLabels.welcome }} {{ userName }}!
-          {{ this.uiLabels.awaitingHost }}
+        <p><div>{{ uiLabels.welcome }} {{ userName }}!</div>
+          <div>{{ this.uiLabels.awaitingHost1 }}host {{ hostUserName}}{{ this.uiLabels.awaitingHost2 }}</div>
         </p>
         </div>
         <div v-if="participants.length > 0">
@@ -52,6 +52,7 @@
     data: function () {
       return {
         userName: "",
+        hostUserName: "",
         pollId: "inactive poll",
         uiLabels: {},
         joined: false,
@@ -64,6 +65,7 @@
       socket.on( "uiLabels", labels => this.uiLabels = labels );
       socket.on( "participantsUpdate", p => this.participants = p );
       socket.on( "startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
+      socket.on("pollData", data => this.hostUserName = data.userName );
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
     },
@@ -77,6 +79,9 @@
         }
         socket.emit("getParticipants", { pollId: this.pollId });
   },
+  handleEnter() {
+      this.validateAndParticipate();
+    },
       participateInPoll: function () {
         socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
         this.joined = true;

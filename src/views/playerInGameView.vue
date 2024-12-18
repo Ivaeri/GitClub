@@ -61,7 +61,7 @@
   </div>
 </div>
 <div v-if="isGameWon" class="animate__animated animate__zoomInDown">
-      You won!  
+      <div class="winText">You won! </div> 
       <InputField
           v-model="trueWord"
           placeholder="uiLabels.example"
@@ -138,7 +138,6 @@ export default {
     socket.on( "letters", letters => this.allGuessedLetters = letters );
     socket.on("word", word => this.trueWord = word );
     socket.on("wonOrNot", isWon => this.isGameWon = isWon)
-    console.log("ordet i player:", this.trueWord)
     
     
     socket.emit( "getUILabels", this.lang );
@@ -158,7 +157,6 @@ export default {
     },
 
     updateThoseLetters: function () {
-      console.log("running updated those letters", this.key)
       socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})
       socket.emit("getGuessedLetters", this.pollId)
     },
@@ -176,10 +174,8 @@ export default {
   },
     
     setAmountWrongLetters(){
-      console.log("entered setamount.. in player, key:", this.key)
       if(!this.trueWord.includes(this.key)) {
       socket.emit("addAmountWrongLetters", this.pollId)
-      console.log("emit sent", this.key)
       }
       
     },
@@ -193,16 +189,19 @@ export default {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
             this.isGameWon = false;
-            console.log("win status:", this.isGameWon);
+            console.log("game not won")
             return;
           }
           
         }
       }
       socket.emit("setGameToWon", this.pollId);
-      console.log("emit sent to update win status");
+      console.log("game won")
+      
       
     },
+  
+
     findIfGameIsWonViaData () {
       socket.emit("findIfWon", this.pollId)
     },
@@ -279,11 +278,18 @@ export default {
   }
 
   .wrongKey {
-  background-color: red !important; /* Gör felaktiga tangenter röda */
+  background-color: red
 }
 
 .correctKey {
   background-color: green
+}
+
+.correctKey:hover {
+  background-color: rgb(21, 69, 21);
+}
+.wrongKey:hover {
+  background-color: rgb(143, 27, 27)
 }
 
   .keyboardContainer {
@@ -350,6 +356,10 @@ export default {
 
   }
   
+  .winText {
+    color: #0056b3;
+    font-size: 10em
+  }
 
  
 </style>
