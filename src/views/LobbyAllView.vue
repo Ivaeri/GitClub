@@ -74,6 +74,7 @@
         else {
           this.participateInPoll();
         }
+        socket.emit("getParticipants", { pollId: this.pollId });
   },
       participateInPoll: function () {
         socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )

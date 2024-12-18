@@ -48,6 +48,9 @@
   }*/
   
   .homeButton {
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
