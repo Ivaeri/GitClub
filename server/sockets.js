@@ -18,6 +18,11 @@ function sockets(io, socket, data) {
     io.emit("activePollsUpdate", Object.keys(data.polls));
   });
 
+  socket.on("deletePollId", function(pollId) {
+    console.log("reached sockets")
+    io.emit("removePollId", pollId);
+  })
+
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang)
     socket.emit('pollData', data.getPoll(d.pollId));

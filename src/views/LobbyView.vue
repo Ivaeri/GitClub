@@ -69,15 +69,19 @@ export default {
     this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("activePollsUpdate", (polls) => {
-      console.log("Aktiva spel mottagna:", polls);
       this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
     socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
+
+    socket.on("removePollId", (pollId) => {
+      this.activePolls = this.activePolls.filter(poll => poll !== pollId);
+      console.log("kom in i socket on i lobbyview", this.activePolls)
+    });
+    
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls"); 
     socket.on("activePolls", (polls) => {
-        console.log("Mottagna spel:", polls); 
         this.activePolls = polls; 
     });
   },
