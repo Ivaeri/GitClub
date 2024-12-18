@@ -37,10 +37,6 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.participants = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
-<<<<<<< HEAD
-    console.log("poll created", pollId, "by host", userName, poll);
-=======
->>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
   }
   return this.polls[pollId];
 }

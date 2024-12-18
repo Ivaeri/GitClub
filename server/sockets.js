@@ -4,16 +4,9 @@ function sockets(io, socket, data) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
 
-<<<<<<< HEAD
   socket.on("sendWord", function (d) { //pollId hostname?
     const { pollId, enteredword, userName} = d;
-    console.log("test", d.enteredword, d.pollId, userName);
     data.updateWord(d.enteredword, d.pollId, userName);
-=======
-  socket.on("sendWord", function (d) {
-    const { pollId, enteredword } = d;
-    socket.emit('updateWord', data.updateWord(d.enteredword, d.pollId));
->>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
     io.emit("sendWord",  d.enteredword); 
   });
  
@@ -85,7 +78,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on('getActivePolls', () => {
-<<<<<<< HEAD
     const activePolls = Object.keys(data.polls).map(pollId => {
       const poll = data.polls[pollId]; 
         return {
@@ -94,9 +86,6 @@ function sockets(io, socket, data) {
         };
     }); 
     console.log("Aktiva spel skickas:", activePolls);
-=======
-    const activePolls = Object.keys(data.polls); 
->>>>>>> 152babae058443a093f427337ff2a571cc4ab43e
     socket.emit('activePolls', activePolls); 
     io.emit("activePollsUpdate", activePolls);
 });
