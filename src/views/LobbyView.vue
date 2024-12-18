@@ -14,7 +14,8 @@
         <InputField  
           v-bind:label="uiLabels.enterGamePin"
           v-model="newPollId" 
-          :placeholder="uiLabels.id" >
+          :placeholder="uiLabels.id" 
+          @keydown.enter="validateAndJoin"> 
         </InputField>
     </label>
     <button class="joinGameButton" @click="validateAndJoin">
