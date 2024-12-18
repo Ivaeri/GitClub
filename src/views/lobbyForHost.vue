@@ -87,7 +87,7 @@ methods: {
   startGame: function () {
     socket.emit("startPoll", this.pollId);
     this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword);
-    socket.emit("deletePollId", this.pollId)
+    socket.emit("deletePollId", this.pollId);
   },
 
   validateAndParticipate() {
