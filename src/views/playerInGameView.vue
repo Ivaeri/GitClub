@@ -61,7 +61,7 @@
   </div>
 </div>
 <div v-if="isGameWon" class="animate__animated animate__zoomInDown">
-      You won!  
+      <div class="winText">You won! </div> 
       <InputField
           v-model="trueWord"
           placeholder="uiLabels.example"
@@ -189,18 +189,18 @@ export default {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
             this.isGameWon = false;
+            console.log("game not won")
             return;
           }
           
         }
       }
       socket.emit("setGameToWon", this.pollId);
-      changeHost();
+      console.log("game won")
+      
       
     },
-    changeHost () {
-
-    },
+  
 
     findIfGameIsWonViaData () {
       socket.emit("findIfWon", this.pollId)
@@ -285,6 +285,13 @@ export default {
   background-color: green
 }
 
+.correctKey:hover {
+  background-color: rgb(21, 69, 21);
+}
+.wrongKey:hover {
+  background-color: rgb(143, 27, 27)
+}
+
   .keyboardContainer {
     margin-top: 3em
   }
@@ -349,6 +356,10 @@ export default {
 
   }
   
+  .winText {
+    color: #0056b3;
+    font-size: 10em
+  }
 
  
 </style>
