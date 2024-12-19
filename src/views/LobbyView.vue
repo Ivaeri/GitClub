@@ -89,10 +89,11 @@ export default {
     this.newPollId = pollId; 
     this.$router.push(`/lobbyAll/${pollId}`); 
   },
+  /*
     participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
       this.joined = true;
-    }
+    }*/
    }
 }
 </script>
