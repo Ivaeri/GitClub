@@ -67,29 +67,19 @@ export default {
 
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
-    socket.emit("getActivePolls"); 
-    socket.on("activePollsUpdate", (polls) => {
-      this.activePolls = polls; });
-   
+    socket.emit("getActivePolls");
   },
   methods: {
     validateAndJoin() {
-    if (!this.newPollId.trim()) {
+    if (!this.newPollId.trim() || !this.activePolls.some(poll => poll.pollId === this.newPollId)) {
       alert(this.uiLabels.fillNumber);
     } else {
-      this.$router.push('/lobbyAll/' + this.newPollId); /*allt inom citat?*/
+      this.$router.push('/lobbyAll/' + this.newPollId); 
     }
   },
   joinPoll(pollId) {
-    //this.newPollId = pollId; 
-    console.log("Joining poll " + pollId);
     this.$router.push('/lobbyAll/' + pollId); 
   },
-  /*
-    participateInGame: function () {
-      socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-      this.joined = true;
-    }*/
    }
 }
 </script>

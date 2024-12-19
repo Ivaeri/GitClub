@@ -69,11 +69,6 @@
     }},
     methods: {
       async validateWord(word, language) {
-        if (language === "sv") {
-          const wordListArray = Array.from(this.swe_wordlist);
-          console.log("Femtionde ordet i svenska ordlistan:", wordListArray[49]);
-        }
-        console.log("validateWord körs");
         let regex;
         if (language === "sv") {
           regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
@@ -127,9 +122,7 @@
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
-        console.log("sending word:" + this.enteredword.toUpperCase())
-        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
-        console.log("Navigering påbörjad");
+        socket.emit( "setWordAndGenerateGameInfo", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
       },
       generateId: function () {
         socket.emit( "generateId", this.pollId )

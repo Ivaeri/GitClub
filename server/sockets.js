@@ -4,23 +4,33 @@ function sockets(io, socket, data) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
 
-  socket.on("sendWord", function (d) { //pollId hostname?
+  socket.on("setWordAndGenerateGameInfo", function (d) { //pollId hostname?
     const { pollId, enteredword, hostName} = d;
     data.updateWord(d.enteredword, d.pollId, d.hostName);
-    io.emit("sendWord",  d.enteredword); 
+    const activePolls = Object.keys(data.polls).map(pollId => {
+      const poll = data.polls[pollId]; 
+      let hostName = poll.hostName;
+        return {
+            pollId: pollId,
+            hostName: hostName || "Okänd host" 
+        };
+    }); 
+    io.emit("activePollsUpdate", activePolls);
   });
  
-
-
   socket.on("generateId", function(d) {
     console.log("socket for sending id and shit", Object.keys(data.polls))
     socket.emit('setPollId', data.setPollId(d))
+<<<<<<< HEAD
    // io.emit("generateId",  { pollId: d });
    // io.emit("activePollsUpdate", Object.keys(data.polls));
+=======
+    //io.emit("generateId",  { pollId: d });
+    io.emit("activePollsUpdate", Object.keys(data.polls));
+>>>>>>> 8a0196a82455b5c9c8673caca4dc44a8b5e8386e
   });
 
   socket.on("deletePollId", function(pollId) {
-    console.log("reached sockets")
     io.emit("removePollId", pollId);
   })
 
@@ -83,6 +93,7 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
 
+<<<<<<< HEAD
   socket.on('getActivePolls', () => {
     const activePolls = Object.keys(data.polls).map(pollId => {
       const poll = data.polls[pollId]; 
@@ -97,6 +108,9 @@ function sockets(io, socket, data) {
     io.emit("activePollsUpdate", activePolls);
     io.emit()
 });
+=======
+
+>>>>>>> 8a0196a82455b5c9c8673caca4dc44a8b5e8386e
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
