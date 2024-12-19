@@ -8,7 +8,6 @@
    </div> 
   </header>
   <div>
-    {{pollId}}
     <div>
       <label> 
         <InputField  
@@ -17,30 +16,22 @@
           :placeholder="uiLabels.id" 
           @keydown.enter="validateAndJoin"> 
         </InputField>
-    </label>
-    <button class="joinGameButton" @click="validateAndJoin">
-     {{ uiLabels.participateGame }}
-   </button>
-      <!--<input type="text" v-model="userName" placeholder="Ditt namn">
-      <button v-on:click="participateInGame">
-        {{ this.uiLabels.participateInGame }}
+      </label>
+      <button class="joinGameButton" @click="validateAndJoin">
+        {{ uiLabels.participateGame }}
       </button>
-    </div>
-    <div v-if="joined">
-      <p>Waiting for host to start game</p>
-      {{ participants }} -->
     </div> 
     <div v-if="activePolls.length > 0">
-  <h2>{{ uiLabels.activeGames }}</h2>
-  <div v-for="poll in activePolls" :key="poll" class="poll-item">
-    <button class="poll-button" @click="joinPoll(poll.pollId)">
-      <div>{{ poll.userName }}{{ uiLabels.hanging }}</div>
-      <div>ID:{{ poll.pollId }}</div>
-    </button>
+      <h2>{{ uiLabels.activeGames }}</h2>
+      <div v-for="poll in activePolls" :key="poll" class="poll-item">
+        <button class="poll-button" @click="joinPoll(poll.pollId)">
+          {{ poll.pollId}}
+          {{ poll.hostName }}
+        </button>
+      </div>
+    </div>
   </div>
-</div>
-  </div>
-</template>
+</template> 
 
 <script>
 import InputField from '../components/InputField.vue';
@@ -67,18 +58,14 @@ export default {
     }
   },
   created: function () {
-    this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("activePollsUpdate", (polls) => {
-      console.log("Aktiva spel mottagna:", polls);
       this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
-    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls"); 
     socket.on("activePolls", (polls) => {
-        console.log("Mottagna spel:", polls); 
         this.activePolls = polls; 
     });
   },
@@ -91,13 +78,15 @@ export default {
     }
   },
   joinPoll(pollId) {
-    this.newPollId = pollId; 
-    this.$router.push(`/lobbyAll/${pollId}`); 
+    //this.newPollId = pollId; 
+    console.log("Joining poll " + pollId);
+    this.$router.push('/lobbyAll/' + pollId); 
   },
+  /*
     participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
       this.joined = true;
-    }
+    }*/
    }
 }
 </script>
@@ -119,6 +108,13 @@ header h1{
   font-size: larger;
   background-color: aliceblue;
   color: black;
+}
+
+.joinGameButton{
+  width: 5%;
+  height: 4em;
+  background-color: #c888b1;
+  cursor: pointer;
 }
 
 </style>

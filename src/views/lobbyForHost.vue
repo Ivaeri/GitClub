@@ -87,6 +87,7 @@ methods: {
   startGame: function () {
     socket.emit("startPoll", this.pollId);
     this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword);
+    socket.emit("deletePollId", this.pollId);
   },
 
   validateAndParticipate() {
@@ -112,13 +113,14 @@ methods: {
   <style scoped>
 
   .participantsLobby{
-      position: relative;
-      font-size: 1.5em;
-      padding: 20px;
-      border: 1px solid #ccc;
-      height: 400px;
-      background-color: lightblue
-
+    position: relative;
+    font-size: 1.5em;
+    padding: 20px;
+    border: 1px solid #ccc;
+    height: 400px;
+    background-color: lightblue;
+    z-index: 6;
+    margin-left: 2em;
     }
 
   .buttonContainer{

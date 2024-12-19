@@ -6,9 +6,9 @@
   <div class="container">
     <div class="item">
       <InputField
-          v-model="userName"
+          v-model="hostName"
           :placeholder="uiLabels.name"
-          id="username"
+          id="hostname"
           @enterPressed="handleEnter">
       </InputField>
       <InputField
@@ -47,7 +47,7 @@
     },
     data: function () {
       return {
-        userName: "",
+        hostName: "",
         uiLabels: {},
         lang: localStorage.getItem( "lang") || "en",
         enteredword: "",
@@ -106,7 +106,7 @@
       },
       async handleClick() {
         console.log("handleClick körs");
-        if (!this.userName.trim()) {
+        if (!this.hostName.trim()) {
           alert(this.uiLabels.fillName );
           return;
         }
@@ -122,7 +122,7 @@
       },
       sendWord: function () {
         console.log("sending word:" + this.enteredword.toUpperCase())
-        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, userName:this.userName} )
+        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
         console.log("Navigering påbörjad");
       },
       generateId: function () {

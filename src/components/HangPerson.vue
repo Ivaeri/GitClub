@@ -59,6 +59,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full höjd på viewporten */
+  margin-bottom: 2em;
+
 }
 </style>
