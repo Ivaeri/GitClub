@@ -25,7 +25,7 @@
             {{ this.current_letter }}
           </div>
         </div>
-        <div id="keyboard" class="keyboard">
+        <div id="keyboard" class="keyboard" @keydown.enter="handleSubmit">
           <div class="row" v-if="this.lang == 'en'">
             <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
           </div>
