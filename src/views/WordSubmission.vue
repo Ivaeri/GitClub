@@ -121,8 +121,9 @@
           return;
         }
         this.pollId = Math.floor(Math.random() * 1000000);
-        this.generateId();
         this.sendWord();
+        this.generateId();
+        
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
@@ -132,6 +133,8 @@
       },
       generateId: function () {
         socket.emit( "generateId", this.pollId )
+        socket.emit("getActivePolls"); 
+        console.log("id sent from wordsubview:", this.pollId)
       }
     }
   };

@@ -163,6 +163,14 @@ Data.prototype.getGuessedLetter = function (pollId) {
   return [];
 };
 
+Data.prototype.getHostName = function (pollId) {
+  if (this.pollExists(pollId)) { 
+    return this.polls[pollId].hostName;
+  }
+  return "no nost name";
+};
+
+
 Data.prototype.updateIndex = function (pollId) {
   if (this.polls[pollId]) {
 

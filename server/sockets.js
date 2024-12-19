@@ -13,9 +13,10 @@ function sockets(io, socket, data) {
 
 
   socket.on("generateId", function(d) {
+    console.log("socket for sending id and shit", Object.keys(data.polls))
     socket.emit('setPollId', data.setPollId(d))
-    io.emit("generateId",  { pollId: d });
-    io.emit("activePollsUpdate", Object.keys(data.polls));
+   // io.emit("generateId",  { pollId: d });
+   // io.emit("activePollsUpdate", Object.keys(data.polls));
   });
 
   socket.on("deletePollId", function(pollId) {
@@ -85,14 +86,16 @@ function sockets(io, socket, data) {
   socket.on('getActivePolls', () => {
     const activePolls = Object.keys(data.polls).map(pollId => {
       const poll = data.polls[pollId]; 
+      //let hostName = data.getHostName(poll.pollId)
         return {
-            pollId: pollId,
+            pollId: poll.pollId,
             hostName: poll.hostName || "Okänd host" 
         };
     }); 
     console.log("Aktiva spel skickas:", activePolls);
     socket.emit('activePolls', activePolls); 
     io.emit("activePollsUpdate", activePolls);
+    io.emit()
 });
 
   socket.on('submitAnswer', function(d) {

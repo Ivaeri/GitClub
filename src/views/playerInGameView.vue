@@ -55,11 +55,7 @@
 
     <div v-if="isGameWon" class="animate__animated animate__zoomInDown">
       You won!  
-      <InputField
-          v-model="trueWord"
-          placeholder="uiLabels.example"
-          id="username">
-      </InputField>
+     <!-- <HomeButton :text="uiLabels.goHome"/> -->
     </div>
     <div class="participants-container">
     

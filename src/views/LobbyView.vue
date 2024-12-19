@@ -62,12 +62,15 @@ export default {
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
+
+    //socket.on("removePollId", (polls) )
+
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls"); 
-    socket.on("activePolls", (polls) => {
-        this.activePolls = polls; 
-    });
+    socket.on("activePollsUpdate", (polls) => {
+      this.activePolls = polls; });
+   
   },
   methods: {
     validateAndJoin() {
