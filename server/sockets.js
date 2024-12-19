@@ -5,8 +5,8 @@ function sockets(io, socket, data) {
   });
 
   socket.on("sendWord", function (d) { //pollId hostname?
-    const { pollId, enteredword, userName} = d;
-    data.updateWord(d.enteredword, d.pollId, userName);
+    const { pollId, enteredword, hostName} = d;
+    data.updateWord(d.enteredword, d.pollId, d.hostName);
     io.emit("sendWord",  d.enteredword); 
   });
  
@@ -87,7 +87,7 @@ function sockets(io, socket, data) {
       const poll = data.polls[pollId]; 
         return {
             pollId: pollId,
-            userName: poll.userName || "Okänd host" 
+            hostName: poll.hostName || "Okänd host" 
         };
     }); 
     console.log("Aktiva spel skickas:", activePolls);

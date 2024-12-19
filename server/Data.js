@@ -31,7 +31,7 @@ Data.prototype.createPoll = function(pollId, lang="en") {
   if (!this.pollExists(pollId)) {
     let poll = {};
     poll.lang = lang; 
-    poll.userName = userName; 
+    poll.hostName = hostName; 
     poll.questions = [];
     poll.answers = [];
     poll.participants = [];
@@ -112,10 +112,10 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-Data.prototype.updateWord = function (word, pollId, userName) {
+Data.prototype.updateWord = function (word, pollId, hostName) {
   if (this.polls[pollId]) {
       this.polls[pollId].enteredWord = word;
-      this.polls[pollId].userName = userName;
+      this.polls[pollId].hostName = hostName;
   }
   
 };
@@ -191,7 +191,7 @@ Data.prototype.updateIndex = function (pollId) {
 Data.prototype.setPollId = function (pollId) {
   if (!this.polls[pollId]) {
     this.polls[pollId] = {
-      userName: "",
+      hostName: "",
       enteredWord: "",
       pollId: pollId,
       participants: [],

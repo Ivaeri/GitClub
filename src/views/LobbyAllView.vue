@@ -1,6 +1,6 @@
 <template>
     <div>
-      {{ this.uiLabels.id }}{{pollId}}
+      {{ this.uiLabels.id }}{{this.pollId}}
       <h1>{{ hostUserName }}{{ uiLabels.idButton }}</h1>
       <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 

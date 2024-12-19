@@ -8,7 +8,6 @@
    </div> 
   </header>
   <div>
-    {{pollId}}
     <div>
       <label> 
         <InputField  
@@ -25,8 +24,9 @@
     <div v-if="activePolls.length > 0">
       <h2>{{ uiLabels.activeGames }}</h2>
       <div v-for="poll in activePolls" :key="poll" class="poll-item">
-        <button class="poll-button" @click="joinPoll(poll)">
-          {{ poll }}
+        <button class="poll-button" @click="joinPoll(poll.pollId)">
+          {{ poll.pollId}}
+          {{ poll.hostName }}
         </button>
       </div>
     </div>
@@ -58,7 +58,6 @@ export default {
     }
   },
   created: function () {
-    this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
@@ -79,8 +78,9 @@ export default {
     }
   },
   joinPoll(pollId) {
-    this.newPollId = pollId; 
-    this.$router.push(`/lobbyAll/${pollId}`); 
+    //this.newPollId = pollId; 
+    console.log("Joining poll " + pollId);
+    this.$router.push('/lobbyAll/' + pollId); 
   },
     participateInGame: function () {
       socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
