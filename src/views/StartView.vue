@@ -7,8 +7,6 @@
       <img src="/img/hangman.jpg">
       {{ uiLabels.titlegame}}
     </div>
- 
- 
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
       <div class="switchLanguageDiv" v-on:click="switchLanguage">
@@ -38,32 +36,6 @@
       <button>{{ uiLabels.participateGame }}</button>
       </router-link>
     </div>
- 
- 
- 
- 
-    <ResponsiveNav v-bind:hideNav="hideNav">
-      <button v-on:click="switchLanguage">
-        {{ uiLabels.changeLanguage }}
-      </button>
-      <router-link to="/create/">
-       {{ uiLabels.createPoll }}
-      </router-link>
-      <a href="">
-       {{ uiLabels.about }}
-     </a>
-      <a href="">FAQ</a>
-    </ResponsiveNav>
-    <label>
-      Write poll id:
-      <input type="text" v-model="newPollId">
-    </label>
-    <router-link v-bind:to="'/lobby/' + newPollId">
-      {{ uiLabels.participatePoll }}
-    </router-link>
- 
- 
- 
  
  </template>
  
@@ -224,7 +196,7 @@
     grid-column: 1/ span 2;
     width: 7em;
     height: 1em;
-    color:white
+    color:black;
  
  
   }

@@ -136,6 +136,10 @@
   
   <style scoped>
 
+  h1{
+    font-size: 9em;
+  }
+
   .container {
     display: flex;
     justify-content: center; 
