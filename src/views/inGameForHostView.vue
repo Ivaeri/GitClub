@@ -50,7 +50,8 @@
           lang: localStorage.getItem("lang") || "en",
           participants: [],
           allGuessedLetters: [],
-          ammountWrongLetters: 0
+          ammountWrongLetters: 0,
+          isGameWon: false
   
         }
       },
@@ -72,6 +73,7 @@
 
     socket.on("amountWrongLetters", (wrongGuesses) => {
       this.ammountWrongLetters = wrongGuesses;
+      this.gameIsWon(); //Kontrollera om spelet är vunnet för hosten efter uppdatering
     });
     
   socket.emit( "getUILabels", this.lang );
@@ -81,6 +83,18 @@
   },
   
   methods: {
+
+    gameIsWon () {
+      if (this.ammountWrongLetters > 6) {  
+        this.gameIsWon = true;
+        this.sendToWinView();
+      }
+    },
+    sendToWinView () {
+      if (this.gameIsWon) {
+        this.$router.push('/winView/')
+      }
+    }
   
   }
   }
