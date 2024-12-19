@@ -126,7 +126,7 @@
       },
       generateId: function () {
         socket.emit( "generateId", this.pollId )
-        socket.emit("getActivePolls"); 
+       // socket.emit("getActivePolls"); 
         console.log("id sent from wordsubview:", this.pollId)
       }
     }

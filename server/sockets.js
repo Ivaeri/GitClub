@@ -17,17 +17,20 @@ function sockets(io, socket, data) {
     }); 
     io.emit("activePollsUpdate", activePolls);
   });
- 
+
+  socket.on('getActivePolls', () => {
+    const activePolls = Object.keys(data.polls);
+    console.log("Aktiva spel skickas:", activePolls);
+    socket.emit('activePolls', activePolls);
+    io.emit("activePollsUpdate", Object.keys(data.polls));
+});
+
+
   socket.on("generateId", function(d) {
     console.log("socket for sending id and shit", Object.keys(data.polls))
     socket.emit('setPollId', data.setPollId(d))
-<<<<<<< HEAD
-   // io.emit("generateId",  { pollId: d });
-   // io.emit("activePollsUpdate", Object.keys(data.polls));
-=======
     //io.emit("generateId",  { pollId: d });
     io.emit("activePollsUpdate", Object.keys(data.polls));
->>>>>>> 8a0196a82455b5c9c8673caca4dc44a8b5e8386e
   });
 
   socket.on("deletePollId", function(pollId) {
@@ -93,24 +96,6 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
 
-<<<<<<< HEAD
-  socket.on('getActivePolls', () => {
-    const activePolls = Object.keys(data.polls).map(pollId => {
-      const poll = data.polls[pollId]; 
-      //let hostName = data.getHostName(poll.pollId)
-        return {
-            pollId: poll.pollId,
-            hostName: poll.hostName || "Okänd host" 
-        };
-    }); 
-    console.log("Aktiva spel skickas:", activePolls);
-    socket.emit('activePolls', activePolls); 
-    io.emit("activePollsUpdate", activePolls);
-    io.emit()
-});
-=======
-
->>>>>>> 8a0196a82455b5c9c8673caca4dc44a8b5e8386e
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
