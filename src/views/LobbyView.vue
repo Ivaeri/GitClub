@@ -84,10 +84,10 @@ export default {
   },
   methods: {
     validateAndJoin() {
-    if (!this.newPollId.trim()) {
+    if (!this.newPollId.trim() || !this.activePolls.some(poll => poll.pollId === this.newPollId)) {
       alert(this.uiLabels.fillNumber);
     } else {
-      this.$router.push('/lobbyAll/' + this.newPollId); /*allt inom citat?*/
+      this.$router.push('/lobbyAll/' + this.newPollId); 
     }
   },
   joinPoll(pollId) {

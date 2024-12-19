@@ -24,7 +24,7 @@
 	"wordRecieved": "Ditt ord: ",
 	"id": "Spel-id: ",
 	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
-	"fillNumber": "vänligen fyll i ett spel-id innan du fortsätter",
+	"fillNumber": "vänligen fyll i ett giltigt spel-id innan du fortsätter",
 	"welcome": "Välkommen till spelet ",
 	"GameRules":  "Visa spelregler",
 	"HideGameRules": "Dölj spelregler",

@@ -69,11 +69,6 @@
     }},
     methods: {
       async validateWord(word, language) {
-        if (language === "sv") {
-          const wordListArray = Array.from(this.swe_wordlist);
-          console.log("Femtionde ordet i svenska ordlistan:", wordListArray[49]);
-        }
-        console.log("validateWord körs");
         let regex;
         if (language === "sv") {
           regex = /^[a-zA-ZåäöÅÄÖ]+$/; 
