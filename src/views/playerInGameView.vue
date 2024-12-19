@@ -114,7 +114,8 @@ export default {
       current_letter: "",
       isGameWon: false,
       lang: localStorage.getItem("lang") || "en",
-      ammountWrongLetters: 0
+      ammountWrongLetters: 0,
+      gameIsLostFlag: false
     };
       
   },
@@ -136,6 +137,7 @@ export default {
     socket.on("wonOrNot", isWon => this.isGameWon = isWon)
     socket.on("amountWrongLetters", (wrongGuesses) => {
       this.ammountWrongLetters = wrongGuesses;
+      this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
     });
     
     
@@ -166,19 +168,18 @@ export default {
       this.findIfGameIsWonViaData();
       this.setAmountWrongLetters();
       this.sendAmountWrongLetters();
-      this.sendToWinView();
+      /*this.sendToWinView();*/
       }
   },
     
     setAmountWrongLetters(){
       if(!this.trueWord.includes(this.key)) {
-      socket.emit("addAmountWrongLetters", this.pollId)
+      socket.emit("addAmountWrongLetters", this.pollId);
       }
       
     },
     sendAmountWrongLetters () {
       socket.emit("getAmountWrongLetters", this.pollId)
-
     },
 
     setGameToWonViaData() {
@@ -224,7 +225,20 @@ export default {
     },
     isCorrectKey(key) {
       return this.allGuessedLetters.includes(key) && this.trueWord.includes(key);
+    },
+
+    gameIsLost () {
+      if (this.ammountWrongLetters > 6) { 
+        this.gameIsLostFlag = true;
+        this.sendToLossView();
+      }
+    },
+    sendToLossView () {
+      if (this.gameIsLostFlag) {
+        this.$router.push('/lossView/')
+      }
     }
+    
     }}
 </script>
 <style scoped>

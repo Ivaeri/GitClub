@@ -40,5 +40,6 @@
 	"waitForPlayers": "Waiting for players to join",
 	"hanging": "s Hanging",
 	"awaitingHost1": "waiting for ",
-	"awaitingHost2": " to commence the execution"
+	"awaitingHost2": " to commence the execution",
+	"gameOver": "Game over, You lost"
 }
