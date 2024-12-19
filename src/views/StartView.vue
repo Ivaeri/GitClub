@@ -222,15 +222,21 @@
   .gameRules{
     grid-row: 2;
     grid-column: 1/ span 2;
-    width: 240px;
+    width: 7em;
+    height: 1em;
+    color:white
  
  
   }
   .gameRules h5{
     cursor: pointer;
- 
- 
+    background-color: #cf84a9;
+    border-radius: 40%
   }
+.gameRules h5:hover {
+  background-color: #a02666
+}
+
   .gameRules div{
     position: absolute;
     background-color: pink;
