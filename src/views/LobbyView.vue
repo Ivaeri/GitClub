@@ -63,13 +63,6 @@ export default {
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
-    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
-
-    socket.on("removePollId", (pollId) => {
-      this.activePolls = this.activePolls.filter(poll => poll !== pollId);
-      console.log("kom in i socket on i lobbyview", this.activePolls)
-    });
-    
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls"); 
