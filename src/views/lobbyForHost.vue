@@ -68,15 +68,6 @@ created: function () {
     this.uiLabels = labels;
     });
 
-
-socket.on("sendWord", (data) => {
-  // this.enteredword = data.enteredWord; Hämtar ordet från sökvägen istället
-});
-
-socket.on("generateId", (data) => {
-  // this.pollId = data.pollId; Hämtar ordet från sökvägen istället
-});
-
 socket.on( "participantsUpdate", p => {
       this.participants = p });
 socket.emit( "getUILabels", this.lang );

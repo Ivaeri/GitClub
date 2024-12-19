@@ -126,9 +126,7 @@
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
       },
       sendWord: function () {
-        console.log("sending word:" + this.enteredword.toUpperCase())
-        socket.emit( "sendWord", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
-        console.log("Navigering påbörjad");
+        socket.emit( "setWordAndGenerateGameInfo", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
       },
       generateId: function () {
         socket.emit( "generateId", this.pollId )

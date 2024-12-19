@@ -4,22 +4,27 @@ function sockets(io, socket, data) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
 
-  socket.on("sendWord", function (d) { //pollId hostname?
+  socket.on("setWordAndGenerateGameInfo", function (d) { //pollId hostname?
     const { pollId, enteredword, hostName} = d;
     data.updateWord(d.enteredword, d.pollId, d.hostName);
-    io.emit("sendWord",  d.enteredword); 
+    const activePolls = Object.keys(data.polls).map(pollId => {
+      const poll = data.polls[pollId]; 
+      let hostName = poll.hostName;
+        return {
+            pollId: pollId,
+            hostName: hostName || "Okänd host" 
+        };
+    }); 
+    io.emit("activePollsUpdate", activePolls);
   });
  
-
-
   socket.on("generateId", function(d) {
     socket.emit('setPollId', data.setPollId(d))
-    io.emit("generateId",  { pollId: d });
+    //io.emit("generateId",  { pollId: d });
     io.emit("activePollsUpdate", Object.keys(data.polls));
   });
 
   socket.on("deletePollId", function(pollId) {
-    console.log("reached sockets")
     io.emit("removePollId", pollId);
   })
 
@@ -82,18 +87,7 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
 
-  socket.on('getActivePolls', () => {
-    const activePolls = Object.keys(data.polls).map(pollId => {
-      const poll = data.polls[pollId]; 
-        return {
-            pollId: pollId,
-            hostName: poll.hostName || "Okänd host" 
-        };
-    }); 
-    console.log("Aktiva spel skickas:", activePolls);
-    socket.emit('activePolls', activePolls); 
-    io.emit("activePollsUpdate", activePolls);
-});
+
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);

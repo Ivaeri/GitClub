@@ -1,37 +1,13 @@
 <template>
-  <h1>{{uiLabels.createGame}}</h1>
+  <header>
+    <h1>{{uiLabels.createGame}}</h1>
+  </header>
   <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/>
   </div>
-  <newPageButton v-bind:text="uiLabels.coop" to="/submitword/" /> <!--newPageutton är en komponent som skapas i Button.vue, den har props: text, to. I text anger man vad som ska stå på knappen. I to anger man den sida man vill skickas till vid klick på knappen -->
-  <div>
-  
-    <div>
-      {{ uiLabels.question }}:
-      <input type="text" v-model="question">
-      <div>
-        Answers:
-        <input v-for="(_, i) in answers"
-               v-model="answers[i]"
-               v-bind:key="'answer' + i">
-        <button v-on:click="addAnswer">
-          Add answer alternative
-        </button>
-      </div>
-    </div>
-    <button v-on:click="addQuestion">
-      Add question
-    </button>
-    <input type="number" v-model="questionNumber">
-    <button v-on:click="startPoll">
-      Start poll
-    </button>
-    <button v-on:click="runQuestion">
-      Run question
-    </button>
-    <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
-    Data: {{ pollData }}
-  </div>
+  <div class="newpageContainer">
+    <newPageButton v-bind:text="uiLabels.coop" to="/submitword/"/> 
+  </div>  
  </template>
  
  
@@ -87,5 +63,11 @@
  </script>
  <style scoped>
 
- 
+ .newpageContainer{
+  margin-top: 10em;
+ }
+
+ h1{
+  font-size: 9em;
+ }
  </style>

@@ -64,10 +64,7 @@ export default {
     socket.on( "participantsUpdate", p => this.participants = p );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
-    socket.emit("getActivePolls"); 
-    socket.on("activePolls", (polls) => {
-        this.activePolls = polls; 
-    });
+    socket.emit("getActivePolls");
   },
   methods: {
     validateAndJoin() {
@@ -78,15 +75,8 @@ export default {
     }
   },
   joinPoll(pollId) {
-    //this.newPollId = pollId; 
-    console.log("Joining poll " + pollId);
     this.$router.push('/lobbyAll/' + pollId); 
   },
-  /*
-    participateInGame: function () {
-      socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-      this.joined = true;
-    }*/
    }
 }
 </script>

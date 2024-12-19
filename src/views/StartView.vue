@@ -19,9 +19,9 @@
           <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
           <p v-else> {{ uiLabels.GameRules }}</p>
         </h5>
-        <div v-if="gameRules" >
+        <div v-if="gameRules" class="animate__animated animate__backInUp">
           <ul>
-              <li v-for="rule in currentGameRules" v-bind:key="rule" class="animate__animated animate__backInUp">{{ rule }}</li>
+              <li v-for="rule in currentGameRules" v-bind:key="rule" >{{ rule }}</li>
           </ul>
         </div>
       </div>

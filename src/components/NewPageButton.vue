@@ -24,7 +24,7 @@
    
     <style scoped>
     .blueButton {
-        background-color: blue;
+        background-color: rgb(124, 124, 244);
         color: white;
         padding: 15px 32px;
         text-align: center;
@@ -32,6 +32,8 @@
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
+        width: 30em;
+        height: 10em;
     }
  
  
