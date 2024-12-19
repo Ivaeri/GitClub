@@ -49,6 +49,11 @@ const router = createRouter({
 
     },
     {
+      path: '/winView/',
+      name: 'WinView',
+      component: () => import('../views/WinView.vue')
+    },
+    {
       path: '/result/:id',
       name: 'ResultView',
       component: () => import('../views/ResultView.vue')

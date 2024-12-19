@@ -166,6 +166,7 @@ export default {
       this.findIfGameIsWonViaData();
       this.setAmountWrongLetters();
       this.sendAmountWrongLetters();
+      this.sendToWinView();
       }
   },
     
@@ -192,6 +193,7 @@ export default {
       }
     socket.emit("setGameToWon", this.pollId);
     console.log("emit sent to update win status");
+    this.$router.push('/winView/')
       
     },
   
@@ -223,8 +225,7 @@ export default {
     isCorrectKey(key) {
       return this.allGuessedLetters.includes(key) && this.trueWord.includes(key);
     }
-      }
-}
+    }}
 </script>
 <style scoped>
 .participants-container {
