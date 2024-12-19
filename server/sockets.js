@@ -6,6 +6,7 @@ function sockets(io, socket, data) {
 
   socket.on("setWordAndGenerateGameInfo", function (d) { //pollId hostname?
     const { pollId, enteredword, hostName} = d;
+    console.log(d)
     data.updateWord(d.enteredword, d.pollId, d.hostName);
     const activePolls = Object.keys(data.polls).map(pollId => {
       const poll = data.polls[pollId]; 
@@ -14,6 +15,18 @@ function sockets(io, socket, data) {
             pollId: pollId,
             hostName: hostName || "Okänd host" 
         };
+    }); 
+    io.emit("activePollsUpdate", activePolls);
+  });
+
+  socket.on("getActivePolls", () => {
+    const activePolls = Object.keys(data.polls).map(pollId => {
+      const poll = data.polls[pollId]; 
+      let hostName = poll.hostName;
+      return {
+        pollId: pollId,
+        hostName: hostName || "Okänd host"
+      };
     }); 
     io.emit("activePollsUpdate", activePolls);
   });
