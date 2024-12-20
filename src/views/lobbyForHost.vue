@@ -70,6 +70,9 @@ created: function () {
 
 socket.on( "participantsUpdate", p => {
       this.participants = p });
+
+
+      
 socket.emit( "getUILabels", this.lang );
 socket.emit("getParticipants", { pollId: this.pollId });
 },

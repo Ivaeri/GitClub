@@ -1,6 +1,7 @@
 <template>
     <h1>{{ uiLabels.titlegame }}</h1>
     {{ this.ammountWrongLetters }}
+    {{this.index}}
     <div class="wordBox">
       <h2>{{ uiLabels.wordRecieved }}</h2>
       <h2 v-for="letter in enteredword">
@@ -25,6 +26,9 @@
     </div>
     <div class="participants-container">
       <div v-for="participant in participants" :key="participant.name" class="participant">
+        <div v-if="participant.name == participants[this.index].name">
+          <img src="/img/speechbubble.png" class="speechBubble"> 
+        </div>
         {{ participant.name }}
       </div>
   </div>
@@ -51,7 +55,8 @@
           participants: [],
           allGuessedLetters: [],
           ammountWrongLetters: 0,
-          isGameWon: false
+          isGameWon: false,
+          index: 0
   
         }
       },
@@ -75,11 +80,14 @@
       this.ammountWrongLetters = wrongGuesses;
       this.gameIsWon(); //Kontrollera om spelet är vunnet för hosten efter uppdatering
     });
-    
-  socket.emit( "getUILabels", this.lang );
-  socket.emit("getParticipants", { pollId: this.pollId });
-  socket.emit("getGuessedLetters",  this.pollId );
-  socket.emit("getAmountWrongLetters", this.pollId );
+    socket.on( "index", index => {
+      this.index = index });
+
+    socket.emit("getIndex", this.pollId )
+    socket.emit( "getUILabels", this.lang );
+    socket.emit("getParticipants", { pollId: this.pollId });
+    socket.emit("getGuessedLetters",  this.pollId );
+    socket.emit("getAmountWrongLetters", this.pollId );
   },
   
   methods: {
@@ -122,6 +130,16 @@ h2 {
 .participant {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
 }
+
+.speechBubble {
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 5rem;
+    color: black;
+    size: 0.5em;
+    width: 1em;
+    height: auto;
+  }
 
 .greenLetter {
   color: green;
