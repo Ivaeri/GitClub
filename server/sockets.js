@@ -84,6 +84,7 @@ function sockets(io, socket, data) {
 
   socket.on("setGameToWon", function(pollId){
     data.setGameToWon(pollId)
+    console.log("game is won")
   })
 
   socket.on("findIfWon", function(pollId) {
