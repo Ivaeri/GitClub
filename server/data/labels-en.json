@@ -41,5 +41,6 @@
 	"hanging": "s Hanging",
 	"awaitingHost1": "waiting for ",
 	"awaitingHost2": " to commence the execution",
-	"gameOver": "Game over, You lost"
+	"gameOver": "Game over, You lost",
+	"manualEnter": "You can also join a game by entering the game-ID below:"
 }

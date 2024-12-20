@@ -5,6 +5,10 @@
     <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
     </div>
+    <header>
+        <div class="animate__animated animate__zoomInDown">But at what cost?</div>
+    </header>
+
 </template>
 
 <script>
