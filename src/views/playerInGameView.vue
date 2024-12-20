@@ -10,14 +10,14 @@
         <span v-else> _ </span>
     </span>
     <div class="inGame" v-if="!isGameWon">
-      <!--<div class="failedLettersContainer">
+      <div class="failedLettersContainer">
         <h3>Wrong guesses:</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}
           </div> 
         </div>
-      </div> -->
+      </div> 
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="guessingcontainer">
           <div class="guesspart">
@@ -123,9 +123,11 @@ export default {
     socket.on( "questionUpdate", q => this.question = q );
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on( "participantsUpdate", p => {
-      this.participants = p;
-      
+    // Lyssna på popstate för navigering mellan sidor
+    window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via inbyggd manick 'popstate'
+    window.addEventListener("beforeunload", this.handleBeforeUnload);
+    socket.on("participantsUpdate", (participants) => {
+      this.participants = participants;
     });
     socket.on( "index", index => {
       this.index = index });
@@ -141,7 +143,8 @@ export default {
       this.ammountWrongLetters = wrongGuesses;
       this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
     });
-    
+
+
     
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
@@ -151,9 +154,26 @@ export default {
     socket.emit("getWord", this.pollId)
     socket.emit("findIfWon", this.pollId) 
   },
+  beforeDestroy() {
+    window.removeEventListener('beforeunload', this.handleBeforeUnload);
+    window.removeEventListener('popstate', this.handlePageLeave);
+  },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+    },
+    
+    
+    leavePoll() {
+      socket.emit("leavePoll", { pollId: this.pollId, userName: this.userName }); // berättar för servern att spelaren lämnat
+      socket.emit("getParticipants", { pollId: this.pollId }); // uppdaterar listan över spelare
+    },
+ 
+  handleBeforeUnload() {
+      console.log("beforeunload event triggered");
+      const data = JSON.stringify({ pollId: this.pollId, userName: this.userName });
+      navigator.sendBeacon("/leavePoll", data);
+      socket.emit("getParticipants", { pollId: this.pollId }); // uppdaterar listan över spelare
     },
 
     updateThoseLetters: function () {
@@ -241,7 +261,9 @@ export default {
       }
     }
     
-    }}
+    }
+  }
+  
 </script>
 <style scoped>
 .participants-container {
@@ -325,6 +347,7 @@ export default {
     display: flex; /* Flexbox för inre strukturering */
     justify-content: center; /* Centrera innehållet horisontellt */
     align-items: center; /* Centrera innehållet vertikalt */
+    
     }
 
   .letterBox {

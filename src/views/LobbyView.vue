@@ -95,8 +95,8 @@ header{
 }
 
 header h1{
-  margin-top: 0.2em;
-  font-size: 7em;
+  margin-top: 0.4em;
+  font-size: 4em;
 }
 
 header h2{
@@ -109,7 +109,7 @@ header h2{
   font-size: larger;
   background-color: pink;
   color: black;
-  margin-top: 1em;
+  
 }
 
 .gamesContainer{
@@ -143,8 +143,8 @@ header h2{
 }
 
 .joinGameButton{
-  width: 5%;
-  height: 4em;
+  width: 5em;
+  height: 5em;
   background-color: #c888b1;
   cursor: pointer;
 }
@@ -166,5 +166,6 @@ header h2{
 .poll-button:hover {
   background-color: hotpink; /* Ändra färg vid hovring */
 }
+
 
 </style>

@@ -50,6 +50,9 @@ export default {
     font-size: 14em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;
+    word-break: break-all;
+    hyphens: auto;
+    white-space: normal;
 }
 
 </style>

@@ -64,10 +64,18 @@ function sockets(io, socket, data) {
     io.emit('participantsUpdate', data.getParticipants(d.pollId));
     
   });
+  socket.on('leavePoll', function(d) {
+    const { pollId, userName } = d;
+    if (data.polls[pollId]) {
+      data.leaveGame(pollId, userName);
+        }
+  }
+);
 
   socket.on("getParticipants", function(d) {
-    socket.emit('participantsUpdate', data.getParticipants(d.pollId));
+    io.emit('participantsUpdate', data.getParticipants(d.pollId));
   });
+
   socket.on("getIndex", function(pollId) {
     let index = data.getIndex(pollId);
     io.emit('index', index);

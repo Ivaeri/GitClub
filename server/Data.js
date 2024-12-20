@@ -126,6 +126,13 @@ Data.prototype.updateGuessedLetters = function (pollId, key) {
   }
 };
 
+
+Data.prototype.leaveGame = function (pollId, userName) {
+  if (this.polls[pollId]) {
+    this.polls[pollId].participants = this.polls[pollId].participants.filter(participant => participant.name !== userName);
+  }
+};
+
 Data.prototype.setGameToWon = function (pollId) {
   if (this.polls[pollId]) {
       this.polls[pollId].isGameWon = true;
