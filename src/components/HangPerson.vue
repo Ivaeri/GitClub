@@ -2,8 +2,8 @@
   <div class="hangperson-container">
     <svg
       width="250"
-      height="350"
-      viewBox="0 0 250 350"
+      height="310"
+      viewBox="0 0 250 310"
       xmlns="http://www.w3.org/2000/svg"
     >
 

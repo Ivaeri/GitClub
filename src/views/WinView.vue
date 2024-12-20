@@ -1,13 +1,13 @@
 <template>
     <header>
-        <div class="animate__animated animate__zoomInDown">Congratulations, You Won!</div>
+        <div class="animate__animated animate__zoomInDown congrats">Congratulations, You Won!</div>
     </header>
     <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
     </div>
-    <header>
+    <!-- <header>
         <div class="animate__animated animate__zoomInDown">But at what cost?</div>
-    </header>
+    </header> -->
 
 </template>
 
@@ -42,8 +42,10 @@ export default {
     position: relative;
 }
 
-div{
-    position: absolute;
+.congrats{
+    text-align: center;
+    justify-content: center; 
+    align-items: center; 
     top:0;
     font-size: 14em;
     color: pink;

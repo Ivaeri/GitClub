@@ -10,46 +10,52 @@
         <span v-else> _ </span>
     </span>
     <div class="inGame" v-if="!isGameWon">
-      <div class="failedLettersContainer">
+      <!--<div class="failedLettersContainer">
         <h3>Wrong guesses:</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}
           </div> 
         </div>
-      </div>
-    
+      </div> -->
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
-        <div class="letterBoxContainer">
-          <div class="letterBox">
-            {{ this.current_letter }}
+        <div class="guessingcontainer">
+          <div class="guesspart">
+            <div class="letterBoxContainer">
+              <div class="letterBox">
+                {{ this.current_letter }}
+              </div>
+            </div>
+            <div id="keyboard" class="keyboard" @keydown.enter="handleSubmit">
+              <div class="row" v-if="this.lang == 'en'">
+                <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row" v-if="this.lang == 'sv'">
+                <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row" v-if="this.lang == 'en'">
+                <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row" v-if="this.lang == 'sv'">
+                <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row">
+                <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+            </div> <!-- Här stängs keyboard-diven-->
+            <button class="submitButton" v-on:click="handleSubmit">
+              {{ uiLabels.submit }}
+            </button>
+            </div>
           </div>
+          <div class="keyboardhangman">
+              <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/> 
+            </div>
         </div>
-        <div id="keyboard" class="keyboard" @keydown.enter="handleSubmit">
-          <div class="row" v-if="this.lang == 'en'">
-            <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row" v-if="this.lang == 'sv'">
-            <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row" v-if="this.lang == 'en'">
-            <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row" v-if="this.lang == 'sv'">
-            <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row">
-            <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-        </div> <!-- Här stängs keyboard-diven-->
-      
-        <button class="submitButton" v-on:click="handleSubmit">
-          {{ uiLabels.submit }}
-        </button>
-      </div>
-      <div v-else class="hangMan">
-        <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
-      </div>
+
+        <div v-else class="hangMan">
+          <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
+        </div>
 
     </div> <!-- Här Stängs inGame-diven-->
 
@@ -257,6 +263,7 @@ export default {
     flex-direction: column;
     align-items: center;
     color: blue;
+    
   }
   
   .row {
@@ -298,18 +305,36 @@ export default {
 }
 
   .keyboardContainer {
-    margin-top: 3em
+    margin-top: 3em;
+    display: flex; /* Ändra till flex för att placera elementen på samma rad */
+    flex-direction: row; /* Säkerställ att barnen ligger på rad */
+    justify-content: space-between; /* Skapa mellanrum mellan keyboard och hangman */
+    align-items: center; /* Justera vertikalt så att elementen är centrerade */
+    gap: 2em; /* Lägg till mellanrum mellan elementen */
   }
 
+  .keyboardhangman {
+    flex: 0; /* Se till att hangman tar upp sin andel av utrymmet */
+    display: flex;
+    justify-content: center;
+    
+  }
+
+  .guessingcontainer {
+    flex: 1; /* Se till att guessingcontainer tar upp proportionerligt utrymme */
+    display: flex; /* Flexbox för inre strukturering */
+    justify-content: center; /* Centrera innehållet horisontellt */
+    align-items: center; /* Centrera innehållet vertikalt */
+    }
+
   .letterBox {
-   
     height: 1.8em;
     width: 1.5em;
     border: solid black;
     border: 0.2em solid black; /* Lägg till en kantlinje */
     justify-content: center; /* Centrera innehållet horisontellt */
     align-items: center; /* Centrera innehållet vertikalt */
-}
+  }
 
   .submitButton {
     background-color: lightcoral
