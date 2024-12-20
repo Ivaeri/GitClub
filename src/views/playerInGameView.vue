@@ -53,14 +53,6 @@
 
     </div> <!-- Här Stängs inGame-diven-->
 
-    <div v-if="isGameWon" class="animate__animated animate__zoomInDown">
-      You won!  
-      <InputField
-          v-model="trueWord"
-          placeholder="uiLabels.example"
-          id="username">
-      </InputField>
-    </div>
     <div class="participants-container">
     
       <div v-for="participant in participants" :key="participant.name" class="participant">
@@ -134,7 +126,11 @@ export default {
     
     socket.on( "letters", letters => this.allGuessedLetters = letters );
     socket.on("word", word => this.trueWord = word );
-    socket.on("wonOrNot", isWon => this.isGameWon = isWon)
+    socket.on("wonOrNot", (isWon) => {
+      this.isGameWon = isWon;
+      this.setGameToWonViaData();
+      console.log("isGameWon?", this.isGameWon);
+    });    
     socket.on("amountWrongLetters", (wrongGuesses) => {
       this.ammountWrongLetters = wrongGuesses;
       this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
