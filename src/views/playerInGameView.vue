@@ -257,7 +257,7 @@ export default {
     },
     sendToLossView () {
       if (this.gameIsLostFlag) {
-        this.$router.push('/lossView/')
+        this.$router.push('/lossView/'+ this.pollId)
       }
     }
     

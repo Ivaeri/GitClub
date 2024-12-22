@@ -1,7 +1,5 @@
 <template>
     <h1>{{ uiLabels.titlegame }}</h1>
-    {{ this.ammountWrongLetters }}
-    {{this.index}}
     <div class="wordBox">
       <h2>{{ uiLabels.wordRecieved }}</h2>
       <h2 v-for="letter in enteredword">
@@ -9,7 +7,7 @@
         <span v-else> {{ letter }} </span>
       </h2>
       <div> 
-        <h3>Letter's guessed:</h3>
+        <h3>{{ uiLabels.guessedLetters }}</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
           <span v-if="enteredword.includes(letter)" class="guessedCorrectLetter"> {{ letter }} </span>
           <span v-else class="guessedWrongLetter"> {{ letter }}</span>
@@ -18,7 +16,7 @@
     </div>
     <div v-if="ammountWrongLetters > 0" class="graveYard">
       <div >
-        <HangPerson  v-bind:wrongGuesses="ammountWrongLetters"/>
+        <HangPerson  v-bind:wrongGuesses="ammountWrongLetters" />
       </div>
     </div>
     <div class="homebutton">
@@ -83,6 +81,12 @@
     socket.on( "index", index => {
       this.index = index });
 
+    socket.on("wonOrNot", (isWon) => {
+    this.isGameWon = isWon;
+    this.sendToLossView();
+    console.log("isGameWon?", this.isGameWon);
+  });  
+
     socket.emit("getIndex", this.pollId )
     socket.emit( "getUILabels", this.lang );
     socket.emit("getParticipants", { pollId: this.pollId });
@@ -102,9 +106,12 @@
       if (this.gameIsWon) {
         this.$router.push('/winView/')
       }
+    },
+    sendToLossView () {
+      if (this.isGameWon) {
+        this.$router.push('/lossView/'+ this.pollId)
     }
-  
-  }
+  }}
   }
    </script>
     

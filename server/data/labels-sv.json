@@ -1,6 +1,4 @@
 {
-	"sales-pitch": "Svar. Helt. Enkelt.",
-	"subHeading": "Ett enkelt enkätverktyg",
 	"invite": "Bjud in deltagare med den här länken:",
 	"createGame": "Skapa spel",
 	"participateGame": "Gå med i ett spel",
@@ -42,5 +40,6 @@
 	"awaitingHost1": "Inväntar att ",
 	"awaitingHost2": " påbörjar avrättningen",
 	"gameOver": "Spelet är över, du förlorade",
-	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan"
+	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
+	"guessedLetters": "Gissade bokstäver: "
 }
