@@ -153,6 +153,7 @@ export default {
     socket.emit("getGuessedLetters", this.pollId)
     socket.emit("getWord", this.pollId)
     socket.emit("findIfWon", this.pollId) 
+    socket.emit("getAmountWrongLetters", this.pollId );
   },
   beforeDestroy() {
     window.removeEventListener('beforeunload', this.handleBeforeUnload);
