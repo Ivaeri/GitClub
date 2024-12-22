@@ -72,7 +72,7 @@ socket.on( "participantsUpdate", p => {
       this.participants = p });
 
 
-      
+
 socket.emit( "getUILabels", this.lang );
 socket.emit("getParticipants", { pollId: this.pollId });
 },
@@ -81,7 +81,8 @@ methods: {
   startGame: function () {
     socket.emit("startPoll", this.pollId);
     this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword);
-    socket.emit("deletePollId", this.pollId);
+    //socket.emit("deletePollId", this.pollId);
+   // socket.emit("removeGame", this.pollId)
   },
 
   validateAndParticipate() {

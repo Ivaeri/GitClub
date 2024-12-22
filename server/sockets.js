@@ -37,10 +37,7 @@ function sockets(io, socket, data) {
     io.emit("activePollsUpdate", Object.keys(data.polls));
   });
 
-  socket.on("deletePollId", function(pollId) {
-    io.emit("removePollId", pollId);
-  })
-
+ 
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang, d.userName);
     socket.emit('pollData', data.getPoll(d.pollId));
@@ -51,6 +48,10 @@ function sockets(io, socket, data) {
     data.addQuestion(d.pollId, {q: d.q, a: d.a});
     socket.emit('questionUpdate', data.activateQuestion(d.pollId));
   });
+
+  socket.on("removeGame", function(pollId) {
+    data.removeGame(pollId)
+  })
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);

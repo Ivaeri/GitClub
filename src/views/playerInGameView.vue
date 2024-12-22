@@ -216,6 +216,7 @@ export default {
       }
     socket.emit("setGameToWon", this.pollId);
     console.log("emit sent to update win status");
+    socket.emit("removeGame", this.pollId)
     this.$router.push('/winView/')
       
     },

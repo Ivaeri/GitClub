@@ -194,6 +194,15 @@ Data.prototype.updateIndex = function (pollId) {
         };
         return ""
       };
+    
+      Data.prototype.removeGame = function(pollId) {
+        if (this.polls[pollId]) {
+          delete this.polls[pollId];
+          console.log(`Poll with ID ${pollId} has been removed.`);
+        } else {
+          console.log(`Poll with ID ${pollId} does not exist.`);
+        }
+      };
 
 Data.prototype.setPollId = function (pollId) {
   if (!this.polls[pollId]) {
