@@ -54,7 +54,7 @@ const router = createRouter({
       component: () => import('../views/WinView.vue')
     },
     {
-      path: '/lossView/',
+      path: '/lossView/:id',
       name: 'LossView',
       component: () => import('../views/LossView.vue')
     },

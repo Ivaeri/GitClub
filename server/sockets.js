@@ -37,10 +37,7 @@ function sockets(io, socket, data) {
     io.emit("activePollsUpdate", Object.keys(data.polls));
   });
 
-  socket.on("deletePollId", function(pollId) {
-    io.emit("removePollId", pollId);
-  })
-
+ 
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang, d.userName);
     socket.emit('pollData', data.getPoll(d.pollId));
@@ -51,6 +48,10 @@ function sockets(io, socket, data) {
     data.addQuestion(d.pollId, {q: d.q, a: d.a});
     socket.emit('questionUpdate', data.activateQuestion(d.pollId));
   });
+
+  socket.on("removeGame", function(pollId) {
+    data.removeGame(pollId)
+  })
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
@@ -64,10 +65,18 @@ function sockets(io, socket, data) {
     io.emit('participantsUpdate', data.getParticipants(d.pollId));
     
   });
+  socket.on('leavePoll', function(d) {
+    const { pollId, userName } = d;
+    if (data.polls[pollId]) {
+      data.leaveGame(pollId, userName);
+        }
+  }
+);
 
   socket.on("getParticipants", function(d) {
-    socket.emit('participantsUpdate', data.getParticipants(d.pollId));
+    io.emit('participantsUpdate', data.getParticipants(d.pollId));
   });
+
   socket.on("getIndex", function(pollId) {
     let index = data.getIndex(pollId);
     io.emit('index', index);
@@ -84,6 +93,7 @@ function sockets(io, socket, data) {
 
   socket.on("setGameToWon", function(pollId){
     data.setGameToWon(pollId)
+    console.log("game is won")
   })
 
   socket.on("findIfWon", function(pollId) {

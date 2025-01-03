@@ -158,8 +158,8 @@ header h2{
 }
 
 .joinGameButton{
-  width: 5%;
-  height: 4em;
+  width: 5em;
+  height: 5em;
   background-color: #c888b1;
   cursor: pointer;
   border-radius: 5px;
@@ -196,5 +196,6 @@ header h2{
 .poll-button:hover {
   background-color: hotpink; /* Ändra färg vid hovring */
 }
+
 
 </style>

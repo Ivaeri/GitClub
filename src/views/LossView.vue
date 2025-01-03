@@ -8,6 +8,9 @@
     <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
     </div>
+    <button class="restartButton" v-on:click="goToGameLobby">
+        Play Again?
+    </button>
 </template>
 
 <script>
@@ -33,8 +36,12 @@ export default {
         this.uiLabels = labels;
     });
     socket.emit("getUILabels", this.lang);
-}
-}
+},
+    methods: {
+    goToGameLobby: function() {
+        this.$router.push("/lobbyAll/" + this.$route.params.id);
+    }
+}}
 
 
 </script>
@@ -48,11 +55,26 @@ export default {
     align-items: center; 
     height: 100vh; 
     top:0;
-    font-size: 10em;
+    font-size: 9.5em;
     color: rgb(163, 31, 31);
     text-shadow: 2px 2px 4px #000000;
+    padding-left: 0.5em;
+    padding-top: 0.3em;
 }
-
+.restartButton {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 30%;
+    height: 10vh;
+    background-color: pink;
+    color: black;
+    font-size: 2em;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
 
 </style>

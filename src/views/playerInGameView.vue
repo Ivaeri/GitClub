@@ -10,46 +10,52 @@
         <span v-else> _ </span>
     </span>
     <div class="inGame" v-if="!isGameWon">
-      <div class="failedLettersContainer">
+      <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
+        <div class="failedLettersContainer">
         <h3>Wrong guesses:</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}
           </div> 
         </div>
-      </div>
-    
-      <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
-        <div class="letterBoxContainer">
-          <div class="letterBox">
-            {{ this.current_letter }}
+      </div> 
+        <div class="guessingcontainer">
+          <div class="guesspart">
+            <div class="letterBoxContainer">
+              <div class="letterBox">
+                {{ this.current_letter }}
+              </div>
+            </div>
+            <div id="keyboard" class="keyboard" @keydown.enter="handleSubmit">
+              <div class="row" v-if="this.lang == 'en'">
+                <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row" v-if="this.lang == 'sv'">
+                <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row" v-if="this.lang == 'en'">
+                <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row" v-if="this.lang == 'sv'">
+                <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+              <div class="row">
+                <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
+              </div>
+            </div> <!-- Här stängs keyboard-diven-->
+            <button class="submitButton" v-on:click="handleSubmit">
+              {{ uiLabels.submit }}
+            </button>
+            </div>
           </div>
+          <div class="keyboardhangman">
+              <HangPerson v-bind:wrongGuesses="ammountWrongLetters" :scale="0.5"/> 
+            </div>
         </div>
-        <div id="keyboard" class="keyboard" @keydown.enter="handleSubmit">
-          <div class="row" v-if="this.lang == 'en'">
-            <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row" v-if="this.lang == 'sv'">
-            <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row" v-if="this.lang == 'en'">
-            <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row" v-if="this.lang == 'sv'">
-            <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-          <div class="row">
-            <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
-          </div>
-        </div> <!-- Här stängs keyboard-diven-->
-      
-        <button class="submitButton" v-on:click="handleSubmit">
-          {{ uiLabels.submit }}
-        </button>
-      </div>
-      <div v-else class="hangMan">
-        <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
-      </div>
+
+        <div v-else class="hangMan">
+          <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
+        </div>
 
     </div> <!-- Här Stängs inGame-diven-->
 
@@ -117,9 +123,11 @@ export default {
     socket.on( "questionUpdate", q => this.question = q );
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on( "participantsUpdate", p => {
-      this.participants = p;
-      
+    // Lyssna på popstate för navigering mellan sidor
+    window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via inbyggd manick 'popstate'
+    window.addEventListener("beforeunload", this.handleBeforeUnload);
+    socket.on("participantsUpdate", (participants) => {
+      this.participants = participants;
     });
     socket.on( "index", index => {
       this.index = index });
@@ -135,7 +143,8 @@ export default {
       this.ammountWrongLetters = wrongGuesses;
       this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
     });
-    
+
+
     
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
@@ -144,10 +153,28 @@ export default {
     socket.emit("getGuessedLetters", this.pollId)
     socket.emit("getWord", this.pollId)
     socket.emit("findIfWon", this.pollId) 
+    socket.emit("getAmountWrongLetters", this.pollId );
+  },
+  beforeDestroy() {
+    window.removeEventListener('beforeunload', this.handleBeforeUnload);
+    window.removeEventListener('popstate', this.handlePageLeave);
   },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+    },
+    
+    
+    leavePoll() {
+      socket.emit("leavePoll", { pollId: this.pollId, userName: this.userName }); // berättar för servern att spelaren lämnat
+      socket.emit("getParticipants", { pollId: this.pollId }); // uppdaterar listan över spelare
+    },
+ 
+  handleBeforeUnload() {
+      console.log("beforeunload event triggered");
+      const data = JSON.stringify({ pollId: this.pollId, userName: this.userName });
+      navigator.sendBeacon("/leavePoll", data);
+      socket.emit("getParticipants", { pollId: this.pollId }); // uppdaterar listan över spelare
     },
 
     updateThoseLetters: function () {
@@ -190,6 +217,7 @@ export default {
       }
     socket.emit("setGameToWon", this.pollId);
     console.log("emit sent to update win status");
+    socket.emit("removeGame", this.pollId)
     this.$router.push('/winView/')
       
     },
@@ -231,11 +259,13 @@ export default {
     },
     sendToLossView () {
       if (this.gameIsLostFlag) {
-        this.$router.push('/lossView/')
+        this.$router.push('/lossView/'+ this.pollId)
       }
     }
     
-    }}
+    }
+  }
+  
 </script>
 <style scoped>
 .participants-container {
@@ -257,6 +287,7 @@ export default {
     flex-direction: column;
     align-items: center;
     color: blue;
+    
   }
   
   .row {
@@ -298,18 +329,38 @@ export default {
 }
 
   .keyboardContainer {
-    margin-top: 3em
+    display: flex; /* Ändra till flex för att placera elementen på samma rad */
+    flex-direction: row; /* Säkerställ att barnen ligger på rad */
+    justify-content: space-evenly; /* Skapa mellanrum mellan keyboard och hangman */
+    align-items: center; /* Justera vertikalt så att elementen är centrerade */
   }
 
+  .keyboardhangman {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 2em;
+  }
+
+  .guessingcontainer {
+    
+    display: flex; /* Flexbox för inre strukturering */
+    justify-content: center; /* Centrera innehållet horisontellt */
+    align-items: center; /* Centrera innehållet vertikalt */
+    position: relative;
+    left: 3em;
+    
+    }
+
   .letterBox {
-   
     height: 1.8em;
     width: 1.5em;
     border: solid black;
     border: 0.2em solid black; /* Lägg till en kantlinje */
     justify-content: center; /* Centrera innehållet horisontellt */
     align-items: center; /* Centrera innehållet vertikalt */
-}
+  }
 
   .submitButton {
     background-color: lightcoral
@@ -330,10 +381,10 @@ export default {
   }
 
   .failedLettersContainer {
-    margin-top: 2em;
-    width: 8em;
-    height: 5em;
+
     margin-left: 1.5em;
+    position: relative;
+    left: 3em;
   }
   .failedLetters {
     top: 2em;
@@ -347,7 +398,7 @@ export default {
   .letterBoxContainer {
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    margin-top: 1em;
     margin-bottom: 1em;
 
   }
