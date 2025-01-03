@@ -26,7 +26,7 @@
         <div v-if="participants.length > 0">
           <h2>{{ uiLabels.joinedPlayers }}</h2>
           <ul>
-            <div v-for="participant in participants" :key="participant.name">
+            <div class="player" v-for="participant in participants" :key="participant.name">
               {{ participant.name }}
         </div>
   </ul>
@@ -94,5 +94,21 @@
   height: 4em;
   background-color: #c888b1;
   cursor: pointer;
+  }
+  .player{
+    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 0.5em;
+    height: 3em;
+    width: 5em;
+    background-size: 2em 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.5em; 
+    margin-bottom: 0.5em; 
+    display: flex;
+    align-items: center;
+    border-radius: 5px; 
+    background-color: pink; 
   }
 </style>

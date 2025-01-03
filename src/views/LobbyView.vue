@@ -195,6 +195,8 @@ header h2{
 
 .poll-button:hover {
   background-color: hotpink; /* Ändra färg vid hovring */
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
 }
 
 

@@ -163,7 +163,8 @@
   }
  .create-join button:hover {
  background-color: #a02666;
- transform: rotate(10deg) scale(1.1);
+ transform: rotate(1deg) scale(1.1);
+ transition: transform 0.2s ease-in-out;
  }
   .languagecontainer{
     display: grid;

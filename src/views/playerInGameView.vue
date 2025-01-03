@@ -61,7 +61,7 @@
 
     <div class="participants-container">
     
-      <div v-for="participant in participants" :key="participant.name" class="participant">
+      <div v-for="participant in participants" :key="participant.name" class="player">
         <div v-if="participant.name == participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
@@ -278,9 +278,23 @@ export default {
     margin-top: 3em;
 }
 
-.participant {
+.player {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
-}
+    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 0.5em;
+    height: 3em;
+    width: 5em;
+    background-size: 2em 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.5em; 
+    margin-bottom: 0.5em; 
+    display: flex;
+    align-items: center;
+    border-radius: 5px; 
+    background-color: pink; 
+  }
 
 .keyboard {
     display: flex;
@@ -417,6 +431,23 @@ export default {
   .winText {
     color: #0056b3;
     font-size: 10em
+  }
+
+  .player{
+    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 0.5em;
+    height: 3em;
+    width: 5em;
+    background-size: 2em 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.5em; 
+    margin-bottom: 0.5em; 
+    display: flex;
+    align-items: center;
+    border-radius: 5px; 
+    background-color: pink; 
   }
 
  
