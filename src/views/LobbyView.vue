@@ -123,7 +123,7 @@ header h2{
 }
 
 .gamesContainer{
-  background-color: rgb(255, 92, 92);
+  background-color: lightblue;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
     color:black;
@@ -132,7 +132,7 @@ header h2{
     width: 90vw;
     height: 19em;
     gap: 1em;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     margin: 0 auto;
     border: 0.2em solid black; /* Lägg till en svart kantlinje */
@@ -159,7 +159,7 @@ header h2{
 
 .joinGameButton{
   width: 5em;
-  height: 5em;
+  height: 4em;
   background-color: #c888b1;
   cursor: pointer;
   border-radius: 5px;
