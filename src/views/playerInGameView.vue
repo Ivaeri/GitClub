@@ -10,7 +10,8 @@
         <span v-else> _ </span>
     </span>
     <div class="inGame" v-if="!isGameWon">
-      <div class="failedLettersContainer">
+      <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
+        <div class="failedLettersContainer">
         <h3>Wrong guesses:</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
@@ -18,7 +19,6 @@
           </div> 
         </div>
       </div> 
-      <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="guessingcontainer">
           <div class="guesspart">
             <div class="letterBoxContainer">
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="keyboardhangman">
-              <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/> 
+              <HangPerson v-bind:wrongGuesses="ammountWrongLetters" :scale="0.5"/> 
             </div>
         </div>
 
@@ -329,26 +329,27 @@ export default {
 }
 
   .keyboardContainer {
-    margin-top: 3em;
     display: flex; /* Ändra till flex för att placera elementen på samma rad */
     flex-direction: row; /* Säkerställ att barnen ligger på rad */
-    justify-content: space-between; /* Skapa mellanrum mellan keyboard och hangman */
+    justify-content: space-evenly; /* Skapa mellanrum mellan keyboard och hangman */
     align-items: center; /* Justera vertikalt så att elementen är centrerade */
-    gap: 2em; /* Lägg till mellanrum mellan elementen */
   }
 
   .keyboardhangman {
-    flex: 0; /* Se till att hangman tar upp sin andel av utrymmet */
     display: flex;
     justify-content: center;
-    
+    align-items: center;
+    position: relative;
+    top: 2em;
   }
 
   .guessingcontainer {
-    flex: 1; /* Se till att guessingcontainer tar upp proportionerligt utrymme */
+    
     display: flex; /* Flexbox för inre strukturering */
     justify-content: center; /* Centrera innehållet horisontellt */
     align-items: center; /* Centrera innehållet vertikalt */
+    position: relative;
+    left: 3em;
     
     }
 
@@ -380,10 +381,10 @@ export default {
   }
 
   .failedLettersContainer {
-    margin-top: 2em;
-    width: 8em;
-    height: 5em;
+
     margin-left: 1.5em;
+    position: relative;
+    left: 3em;
   }
   .failedLetters {
     top: 2em;
@@ -397,7 +398,7 @@ export default {
   .letterBoxContainer {
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    margin-top: 1em;
     margin-bottom: 1em;
 
   }

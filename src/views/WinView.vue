@@ -1,6 +1,7 @@
 <template>
     <header>
-        <div class="animate__animated animate__zoomInDown congrats">Congratulations, You Won!</div>
+        <div class="animate__animated animate__zoomInDown congrats">Congratulations!</div>
+        <div class="animate__animated animate__zoomInDown congrats">You Won 🎉</div>
     </header>
     <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
@@ -47,7 +48,7 @@ export default {
     justify-content: center; 
     align-items: center; 
     top:0;
-    font-size: 14em;
+    font-size: 12em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;
     word-break: break-all;
