@@ -53,6 +53,7 @@
           participants: [],
           allGuessedLetters: [],
           ammountWrongLetters: 0,
+          correctguesses: 0,
           isGameWon: false,
           index: 0
   
@@ -69,6 +70,7 @@
 
     socket.on("letters", (letters) => {
       this.allGuessedLetters = letters;
+      this.updateCorrectGuesses();
     });
     socket.on( "participantsUpdate", p => {
       this.participants = p;
@@ -76,7 +78,7 @@
 
     socket.on("amountWrongLetters", (wrongGuesses) => {
       this.ammountWrongLetters = wrongGuesses;
-      this.gameIsWon(); //Kontrollera om spelet är vunnet för hosten efter uppdatering
+      this.gameIsWon(); // Kontrollera om spelet är vunnet för hosten efter uppdatering
     });
     socket.on( "index", index => {
       this.index = index });
@@ -96,6 +98,11 @@
   
   methods: {
 
+    updateCorrectGuesses () {
+      this.correctguesses = this.enteredword.split('').filter(letter => this.allGuessedLetters.includes(letter)).length;  
+      console.log("correctguesses", this.correctguesses);
+    },
+
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
         this.gameIsWon = true;
@@ -108,7 +115,7 @@
       }
     },
     sendToLossView () {
-      if (this.isGameWon) {
+      if (this.correctguesses == this.enteredword.length) {
         this.$router.push('/lossView/'+ this.pollId)
     }
   }}
