@@ -90,10 +90,19 @@
   </script>
   <style scoped>
   .joinGameButton {
-  width: 5%;
-  height: 4em;
-  background-color: #c888b1;
+  width: 6em;
+  height: 7em;
+  background-color: #cf84a9;
   cursor: pointer;
+  margin-left: 1em;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  }
+  .joinGameButton:hover{
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
   }
   .player{
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');

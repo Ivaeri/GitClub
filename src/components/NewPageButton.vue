@@ -24,16 +24,22 @@
    
     <style scoped>
     .blueButton {
-        background-color: #cf84a9;
+        background-color: pink;
         color: white;
-        padding: 15px 32px;
+        border-radius: 16px;
+        padding: 1em 1em;
         text-align: center;
         display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
+        font-size: 2em;
+        margin: 1em 1em;
         cursor: pointer;
-        width: 30em;
-        height: 10em;
+        width: 20em;
+        height: 8em;
+    }
+    .blueButton:hover{
+        background-color: #a02666;
+        transform: rotate(1deg) scale(1.1);
+        transition: transform 0.2s ease-in-out;
     }
  
  

@@ -1,13 +1,16 @@
 <template>
+  <div class="createContainer">
   <header>
     <h1>{{uiLabels.createGame}}</h1>
   </header>
   <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/>
   </div>
+</br>
   <div class="newpageContainer">
     <newPageButton v-bind:text="uiLabels.coop" to="/submitword/"/> 
-  </div>  
+  </div> 
+  </div> 
  </template>
  
  
@@ -64,10 +67,15 @@
  <style scoped>
 
  .newpageContainer{
-  margin-top: 10em;
+  margin-top: 1em;
+ }
+
+ .createContainer{
+  height: 100vh;
+  overflow: hidden;
  }
 
  h1{
-  font-size: 9em;
+  font-size: 8em;
  }
  </style>

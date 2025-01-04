@@ -101,10 +101,10 @@
   header {
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 25em;
     display: grid;
     grid-template-columns: 2em auto;
- 
+    align-items: center;
  
   }
   .logo {
@@ -114,10 +114,11 @@
     font-size: 5rem;
     color: rgb(4, 16, 131);
     padding-top: 2.5em;
+    vertical-align: bottom;
+    align-items: center;
   }
   .logo img {
     height:5rem;
-    vertical-align: bottom;
     margin-right: 0.5rem;
   }
   .hamburger {
@@ -171,43 +172,50 @@
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     position: absolute;
-    width: 240px;
-    height: px;
-    margin-top: 20px;
+    width: 15em;
+    height: 10em;
+    margin-top: 10px;
     margin-right: 10px;
     right: 0px;
+    top: 0em;
   }
   .switchLanguageDiv{
     grid-row : 1;
     grid-column: 2;
-    width: 80px;
-    height: 30px;
+    width: 4em;
+    height: 1.7em;
     right: 0;
-    margin-top: 15px;
-    background-color: lightgrey;
+    background-color: #cf84a9;
     border-radius: 10%;
-    padding-top: 7px;
     cursor: pointer;
-    border: 2px solid black
- 
- 
+    color: white;
+    display: flex;
+    font-size: 2em;
+    box-sizing: border-box; 
+    padding: 0;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
   .gameRules{
     grid-row: 2;
     grid-column: 1/ span 2;
-    width: 7em;
+    width: 8em;
     height: 1em;
-    color:black;
+    color:white;
  
  
   }
   .gameRules h5{
     cursor: pointer;
     background-color: #cf84a9;
-    border-radius: 40%
+    border-radius: 5px;
+    padding: 0.3em;
   }
 .gameRules h5:hover {
-  background-color: #a02666
+  background-color: #a02666;
+  transform: rotate(1deg) scale(1.1);
+  transition: transform 0.2s ease-in-out;
 }
 
   .gameRules div{
@@ -227,8 +235,8 @@
   .languagecontainer button{
     grid-row : 1;
     grid-column: 1;
-    height: 60px;
-    width: 140px;
+    height: 4em;
+    width: 8em;
     background-size: cover;
     background-position: center;
     left: 0;

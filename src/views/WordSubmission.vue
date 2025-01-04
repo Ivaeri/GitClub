@@ -20,7 +20,7 @@
       </InputField>
     </div>
     <div class="item">
-      <Button
+      <Button 
         v-bind:text="uiLabels.sendWord" 
         v-on:click="handleClick">
         {{ uiLabels.sendWord }}
@@ -153,7 +153,19 @@
     flex-direction: column;
     height: 4em;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
+    cursor: pointer;
+    background-color: #cf84a9;
+    border-radius: 5px;
+    margin: 2em;  
+    padding: 1em;
+    color: white;
+    border: none;
+  }
+  .item button:hover{
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
   }
 
 
