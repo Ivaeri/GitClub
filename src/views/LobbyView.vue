@@ -160,11 +160,18 @@ header h2{
 .joinGameButton{
   width: 5em;
   height: 4em;
-  background-color: #c888b1;
+  background-color: #cf84a9;
   cursor: pointer;
   border-radius: 5px;
   margin-top: 1em;
+  margin-left: 1em;
 }
+.joinGameButton:hover{
+background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
 .manualJoin {
   display: flex;
   align-items: center;
