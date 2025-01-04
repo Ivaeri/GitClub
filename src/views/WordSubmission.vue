@@ -8,8 +8,7 @@
       <InputField
           v-model="hostName"
           :placeholder="uiLabels.name"
-          id="hostname"
-          @enterPressed="handleEnter">
+          id="hostname">
       </InputField>
       <InputField
         v-bind:label="uiLabels.enterWord"
