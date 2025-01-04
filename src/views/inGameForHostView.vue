@@ -54,7 +54,6 @@
           allGuessedLetters: [],
           ammountWrongLetters: 0,
           correctguesses: 0,
-          isGameWon: false,
           index: 0
   
         }
@@ -84,7 +83,6 @@
       this.index = index });
 
     socket.on("wonOrNot", (isWon) => {
-    this.isGameWon = isWon;
     this.sendToLossView();
     console.log("isGameWon?", this.isGameWon);
   });  
@@ -105,14 +103,11 @@
 
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
-        this.gameIsWon = true;
         this.sendToWinView();
       }
     },
     sendToWinView () {
-      if (this.gameIsWon) {
         this.$router.push('/winView/')
-      }
     },
     sendToLossView () {
       if (this.correctguesses == this.enteredword.length) {

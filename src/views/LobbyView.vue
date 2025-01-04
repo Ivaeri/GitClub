@@ -23,7 +23,6 @@
     <h2>{{ uiLabels.manualEnter }}</h2>
     <div class="manualJoin">
       <label for="pollIdInput"> 
-        {{ uiLabels.enterGamePin }}
         <InputField 
         id="newPollIdInput"
         class="enterGameInput"
