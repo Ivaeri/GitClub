@@ -117,7 +117,7 @@
         this.pollId = Math.floor(Math.random() * 1000000);
         this.generateId();
         this.sendWord();
-        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
+        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
       },
       sendWord: function () {
         socket.emit( "setWordAndGenerateGameInfo", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )

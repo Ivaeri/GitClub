@@ -26,13 +26,13 @@ const router = createRouter({
       component: () => import('../views/LobbyAllView.vue')
     },
     {
-      path:'/hostLobby/:id/:id2',
+      path:'/hostLobby/:id/:id2/:id3',
       name: 'lobbyForHost',
       component: () => import('../views/lobbyForHost.vue')
 
     },
     {
-      path: '/inGameForHost/:id/:id2',
+      path: '/inGameForHost/:id/:id2/:id3',
       name: 'inGameForHostView',
       component: () => import('../views/inGameForHostView.vue')
 
@@ -49,7 +49,7 @@ const router = createRouter({
 
     },
     {
-      path: '/winView/',
+      path: '/winView/:id/:id2',
       name: 'WinView',
       component: () => import('../views/WinView.vue')
     },
@@ -62,6 +62,11 @@ const router = createRouter({
       path: '/result/:id',
       name: 'ResultView',
       component: () => import('../views/ResultView.vue')
+    },
+    {
+    path: '/ChooseNewWord/:id',
+    name: 'ChooseNewWord',
+    component: () => import('../views/ChooseNewWord.vue')
     }
   ]
 });

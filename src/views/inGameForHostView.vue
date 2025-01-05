@@ -54,7 +54,8 @@
           allGuessedLetters: [],
           ammountWrongLetters: 0,
           correctguesses: 0,
-          index: 0
+          index: 0,
+          hostName: ""
   
         }
       },
@@ -62,6 +63,8 @@
   created: function () {
     this.pollId = this.$route.params.id;
     this.enteredword = this.$route.params.id2;
+    this.hostName = this.$route.params.id3;
+
   
     socket.on("uiLabels", (labels) => {
       this.uiLabels = labels;
@@ -107,7 +110,7 @@
       }
     },
     sendToWinView () {
-        this.$router.push('/winView/')
+        this.$router.push('/winView/'+ this.pollId+ '/' + this.hostName)
     },
     sendToLossView () {
       if (this.correctguesses == this.enteredword.length) {
