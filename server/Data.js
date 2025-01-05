@@ -32,8 +32,6 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     let poll = {};
     poll.lang = lang; 
     poll.hostName = hostName; 
-    poll.questions = [];
-    poll.answers = [];
     poll.participants = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
@@ -162,6 +160,19 @@ Data.prototype.findIfWon = function (pollId) {
   }
 };
 
+Data.prototype.nailInCoffin = function (userName, pollId) {
+  if (this.polls[pollId]) {
+    this.polls[pollId].NailInCoffin = userName;
+    console.log("nail in coffin", this.polls[pollId].NailInCoffin)
+  }
+}
+
+Data.prototype.getNailInCoffin = function (pollId) {
+  if (this.polls[pollId]) {
+    return this.polls[pollId].NailInCoffin
+  }
+}
+
 
 Data.prototype.getGuessedLetter = function (pollId) {
   if (this.pollExists(pollId)) { 
@@ -217,7 +228,8 @@ Data.prototype.setPollId = function (pollId) {
       index: 0,
       guessedLetters: [],
       isGameWon: false,
-      amountWrongLetters: 0
+      amountWrongLetters: 0,
+      NailInCoffin: ""
 
     };
   }

@@ -63,6 +63,7 @@
 created: function () {
   this.pollId = this.$route.params.id;
   this.enteredword = this.$route.params.id2;
+  this.hostName = this.$route.params.id3;
 
   socket.on("uiLabels", (labels) => {
     this.uiLabels = labels;
@@ -80,7 +81,7 @@ socket.emit("getParticipants", { pollId: this.pollId });
 methods: {
   startGame: function () {
     socket.emit("startPoll", this.pollId);
-    this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword);
+    this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword+ '/' + this.hostName);
     //socket.emit("deletePollId", this.pollId);
    // socket.emit("removeGame", this.pollId)
   },

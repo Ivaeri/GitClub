@@ -184,13 +184,13 @@ export default {
 
     handleSubmit: function () {
       if(!this.allGuessedLetters.includes(this.key)){
-      this.toggleIndexViaData();
       this.updateThoseLetters();
       this.setcurrentLetterToEmpty();
       this.setGameToWonViaData();
       this.findIfGameIsWonViaData();
       this.setAmountWrongLetters();
       this.sendAmountWrongLetters();
+      this.toggleIndexViaData();
       /*this.sendToWinView();*/
       }
   },
@@ -215,10 +215,13 @@ export default {
             return;
           }}
       }
+    if (this.participants[this.index] && this.userName == this.participants[this.index].name){
+      socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.userName})
+    }
     socket.emit("setGameToWon", this.pollId);
     console.log("emit sent to update win status");
-    socket.emit("removeGame", this.pollId)
-    this.$router.push('/winView/')
+    //socket.emit("removeGame", this.pollId)
+    this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
       
     },
   
