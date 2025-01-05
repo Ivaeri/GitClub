@@ -8,8 +8,7 @@
       <InputField
           v-model="hostName"
           :placeholder="uiLabels.name"
-          id="hostname"
-          @enterPressed="handleEnter">
+          id="hostname">
       </InputField>
       <InputField
         v-bind:label="uiLabels.enterWord"
@@ -20,7 +19,7 @@
       </InputField>
     </div>
     <div class="item">
-      <Button
+      <Button 
         v-bind:text="uiLabels.sendWord" 
         v-on:click="handleClick">
         {{ uiLabels.sendWord }}
@@ -118,7 +117,7 @@
         this.pollId = Math.floor(Math.random() * 1000000);
         this.generateId();
         this.sendWord();
-        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase());
+        this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
       },
       sendWord: function () {
         socket.emit( "setWordAndGenerateGameInfo", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
@@ -153,7 +152,19 @@
     flex-direction: column;
     height: 4em;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
+    cursor: pointer;
+    background-color: #cf84a9;
+    border-radius: 5px;
+    margin: 2em;  
+    padding: 1em;
+    color: white;
+    border: none;
+  }
+  .item button:hover{
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
   }
 
 

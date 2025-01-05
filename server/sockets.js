@@ -111,7 +111,15 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
 
+  socket.on('NailInCoffin' , function(d) {
+    data.nailInCoffin(d.userName, d.pollId);
+    console.log("nail in coffin", d.userName, d.pollId)
+  });
 
+  socket.on('getNailInCoffin', function(pollId) {
+    let nail = data.getNailInCoffin(pollId);
+    io.emit("nail", nail);
+  });
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);

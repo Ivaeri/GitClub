@@ -21,12 +21,12 @@
       </div>
       <div v-if="joined">
         <div>{{ uiLabels.welcome }} {{ userName }}!</div>
-          <div>{{ this.uiLabels.awaitingHost1 }}host {{ hostUserName}}{{ this.uiLabels.awaitingHost2 }}</div>
+          <div>{{ this.uiLabels.awaitingHost1 }}host {{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}</div>
         </div>
         <div v-if="participants.length > 0">
           <h2>{{ uiLabels.joinedPlayers }}</h2>
           <ul>
-            <div v-for="participant in participants" :key="participant.name">
+            <div class="player" v-for="participant in participants" :key="participant.name">
               {{ participant.name }}
         </div>
   </ul>
@@ -90,9 +90,34 @@
   </script>
   <style scoped>
   .joinGameButton {
-  width: 5%;
-  height: 4em;
-  background-color: #c888b1;
+  width: 6em;
+  height: 7em;
+  background-color: #cf84a9;
   cursor: pointer;
+  margin-left: 1em;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  }
+  .joinGameButton:hover{
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  .player{
+    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 0.5em;
+    height: 3em;
+    width: 5em;
+    background-size: 2em 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.5em; 
+    margin-bottom: 0.5em; 
+    display: flex;
+    align-items: center;
+    border-radius: 5px; 
+    background-color: pink; 
   }
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <div class="hangperson-container">
+  <div class="hangperson-container" :style="{transform: `scale(${scale})`}">
     <svg
       width="250"
       height="310"
-      viewBox="0 0 250 310"
+      viewBox="0 0 250 310" 
       xmlns="http://www.w3.org/2000/svg"
     >
 
@@ -55,6 +55,10 @@ export default {
     wrongGuesses: {
       type: Number,
       default: 0,
+    },
+    scale: {
+      type: Number,
+      default: 1,
     },
   },
 

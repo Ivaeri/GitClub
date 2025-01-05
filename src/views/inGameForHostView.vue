@@ -23,7 +23,7 @@
         <HomeButton :text="uiLabels.goHome"/> 
     </div>
     <div class="participants-container">
-      <div v-for="participant in participants" :key="participant.name" class="participant">
+      <div v-for="participant in participants" :key="participant.name" class="player">
         <div v-if="participant.name == participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
@@ -53,8 +53,9 @@
           participants: [],
           allGuessedLetters: [],
           ammountWrongLetters: 0,
-          isGameWon: false,
-          index: 0
+          correctguesses: 0,
+          index: 0,
+          hostName: ""
   
         }
       },
@@ -62,6 +63,8 @@
   created: function () {
     this.pollId = this.$route.params.id;
     this.enteredword = this.$route.params.id2;
+    this.hostName = this.$route.params.id3;
+
   
     socket.on("uiLabels", (labels) => {
       this.uiLabels = labels;
@@ -69,6 +72,7 @@
 
     socket.on("letters", (letters) => {
       this.allGuessedLetters = letters;
+      this.updateCorrectGuesses();
     });
     socket.on( "participantsUpdate", p => {
       this.participants = p;
@@ -76,13 +80,12 @@
 
     socket.on("amountWrongLetters", (wrongGuesses) => {
       this.ammountWrongLetters = wrongGuesses;
-      this.gameIsWon(); //Kontrollera om spelet är vunnet för hosten efter uppdatering
+      this.gameIsWon(); // Kontrollera om spelet är vunnet för hosten efter uppdatering
     });
     socket.on( "index", index => {
       this.index = index });
 
     socket.on("wonOrNot", (isWon) => {
-    this.isGameWon = isWon;
     this.sendToLossView();
     console.log("isGameWon?", this.isGameWon);
   });  
@@ -96,19 +99,21 @@
   
   methods: {
 
+    updateCorrectGuesses () {
+      this.correctguesses = this.enteredword.split('').filter(letter => this.allGuessedLetters.includes(letter)).length;  
+      console.log("correctguesses", this.correctguesses);
+    },
+
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
-        this.gameIsWon = true;
         this.sendToWinView();
       }
     },
     sendToWinView () {
-      if (this.gameIsWon) {
-        this.$router.push('/winView/')
-      }
+        this.$router.push('/winView/'+ this.pollId+ '/' + this.hostName)
     },
     sendToLossView () {
-      if (this.isGameWon) {
+      if (this.correctguesses == this.enteredword.length) {
         this.$router.push('/lossView/'+ this.pollId)
     }
   }}
@@ -134,8 +139,22 @@ h2 {
     font-size: 2em;
 }
 
-.participant {
+.player {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
+  background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-position-x: 0.5em;
+  height: 3em;
+  width: 5em;
+  background-size: 2em 2em; 
+  padding-left: 2.5em; 
+  font-size: 1.5em; 
+  margin-bottom: 0.5em; 
+  display: flex;
+  align-items: center;
+  border-radius: 5px; 
+  background-color: pink; 
 }
 
 .speechBubble {

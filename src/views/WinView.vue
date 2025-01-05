@@ -1,6 +1,7 @@
 <template>
     <header>
-        <div class="animate__animated animate__zoomInDown congrats">Congratulations, You Won!</div>
+        <div class="animate__animated animate__zoomInDown congrats">Congratulations!</div>
+        <div class="animate__animated animate__zoomInDown congrats">You Won 🎉</div>
     </header>
     <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
@@ -8,7 +9,9 @@
     <!-- <header>
         <div class="animate__animated animate__zoomInDown">But at what cost?</div>
     </header> -->
-
+    <button class="restartButton" v-on:click="goToGameLobby">
+        Play Again?
+    </button>
 </template>
 
 <script>
@@ -23,16 +26,34 @@ export default {
     data: function () {
         return {
             uiLabels: {},
-            lang: localStorage.getItem( "lang") || "en"
+            lang: localStorage.getItem( "lang") || "en",
+            nailer: "",
+            userName: ""
         }
     },
     created: function () {
+    this.pollId = this.$route.params.id;
+    this.userName = this.$route.params.id2;
     socket.on("uiLabels", (labels) => {
         this.uiLabels = labels;
     });
+    socket.on("getNailInCoffin", nail => {
+        this.nailer = nail;
+        console.log(this.nailer);
+    });
     socket.emit("getUILabels", this.lang);
-}
-}
+    socket.emit("getNailInCoffin", this.pollId);
+},
+    methods: {
+    goToGameLobby: function() {
+        console.log( "scoobydoo",this.nailer, this.userName);
+        if (this.nailer === this.userName) {
+            console.log( "scoobydoo2",this.nailer, this.userName);
+            this.$router.push("/ChooseNewWord/" + this.$route.params.id);
+        } else {
+        this.$router.push("/lobbyAll/" + this.$route.params.id);
+    }
+}}}
 
 
 </script>
@@ -47,7 +68,7 @@ export default {
     justify-content: center; 
     align-items: center; 
     top:0;
-    font-size: 14em;
+    font-size: 12em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;
     word-break: break-all;

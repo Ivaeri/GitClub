@@ -32,6 +32,7 @@ export default {
         }
     },
     created: function () {
+    this.pollId = this.$route.params.id;
     socket.on("uiLabels", (labels) => {
         this.uiLabels = labels;
     });

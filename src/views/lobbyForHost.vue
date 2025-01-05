@@ -13,7 +13,7 @@
       <p v-if="participants.length > 0" v-for="(participant, index) in participants" 
         v-bind:key="participant.name"
         v-bind:style="{gridColumnStart: (index % 3) + 1, gridRowStart: Math.floor(index / 3) + 1}"
-        class="playerGrid">
+        class="player">
           {{ participant.name }}
       </p>
     </div>
@@ -63,6 +63,7 @@
 created: function () {
   this.pollId = this.$route.params.id;
   this.enteredword = this.$route.params.id2;
+  this.hostName = this.$route.params.id3;
 
   socket.on("uiLabels", (labels) => {
     this.uiLabels = labels;
@@ -80,7 +81,7 @@ socket.emit("getParticipants", { pollId: this.pollId });
 methods: {
   startGame: function () {
     socket.emit("startPoll", this.pollId);
-    this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword);
+    this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword+ '/' + this.hostName);
     //socket.emit("deletePollId", this.pollId);
    // socket.emit("removeGame", this.pollId)
   },
@@ -154,17 +155,28 @@ methods: {
     padding: 20px;
 
   }
-  .playerGrid{
-    padding: 10px;
-    text-align: center;
-    font-size: 1.5em;
-    font-style: italic;
-  }
+  
   .active1{
     margin-left: 5px;
     display: inline-block;
     color: red
+  }
 
+  .player{
+    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 0.5em;
+    height: 3em;
+    width: 5em;
+    background-size: 2em 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.5em; 
+    margin-bottom: 0.5em; 
+    display: flex;
+    align-items: center;
+    border-radius: 5px; 
+    background-color: pink; 
   }
   
   </style>
