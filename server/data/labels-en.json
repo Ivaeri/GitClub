@@ -41,5 +41,6 @@
 	"awaitingHost2": " to commence the execution",
 	"gameOver": "Game over, You lost",
 	"manualEnter": "You can also join a game by entering the game-ID below:",
-	"guessedLetters": "Guessed letters: "
+	"guessedLetters": "Guessed letters: ",
+	"host": "the host"
 }

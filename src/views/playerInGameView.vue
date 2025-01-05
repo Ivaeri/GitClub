@@ -2,7 +2,7 @@
     <h1>{{uiLabels.coop}}</h1>
     <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
     <div class="homebutton">
-        <HomeButton :text="uiLabels.goHome"/> 
+        <HomeButton :text="uiLabels.goHome" v-on:click="this.leavePoll"/> 
     </div>
     <hr>
     <span v-for="letter in trueWord" class="trueWord">
@@ -19,6 +19,7 @@
           </div> 
         </div>
       </div> 
+      <div v-if="this.participants[this.index] && this.userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="guessingcontainer">
           <div class="guesspart">
             <div class="letterBoxContainer">
@@ -60,9 +61,9 @@
     </div> <!-- Här Stängs inGame-diven-->
 
     <div class="participants-container">
-    
-      <div v-for="participant in participants" :key="participant.name" class="player">
-        <div v-if="participant.name == participants[this.index].name">
+    </div>
+      <div v-for="participant in participants" :key="participant.name" class="participant">
+        <div v-if="participant.name == this.participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
         {{ participant.name }}
@@ -113,7 +114,7 @@ export default {
       isGameWon: false,
       lang: localStorage.getItem("lang") || "en",
       ammountWrongLetters: 0,
-      gameIsLostFlag: false
+      gameIsLostFlag: false,
     };
       
   },
@@ -123,9 +124,14 @@ export default {
     socket.on( "questionUpdate", q => this.question = q );
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    // Lyssna på popstate för navigering mellan sidor
-    window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via inbyggd manick 'popstate'
+    
+    
+    window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
+
+        // Registrera beforeunload och unload händelser
     window.addEventListener("beforeunload", this.handleBeforeUnload);
+    window.addEventListener("unload", this.handleUnload);
+
     socket.on("participantsUpdate", (participants) => {
       this.participants = participants;
     });
@@ -155,10 +161,13 @@ export default {
     socket.emit("findIfWon", this.pollId) 
     socket.emit("getAmountWrongLetters", this.pollId );
   },
+  /*
   beforeDestroy() {
-    window.removeEventListener('beforeunload', this.handleBeforeUnload);
-    window.removeEventListener('popstate', this.handlePageLeave);
+    window.removeEventListener('beforeunload', this.handleBeforeUnload); //kryss och refresh
+    window.removeEventListener('popstate', this.handlePageLeave); //
+    window.removeEventListener('unload', this.handleUnload);
   },
+*/
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
@@ -169,12 +178,22 @@ export default {
       socket.emit("leavePoll", { pollId: this.pollId, userName: this.userName }); // berättar för servern att spelaren lämnat
       socket.emit("getParticipants", { pollId: this.pollId }); // uppdaterar listan över spelare
     },
- 
-  handleBeforeUnload() {
+
+   
+    handleBeforeUnload(event) {
       console.log("beforeunload event triggered");
-      const data = JSON.stringify({ pollId: this.pollId, userName: this.userName });
-      navigator.sendBeacon("/leavePoll", data);
-      socket.emit("getParticipants", { pollId: this.pollId }); // uppdaterar listan över spelare
+
+
+      // Visa en bekräftelseruta
+      const confirmationMessage = "Are you sure you want to leave? You will be removed from the game.";
+      event.returnValue = confirmationMessage; // Standard för vissa webbläsare
+      return confirmationMessage; // Standard för andra webbläsare
+    },
+    handleUnload() {
+      console.log("unload event triggered");
+      
+        this.leavePoll(); // Lämna spelet om användaren försöker lämna sidan
+   
     },
 
     updateThoseLetters: function () {

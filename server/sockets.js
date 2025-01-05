@@ -66,6 +66,7 @@ function sockets(io, socket, data) {
     
   });
   socket.on('leavePoll', function(d) {
+    console.log("reached leavePoll in sockets.js") 
     const { pollId, userName } = d;
     if (data.polls[pollId]) {
       data.leaveGame(pollId, userName);
