@@ -37,7 +37,7 @@ export default {
     socket.on("uiLabels", (labels) => {
         this.uiLabels = labels;
     });
-    socket.on("getNailInCoffin", nail => {
+    socket.on("nail", nail => {
         this.nailer = nail;
         console.log(this.nailer);
     });
@@ -49,9 +49,9 @@ export default {
         console.log( "scoobydoo",this.nailer, this.userName);
         if (this.nailer === this.userName) {
             console.log( "scoobydoo2",this.nailer, this.userName);
-            this.$router.push("/ChooseNewWord/" + this.$route.params.id);
+            this.$router.push("/ChooseNewWord/" + this.$route.params.id+ "/" + this.$route.params.id2);
         } else {
-        this.$router.push("/lobbyAll/" + this.$route.params.id);
+        this.$router.push("/lobbyAll/" + this.pollId);
     }
 }}}
 

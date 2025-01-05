@@ -21,7 +21,7 @@ const router = createRouter({
       component: () => import('../views/LobbyView.vue')
     },
     {
-      path: '/lobbyAll/:id',
+      path: '/lobbyAll/:id/',
       name: 'LobbyAllView',
       component: () => import('../views/LobbyAllView.vue')
     },
@@ -54,7 +54,7 @@ const router = createRouter({
       component: () => import('../views/WinView.vue')
     },
     {
-      path: '/lossView/:id',
+      path: '/lossView/:id/:id2',
       name: 'LossView',
       component: () => import('../views/LossView.vue')
     },
@@ -64,7 +64,7 @@ const router = createRouter({
       component: () => import('../views/ResultView.vue')
     },
     {
-    path: '/ChooseNewWord/:id',
+    path: '/ChooseNewWord/:id/:id2',
     name: 'ChooseNewWord',
     component: () => import('../views/ChooseNewWord.vue')
     }

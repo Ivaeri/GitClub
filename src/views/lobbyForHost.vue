@@ -49,11 +49,7 @@
     },
     data: function () {
       return {
-        userName: "",
-        enteredword: "",
-        pollId: null,
         uiLabels: {},
-        joined: false,
         lang: localStorage.getItem("lang") || "en",
         participants: [],
         noPlayers: false
@@ -86,7 +82,7 @@ methods: {
    // socket.emit("removeGame", this.pollId)
   },
 
-  validateAndParticipate() {
+  /*validateAndParticipate() {
     if (!this.userName.trim()) {
       alert(this.uiLabels.fillName);
     } else {
@@ -96,7 +92,7 @@ methods: {
   participateInPoll: function () {
     socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
     this.joined = true;
-  },
+  },*/
   alertErrorMessage(){
   this.noPlayers = true;
 }

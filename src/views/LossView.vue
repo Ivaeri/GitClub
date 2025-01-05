@@ -33,6 +33,7 @@ export default {
     },
     created: function () {
     this.pollId = this.$route.params.id;
+    this.userName = this.$route.params.id2;
     socket.on("uiLabels", (labels) => {
         this.uiLabels = labels;
     });
@@ -40,7 +41,7 @@ export default {
 },
     methods: {
     goToGameLobby: function() {
-        this.$router.push("/lobbyAll/" + this.$route.params.id);
+        this.$router.push("/lobbyAll/" + this.pollId);
     }
 }}
 

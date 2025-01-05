@@ -114,7 +114,7 @@
     },
     sendToLossView () {
       if (this.correctguesses == this.enteredword.length) {
-        this.$router.push('/lossView/'+ this.pollId)
+        this.$router.push('/lossView/'+ this.pollId + '/' + this.hostName)
     }
   }}
   }

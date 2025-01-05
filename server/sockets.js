@@ -143,6 +143,10 @@ function sockets(io, socket, data) {
     io.emit("letters", letters);
   })
 
+  socket.on("StartNewGame", function(d) {
+    data.startNewGame(d.pollId, d.hostName, d.enteredword);
+  })
+
 }
 
 export { sockets };

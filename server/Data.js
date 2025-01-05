@@ -50,6 +50,7 @@ Data.prototype.participateInPoll = function(pollId, name) {
   if (this.pollExists(pollId)) {
     this.polls[pollId].participants.push({name: name, answers: []})
   }
+  console.log(this.polls[pollId].participants)
 }
 
 Data.prototype.getParticipants = function(pollId) {
@@ -235,6 +236,30 @@ Data.prototype.setPollId = function (pollId) {
   }
   this.polls[pollId].pollId = pollId;
 };
+
+Data.prototype.startNewGame = function (pollId, hostname, word) {
+  //let oldHost = this.polls[pollId].hostName
+  //this.polls[pollId].participants.push({name: oldHost, answers: []})
+  if (this.polls[pollId]) {
+    this.polls[pollId] = {
+      hostName: hostname,
+      enteredWord: word,
+      pollId: pollId,
+      participants: [],
+      questions: [],
+      answers: [],
+      currentQuestion: 0,
+      index: 0,
+      guessedLetters: [],
+      isGameWon: false,
+      amountWrongLetters: 0,
+      NailInCoffin: ""
+    };
+
+  }
+  console.log(this.polls[pollId])
+
+}
 
 export { Data };
 
