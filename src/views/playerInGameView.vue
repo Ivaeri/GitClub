@@ -61,7 +61,7 @@
 
     <div class="participants-container">
 
-      <div v-for="participant in participants" :key="participant.name" class="participant">
+      <div v-for="participant in this.participants" :key="participant.name" class="participant">
         <div v-if="participant.name == this.participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
@@ -134,9 +134,14 @@ export default {
     //window.addEventListener("unload", this.handleUnload);
    window.addEventListener("beforeunload", this.leavePoll);
    window.addEventListener("unload", this.leavePoll);
-    socket.on("participantsUpdate", (participants) => {
-      this.participants = participants;
-    });
+   socket.on("participantsUpdate", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.participants = data.participants; // Uppdatera deltagarlistan
+    console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
+  } else {
+    console.log("Uppdateringen ignorerades för pollId:", data.pollId);
+  }
+});
     socket.on( "index", index => {
       this.index = index });
     

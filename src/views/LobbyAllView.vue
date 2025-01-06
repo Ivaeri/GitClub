@@ -54,7 +54,14 @@
       this.pollId = this.$route.params.id;
       this.userName = this.$route.params.id2;
       socket.on( "uiLabels", labels => this.uiLabels = labels );
-      socket.on( "participantsUpdate", p => this.participants = p );
+      socket.on("participantsUpdate", (data) => {
+        if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+          this.participants = data.participants; // Uppdatera deltagarlistan
+          console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
+        } else {
+          console.log("Uppdateringen ignorerades för pollId:", data.pollId);
+        }
+      });
       socket.on( "startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
       socket.on("pollData", data => this.hostUserName = data.userName );
       socket.emit( "joinPoll", this.pollId );
