@@ -1,4 +1,5 @@
 <template>
+  <div clas="lobby-container">
   <header>
     <h1>
       {{ uiLabels.participateGame }}
@@ -12,15 +13,16 @@
       
       <div v-for="poll in activePolls" :key="poll" class="poll-item">
         <button class="poll-button" @click="joinPoll(poll.pollId)">
+          <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
+            {{ poll.hostName.toUpperCase() }}
+          </span><br/>
           {{ poll.pollId}}
-          {{ poll.hostName }}
         </button>
       </div>
     </div>
+    <h2>{{ uiLabels.manualEnter }}</h2>
     <div class="manualJoin">
-      <h2>{{ uiLabels.manualEnter }}</h2>
       <label for="pollIdInput"> 
-        {{ uiLabels.enterGamePin }}
         <InputField 
         id="newPollIdInput"
         class="enterGameInput"
@@ -34,6 +36,7 @@
         {{ uiLabels.participateGame }}
       </button>
     </div> 
+  </div>
  
   
 </template> 
@@ -91,12 +94,12 @@ export default {
 <style scoped>
 
 header{
-  height: 10em;
+  height: 7em;
 }
 
 header h1{
-  margin-top: 0.4em;
-  font-size: 4em;
+  margin-top: 0em;
+  font-size: 6em;
 }
 
 header h2{
@@ -104,24 +107,35 @@ header h2{
 }
 .enterGameInput{
   width: 8em;
-  height: 2em;
+  height: 1.5em;
   text-align: center;
   font-size: larger;
   background-color: pink;
   color: black;
-  
+  margin-top: 1em;
+}
+.lobby-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .gamesContainer{
+  background-color: lightblue;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
     color:black;
+    justify-content: center;
     padding: 1em;
-    width: 90%;
-    height: 30em;
-    overflow-y: scroll;
+    width: 90vw;
+    height: 19em;
+    gap: 1em;
+    overflow-y: auto;
     overflow-x: hidden;
     margin: 0 auto;
     border: 0.2em solid black; /* Lägg till en svart kantlinje */
-  border-radius: 10px; /* Lägg till rundade hörn */
+    border-radius: 10px; /* Lägg till rundade hörn */
 }
 /* Anpassa scrollbaren */
 .gamesContainer::-webkit-scrollbar {
@@ -144,9 +158,25 @@ header h2{
 
 .joinGameButton{
   width: 5em;
-  height: 5em;
-  background-color: #c888b1;
+  height: 4em;
+  background-color: #cf84a9;
   cursor: pointer;
+  border-radius: 5px;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+.joinGameButton:hover{
+background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+.manualJoin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+  flex-wrap: wrap;
 }
 
 .poll-button {
@@ -157,14 +187,22 @@ header h2{
   border: 0.1em solid black; /* Ta bort kantlinje */
   border-radius: 5px; /* Lägg till rundade hörn */
   cursor: pointer; /* Ändra muspekaren till en hand */
-  display: block; /* Gör knappen till ett blockelement */
   margin: 1em auto; /* Centrera knappen horisontellt */
   text-align: center; /* Centrera texten i knappen */
-  width: 50%;
+  width: 70%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  box-sizing: 1em;
 }
 
 .poll-button:hover {
   background-color: hotpink; /* Ändra färg vid hovring */
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
 }
 
 

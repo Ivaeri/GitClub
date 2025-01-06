@@ -1,22 +1,15 @@
 <template>
-  <h1>{{uiLabels.coop}}</h1>
-  <div class="homebutton">
-      <HomeButton :text="uiLabels.goHome"/> 
-  </div> 
-  <div class="container">
-    <div class="item">
-      <InputField
-          v-model="hostName"
-          :placeholder="uiLabels.name"
-          id="hostname">
-      </InputField>
-      <InputField
+    <HomeButton :text="uiLabels.goHome"/>
+    <h1>Grattis, du är ny spelledare!</h1>
+    <h2>Välj ett nytt ord:</h2>
+    <div>
+        <InputField
         v-bind:label="uiLabels.enterWord"
         v-model="enteredword" 
         :placeholder="uiLabels.enterWord" 
-        id="enter-word"
-        @keydown.enter="handleClick">
-      </InputField>
+        id="enter-word">
+
+        </InputField>
     </div>
     <div class="item">
       <Button 
@@ -25,36 +18,30 @@
         {{ uiLabels.sendWord }}
       </Button>
     </div>
-  </div>
 </template>
-  
-  <script>
-  import io from 'socket.io-client';
-  import NewPageButton from '../components/NewPageButton.vue';
-  import InputField from '../components/InputField.vue';
-  import HomeButton from '../components/HomeButton.vue';
-  const socket = io("localhost:3000");
-  
-  
-  
-  export default {
-    name: 'wordSubmission',
+
+<script>
+import HomeButton from '../components/HomeButton.vue';
+import InputField from '../components/InputField.vue';
+import io from 'socket.io-client';
+const socket = io("localhost:3000");
+export default {
+    name: 'WinView',
     components: {
-      NewPageButton,
-      InputField,
-      HomeButton
+        HomeButton,
+        InputField
     },
     data: function () {
-      return {
-        hostName: "",
-        uiLabels: {},
-        lang: localStorage.getItem( "lang") || "en",
-        enteredword: "",
-        pollId: 1,
-        swe_wordlist: new Set()
-      }
+        return {
+            uiLabels: {},
+            lang: localStorage.getItem( "lang") || "en",
+            enteredword: "",
+            swe_wordlist: new Set()
+        }
     },
-    created: async function () {
+    created:  async function () {
+    this.pollId = this.$route.params.id;
+    this.hostName = this.$route.params.id2;
       socket.on("uiLabels", labels => {
       this.uiLabels = labels;
       });
@@ -64,8 +51,10 @@
         const text = await response.text();
         this.swe_wordlist = new Set(text.split("\n").map(word => word.trim().toLowerCase()));
         console.log("Svenska ordlistan laddad med", this.swe_wordlist.size, "ord");
-        console.error("Fel vid inläsning av ordlistan:", error); //bort??
-    }},
+        //console.error("Fel vid inläsning av ordlistan:", error); //bort??
+    }
+    socket.emit("getUILabels", this.lang);
+    },
     methods: {
       async validateWord(word, language) {
         let regex;
@@ -104,7 +93,6 @@
         return null; 
       },
       async handleClick() {
-        console.log("handleClick körs");
         if (!this.hostName.trim()) {
           alert(this.uiLabels.fillName );
           return;
@@ -114,59 +102,20 @@
           alert(validationError); 
           return;
         }
-        this.pollId = Math.floor(Math.random() * 1000000);
-        this.generateId();
-        this.sendWord();
+        //this.generateId();
+        this.startNewGame();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
       },
-      sendWord: function () {
-        socket.emit( "setWordAndGenerateGameInfo", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
-      },
-      generateId: function () {
-        socket.emit( "generateId", this.pollId )
+
+      startNewGame(){
+        console.log("startNewGame körs");
+        socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName:this.hostName});
       }
-    }
-  };
-  
-  </script>
-  
-  <style scoped>
-
-  h1{
-    font-size: 9em;
-  }
-
-  .container {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-  }
-
-  .item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    }
-  .item button{
-    display: flex;
-    flex-direction: column;
-    height: 4em;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background-color: #cf84a9;
-    border-radius: 5px;
-    margin: 2em;  
-    padding: 1em;
-    color: white;
-    border: none;
-  }
-  .item button:hover{
-    background-color: #a02666;
-    transform: rotate(1deg) scale(1.1);
-    transition: transform 0.2s ease-in-out;
-  }
+  }}
 
 
-  
-  </style>
+</script>
+
+<style scoped>
+/* Your component styles go here */
+</style>
