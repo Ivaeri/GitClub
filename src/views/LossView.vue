@@ -28,7 +28,8 @@ export default {
         return {
             uiLabels: {},
             lang: localStorage.getItem( "lang") || "en",
-            ammountWrongLetters: 8
+            ammountWrongLetters: 8,
+            newGameIsStarted: false,
         }
     },
     created: function () {
@@ -37,12 +38,22 @@ export default {
     socket.on("uiLabels", (labels) => {
         this.uiLabels = labels;
     });
+    socket.on("newGameIsStarted", () => {
+        this.newGameIsStarted = true;
+        console.log("newGameIsStarted in winview", this.newGameIsStarted);
+    });
     socket.emit("getUILabels", this.lang);
 },
     methods: {
     goToGameLobby: function() {
-        socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-        this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
+        if(!this.newGameIsStarted) {
+                alert("Hold your horses, the new host is thinking of a word...");
+            }
+            else {
+                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
+                this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
+            }
+       
 
     }
 }}

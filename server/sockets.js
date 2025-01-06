@@ -57,6 +57,11 @@ function sockets(io, socket, data) {
     io.emit("removeGameFromList", pollId)
   },);
 
+  socket.on("newGameHasStarted", function(pollId) {
+  io.emit("newGameIsStarted", pollId)
+  console.log("newGameHasStarted in sockets", pollId)
+  });
+
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
     socket.emit('questionUpdate', data.activateQuestion(pollId))
