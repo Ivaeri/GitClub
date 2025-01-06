@@ -240,8 +240,8 @@ Data.prototype.setPollId = function (pollId) {
 };
 
 Data.prototype.startNewGame = function (pollId, hostname, word) {
-  //let oldHost = this.polls[pollId].hostName
-  //this.polls[pollId].participants.push({name: oldHost, answers: []})
+ //let oldHost = this.polls[pollId].hostName
+ // this.polls[pollId].participants.push({name: oldHost, answers: []})
   if (this.polls[pollId]) {
     this.polls[pollId] = {
       hostName: hostname,

@@ -41,7 +41,9 @@ export default {
 },
     methods: {
     goToGameLobby: function() {
+        socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
         this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
+
     }
 }}
 
