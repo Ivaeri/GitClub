@@ -65,9 +65,15 @@ created: function () {
     this.uiLabels = labels;
     });
 
-socket.on( "participantsUpdate", p => {
-      this.participants = p });
 
+socket.on("participantsUpdate", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.participants = data.participants; // Uppdatera deltagarlistan
+    console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
+  } else {
+    console.log("Uppdateringen ignorerades för pollId:", data.pollId);
+  }
+});
 
 
 socket.emit( "getUILabels", this.lang );

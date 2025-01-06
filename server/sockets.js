@@ -61,8 +61,8 @@ function sockets(io, socket, data) {
 
   socket.on('participateInPoll', function(d) {
     data.participateInPoll(d.pollId, d.name);
-    io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
-    io.emit('participantsUpdate', data.getParticipants(d.pollId));
+   // io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
+   // io.emit('participantsUpdate', data.getParticipants(d.pollId));
     
   });
   socket.on('leavePoll', function(d) {
@@ -76,7 +76,9 @@ function sockets(io, socket, data) {
 
 
   socket.on("getParticipants", function(d) {
-    io.emit('participantsUpdate', data.getParticipants(d.pollId));
+
+    io.emit('participantsUpdate',  { participants: data.getParticipants(d.pollId), pollId: d.pollId });
+    console.log("getParticipants kör i", data.getParticipants(d.pollId), d.pollId)
   });
 
   socket.on("getIndex", function(pollId) {
