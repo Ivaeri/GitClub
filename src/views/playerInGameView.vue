@@ -19,7 +19,6 @@
           </div> 
         </div>
       </div> 
-      <div v-if="this.participants[this.index] && this.userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="guessingcontainer">
           <div class="guesspart">
             <div class="letterBoxContainer">
@@ -49,19 +48,19 @@
             </button>
             </div>
           </div>
-          <div class="keyboardhangman">
+            <div class="keyboardhangman">
               <HangPerson v-bind:wrongGuesses="ammountWrongLetters" :scale="0.5"/> 
             </div>
-        </div>
+    </div>
 
         <div v-else class="hangMan">
           <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
         </div>
-
+      
     </div> <!-- Här Stängs inGame-diven-->
 
     <div class="participants-container">
-    </div>
+
       <div v-for="participant in participants" :key="participant.name" class="participant">
         <div v-if="participant.name == this.participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
@@ -69,6 +68,7 @@
         {{ participant.name }}
       </div>
     </div>
+
 
 
  
