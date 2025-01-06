@@ -12,7 +12,7 @@
     <div v-if="activePolls.length > 0" class="gamesContainer">
       
       <div v-for="poll in activePolls" :key="poll" class="poll-item">
-        <button class="poll-button" @click="joinPoll(poll.pollId)">
+        <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
             {{ poll.hostName }}
           </span><br/>
@@ -20,6 +20,7 @@
         </button>
       </div>
     </div>
+    <div class="userNameDiv" v-if="this.anyIdIsClicked">
     <h3>{{ this.uiLabels.enterUsername }}</h3>
         <InputField 
           v-model="userName" 
@@ -30,6 +31,7 @@
         <button class="joinGameButton" @click="validateAndParticipate">
            {{ uiLabels.participateGame }}
         </button>
+      </div>
     <h2>{{ uiLabels.manualEnter }}</h2>
     <div class="manualJoin">
       <label for="pollIdInput"> 
@@ -73,7 +75,8 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       participants: [],
       activePolls: [],
-      chosenPollId: ""
+      chosenPollId: "",
+      anyIdIsClicked: false
     }
   },
   created: function () {
@@ -99,6 +102,7 @@ export default {
 
   joinPoll(pollId) {
     this.chosenPollId = pollId; 
+    this.anyIdIsClicked = true;
   },
   validateAndParticipate() {
         if (!this.userName.trim()) {
@@ -235,8 +239,8 @@ background-color: #a02666;
   transition: transform 0.2s ease-in-out;
 }
 
-.clicked-poll-button {
-  background-color: lightblue; /* Ändra färg för den senast klickade knappen */
+.clicked-button {
+  background-color: rgb(149, 42, 95); /* Ändra färg för den senast klickade knappen */
   border: 0.2em solid blue; /* Lägg till en kantlinje för den senast klickade knappen */
 }
 
