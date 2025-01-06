@@ -53,6 +53,10 @@ function sockets(io, socket, data) {
     data.removeGame(pollId)
   })
 
+  socket.on("removePollIdFromList", function(pollId) {
+    io.emit("removeGameFromList", pollId)
+  },);
+
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
     socket.emit('questionUpdate', data.activateQuestion(pollId))

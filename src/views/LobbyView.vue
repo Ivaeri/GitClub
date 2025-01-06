@@ -84,8 +84,13 @@ export default {
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
+    /*
     socket.on("removePollId", (oldPollId) => {
       this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
+*/
+      socket.on("removeGameFromList", (oldPollId) => {
+        this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
+    
 
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
