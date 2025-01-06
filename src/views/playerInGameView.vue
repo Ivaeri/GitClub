@@ -114,6 +114,7 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       ammountWrongLetters: 0,
       gameIsLostFlag: false,
+      isLeaving: false
     };
       
   },
@@ -128,9 +129,10 @@ export default {
     window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
 
         // Registrera beforeunload och unload händelser
-    window.addEventListener("beforeunload", this.handleBeforeUnload);
-    window.addEventListener("unload", this.handleUnload);
-
+   // window.addEventListener("beforeunload", this.handleBeforeUnload);
+    //window.addEventListener("unload", this.handleUnload);
+   window.addEventListener("beforeunload", this.leavePoll);
+   window.addEventListener("unload", this.leavePoll);
     socket.on("participantsUpdate", (participants) => {
       this.participants = participants;
     });
@@ -167,6 +169,11 @@ export default {
     window.removeEventListener('unload', this.handleUnload);
   },
 */
+beforeDestroy() {
+  window.removeEventListener("beforeunload", this.handleBeforeUnload);
+  window.removeEventListener("unload", this.handleUnload);
+},
+
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
@@ -178,22 +185,13 @@ export default {
       socket.emit("getParticipants", { pollId: this.pollId }); // uppdaterar listan över spelare
     },
 
-   
     handleBeforeUnload(event) {
-      console.log("beforeunload event triggered");
-
-
-      // Visa en bekräftelseruta
-      const confirmationMessage = "Are you sure you want to leave? You will be removed from the game.";
-      event.returnValue = confirmationMessage; // Standard för vissa webbläsare
-      return confirmationMessage; // Standard för andra webbläsare
-    },
-    handleUnload() {
-      console.log("unload event triggered");
       
-        this.leavePoll(); // Lämna spelet om användaren försöker lämna sidan
-   
     },
+
+    handleUnload() {
+  
+},
 
     updateThoseLetters: function () {
       socket.emit("updateGuessedLetters", {pollId: this.pollId, key: this.key})

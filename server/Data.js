@@ -133,6 +133,7 @@ Data.prototype.leaveGame = function (pollId, userName) {
   }
 };
 
+
 Data.prototype.setGameToWon = function (pollId) {
   if (this.polls[pollId]) {
       this.polls[pollId].isGameWon = true;

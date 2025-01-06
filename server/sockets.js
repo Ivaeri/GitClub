@@ -74,6 +74,7 @@ function sockets(io, socket, data) {
   }
 );
 
+
   socket.on("getParticipants", function(d) {
     io.emit('participantsUpdate', data.getParticipants(d.pollId));
   });
