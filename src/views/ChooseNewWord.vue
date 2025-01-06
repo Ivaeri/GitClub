@@ -109,7 +109,7 @@ export default {
 
       startNewGame(){
         console.log("startNewGame körs");
-        socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName:this.hostName});
+        socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName: this.hostName});
       }
   }}
 

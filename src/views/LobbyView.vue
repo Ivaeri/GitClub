@@ -14,12 +14,22 @@
       <div v-for="poll in activePolls" :key="poll" class="poll-item">
         <button class="poll-button" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
-            {{ poll.hostName.toUpperCase() }}
+            {{ poll.hostName }}
           </span><br/>
           {{ poll.pollId}}
         </button>
       </div>
     </div>
+    <h3>{{ this.uiLabels.enterUsername }}</h3>
+        <InputField 
+          v-model="userName" 
+          :placeholder="uiLabels.name" 
+          id="username"
+          @keydown.enter="validateAndParticipate">
+        </InputField>
+        <button class="joinGameButton" @click="validateAndParticipate">
+           {{ uiLabels.participateGame }}
+        </button>
     <h2>{{ uiLabels.manualEnter }}</h2>
     <div class="manualJoin">
       <label for="pollIdInput"> 
@@ -62,7 +72,8 @@ export default {
       joined: false,
       lang: localStorage.getItem("lang") || "en",
       participants: [],
-      activePolls: []
+      activePolls: [],
+      chosenPollId: ""
     }
   },
   created: function () {
@@ -78,16 +89,35 @@ export default {
     socket.emit("getActivePolls");
   },
   methods: {
-    validateAndJoin() {
+  validateAndJoin() {
     if (!this.newPollId.trim() || !this.activePolls.some(poll => poll.pollId === this.newPollId)) {
       alert(this.uiLabels.fillNumber);
     } else {
-      this.$router.push('/lobbyAll/' + this.newPollId); 
+      this.chosenPollId = this.newPollId; 
     }
   },
+
   joinPoll(pollId) {
-    this.$router.push('/lobbyAll/' + pollId); 
+    this.chosenPollId = pollId; 
   },
+  validateAndParticipate() {
+        if (!this.userName.trim()) {
+          alert(this.uiLabels.fillName);
+        }
+        else {
+          this.participateInPoll();
+          this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
+        }
+        socket.emit("getParticipants", { pollId: this.chosenPollId });
+  },
+  handleEnter() {
+      this.validateAndParticipate();
+    },
+      participateInPoll: function () {
+        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName} )
+        //this.joined = true;
+      }
+  
    }
 }
 </script>
@@ -204,6 +234,27 @@ background-color: #a02666;
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
+
+.clicked-poll-button {
+  background-color: lightblue; /* Ändra färg för den senast klickade knappen */
+  border: 0.2em solid blue; /* Lägg till en kantlinje för den senast klickade knappen */
+}
+
+.joinGameButton {
+  width: 6em;
+  height: 7em;
+  background-color: #cf84a9;
+  cursor: pointer;
+  margin-left: 1em;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  }
+  .joinGameButton:hover{
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
 
 
 </style>

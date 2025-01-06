@@ -78,6 +78,7 @@ methods: {
   startGame: function () {
     socket.emit("startPoll", this.pollId);
     this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword+ '/' + this.hostName);
+    console.log("reached startGame with values:", this.pollId, this.enteredword, this.hostName);
     //socket.emit("deletePollId", this.pollId);
    // socket.emit("removeGame", this.pollId)
   },

@@ -51,7 +51,7 @@ export default {
             console.log( "scoobydoo2",this.nailer, this.userName);
             this.$router.push("/ChooseNewWord/" + this.$route.params.id+ "/" + this.$route.params.id2);
         } else {
-        this.$router.push("/lobbyAll/" + this.pollId);
+        this.$router.push("/lobbyAll/" + this.pollId + "/" + this.$route.params.id2);
     }
 }}}
 

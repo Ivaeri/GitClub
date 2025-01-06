@@ -41,7 +41,7 @@ export default {
 },
     methods: {
     goToGameLobby: function() {
-        this.$router.push("/lobbyAll/" + this.pollId);
+        this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
     }
 }}
 

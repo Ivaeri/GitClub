@@ -7,16 +7,7 @@
       </div>
       </div>
       <div v-if="!joined">
-        <h3>{{ this.uiLabels.enterUsername }}</h3>
-        <InputField 
-          v-model="userName" 
-          :placeholder="uiLabels.name" 
-          id="username"
-          @keydown.enter="validateAndParticipate">
-        </InputField>
-        <button class="joinGameButton" @click="validateAndParticipate">
-           {{ uiLabels.participateGame }}
-        </button>
+       
 
       </div>
       <div v-if="joined">
@@ -61,49 +52,23 @@
     },
     created: function () {
       this.pollId = this.$route.params.id;
+      this.userName = this.$route.params.id2;
       socket.on( "uiLabels", labels => this.uiLabels = labels );
       socket.on( "participantsUpdate", p => this.participants = p );
       socket.on( "startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
       socket.on("pollData", data => this.hostUserName = data.userName );
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
+      socket.emit("getParticipants", { pollId: this.pollId });
     },
     methods: {
-      validateAndParticipate() {
-        if (!this.userName.trim()) {
-          alert(this.uiLabels.fillName);
-        }
-        else {
-          this.participateInPoll();
-        }
-        socket.emit("getParticipants", { pollId: this.pollId });
-  },
-  handleEnter() {
-      this.validateAndParticipate();
-    },
-      participateInPoll: function () {
-        socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-        this.joined = true;
-      }
+ 
+ 
     }
   }
   </script>
   <style scoped>
-  .joinGameButton {
-  width: 6em;
-  height: 7em;
-  background-color: #cf84a9;
-  cursor: pointer;
-  margin-left: 1em;
-  border-radius: 10px;
-  color: white;
-  border: none;
-  }
-  .joinGameButton:hover{
-    background-color: #a02666;
-    transform: rotate(1deg) scale(1.1);
-    transition: transform 0.2s ease-in-out;
-  }
+ 
   .player{
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
     background-repeat: no-repeat;

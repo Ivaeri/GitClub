@@ -50,7 +50,7 @@ Data.prototype.participateInPoll = function(pollId, name) {
   if (this.pollExists(pollId)) {
     this.polls[pollId].participants.push({name: name, answers: []})
   }
-  console.log(this.polls[pollId].participants)
+ // console.log('körs från participate in poll', this.polls[pollId].participants)
 }
 
 Data.prototype.getParticipants = function(pollId) {
@@ -236,6 +236,7 @@ Data.prototype.setPollId = function (pollId) {
     };
   }
   this.polls[pollId].pollId = pollId;
+  console.log('körs från set poll id', this.polls[pollId])
 };
 
 Data.prototype.startNewGame = function (pollId, hostname, word) {
@@ -258,7 +259,7 @@ Data.prototype.startNewGame = function (pollId, hostname, word) {
     };
 
   }
-  console.log(this.polls[pollId])
+  console.log('körs från start new game', this.polls[pollId])
 
 }
 
