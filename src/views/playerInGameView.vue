@@ -128,7 +128,7 @@ export default {
     
     
     window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
-
+    // window.addEventListener('keydown', this.handleKeydown); //denna lyssnar på när någon trycker på en tangent
         // Registrera beforeunload och unload händelser
    // window.addEventListener("beforeunload", this.handleBeforeUnload);
     //window.addEventListener("unload", this.handleUnload);
@@ -169,6 +169,7 @@ export default {
 
 
   methods: {
+
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
@@ -251,6 +252,17 @@ export default {
     socket.emit("getIndex", this.pollId )
     },
 
+    /*handleKeydown(event) {
+      const key = event.key.toUpperCase();
+      const validKeys = [...this.row1e, ...this.row2e, ...this.row3, ...this.row1s, ...this.row2s];
+      if (validKeys.includes(key)) {
+        this.keyPressed(key);
+      } else if (event.key === 'Enter') {
+        this.handleSubmit();
+      }
+    },*/
+
+    
    
     keyPressed: function (key) {
       this.key = key;

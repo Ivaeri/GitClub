@@ -45,7 +45,7 @@
 	"host": "the host",
 	"wrongGuess": "Wrong guess, try again",
 	"win1": "Congratulations!",
-	"Win2": "You Won 🎉",
+	"win2": "You Won 🎉",
 	"newHost": "Congratulations, you are the new host!",
 	"chooseNewWord": "Choose a new word:",
 	"nameTaken": "Come on the name is already taken BE ORIGINAL!",
