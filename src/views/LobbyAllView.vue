@@ -14,7 +14,7 @@
         <div>{{ uiLabels.welcome }} {{ userName }}!</div>
           <div>{{ this.uiLabels.awaitingHost1 }}host {{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}</div>
         </div>
-        <div v-if="participants.length > 0">
+        <div v-if="participants.length > 0"  class="participants-list">
           <h2>{{ uiLabels.joinedPlayers }}</h2>
           <ul>
             <div class="player" v-for="participant in participants" :key="participant.name">
@@ -91,5 +91,12 @@
     align-items: center;
     border-radius: 5px; 
     background-color: pink; 
+  }
+
+  .participants-list{
+    display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
   }
 </style>
