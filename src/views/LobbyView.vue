@@ -78,6 +78,7 @@ export default {
   data: function () {
     return {
       userName: "",
+      hostName: "",
       newPollId: "",
       pollId: "inactive poll",
       uiLabels: {},
@@ -125,20 +126,22 @@ export default {
     this.anyIdIsClicked = true;
   },
   validateAndParticipate() {
-      socket.emit("getParticipants", { pollId: this.chosenPollId });
-      socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
-        if (data.pollId === this.chosenPollId) {
-          this.participants = data.participants;
-          if (!this.userName.trim()) {
-            alert(this.uiLabels.fillName);
-          } else if (this.participants.some(participant => participant.name === this.userName)) {
-            alert(this.uiLabels.nameTaken);
-          } else {
-            this.participateInPoll();
-            this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
-          }
+    const poll = this.activePolls.find(poll => poll.pollId === this.chosenPollId);
+    socket.emit("getParticipants", { pollId: this.chosenPollId });
+    socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
+      if (data.pollId === this.chosenPollId) {
+        this.participants = data.participants;
+        console.log(this.hostName, "host")
+        if (!this.userName.trim()) {
+          alert(this.uiLabels.fillName);
+        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName) {
+          alert(this.uiLabels.nameTaken);
+        } else {
+          this.participateInPoll();
+          this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
         }
-      });
+      }
+    });
     },
   handleEnter() {
       this.validateAndParticipate();
