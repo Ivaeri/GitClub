@@ -88,5 +88,23 @@ export default {
     text-shadow: 2px 2px 4px #000000;
     word-break: break-all;
 }
+.restartButton {
+    background-color: #cf84a9;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    gap: 7em;
+    font-size: 1em;
+    transition: transform 0.3s ease;
+    width: 15em;
+    height: 6em;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+}
 
+.restartButton:hover{
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
+}
 </style>
