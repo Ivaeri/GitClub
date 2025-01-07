@@ -43,10 +43,10 @@
 	"manualEnter": "You can also join a game by entering the game-ID below:",
 	"guessedLetters": "Guessed letters: ",
 	"host": "the host",
-<<<<<<< HEAD
-	"nameTaken": "Come on the name is already take. BE ORIGINAL!"
-=======
-	"noGames": "No active games",
-	"nameTaken": "The username is taken, please choose another!"
->>>>>>> e333ccd2af13f2fed89baa4e40eca0ced7f72401
+	"nameTaken": "Come on the name is already take. BE ORIGINAL!",
+	"wrongGuess": "Wrong guess, try again",
+	"win1": "Congratulations!",
+	"Win2": "You Won 🎉",
+	"newHost": "Congratulations, you are the new host!",
+	"chooseNewWord": "Choose a new word:"
 }

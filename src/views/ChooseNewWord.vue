@@ -1,7 +1,7 @@
 <template>
     <HomeButton :text="uiLabels.goHome"/>
-    <h1>Grattis, du är ny spelledare!</h1>
-    <h2>Välj ett nytt ord:</h2>
+    <h1> {{ uiLabels.newHost }} </h1>
+    <h2> {{ uiLabels.chooseNewWord }}</h2>
     <div>
         <InputField
         v-bind:label="uiLabels.enterWord"

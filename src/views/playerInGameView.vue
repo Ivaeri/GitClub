@@ -12,7 +12,7 @@
     <div class="inGame" v-if="!isGameWon">
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="failedLettersContainer">
-        <h3>Wrong guesses:</h3>
+        <h3>{{ uiLabels.wrongGuess }}</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}

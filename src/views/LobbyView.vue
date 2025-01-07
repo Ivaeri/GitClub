@@ -59,7 +59,7 @@
         <h2>{{ uiLabels.noGames }}</h2>
     <img src="/img/az0w7m53abb21.webp" class="mrBean"> 
     </div>
-  </div>
+  
  
   
 </template> 

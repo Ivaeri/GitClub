@@ -43,10 +43,11 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
-<<<<<<< HEAD
-	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!"
-=======
-	"noGames": "Inga aktiva spel",
-	"nameTaken": "Användarnamnet är upptaget, välj ett annat!"
->>>>>>> e333ccd2af13f2fed89baa4e40eca0ced7f72401
+	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
+	"wrongGuess": "Fel gissning, försök igen",
+	"win1": "Grattis!",
+	"win2": "Du vann 🎉",
+	"newHost": "Grattis, du är ny spelledare!",
+	"chooseNewWord": "Välj ett nytt ord:"
+
 }
