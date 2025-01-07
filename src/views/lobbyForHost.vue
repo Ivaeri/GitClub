@@ -19,7 +19,7 @@
     </div>
     <div class="buttonContainer">
       <div v-if="participants.length > 0">
-        <button v-on:click="startGame" class="startGameButtonGreen">
+        <button v-on:click="startGame" class="startGameButtonPink">
             {{uiLabels.start}}
         </button>
       </div>
@@ -133,14 +133,20 @@ methods: {
 
   }
 
-  .startGameButtonGreen{
+  .startGameButtonPink{
     width: 10em;
     height: 6em;
-    background-color: lightgreen;
-    cursor: pointer;
+    background-color: #cf84a9;
+    color: white;
+    border: none;
     border-radius: 10%;
-
+    cursor: pointer;
   }
+  .startGameButtonPink:hover{
+ background-color: #a02666;
+ transform: rotate(1deg) scale(1.1);
+ transition: transform 0.2s ease-in-out;
+ }
   .startGameButtonGray{
     width: 10em;
     height: 6em;

@@ -12,7 +12,7 @@
     <div class="inGame" v-if="!isGameWon">
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="failedLettersContainer">
-        <h3>Wrong guesses:</h3>
+        <h3>{{ uiLabels.wrongGuess }}</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}
@@ -132,7 +132,6 @@ export default {
         // Registrera beforeunload och unload händelser
    // window.addEventListener("beforeunload", this.handleBeforeUnload);
     //window.addEventListener("unload", this.handleUnload);
-  
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
@@ -167,13 +166,6 @@ export default {
     socket.emit("findIfWon", this.pollId) 
     socket.emit("getAmountWrongLetters", this.pollId );
   },
-  /*
-  beforeDestroy() {
-    window.removeEventListener('beforeunload', this.handleBeforeUnload); //kryss och refresh
-    window.removeEventListener('popstate', this.handlePageLeave); //
-    window.removeEventListener('unload', this.handleUnload);
-  },
-*/
 
 
   methods: {

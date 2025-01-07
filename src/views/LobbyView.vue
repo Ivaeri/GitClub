@@ -11,11 +11,10 @@
   <h2 v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
       
-      <div v-for="poll in activePolls" 
+      <div v-for="poll in activePolls.filter(p => !inActivePolls.includes(p.pollId))" 
       :key="poll" 
       class="poll-item"
      >
-     <div v-if="!inActivePolls.includes(poll.pollId) && activePolls.length > 0">
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
             {{ poll.hostName }}
@@ -58,7 +57,7 @@
         <h2>{{ uiLabels.noGames }}</h2>
     <img :src="this.images[this.currentImageIndex]" class="mrBean"> 
     </div>
-  </div>
+  
  
   
 </template> 
@@ -78,6 +77,7 @@ export default {
   data: function () {
     return {
       userName: "",
+      hostName: "",
       newPollId: "",
       pollId: "inactive poll",
       uiLabels: {},
@@ -145,20 +145,22 @@ export default {
     this.anyIdIsClicked = true;
   },
   validateAndParticipate() {
-      socket.emit("getParticipants", { pollId: this.chosenPollId });
-      socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
-        if (data.pollId === this.chosenPollId) {
-          this.participants = data.participants;
-          if (!this.userName.trim()) {
-            alert(this.uiLabels.fillName);
-          } else if (this.participants.some(participant => participant.name === this.userName)) {
-            alert(this.uiLabels.nameTaken);
-          } else {
-            this.participateInPoll();
-            this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
-          }
+    const poll = this.activePolls.find(poll => poll.pollId === this.chosenPollId);
+    socket.emit("getParticipants", { pollId: this.chosenPollId });
+    socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
+      if (data.pollId === this.chosenPollId) {
+        this.participants = data.participants;
+        console.log(this.hostName, "host")
+        if (!this.userName.trim()) {
+          alert(this.uiLabels.fillName);
+        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName) {
+          alert(this.uiLabels.nameTaken);
+        } else {
+          this.participateInPoll();
+          this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
         }
-      });
+      }
+    });
     },
   handleEnter() {
       this.validateAndParticipate();

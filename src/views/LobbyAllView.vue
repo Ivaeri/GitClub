@@ -6,13 +6,10 @@
         <HomeButton :text="uiLabels.goHome"/> 
       </div>
       </div>
-      <div v-if="!joined">
-       
-
-      </div>
-      <div v-if="joined">
+      
+      <div>
         <div>{{ uiLabels.welcome }} {{ userName }}!</div>
-          <div>{{ this.uiLabels.awaitingHost1 }}host {{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}</div>
+          <div>{{ this.uiLabels.awaitingHost1 }}{{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}</div>
         </div>
         <div v-if="participants.length > 0"  class="participants-list">
           <h2>{{ uiLabels.joinedPlayers }}</h2>
