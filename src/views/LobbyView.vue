@@ -7,10 +7,9 @@
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
-  </header>
+  </header><div v-if="!anyIdIsClicked">
   <h2>{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length > 0" class="gamesContainer">
-      
       <div v-for="poll in activePolls" :key="poll" class="poll-item">
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
@@ -19,6 +18,7 @@
           {{ poll.pollId}}
         </button>
       </div>
+    </div>
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">
     <h3>{{ this.uiLabels.enterUsername }}</h3>
@@ -32,6 +32,7 @@
            {{ uiLabels.participateGame }}
         </button>
       </div>
+      <div v-if="!anyIdIsClicked">
     <h2>{{ uiLabels.manualEnter }}</h2>
     <div class="manualJoin">
       <label for="pollIdInput"> 
@@ -47,7 +48,8 @@
       <button class="joinGameButton" @click="validateAndJoin">
         {{ uiLabels.participateGame }}
       </button>
-    </div> 
+      </div> 
+    </div>
   </div>
  
   
