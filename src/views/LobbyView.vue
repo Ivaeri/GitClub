@@ -83,13 +83,12 @@ export default {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
-    socket.on( "participantsUpdate", p => this.participants = p );
     /*
     socket.on("removePollId", (oldPollId) => {
       this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
 */
-      socket.on("removeGameFromList", (oldPollId) => {
-        this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
+    socket.on("removeGameFromList", (oldPollId) => {
+      this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
     
 
     socket.emit( "joinPoll", this.pollId );
@@ -110,15 +109,21 @@ export default {
     this.anyIdIsClicked = true;
   },
   validateAndParticipate() {
-        if (!this.userName.trim()) {
-          alert(this.uiLabels.fillName);
+      socket.emit("getParticipants", { pollId: this.chosenPollId });
+      socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
+        if (data.pollId === this.chosenPollId) {
+          this.participants = data.participants;
+          if (!this.userName.trim()) {
+            alert(this.uiLabels.fillName);
+          } else if (this.participants.some(participant => participant.name === this.userName)) {
+            alert(this.uiLabels.nameTaken);
+          } else {
+            this.participateInPoll();
+            this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
+          }
         }
-        else {
-          this.participateInPoll();
-          this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
-        }
-        socket.emit("getParticipants", { pollId: this.chosenPollId });
-  },
+      });
+    },
   handleEnter() {
       this.validateAndParticipate();
     },
