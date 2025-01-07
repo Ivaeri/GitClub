@@ -217,26 +217,26 @@ header h2{
     overflow-y: auto;
     overflow-x: hidden;
     margin: 0 auto;
-    border: 0.2em solid black; /* Lägg till en svart kantlinje */
-    border-radius: 10px; /* Lägg till rundade hörn */
+    border: 0.2em solid black; 
+    border-radius: 10px; 
 }
-/* Anpassa scrollbaren */
+
 .gamesContainer::-webkit-scrollbar {
-  width: 0.5em; /* Bredd på scrollbaren */
+  width: 0.5em; 
 }
 
 .gamesContainer::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Färg på scrollbarsens spår */
-  border-radius: 10px; /* Rundade hörn på spåret */
+  background: #f1f1f1; 
+  border-radius: 10px; 
 }
 
 .gamesContainer::-webkit-scrollbar-thumb {
-  background: #c888b1; /* Färg på scrollbarsens tumme */
-  border-radius: 10px; /* Rundade hörn på tummen */
+  background: #c888b1; 
+  border-radius: 10px; 
 }
 
 .gamesContainer::-webkit-scrollbar-thumb:hover {
-  background: hotpink; /* Färg på scrollbarsens tumme vid hovring */
+  background: hotpink; 
 }
 
 .joinGameButton{
@@ -263,15 +263,15 @@ background-color: #a02666;
 }
 
 .poll-button {
-  background-color: pink; /* Gör knapparna rosa */
-  color: black; /* Textfärg */
-  font-size: 1.5em; /* Gör knapparna stora */
-  padding: 1em 2em; /* Lägg till padding för att göra knapparna större */
-  border: 0.1em solid black; /* Ta bort kantlinje */
-  border-radius: 5px; /* Lägg till rundade hörn */
-  cursor: pointer; /* Ändra muspekaren till en hand */
-  margin: 1em auto; /* Centrera knappen horisontellt */
-  text-align: center; /* Centrera texten i knappen */
+  background-color: pink; 
+  color: black; 
+  font-size: 1.5em; 
+  padding: 1em 2em; 
+  border: 0.1em solid black; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  margin: 1em auto; 
+  text-align: center; 
   width: 70%;
   height: 60%;
   display: flex;
@@ -283,14 +283,14 @@ background-color: #a02666;
 }
 
 .poll-button:hover {
-  background-color: hotpink; /* Ändra färg vid hovring */
+  background-color: hotpink; 
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
 
 .clicked-button {
-  background-color: rgb(149, 42, 95); /* Ändra färg för den senast klickade knappen */
-  border: 0.2em solid blue; /* Lägg till en kantlinje för den senast klickade knappen */
+  background-color: rgb(149, 42, 95); 
+  border: 0.2em solid blue; 
 }
 
 .joinGameButton {

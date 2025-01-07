@@ -4,8 +4,7 @@
          v-on:click="toggleNav">
     </div>
     <div class="logo" >
-      <img src="/img/hangman.jpg">
-      {{ uiLabels.titlegame}}
+      {{ uiLabels.titlegame }}
     </div>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
@@ -19,71 +18,85 @@
         </h5>
         <div v-if="gameRules" class="animate__animated animate__backInUp">
           <ul>
-              <li v-for="rule in currentGameRules" v-bind:key="rule" >{{ rule }}</li>
+            <li v-for="rule in currentGameRules" v-bind:key="rule">{{ rule }}</li>
           </ul>
         </div>
       </div>
     </div>
-    
   </header>
-    <div class="create-join">
-      <router-link to="/submitword/">
+
+  <!-- Hängda gubben -->
+  <HangPerson :wrongGuesses="wrongGuesses" :scale="0.5" />
+
+  <div class="create-join">
+    <router-link to="/create/">
       <button>{{ uiLabels.createGame }}</button>
-      </router-link>
-      <router-link to="/lobby/">
+    </router-link>
+    <router-link to="/lobby/">
       <button>{{ uiLabels.participateGame }}</button>
-      </router-link>
-    </div>
- 
- </template>
- 
- 
- <script>
- import ResponsiveNav from '@/components/ResponsiveNav.vue';
- import io from 'socket.io-client';
- import gameRules from '/server/gamerules.json';
- const socket = io("localhost:3000");
- 
- 
- export default {
+    </router-link>
+  </div>
+</template>
+
+<script>
+import ResponsiveNav from '@/components/ResponsiveNav.vue';
+import io from 'socket.io-client';
+import gameRules from '/server/gamerules.json';
+import HangPerson from "@/components/HangPerson.vue";
+
+const socket = io("localhost:3000");
+
+export default {
   name: 'StartView',
   components: {
-    ResponsiveNav
+    ResponsiveNav,
+    HangPerson
   },
   data: function () {
     return {
       uiLabels: {},
-      lang: localStorage.getItem( "lang") || "en",
+      lang: localStorage.getItem("lang") || "en",
       hideNav: true,
       gameRules: false,
-      currentGameRules: []
+      currentGameRules: [],
+      wrongGuesses: 0,
     }
   },
   created: function () {
-    socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.emit( "getUILabels", this.lang );
+    socket.on("uiLabels", labels => this.uiLabels = labels);
+    socket.emit("getUILabels", this.lang);
     this.loadGameRules();
   },
-  methods: {
-    showGameRules: function() {
-      this.gameRules = !this.gameRules;
-
-    },
-    switchLanguage: function() {
-      if (this.lang === "en") {
-        this.lang = "sv"
+  mounted() {
+    const maxGuesses = 7;
+    let delay = 250;
+    const interval = setInterval(() => {
+      if (this.wrongGuesses < maxGuesses) {
+        this.wrongGuesses++;
+        console.log(`wrongGuesses: ${this.wrongGuesses}`); // Debug-logg
+      } else {
+        clearInterval(interval);
       }
-      else {
-        this.lang = "en"
+    }, delay);
+  },
+  methods: {
+    showGameRules: function () {
+      this.gameRules = !this.gameRules;
+    },
+    switchLanguage: function () {
+      if (this.lang === "en") {
+        this.lang = "sv";
+      } else {
+        this.lang = "en";
       }
       this.loadGameRules();
-      localStorage.setItem( "lang", this.lang );
-      socket.emit( "getUILabels", this.lang );
+      localStorage.setItem("lang", this.lang);
+      socket.emit("getUILabels", this.lang);
     },
     toggleNav: function () {
-      this.hideNav = ! this.hideNav;
+      this.hideNav = !this.hideNav;
     },
-    loadGameRules(){
+    loadGameRules() {
       if (this.lang === "sv") {
         this.currentGameRules = gameRules.gameRules_sv;
       } else {
@@ -91,34 +104,31 @@
       }
     }
   }
- }
- </script>
- <style scoped>
-  header {
-    position: relative;
-    width: 100%;
-    height: 25em;
-    display: grid;
-    grid-template-columns: 2em auto;
-    align-items: center;
- 
-  }
-  .logo {
-    font-family: 'Sue Ellen Francisco', cursive;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 5rem;
-    color: rgb(4, 16, 131);
-    padding-top: 2.5em;
-    vertical-align: bottom;
-    align-items: center;
-  }
-  .logo img {
-    height:5rem;
-    margin-right: 0.5rem;
-  }
-  
-  .create-join {
+}
+</script>
+
+<style scoped>
+header {
+  position: relative;
+  width: 100%;
+  height: 25em;
+  display: grid;
+  grid-template-columns: 2em auto;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Sue Ellen Francisco', cursive;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 5rem;
+  color: rgb(4, 16, 131);
+  padding-top: 2.5em;
+  vertical-align: bottom;
+  align-items: center;
+}
+
+.create-join {
   background-color: transparent;
   display: flex;
   color: white;
@@ -130,10 +140,9 @@
   text-align: left;
   width: fit-content;
   margin-bottom: 10em;
-  }
- 
- 
-  .create-join button {
+}
+
+.create-join button {
   background-color: #cf84a9;
   color: white;
   border: none;
@@ -145,113 +154,118 @@
   width: 20em;
   height: 10em;
   box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
-  }
- .create-join button:hover {
- background-color: #a02666;
- transform: rotate(1deg) scale(1.1);
- transition: transform 0.2s ease-in-out;
- }
-  .languagecontainer{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    position: absolute;
-    width: 15em;
-    height: 10em;
-    margin-top: 10px;
-    margin-right: 10px;
-    right: 0px;
-    top: 0em;
-  }
-  .switchLanguageDiv{
-    grid-row : 1;
-    grid-column: 2;
-    width: 4em;
-    height: 1.7em;
-    right: 0;
-    background-color: #cf84a9;
-    border-radius: 10%;
-    cursor: pointer;
-    color: white;
-    display: flex;
-    font-size: 2em;
-    box-sizing: border-box; 
-    padding: 0;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-  }
-  .gameRules{
-    grid-row: 2;
-    grid-column: 1/ span 2;
-    width: 8em;
-    height: 1em;
-    color:white;
- 
- 
-  }
-  .gameRules h5{
-    cursor: pointer;
-    background-color: #cf84a9;
-    border-radius: 5px;
-    padding: 0.3em;
-  }
+}
+
+.create-join button:hover {
+  background-color: #a02666;
+  transform: rotate(1deg) scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.languagecontainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  position: absolute;
+  width: 15em;
+  height: 10em;
+  margin-top: 10px;
+  margin-right: 10px;
+  right: 0px;
+  top: 0em;
+}
+
+.switchLanguageDiv {
+  grid-row: 1;
+  grid-column: 2;
+  width: 4em;
+  height: 1.7em;
+  right: 0;
+  background-color: #cf84a9;
+  border-radius: 10%;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  font-size: 2em;
+  box-sizing: border-box;
+  padding: 0;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.gameRules {
+  grid-row: 2;
+  grid-column: 1 / span 2;
+  width: 8em;
+  height: 1em;
+  color: white;
+}
+
+.gameRules h5 {
+  cursor: pointer;
+  background-color: #cf84a9;
+  border-radius: 5px;
+  padding: 0.3em;
+}
+
 .gameRules h5:hover {
   background-color: #a02666;
   transform: rotate(1deg) scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
 
-  .gameRules div{
-    position: absolute;
-    background-color: pink;
-    margin-left: 5px;
-    grid-row: 3;
-    grid-column: 1;
-    border-radius: 10%;
-  }
-  .gameRules ul{
-    padding-right: 10px;
-  }
-  .gameRules li{
-    padding-top: 10px;
-  }
-  .languagecontainer button{
-    grid-row : 1;
-    grid-column: 1;
-    height: 4em;
-    width: 8em;
-    background-size: cover;
-    background-position: center;
-    left: 0;
-    cursor: pointer;
-    border-radius: 10%;
-  }
-  .swedishbutton{
-    background-image: url("/img/svenskflagga.jpg");
-  }
-  .englishbutton{
-    background-image: url("/img/uk.png");
-  }
- 
- 
- @media screen and (max-width:50em) {
+.gameRules div {
+  position: absolute;
+  background-color: pink;
+  margin-left: 5px;
+  grid-row: 3;
+  grid-column: 1;
+  border-radius: 10%;
+}
+
+.gameRules ul {
+  padding-right: 10px;
+}
+
+.gameRules li {
+  padding-top: 10px;
+}
+
+.languagecontainer button {
+  grid-row: 1;
+  grid-column: 1;
+  height: 4em;
+  width: 8em;
+  background-size: cover;
+  background-position: center;
+  left: 0;
+  cursor: pointer;
+  border-radius: 10%;
+}
+
+.swedishbutton {
+  background-image: url("/img/svenskflagga.jpg");
+}
+
+.englishbutton {
+  background-image: url("/img/uk.png");
+}
+
+@media screen and (max-width: 50em) {
   .logo {
     font-size: 5vw;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .hamburger::before {
-    content: "☰";
-    color:black;
-  }
+
   .close::before {
     content: "✕";
-    color:black;
+    color: black;
   }
   .hide {
-    left:-12em;
+    left: -12em;
   }
- }
- </style>
+}
+</style>
