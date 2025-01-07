@@ -7,10 +7,15 @@
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
-  </header><div v-if="!anyIdIsClicked">
-  <h2>{{ uiLabels.activeGames }}</h2>
-    <div v-if="activePolls.length > 0" class="gamesContainer">
-      <div v-for="poll in activePolls" :key="poll" class="poll-item">
+  </header>
+  <h2 v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.activeGames }}</h2>
+    <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
+      
+      <div v-for="poll in activePolls" 
+      :key="poll" 
+      class="poll-item"
+     >
+     <div v-if="!inActivePolls.includes(poll.pollId) && activePolls.length > 0">
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
             {{ poll.hostName }}
@@ -18,6 +23,7 @@
           {{ poll.pollId}}
         </button>
       </div>
+    </div>
     </div>
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">
@@ -32,9 +38,8 @@
            {{ uiLabels.participateGame }}
         </button>
       </div>
-      <div v-if="!anyIdIsClicked">
-    <h2>{{ uiLabels.manualEnter }}</h2>
-    <div class="manualJoin">
+    <h2  v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.manualEnter }}</h2>
+    <div class="manualJoin" v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">
       <label for="pollIdInput"> 
         <InputField 
         id="newPollIdInput"
@@ -48,7 +53,11 @@
       <button class="joinGameButton" @click="validateAndJoin">
         {{ uiLabels.participateGame }}
       </button>
-      </div> 
+    </div> 
+    <div v-if="activePolls.length - inActivePolls.length == 0" class="noGames">
+        
+        <h2>{{ uiLabels.noGames }}</h2>
+    <img src="/img/az0w7m53abb21.webp" class="mrBean"> 
     </div>
   </div>
  
@@ -78,26 +87,31 @@ export default {
       participants: [],
       activePolls: [],
       chosenPollId: "",
-      anyIdIsClicked: false
+      anyIdIsClicked: false,
+      inActivePolls: []
     }
   },
   created: function () {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
-    socket.on( "participantsUpdate", p => this.participants = p );
+    socket.on("inActivePolls", (polls) => {
+      this.inActivePolls = polls; });
     /*
     socket.on("removePollId", (oldPollId) => {
       this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
-*/
+
       socket.on("removeGameFromList", (oldPollId) => {
         this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
-    
+    */
+    socket.emit("getInActivePolls", this.pollId)
+     
 
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls");
   },
+
   methods: {
   validateAndJoin() {
     if (!this.newPollId.trim() || !this.activePolls.some(poll => poll.pollId === this.newPollId)) {
@@ -112,15 +126,21 @@ export default {
     this.anyIdIsClicked = true;
   },
   validateAndParticipate() {
-        if (!this.userName.trim()) {
-          alert(this.uiLabels.fillName);
+      socket.emit("getParticipants", { pollId: this.chosenPollId });
+      socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
+        if (data.pollId === this.chosenPollId) {
+          this.participants = data.participants;
+          if (!this.userName.trim()) {
+            alert(this.uiLabels.fillName);
+          } else if (this.participants.some(participant => participant.name === this.userName)) {
+            alert(this.uiLabels.nameTaken);
+          } else {
+            this.participateInPoll();
+            this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
+          }
         }
-        else {
-          this.participateInPoll();
-          this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
-        }
-        socket.emit("getParticipants", { pollId: this.chosenPollId });
-  },
+      });
+    },
   handleEnter() {
       this.validateAndParticipate();
     },
@@ -265,6 +285,13 @@ background-color: #a02666;
     background-color: #a02666;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
+  }
+
+  .mrBean{
+    width: auto;
+    height: 50em;
+    margin-top: 1em;
+    border: 0.2em solid black; 
   }
 
 

@@ -42,5 +42,7 @@
 	"gameOver": "Game over, You lost",
 	"manualEnter": "You can also join a game by entering the game-ID below:",
 	"guessedLetters": "Guessed letters: ",
-	"host": "the host"
+	"host": "the host",
+	"noGames": "No active games",
+	"nameTaken": "The username is taken, please choose another!"
 }
