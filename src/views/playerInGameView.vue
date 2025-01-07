@@ -132,8 +132,6 @@ export default {
         // Registrera beforeunload och unload händelser
    // window.addEventListener("beforeunload", this.handleBeforeUnload);
     //window.addEventListener("unload", this.handleUnload);
-   window.addEventListener("beforeunload", this.leavePoll);
-   window.addEventListener("unload", this.leavePoll);
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
@@ -168,17 +166,7 @@ export default {
     socket.emit("findIfWon", this.pollId) 
     socket.emit("getAmountWrongLetters", this.pollId );
   },
-  /*
-  beforeDestroy() {
-    window.removeEventListener('beforeunload', this.handleBeforeUnload); //kryss och refresh
-    window.removeEventListener('popstate', this.handlePageLeave); //
-    window.removeEventListener('unload', this.handleUnload);
-  },
-*/
-beforeDestroy() {
-  window.removeEventListener("beforeunload", this.handleBeforeUnload);
-  window.removeEventListener("unload", this.handleUnload);
-},
+
 
   methods: {
     submitAnswer: function (answer) {

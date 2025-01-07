@@ -43,5 +43,7 @@
 	"manualEnter": "You can also join a game by entering the game-ID below:",
 	"guessedLetters": "Guessed letters: ",
 	"host": "the host",
-	"nameTaken": "Come on the name is already take. BE ORIGINAL!"
+	"nameTaken": "Come on the name is already take. BE ORIGINAL!",
+	"skipPlayer": "Skip player",
+	"tooSlow": "Too slow? Press to skip player!"
 }
