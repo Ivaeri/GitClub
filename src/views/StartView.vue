@@ -119,16 +119,6 @@ header {
   align-items: center;
 }
 
-.logo {
-  font-family: 'Sue Ellen Francisco', cursive;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: 5rem;
-  color: rgb(4, 16, 131);
-  padding-top: 2.5em;
-  vertical-align: bottom;
-  align-items: center;
-}
 
 .create-join {
   background-color: transparent;
