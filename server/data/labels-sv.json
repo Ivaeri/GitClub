@@ -43,6 +43,11 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
+	"wrongGuess": "Fel gissning, försök igen",
+	"win1": "Grattis!",
+	"win2": "Du vann 🎉",
+	"newHost": "Grattis, du är ny spelledare!",
+	"chooseNewWord": "Välj ett nytt ord:",
 	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
 	"skipPlayer": "Hoppa över spelare",
 	"tooSlow": "För långsam? Tryck för att hoppa över spelare!"
