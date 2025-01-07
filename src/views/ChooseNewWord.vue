@@ -105,6 +105,7 @@ export default {
           return;
         }
         //this.generateId();
+        socket.emit("reActivatePollId", this.pollId)
         this.startNewGame();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
       },
