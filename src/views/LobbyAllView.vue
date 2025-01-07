@@ -6,11 +6,8 @@
         <HomeButton :text="uiLabels.goHome"/> 
       </div>
       </div>
-      <div v-if="!joined">
-       
-
-      </div>
-      <div v-if="joined">
+      
+      <div>
         <div>{{ uiLabels.welcome }} {{ userName }}!</div>
           <div>{{ this.uiLabels.awaitingHost1 }}host {{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}</div>
         </div>
