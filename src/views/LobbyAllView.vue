@@ -28,7 +28,7 @@
   import io from 'socket.io-client';
   import InputField from '../components/InputField.vue';
   import HomeButton from '../components/HomeButton.vue';
-  const socket = io("localhost:3000");
+  const socket = io(sessionStorage.getItem("dataServer"));
   
   export default {
     name: 'LobbyAll',

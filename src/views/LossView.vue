@@ -17,7 +17,7 @@
 import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
 import HangPerson from '../components/HangPerson.vue';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("dataServer"));
 export default {
     name: 'LossView',
     components: {

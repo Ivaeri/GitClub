@@ -39,7 +39,7 @@
     <script>
     import io from 'socket.io-client';
     import HomeButton from '../components/HomeButton.vue';
-    const socket = io("localhost:3000");
+    const socket = io(sessionStorage.getItem("dataServer"));
     import HangPerson from '../components/HangPerson.vue';
     
     export default {
