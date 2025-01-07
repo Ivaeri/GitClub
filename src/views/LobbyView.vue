@@ -189,12 +189,12 @@ header h2{
 }
 .enterGameInput{
   width: 8em;
-  height: 1.5em;
+  height: 2em;
   text-align: center;
   font-size: larger;
   background-color: pink;
   color: black;
-  margin-top: 1em;
+  margin: 1em;
 }
 .lobby-container {
   display: flex;
@@ -238,20 +238,6 @@ header h2{
   background: hotpink; /* Färg på scrollbarsens tumme vid hovring */
 }
 
-.joinGameButton{
-  width: 5em;
-  height: 4em;
-  background-color: #cf84a9;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 1em;
-  margin-left: 1em;
-}
-.joinGameButton:hover{
-background-color: #a02666;
-    transform: rotate(1deg) scale(1.1);
-    transition: transform 0.2s ease-in-out;
-  }
 
 .manualJoin {
   display: flex;
@@ -279,6 +265,7 @@ background-color: #a02666;
   align-items: center;
   padding: 1em;
   box-sizing: 1em;
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
 }
 
 .poll-button:hover {
@@ -294,13 +281,15 @@ background-color: #a02666;
 
 .joinGameButton {
   width: 6em;
-  height: 7em;
+  height: 5em;
   background-color: #cf84a9;
   cursor: pointer;
   margin-left: 1em;
   border-radius: 10px;
   color: white;
   border: none;
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  margin: 1em;
   }
   .joinGameButton:hover{
     background-color: #a02666;
