@@ -115,6 +115,7 @@ Data.prototype.updateWord = function (word, pollId, hostName) {
   if (this.polls[pollId]) {
       this.polls[pollId].enteredWord = word;
       this.polls[pollId].hostName = hostName;
+      this.polls[pollId].NailInCoffin = hostName;
   }
   
 };
@@ -236,7 +237,7 @@ Data.prototype.setPollId = function (pollId) {
     };
   }
   this.polls[pollId].pollId = pollId;
-  console.log('körs från set poll id', this.polls[pollId])
+  //console.log('körs från set poll id', this.polls[pollId])
 };
 
 Data.prototype.startNewGame = function (pollId, hostname, word) {
@@ -255,11 +256,11 @@ Data.prototype.startNewGame = function (pollId, hostname, word) {
       guessedLetters: [],
       isGameWon: false,
       amountWrongLetters: 0,
-      NailInCoffin: ""
+      NailInCoffin: hostname
     };
 
   }
-  console.log('körs från start new game', this.polls[pollId])
+  console.log("hostNaail", this.polls[pollId].NailInCoffin)
 
 }
 
