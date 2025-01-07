@@ -41,7 +41,6 @@
     <div class="manualJoin" v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">
       <label for="pollIdInput"> 
         <InputField 
-         
         id="newPollIdInput"
         class="enterGameInput"
           v-bind:label="uiLabels.enterGamePin"
@@ -95,7 +94,6 @@ export default {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
-    socket.on( "participantsUpdate", p => this.participants = p );
     socket.on("inActivePolls", (polls) => {
       this.inActivePolls = polls; });
     /*
@@ -127,15 +125,21 @@ export default {
     this.anyIdIsClicked = true;
   },
   validateAndParticipate() {
-        if (!this.userName.trim()) {
-          alert(this.uiLabels.fillName);
+      socket.emit("getParticipants", { pollId: this.chosenPollId });
+      socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
+        if (data.pollId === this.chosenPollId) {
+          this.participants = data.participants;
+          if (!this.userName.trim()) {
+            alert(this.uiLabels.fillName);
+          } else if (this.participants.some(participant => participant.name === this.userName)) {
+            alert(this.uiLabels.nameTaken);
+          } else {
+            this.participateInPoll();
+            this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
+          }
         }
-        else {
-          this.participateInPoll();
-          this.$router.push('/lobbyAll/' + this.chosenPollId + '/' + this.userName); 
-        }
-        socket.emit("getParticipants", { pollId: this.chosenPollId });
-  },
+      });
+    },
   handleEnter() {
       this.validateAndParticipate();
     },
