@@ -44,6 +44,10 @@
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
 	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
-	"congratsGameLeader": "Grattis, du är ny spelledare!",
-	"chooseNew": "Vänligen skriv in ordet för nästa runda:"
+	"wrongGuess": "Fel gissning, försök igen",
+	"win1": "Grattis!",
+	"win2": "Du vann 🎉",
+	"newHost": "Grattis, du är ny spelledare!",
+	"chooseNewWord": "Välj ett nytt ord:"
+
 }

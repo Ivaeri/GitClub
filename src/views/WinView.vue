@@ -1,7 +1,7 @@
 <template>
     <header>
-        <div class="animate__animated animate__zoomInDown congrats">Congratulations!</div>
-        <div class="animate__animated animate__zoomInDown congrats">You Won 🎉</div>
+        <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }}</div>
+        <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win2 }}</div>
     </header>
     <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>

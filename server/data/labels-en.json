@@ -43,7 +43,10 @@
 	"manualEnter": "You can also join a game by entering the game-ID below:",
 	"guessedLetters": "Guessed letters: ",
 	"host": "the host",
-	"nameTaken": "Come on, the name is already taken. BE ORIGINAL!",
-	"congratsGameLeader": "Congrats, you are the new game leader!",
-	"chooseNew": "Please enter a word for the next round:"
+	"nameTaken": "Come on the name is already take. BE ORIGINAL!",
+	"wrongGuess": "Wrong guess, try again",
+	"win1": "Congratulations!",
+	"Win2": "You Won 🎉",
+	"newHost": "Congratulations, you are the new host!",
+	"chooseNewWord": "Choose a new word:"
 }
