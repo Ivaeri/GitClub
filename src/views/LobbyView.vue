@@ -11,11 +11,10 @@
   <h2 v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
       
-      <div v-for="poll in activePolls" 
+      <div v-for="poll in activePolls.filter(p => !inActivePolls.includes(p.pollId))" 
       :key="poll" 
       class="poll-item"
      >
-     <div v-if="!inActivePolls.includes(poll.pollId) && activePolls.length > 0">
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
             {{ poll.hostName }}
@@ -23,7 +22,6 @@
           {{ poll.pollId}}
         </button>
       </div>
-    </div>
     </div>
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">

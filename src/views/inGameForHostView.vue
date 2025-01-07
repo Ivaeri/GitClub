@@ -24,10 +24,10 @@
     </div>
     <div class="participants-container">
       <div v-for="participant in participants" :key="participant.name" class="player">
+        {{ participant.name }}
         <div v-if="participant.name == participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
-        {{ participant.name }}
       </div>
   </div>
     </template>
