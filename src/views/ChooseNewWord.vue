@@ -1,7 +1,8 @@
 <template>
     <HomeButton :text="uiLabels.goHome"/>
-    <h1> {{ uiLabels.newHost }} </h1>
+    <h1 class="congrats"> {{ uiLabels.newHost }} </h1>
     <h2> {{ uiLabels.chooseNewWord }}</h2>
+    <div class="chooseWord">
     <div>
         <InputField
         v-bind:label="uiLabels.enterWord"
@@ -17,6 +18,7 @@
         v-on:click="handleClick">
         {{ uiLabels.sendWord }}
       </Button>
+    </div>
     </div>
 </template>
 
@@ -138,7 +140,14 @@ export default {
  transition: transform 0.2s ease-in-out;
  }
 
- .h1{
-  font-size: 20em;
+ .congrats {
+  font-size: 4em;
+ }
+
+ .chooseWord {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
  }
 </style>
