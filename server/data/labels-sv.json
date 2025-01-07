@@ -42,5 +42,6 @@
 	"gameOver": "Spelet är över, du förlorade",
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
-	"host": "spelvärden"
+	"host": "spelvärden",
+	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!"
 }
