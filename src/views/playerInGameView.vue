@@ -233,10 +233,13 @@ export default {
     console.log("emit sent to update win status");
     //socket.emit("removeGame", this.pollId)
     
-    
-    this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
-      
+    if (this.isGameWon) {
+      this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
+    }
     },
+   
+      
+    
   
 
     findIfGameIsWonViaData () {
@@ -291,7 +294,8 @@ export default {
     }
     
     }
-  }
+}
+  
   
 </script>
 <style scoped>
