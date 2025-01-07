@@ -1,72 +1,68 @@
-:root {
-  --foreground-color: red;
-  --background-color: green;
-}
 
 html, body {
   height: 100%;
-  margin: 0; /* Tar bort standardmarginaler */
-  padding: 0; /* Tar bort standardavstånd */
-  background-color: rgb(245, 240, 235); /* Grundfärg som efterliknar papper */
+  margin: 0; 
+  padding: 0; 
+  background-color: rgb(245, 240, 235); 
   background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px), /* Vertikala linjer */
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px); /* Horisontella linjer */
-  background-size: 20px 20px; /* Rutstorlek: 20px */
+    linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px), 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px); 
+  background-size: 20px 20px; 
   background-attachment: fixed;
-  font-family: Arial, sans-serif; /* Standardtypsnitt */
+  font-family: Arial, sans-serif; 
 }
 
-/* Grundstruktur för spiral-container */
+
 .spiral-container {
   position: fixed;
-  left: 0; /* Fäst till vänster */
+  left: 0; 
   top: 0;
   bottom: 0;
-  width: 50px; /* Bredd på bindningen */
+  width: 50px; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Jämnt fördelade hål */
+  justify-content: space-between; 
   background-color: transparent;
-  z-index: 5; /* Ligger över bakgrunden */
-  padding: 20px 0; /* Utrymme upptill och nedtill */
+  z-index: 5; 
+  padding: 20px 0; 
 }
 
-/* Hål som representerar spiralhålen */
+
 .spiral-hole {
   width: 20px;
   height: 20px;
   background-color: rgb(49, 48, 48);
-  border-radius: 50%; /* Gör dem runda */
+  border-radius: 50%; 
   position: relative;
-  margin: 10px auto; /* Centrerar hålen horisontellt */
+  margin: 10px auto; 
   box-shadow: 
-    inset -3px -3px 3px rgba(255, 255, 255, 0.84), /* Ljusreflektion */
-    inset 3px 3px 3px rgba(0, 0, 0, 0.5); /* Skugga för djup */
+    inset -3px -3px 3px rgba(255, 255, 255, 0.84), 
+    inset 3px 3px 3px rgba(0, 0, 0, 0.5); 
 }
 
-/* Pseudo-element för att skapa metallspiraler */
+
 .spiral-hole::before,
 .spiral-hole::after {
   content: '';
   position: absolute;
-  left: -25%; /* Centrerar horisontellt */
-  transform: translateX(100%); /* Justerar för basen av spiralen */
+  left: -25%;
+  transform: translateX(100%); 
   width: 6px;
   height: 35px;
-  background: linear-gradient(to bottom, #ccc, #999); /* Metallisk färg */
+  background: linear-gradient(to bottom, #ccc, #999); 
   border-radius: 3px;
   box-shadow: 
-    inset -1px -1px 2px rgba(255, 255, 255, 0.7), /* Ljusreflektion */
-    inset 1px 1px 2px rgba(0, 0, 0, 0.2); /* Metallskugga */
+    inset -1px -1px 2px rgba(255, 255, 255, 0.7), 
+    inset 1px 1px 2px rgba(0, 0, 0, 0.2); 
 }
 
 .spiral-hole::before {
-  top: 50%; /* Flyttar den övre spiralen till mitten av hålet */
+  top: 50%; 
   transform: translate(-50%, -37%) rotate(90deg);
 }
 
 .spiral-hole::after {
-  top: 50%; /* Flyttar den nedre spiralen till mitten av hålet */
+  top: 50%; 
   left: -25%;
   transform: translate(-50%, -63%)  rotate(90deg);
 }
