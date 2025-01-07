@@ -190,6 +190,15 @@ Data.prototype.addToInActivePolls = function (pollId) {
    }
 };
 
+Data.prototype.reActivatePollId = function (pollId) {
+  console.log('körs från reActivePolls i data', pollId)
+  if (this.polls[pollId]) { 
+    console.log('körs från if satsen i addToInActivePolls i data', pollId)
+    this.inActivePolls = this.inActivePolls.filter(id => id !== pollId);
+    return this.inActivePolls;
+   }
+};
+
 
 Data.prototype.getGuessedLetter = function (pollId) {
   if (this.pollExists(pollId)) { 
