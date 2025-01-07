@@ -61,11 +61,11 @@
 
     <div class="participants-container">
 
-      <div v-for="participant in this.participants" :key="participant.name" class="participant">
+      <div v-for="participant in this.participants" :key="participant.name" class="player">
+        {{ participant.name }}
         <div v-if="participant.name == this.participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
-        {{ participant.name }}
       </div>
     </div>
 
@@ -310,7 +310,7 @@ export default {
 }
 
 .player {
-  margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
+    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
     background-repeat: no-repeat;
     background-position: left center;
@@ -318,13 +318,15 @@ export default {
     height: 3em;
     width: 5em;
     background-size: 2em 2em; 
-    padding-left: 2.5em; 
-    font-size: 1.5em; 
+    padding: 1.5em; 
+    font-size: 2em; 
     margin-bottom: 0.5em; 
     display: flex;
     align-items: center;
     border-radius: 5px; 
     background-color: pink; 
+    background-size: 2em 2em;
+    color: black;
   }
 
 .keyboard {
