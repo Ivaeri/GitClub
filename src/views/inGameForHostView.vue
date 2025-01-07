@@ -1,5 +1,9 @@
 <template>
     <h1>{{ uiLabels.titlegame }}</h1>
+    <div class="skipPlayer">
+        <h3> {{ uiLabels.tooSlow }}</h3>
+        <button class="skipPlayerButton" v-on:click="skipPlayer">{{ uiLabels.skipPlayer }}</button>
+    </div>
     <div class="wordBox">
       <h2>{{ uiLabels.wordRecieved }}</h2>
       <h2 v-for="letter in enteredword">
@@ -15,7 +19,7 @@
       </div>
     </div>
     <div class="graveYard">
-      <div >
+      <div>
         <HangPerson  v-bind:wrongGuesses="ammountWrongLetters" />
       </div>
     </div>
@@ -24,10 +28,10 @@
     </div>
     <div class="participants-container">
       <div v-for="participant in participants" :key="participant.name" class="player">
+        {{ participant.name }}
         <div v-if="participant.name == participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
-        {{ participant.name }}
       </div>
   </div>
     </template>
@@ -114,9 +118,16 @@
         this.sendToWinView();
       }
     },
+    
     sendToWinView () {
         this.$router.push('/winView/'+ this.pollId+ '/' + this.hostName)
     },
+
+    skipPlayer () {
+      socket.emit("updateIndex", this.pollId)
+      socket.emit("getIndex", this.pollId )
+    },
+
     sendToLossView () {
       if (this.correctguesses == this.enteredword.length) {
         this.$router.push('/lossView/'+ this.pollId + '/' + this.hostName)
@@ -207,6 +218,25 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.skipPlayer{
+  position: absolute;
+  right: 2em;
+  top: 5em;
+  z-index: 100;
+
+}
+.skipPlayerButton {
+  background-color: #cf84a9;
+  color: black;
+  padding: 1em;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.skipPlayerButton:hover {
+  background-color: #a02666;
 }
 
 </style>

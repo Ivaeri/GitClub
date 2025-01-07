@@ -12,7 +12,7 @@
     <div class="inGame" v-if="!isGameWon">
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="failedLettersContainer">
-        <h3>Wrong guesses:</h3>
+        <h3>{{ uiLabels.wrongGuess }}</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}
@@ -128,12 +128,10 @@ export default {
     
     
     window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
-
+    // window.addEventListener('keydown', this.handleKeydown); //denna lyssnar på när någon trycker på en tangent
         // Registrera beforeunload och unload händelser
    // window.addEventListener("beforeunload", this.handleBeforeUnload);
     //window.addEventListener("unload", this.handleUnload);
-   window.addEventListener("beforeunload", this.leavePoll);
-   window.addEventListener("unload", this.leavePoll);
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
@@ -168,19 +166,10 @@ export default {
     socket.emit("findIfWon", this.pollId) 
     socket.emit("getAmountWrongLetters", this.pollId );
   },
-  /*
-  beforeDestroy() {
-    window.removeEventListener('beforeunload', this.handleBeforeUnload); //kryss och refresh
-    window.removeEventListener('popstate', this.handlePageLeave); //
-    window.removeEventListener('unload', this.handleUnload);
-  },
-*/
-beforeDestroy() {
-  window.removeEventListener("beforeunload", this.handleBeforeUnload);
-  window.removeEventListener("unload", this.handleUnload);
-},
+
 
   methods: {
+
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
@@ -228,7 +217,7 @@ beforeDestroy() {
     },
 
     setGameToWonViaData() {
-      
+      console.log("trueWord", this.trueWord, "allGuessedLetters:", this.allGuessedLetters, "key:", this.key);
       for (let letter of this.trueWord) {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
@@ -243,6 +232,8 @@ beforeDestroy() {
     socket.emit("setGameToWon", this.pollId);
     console.log("emit sent to update win status");
     //socket.emit("removeGame", this.pollId)
+    
+    
     this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
       
     },
@@ -261,6 +252,17 @@ beforeDestroy() {
     socket.emit("getIndex", this.pollId )
     },
 
+    /*handleKeydown(event) {
+      const key = event.key.toUpperCase();
+      const validKeys = [...this.row1e, ...this.row2e, ...this.row3, ...this.row1s, ...this.row2s];
+      if (validKeys.includes(key)) {
+        this.keyPressed(key);
+      } else if (event.key === 'Enter') {
+        this.handleSubmit();
+      }
+    },*/
+
+    
    
     keyPressed: function (key) {
       this.key = key;

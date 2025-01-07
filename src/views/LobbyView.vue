@@ -11,11 +11,10 @@
   <h2 v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
       
-      <div v-for="poll in activePolls" 
+      <div v-for="poll in activePolls.filter(p => !inActivePolls.includes(p.pollId))" 
       :key="poll" 
       class="poll-item"
      >
-     <div v-if="!inActivePolls.includes(poll.pollId) && activePolls.length > 0">
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
             {{ poll.hostName }}
@@ -23,7 +22,6 @@
           {{ poll.pollId}}
         </button>
       </div>
-    </div>
     </div>
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">
@@ -57,8 +55,9 @@
     <div v-if="activePolls.length - inActivePolls.length == 0" class="noGames">
         
         <h2>{{ uiLabels.noGames }}</h2>
-    <img src="/img/az0w7m53abb21.webp" class="mrBean"> 
+    <img :src="this.images[this.currentImageIndex]" class="mrBean"> 
     </div>
+  
  
   
 </template> 
@@ -88,7 +87,10 @@ export default {
       activePolls: [],
       chosenPollId: "",
       anyIdIsClicked: false,
-      inActivePolls: []
+      inActivePolls: [],
+      images: ["/img/OIP.jpg", "/img/84e9f62ff454a1c4b1b82841f0d6aef2.jpg", "/img/image-w1280.webp", "/img/EeVGxbTU8AA9718.jpg"
+        ],
+      currentImageIndex: 0
     }
   },
   created: function () {
@@ -110,9 +112,25 @@ export default {
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls");
+    this.startSlideShow();
+  },
+
+  beforeDestroy() {
+    // Stoppa bildspelet när komponenten förstörs
+    this.stopSlideshow();
   },
 
   methods: {
+
+  startSlideShow() {
+    this.slideshowInterval = setInterval(() => {
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    }, 5000); // Byt bild var tredje sekund
+  },
+  stopSlideshow() {
+    clearInterval(this.slideshowInterval);
+  },
+
   validateAndJoin() {
     if (!this.newPollId.trim() || !this.activePolls.some(poll => poll.pollId === this.newPollId)) {
       alert(this.uiLabels.fillNumber);
@@ -120,6 +138,7 @@ export default {
       this.chosenPollId = this.newPollId; 
     }
   },
+
 
   joinPoll(pollId) {
     this.chosenPollId = pollId; 
@@ -290,8 +309,8 @@ background-color: #a02666;
   }
 
   .mrBean{
-    width: auto;
-    height: 50em;
+    width: 70em;
+    height: auto;
     margin-top: 1em;
     border: 0.2em solid black; 
   }

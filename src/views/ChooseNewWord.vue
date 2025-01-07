@@ -1,7 +1,8 @@
 <template>
     <HomeButton :text="uiLabels.goHome"/>
-    <h1>Grattis, du är ny spelledare!</h1>
-    <h2>Välj ett nytt ord:</h2>
+    <h1 class="congrats"> {{ uiLabels.newHost }} </h1>
+    <h2> {{ uiLabels.chooseNewWord }}</h2>
+    <div class="chooseWord">
     <div>
         <InputField
         v-bind:label="uiLabels.enterWord"
@@ -12,11 +13,12 @@
         </InputField>
     </div>
     <div class="item">
-      <Button 
+      <Button class="sendWordButton"
         v-bind:text="uiLabels.sendWord" 
         v-on:click="handleClick">
         {{ uiLabels.sendWord }}
       </Button>
+    </div>
     </div>
 </template>
 
@@ -103,6 +105,7 @@ export default {
           return;
         }
         //this.generateId();
+        socket.emit("reActivatePollId", this.pollId)
         this.startNewGame();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
       },
@@ -118,5 +121,34 @@ export default {
 </script>
 
 <style scoped>
-/* Your component styles go here */
+.sendWordButton{
+  background-color: #cf84a9;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  gap: 7em;
+  font-size: 1em;
+  transition: transform 0.3s ease;
+  width: 10em;
+  height: 5em;
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+}
+
+.sendWordButton:hover {
+ background-color: #a02666;
+ transform: rotate(1deg) scale(1.1);
+ transition: transform 0.2s ease-in-out;
+ }
+
+ .congrats {
+  font-size: 4em;
+ }
+
+ .chooseWord {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+ }
 </style>

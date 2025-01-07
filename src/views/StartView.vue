@@ -28,8 +28,9 @@
   <!-- Hängda gubben -->
   <HangPerson :wrongGuesses="wrongGuesses" :scale="0.5" />
 
-  <div class="create-join">
-    <router-link to="/create/">
+
+    <div class="create-join">
+      <router-link to="/submitword/">
       <button>{{ uiLabels.createGame }}</button>
     </router-link>
     <router-link to="/lobby/">
