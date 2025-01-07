@@ -45,8 +45,8 @@ const socket = io('http://localhost:3000'); // Justera URL efter behov
 }*/
  .homeButton {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 2em;
+  left: 5em;
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
@@ -54,8 +54,6 @@ const socket = io('http://localhost:3000'); // Justera URL efter behov
   border-radius: 5px;
   cursor: pointer;
   position: fixed;
-  top: 0;
-  left: 0;
   margin-top: 5px;
   margin-left: 3em;
 }

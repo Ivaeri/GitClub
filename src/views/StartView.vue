@@ -24,9 +24,7 @@
         </div>
       </div>
     </div>
-      <div class="homebutton">
-        <HomeButton :text="uiLabels.goHome"/>
-    </div>
+    
   </header>
     <div class="create-join">
       <router-link to="/create/">
@@ -44,15 +42,13 @@
  import ResponsiveNav from '@/components/ResponsiveNav.vue';
  import io from 'socket.io-client';
  import gameRules from '/server/gamerules.json';
- import HomeButton from '../components/HomeButton.vue';
  const socket = io("localhost:3000");
  
  
  export default {
   name: 'StartView',
   components: {
-    ResponsiveNav,
-    HomeButton
+    ResponsiveNav
   },
   data: function () {
     return {
@@ -121,19 +117,7 @@
     height:5rem;
     margin-right: 0.5rem;
   }
-  .hamburger {
-    color:white;
-    width:1em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding:0.5rem;
-    top:0;
-    left:0;
-    height: 2rem;
-    cursor: pointer;
-    font-size: 1.5rem;
-  }
+  
   .create-join {
   background-color: transparent;
   display: flex;
