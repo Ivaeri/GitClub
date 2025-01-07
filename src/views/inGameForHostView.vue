@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div v-if="ammountWrongLetters > 0" class="graveYard">
+    <div class="graveYard">
       <div >
         <HangPerson  v-bind:wrongGuesses="ammountWrongLetters" />
       </div>

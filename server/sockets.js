@@ -93,7 +93,6 @@ function sockets(io, socket, data) {
   socket.on("getParticipants", function(d) {
 
     io.emit('participantsUpdate',  { participants: data.getParticipants(d.pollId), pollId: d.pollId });
-    console.log("getParticipants kör i", data.getParticipants(d.pollId), d.pollId)
   });
 
   socket.on("getIndex", function(pollId) {

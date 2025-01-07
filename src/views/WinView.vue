@@ -40,7 +40,7 @@ export default {
     });
     socket.on("nail", nail => {
         this.nailer = nail;
-        console.log(this.nailer);
+        console.log("nailern är", this.nailer);
     });
     socket.on("newGameIsStarted", () => {
         this.newGameIsStarted = true;
