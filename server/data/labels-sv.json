@@ -43,5 +43,7 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
-	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!"
+	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
+	"congratsGameLeader": "Grattis, du är ny spelledare!",
+	"chooseNew": "Vänligen skriv in ordet för nästa runda:"
 }

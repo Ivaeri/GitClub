@@ -27,7 +27,7 @@
     
   </header>
     <div class="create-join">
-      <router-link to="/create/">
+      <router-link to="/submitword/">
       <button>{{ uiLabels.createGame }}</button>
       </router-link>
       <router-link to="/lobby/">
