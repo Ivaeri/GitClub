@@ -8,9 +8,9 @@
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
   </header>
-  
+  <h2 v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
-      <h2>{{ uiLabels.activeGames }}</h2>
+      
       <div v-for="poll in activePolls" 
       :key="poll" 
       class="poll-item"
@@ -23,6 +23,7 @@
           {{ poll.pollId}}
         </button>
       </div>
+    </div>
     </div>
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">
@@ -56,7 +57,7 @@
     <div v-if="activePolls.length - inActivePolls.length == 0" class="noGames">
         
         <h2>{{ uiLabels.noGames }}</h2>
-    <img src="/img/az0w7m53abb21.webp"> 
+    <img src="/img/az0w7m53abb21.webp" class="mrBean"> 
     </div>
   </div>
  
@@ -287,6 +288,13 @@ background-color: #a02666;
     background-color: #a02666;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
+  }
+
+  .mrBean{
+    width: auto;
+    height: 50em;
+    margin-top: 1em;
+    border: 0.2em solid black; 
   }
 
 
