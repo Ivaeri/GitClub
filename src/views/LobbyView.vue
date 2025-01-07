@@ -11,7 +11,11 @@
   <h2>{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length > 0" class="gamesContainer">
       
-      <div v-for="poll in activePolls" :key="poll" class="poll-item">
+      <div v-for="poll in activePolls" 
+      :key="poll" 
+      class="poll-item"
+     >
+     <div v-if="!inActivePolls.includes(poll.pollId)">
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
             {{ poll.hostName }}
@@ -19,6 +23,9 @@
           {{ poll.pollId}}
         </button>
       </div>
+      inactive polls: {{ this.inActivePolls}}
+      activepolls: {{ this.activePolls}}
+    </div>
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">
     <h3>{{ this.uiLabels.enterUsername }}</h3>
@@ -76,7 +83,8 @@ export default {
       participants: [],
       activePolls: [],
       chosenPollId: "",
-      anyIdIsClicked: false
+      anyIdIsClicked: false,
+      inActivePolls: []
     }
   },
   created: function () {
@@ -84,18 +92,23 @@ export default {
     socket.on("activePollsUpdate", (polls) => {
       this.activePolls = polls; });
     socket.on( "participantsUpdate", p => this.participants = p );
+    socket.on("inActivePolls", (polls) => {
+      this.inActivePolls = polls; });
     /*
     socket.on("removePollId", (oldPollId) => {
       this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
-*/
+
       socket.on("removeGameFromList", (oldPollId) => {
         this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
-    
+    */
+    socket.emit("getInActivePolls", this.pollId)
+     
 
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls");
   },
+
   methods: {
   validateAndJoin() {
     if (!this.newPollId.trim() || !this.activePolls.some(poll => poll.pollId === this.newPollId)) {

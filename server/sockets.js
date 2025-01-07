@@ -49,13 +49,19 @@ function sockets(io, socket, data) {
     socket.emit('questionUpdate', data.activateQuestion(d.pollId));
   });
 
-  socket.on("removeGame", function(pollId) {
-    data.removeGame(pollId)
-  })
-
   socket.on("removePollIdFromList", function(pollId) {
-    io.emit("removeGameFromList", pollId)
+    console.log("removePollIdFromList körs i sockets.js", pollId)
+    data.addToInActivePolls(pollId)
   },);
+
+  socket.on("getInActivePolls", function(pollId) {
+  const inActivePolls = data.getInActivePolls(pollId)
+  console.log("getInActivePolls körs i sockets.js", inActivePolls)
+
+    io.emit("inActivePolls", inActivePolls)
+  }) 
+
+ 
 
   socket.on("newGameHasStarted", function(pollId) {
   io.emit("newGameIsStarted", pollId)
