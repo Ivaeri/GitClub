@@ -8,9 +8,9 @@
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
   </header>
-  <h2>{{ uiLabels.activeGames }}</h2>
+  
     <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
-      
+      <h2>{{ uiLabels.activeGames }}</h2>
       <div v-for="poll in activePolls" 
       :key="poll" 
       class="poll-item"
@@ -54,6 +54,11 @@
         {{ uiLabels.participateGame }}
       </button>
     </div> 
+    <div v-if="activePolls.length - inActivePolls.length == 0" class="noGames">
+        
+        <h2>{{ uiLabels.noGames }}</h2>
+    <img src="/img/az0w7m53abb21.webp"> 
+    </div>
   </div>
  
   
