@@ -43,5 +43,6 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
+	"noGames": "Inga aktiva spel",
 	"nameTaken": "Användarnamnet är upptaget, välj ett annat!"
 }

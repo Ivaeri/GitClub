@@ -3,6 +3,7 @@ import {readFileSync} from "fs";
 
 function Data() {
   this.polls = {};
+  this.inActivePolls = [];
 }
 
 
@@ -175,6 +176,19 @@ Data.prototype.getNailInCoffin = function (pollId) {
     return this.polls[pollId].NailInCoffin
   }
 }
+
+Data.prototype.getInActivePolls = function (pollId) {
+  console.log('körs från getInActivePolls i data', this.inActivePolls)
+  return this.inActivePolls;
+};
+
+Data.prototype.addToInActivePolls = function (pollId) {
+  console.log('körs från addToInActivePolls i data', pollId)
+  if (this.polls[pollId]) { 
+    console.log('körs från if satsen i addToInActivePolls i data', pollId)
+    this.inActivePolls.push(pollId)
+   }
+};
 
 
 Data.prototype.getGuessedLetter = function (pollId) {
