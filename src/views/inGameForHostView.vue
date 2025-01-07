@@ -114,6 +114,7 @@
         this.sendToWinView();
       }
     },
+    
     sendToWinView () {
         this.$router.push('/winView/'+ this.pollId+ '/' + this.hostName)
     },

@@ -54,6 +54,12 @@ function sockets(io, socket, data) {
     data.addToInActivePolls(pollId)
   },);
 
+  socket.on("reActivatePollId", function(pollId) {
+  console.log("reActivatePollId körs i sockets.js", pollId)
+  const inActivePolls = data.reActivatePollId(pollId)
+  io.emit("inActivePolls", inActivePolls)
+  });
+
   socket.on("getInActivePolls", function(pollId) {
   const inActivePolls = data.getInActivePolls(pollId)
   console.log("getInActivePolls körs i sockets.js", inActivePolls)
