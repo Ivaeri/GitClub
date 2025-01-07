@@ -50,5 +50,6 @@
 	"chooseNewWord": "Välj ett nytt ord:",
 	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
 	"skipPlayer": "Hoppa över spelare",
-	"tooSlow": "För långsam? Tryck för att hoppa över spelare!"
+	"tooSlow": "För långsam? Tryck för att hoppa över spelare!",
+	"noGames": "Inga aktiva spel just nu"
 }

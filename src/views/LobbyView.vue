@@ -53,8 +53,9 @@
       </button>
     </div> 
     <div v-if="activePolls.length - inActivePolls.length == 0" class="noGames">
-        
+        <div>
         <h2>{{ uiLabels.noGames }}</h2>
+      </div>
     <img :src="this.images[this.currentImageIndex]" class="mrBean"> 
     </div>
   
