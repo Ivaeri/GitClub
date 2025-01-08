@@ -137,26 +137,41 @@
   
   <style scoped>
 
+
+  body {
+    overflow-x: hidden; 
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;/* Förhindra horisontell scroll */
+  }
+
   h1{
-    font-size: 600%;
+    font-size: 5rem;
+    max-width: 80%;
   }
 
   .container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center; 
     align-items: center; 
+    margin: 2em 2em;
   }
 
   .item {
-    display: flex;
+    flex: 1 1 100%; 
+    max-width: 20em;
     flex-direction: column;
     justify-content: center;
     }
   .item button{
+    flex: 1 1 40%;
     display: flex;
     flex-direction: column;
-    height: 6em; 
-    width: 8em;
+    height: 70%;
+    max-height: 12em;
+    width: 60%;
+    max-width:8em;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -173,6 +188,7 @@
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }
+
 
 
   

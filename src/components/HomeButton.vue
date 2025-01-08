@@ -36,27 +36,39 @@ const socket = io('http://localhost:3000');
 }
 </script>
  <style scoped>
-/*.toppbar {
+  .toppbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: #f8f9fa;
-}*/
+  
+}
  .homeButton {
-  position: absolute;
-  top: 2em;
-  left: 5em;
+  position: relative;
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 5px;
-  margin-left: 3em;
+  margin-left: calc(100% - 3em);
 }
  .homeButton:hover {
   background-color: #0056b3;
 }
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .homeButton {
+    padding: 8px 16px;
+    font-size: 0.9em;  
+  }
+}
+
+@media (max-width: 480px) {
+  .homeButton {
+    padding: 6px 12px; 
+    font-size: 0.8em;  
+  }
+}
+
 </style>
