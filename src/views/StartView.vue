@@ -119,7 +119,6 @@ header {
   align-items: center;
 }
 
-
 .create-join {
   background-color: transparent;
   display: flex;
@@ -145,7 +144,7 @@ header {
   transition: transform 0.3s ease;
   width: 20em;
   height: 10em;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .create-join button:hover {
@@ -184,7 +183,7 @@ header {
   text-align: center;
   justify-content: center;
   border: none;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .languageSwitchButton:hover {
@@ -204,7 +203,7 @@ header {
   background-color: #cf84a9;
   border-radius: 5px;
   padding: 0.3em;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .gameRules h5:hover {
@@ -244,7 +243,7 @@ header {
   
   .close::before {
     content: "✕";
-    color: rgb(60, 35, 35);
+    color: black;
   }
   .hide {
     left: -12em;

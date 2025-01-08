@@ -133,7 +133,7 @@
   <style scoped>
 
   h1{
-    font-size: 9em;
+    font-size: 600%;
   }
 
   .container {
@@ -150,17 +150,18 @@
   .item button{
     display: flex;
     flex-direction: column;
-    height: 4em;
+    height: 6em; 
+    width: 8em;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     background-color: #cf84a9;
-    border-radius: 5px;
+    border-radius: 0.5em;
     margin: 2em;  
     padding: 1em;
     color: white;
     border: none;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
   .item button:hover{
     background-color: #a02666;
