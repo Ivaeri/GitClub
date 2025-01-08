@@ -4,29 +4,26 @@
     <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
     </div>
-    <div class="logo" >
-      {{ uiLabels.titlegame }}
+    <div class="languagecontainer">
+      <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
+      <div class="switchLanguageDiv" v-on:click="switchLanguage">
+        {{ uiLabels.languagebox }}
+      </div>
+      <div class="gameRules">
+        <h5 v-on:click="showGameRules">
+          <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
+          <p v-else> {{ uiLabels.GameRules }}</p>
+        </h5>
+        <div v-if="gameRules" class="animate__animated animate__backInUp">
+          <ul>
+            <li v-for="rule in currentGameRules" v-bind:key="rule">{{ rule }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="buttonsContainer">
-  <button class="languageSwitchButton" v-on:click="switchLanguage">
-    <img :src="lang === 'sv' ? '/img/uk.png' : '/img/svenskflagga.jpg'" alt="flag" class="languageFlag">
-    <span class="languageText">{{ uiLabels.languagebox }}</span>
-  </button>
-
-<div class="gameRules">
-  <h5 v-on:click="showGameRules">
-    <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
-    <p v-else> {{ uiLabels.GameRules }}</p>
-  </h5>
-  <div v-if="gameRules" class="animate__animated animate__backInUp">
-    <ul>
-      <li v-for="rule in currentGameRules" v-bind:key="rule">{{ rule }}</li>
-    </ul>
-  </div>
-</div>
-</div>
   </header>
 
+  <!-- Hängda gubben -->
   <HangPerson :wrongGuesses="wrongGuesses" :scale="0.5" />
 
 
@@ -47,12 +44,12 @@ import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
 import HangPerson from "@/components/HangPerson.vue";
 
-const socket = io("192.168.166.109:3000");
+const socket = io("localhost:3000");
 
 export default {
   name: 'StartView',
   components: {
-    Logo, 
+    Logo,
     ResponsiveNav,
     HangPerson
   },
@@ -121,6 +118,7 @@ header {
   align-items: center;
 }
 
+
 .create-join {
   background-color: transparent;
   display: flex;
@@ -146,7 +144,7 @@ header {
   transition: transform 0.3s ease;
   width: 20em;
   height: 10em;
-  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
 }
 
 .create-join button:hover {
@@ -155,23 +153,24 @@ header {
   transition: transform 0.2s ease-in-out;
 }
 
-.buttonsContainer {
-  display: flex; /* Byt till flex för enkel justering av horisontell layout */
-  justify-content: flex-end; /* Placera knapparna till höger */
-  align-items: center; /* Centrera vertikalt */
-  gap: 1em; /* Skapa avstånd mellan knapparna */
+.languagecontainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   position: absolute;
-  top: 1em; /* Avstånd från toppen */
-  right: 1em; /* Avstånd från högerkanten */
-}
-.languageFlag{
-  height: 1.5em;
+  width: 15em;
+  height: 10em;
+  margin-top: 10px;
+  margin-right: 10px;
+  right: 0px;
+  top: 0em;
 }
 
-.languageSwitchButton {
-  display: flex;
-  width: 5.2em;
-  height: 2.5em;
+.switchLanguageDiv {
+  grid-row: 1;
+  grid-column: 2;
+  width: 4em;
+  height: 1.7em;
   right: 0;
   background-color: #cf84a9;
   border-radius: 10%;
@@ -184,17 +183,11 @@ header {
   align-items: center;
   text-align: center;
   justify-content: center;
-  border: none;
-  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
-}
-
-.languageSwitchButton:hover {
-  background-color: #a02666;
-  transform: rotate(1deg) scale(1.1);
-  transition: transform 0.2s ease-in-out;
 }
 
 .gameRules {
+  grid-row: 2;
+  grid-column: 1 / span 2;
   width: 8em;
   height: 1em;
   color: white;
@@ -205,7 +198,6 @@ header {
   background-color: #cf84a9;
   border-radius: 5px;
   padding: 0.3em;
-  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .gameRules h5:hover {
@@ -218,14 +210,30 @@ header {
   position: absolute;
   background-color: pink;
   margin-left: 5px;
+  grid-row: 3;
+  grid-column: 1;
   border-radius: 10%;
 }
 
+.gameRules ul {
+  padding-right: 10px;
+}
 
-.languageText{
-    min-width: 2.5em;
-    text-align: center;
-  }
+.gameRules li {
+  padding-top: 10px;
+}
+
+.languagecontainer button {
+  grid-row: 1;
+  grid-column: 1;
+  height: 4em;
+  width: 8em;
+  background-size: cover;
+  background-position: center;
+  left: 0;
+  cursor: pointer;
+  border-radius: 10%;
+}
 
 .swedishbutton {
   background-image: url("/img/svenskflagga.jpg");
@@ -242,10 +250,10 @@ header {
     align-items: center;
     justify-content: center;
   }
-  
+
   .close::before {
     content: "✕";
-    color: black;
+    color: rgb(60, 35, 35);
   }
   .hide {
     left: -12em;
