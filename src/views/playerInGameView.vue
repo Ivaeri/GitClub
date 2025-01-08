@@ -233,10 +233,13 @@ export default {
     console.log("emit sent to update win status");
     //socket.emit("removeGame", this.pollId)
     
-    
-    this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
-      
+    if (this.isGameWon) {
+      this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
+    }
     },
+   
+      
+    
   
 
     findIfGameIsWonViaData () {
@@ -280,18 +283,19 @@ export default {
 
     gameIsLost () {
       if (this.ammountWrongLetters > 6) { 
-        this.gameIsLostFlag = true;
+       // this.gameIsLostFlag = true;
         this.sendToLossView();
       }
     },
     sendToLossView () {
-      if (this.gameIsLostFlag) {
+     // if (this.gameIsLostFlag) {
         this.$router.push('/lossView/'+ this.pollId+ '/' + this.userName)
-      }
+    //  }
     }
     
     }
-  }
+}
+  
   
 </script>
 <style scoped>
