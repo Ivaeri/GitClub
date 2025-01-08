@@ -250,7 +250,7 @@ header {
 
   .close::before {
     content: "✕";
-    color: black;
+    color: rgb(60, 35, 35);
   }
   .hide {
     left: -12em;
