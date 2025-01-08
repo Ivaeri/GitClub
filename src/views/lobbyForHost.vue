@@ -1,5 +1,6 @@
 <template>
   <header>
+    <Logo />
   <h1>{{ uiLabels.awaitingPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
@@ -38,6 +39,7 @@
   </template>
   
   <script>
+  import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
   import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
@@ -45,6 +47,7 @@
   export default {
     name: 'LobbyForHost',
     components: {
+      Logo, 
       HomeButton
     },
     data: function () {
@@ -144,7 +147,7 @@ methods: {
     border: none;
     border-radius: 10%;
     cursor: pointer;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
   .startGameButtonPink:hover{
  background-color: #a02666;

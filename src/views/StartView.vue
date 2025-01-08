@@ -1,5 +1,6 @@
 <template>
   <header>
+    <Logo :isStartPage="true"/>
     <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
     </div>
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
 import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
@@ -47,6 +49,7 @@ const socket = io("localhost:3000");
 export default {
   name: 'StartView',
   components: {
+    Logo,
     ResponsiveNav,
     HangPerson
   },

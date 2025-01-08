@@ -1,12 +1,14 @@
 <template>
   <div clas="lobby-container">
   <header>
-    <h1>
-      {{ uiLabels.participateGame }}
-    </h1>
+    <Logo class="logostyle"/>
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
+    <h1>
+      {{ uiLabels.participateGame }}
+    </h1>
+
   </header>
   <h2 v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
@@ -16,7 +18,7 @@
       class="poll-item"
      >
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
-          <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
+          <span class="idPollStyle">
             {{ poll.hostName }}
           </span><br/>
           {{ poll.pollId}}
@@ -26,16 +28,19 @@
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">
     <h3>{{ this.uiLabels.enterUsername }}</h3>
+      <div class="userNameInput">
         <InputField 
           v-model="userName" 
           :placeholder="uiLabels.name" 
           id="username"
+          class="enterGameInput"
           @keydown.enter="validateAndParticipate">
         </InputField>
         <button class="joinGameButton" @click="validateAndParticipate">
            {{ uiLabels.participateGame }}
         </button>
       </div>
+    </div>
     <h2  v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.manualEnter }}</h2>
     <div class="manualJoin" v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">
       <label for="pollIdInput"> 
@@ -64,6 +69,7 @@
 </template> 
 
 <script>
+import Logo from "@/components/Logo.vue";
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
@@ -72,6 +78,7 @@ const socket = io("localhost:3000");
 export default {
   name: 'LobbyView',
   components: {
+    Logo, 
     InputField,
     HomeButton
   },
@@ -176,18 +183,31 @@ export default {
 </script>
 <style scoped>
 
-header{
-  height: 7em;
-}
 
 header h1{
-  margin-top: 0em;
   font-size: 6em;
+  text-align: center;
+  margin-top: 0em;
+  margin-bottom: 0em;
 }
 
-header h2{
+h2{
+  font-size: 3em;
+  margin-top: 0.5em;
+  text-align: center;
+  
+}
+
+.homebutton{
   margin-top: 1em;
 }
+
+.idPollstyle { 
+  font-size: '1.5em';
+  font-weight: 'bold';
+  margin-bottom: '5px';
+  }
+
 .enterGameInput{
   width: 8em;
   height: 2em;
@@ -195,19 +215,19 @@ header h2{
   font-size: larger;
   background-color: pink;
   color: black;
-  margin: 1em;
 }
 .lobby-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
   overflow: hidden;
 }
 
 .gamesContainer{
   background-color: lightblue;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     color:black;
     justify-content: center;
     padding: 1em;
@@ -226,7 +246,7 @@ header h2{
 }
 
 .gamesContainer::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: lightblue; 
   border-radius: 10px; 
 }
 
@@ -266,7 +286,7 @@ header h2{
   align-items: center;
   padding: 1em;
   box-sizing: 1em;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .poll-button:hover {
@@ -281,16 +301,15 @@ header h2{
 }
 
 .joinGameButton {
-  width: 6em;
-  height: 5em;
+  width: 5em;
+  height: 3em;
   background-color: #cf84a9;
   cursor: pointer;
-  margin-left: 1em;
+  margin-left: 0.5em;
   border-radius: 10px;
-  color: white;
-  border: none;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
-  margin: 1em;
+  color: rgb(3, 3, 3);
+  border: 1px solid black;
+  
   }
   .joinGameButton:hover{
     background-color: #a02666;
@@ -299,11 +318,104 @@ header h2{
   }
 
   .mrBean{
-    width: 70em;
-    height: auto;
+    width: 35%;
+    height: 35%;
     margin-top: 1em;
     border: 0.2em solid black; 
   }
 
+  .userNameDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .userNameInput {
+    display: flex;
+    align-items: center;
+
+  }
+
+  
+  @media (max-width: 768px) {
+
+  header h1 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header h1 {
+    font-size: 4em;
+    text-align: center;
+  }
+
+  h2{
+  font-size: 2em;
+  margin-top: 1em;
+  width: 80%;
+  margin-left: 10%;
+  }
+
+  .homebutton{
+    align-self: flex-end;
+    margin-right: 0;
+  }
+
+  .gamesContainer {
+  
+    width: 75vh;
+    height: auto;
+
+  }
+
+  .poll-button {
+    width: 90%;
+    height: auto;
+    font-size: 1.2em;
+  }
+
+  .joinGameButton {
+    width: 6em;
+    height: 4em;
+  }
+
+  .mrBean {
+    width: 75%;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 2em;
+    text-align: center;
+  }
+
+  h2{
+  font-size: 1em;
+  margin-top: 1em;
+  text-align: center;
+}
+
+  .logostyle {
+    margin-left: 1.3em;
+    margin-top: 0.5em;
+  }
+
+  .gamesContainer {
+    width: 70%; /* Justera bredden ytterligare för mindre skärmar */
+    height: auto;
+    padding: 0.5em;
+  }
+  
+
+  .poll-button {
+    font-size: 1em;
+    padding: 0.5em 1em;
+  }
+
+  .joinGameButton {
+    
+    font-size: 0.5em;
+  }
+}
 </style>

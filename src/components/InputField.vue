@@ -45,14 +45,16 @@ export default {
   .inputField {
   background-color: pink;
   color: black;
-  padding: 10px 20px; /* Justera padding för att kompensera för större text */
+  padding: 0.5em 1em; /* Justera padding för att kompensera för större text */
   text-align: center;
   display: inline-block;
-  font-size: 24px; /* Ändra textstorleken här */
-  margin: 4px 2px;
+  font-size: 2rem; /* Ändra textstorleken här */
+  margin: 0.5em auto;
   cursor: text;
-  height: 3em; /* Justera höjden för att kompensera för större text */
-  width: 20em; /* Justera bredden om nödvändigt */
+  height: auto; /* Justera höjden för att kompensera för större text */
+  width: 90%; /* Justera bredden om nödvändigt */
+  max-width: 20em;
+  box-sizing: border-box;
 }
 
     </style>
