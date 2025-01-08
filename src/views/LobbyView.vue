@@ -1,7 +1,7 @@
 <template>
   <div clas="lobby-container">
   <header>
-    <Logo />
+    <Logo class="logostyle"/>
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
@@ -187,12 +187,15 @@ header{
 header h1{
   font-size: 6em;
   text-align: center;
+  margin-top: 0em;
+  margin-bottom: 0em;
 }
 
 h2{
   font-size: 3em;
-  margin-top: 1em;
+  margin-top: 0.5em;
   text-align: center;
+  
 }
 
 .homebutton{
@@ -212,7 +215,6 @@ h2{
   font-size: larger;
   background-color: pink;
   color: black;
-  margin: 1em;
 }
 .lobby-container {
   display: flex;
@@ -256,8 +258,6 @@ h2{
 .gamesContainer::-webkit-scrollbar-thumb:hover {
   background: hotpink; 
 }
-
-
 
 
 .manualJoin {
@@ -307,8 +307,8 @@ h2{
   cursor: pointer;
   margin-left: 1em;
   border-radius: 10px;
-  color: white;
-  border: none;
+  color: rgb(3, 3, 3);
+  border: 1px solid black;
   box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   margin: 1em;
   }
@@ -339,7 +339,8 @@ h2{
   h2{
   font-size: 2em;
   margin-top: 1em;
-  text-align: center;
+  width: 80%;
+  margin-left: 10%;
   }
 
   .homebutton{
@@ -349,8 +350,9 @@ h2{
 
   .gamesContainer {
   
-    width: 90vh;
+    width: 75vh;
     height: auto;
+
   }
 
   .poll-button {
@@ -381,8 +383,13 @@ h2{
   text-align: center;
 }
 
+  .logostyle {
+    margin-left: 1em;
+    margin-top: 0.5em;
+  }
+
   .gamesContainer {
-    width: 100%; /* Justera bredden ytterligare för mindre skärmar */
+    width: 70%; /* Justera bredden ytterligare för mindre skärmar */
     height: auto;
     padding: 0.5em;
   }
@@ -394,6 +401,8 @@ h2{
   }
 
   .joinGameButton {
+    
+    font-size: 0.5em;
     width: 4em;
     height: 3em;
   }
