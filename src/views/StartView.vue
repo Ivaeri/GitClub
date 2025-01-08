@@ -1,6 +1,6 @@
 <template>
   <header>
-    <Logo :isStartPage="true"/>
+    <Logo :text="uiLabels.logo" :isStartPage="true"/>
     <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
     </div>
