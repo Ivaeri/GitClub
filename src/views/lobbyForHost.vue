@@ -19,7 +19,7 @@
     </div>
     <div class="buttonContainer">
       <div v-if="participants.length > 0">
-        <button v-on:click="startGame" class="startGameButtonPink">
+        <button v-on:click="startGamee" class="startGameButtonPink">
             {{uiLabels.start}}
         </button>
       </div>
@@ -80,8 +80,9 @@ socket.emit( "getUILabels", this.lang );
 socket.emit("getParticipants", { pollId: this.pollId });
 },
 
+
 methods: {
-  startGame: function () {
+  startGamee: function () {
     socket.emit("startPoll", this.pollId);
     this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword+ '/' + this.hostName);
     console.log("reached startGame with values:", this.pollId, this.enteredword, this.hostName);
@@ -89,7 +90,9 @@ methods: {
     socket.emit("getInActivePolls", this.pollId)
     //socket.emit("deletePollId", this.pollId);
    // socket.emit("removeGame", this.pollId)
+   
   },
+  
 
   /*validateAndParticipate() {
     if (!this.userName.trim()) {

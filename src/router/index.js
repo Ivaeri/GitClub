@@ -13,8 +13,24 @@ const router = createRouter({
       {
       path: '/playerInGame/:id/:id2',
       name: 'playerInGameView',
-      component: () => import('../views/playerInGameView.vue')
-    },
+      component: () => import('../views/playerInGameView.vue'),
+      beforeEnter: (to, from, next) => {
+        console.log('Navigating to playerInGameView with params:', to.params);
+        console.log('Navigating from:', from.fullPath);
+        next();
+      }
+      },
+      {
+        path: '/inGameForHost/:id/:id2/:id3',
+        name: 'inGameForHostView',
+        component: () => import('../views/inGameForHostView.vue'),
+        beforeEnter: (to, from, next) => {
+          console.log('Navigating to ingameforhost with params:', to.params);
+          console.log('Navigating from:', from.fullPath);
+          next();
+        }
+        },
+    
     {
       path: '/lobby/',
       name: 'LobbyView:id',
@@ -31,12 +47,8 @@ const router = createRouter({
       component: () => import('../views/lobbyForHost.vue')
 
     },
-    {
-      path: '/inGameForHost/:id/:id2/:id3',
-      name: 'inGameForHostView',
-      component: () => import('../views/inGameForHostView.vue')
 
-    },
+    
     {
       path: '/create/',
       name: 'CreateView',
@@ -51,7 +63,12 @@ const router = createRouter({
     {
       path: '/winView/:id/:id2',
       name: 'WinView',
-      component: () => import('../views/WinView.vue')
+      component: () => import('../views/WinView.vue'),
+      beforeEnter: (to, from, next) => {
+        console.log('Navigating to WinView with params:', to.params);
+        console.log('Navigating from:', from.fullPath);
+        next();
+      }
     },
     {
       path: '/lossView/:id/:id2',

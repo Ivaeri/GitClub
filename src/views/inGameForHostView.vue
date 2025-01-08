@@ -115,21 +115,25 @@
 
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
+        console.log("Game is won, navigating to win view");
         this.sendToWinView();
       }
     },
     
     sendToWinView () {
+        console.log("Navigating to win view");
         this.$router.push('/winView/'+ this.pollId+ '/' + this.hostName)
     },
 
     skipPlayer () {
+      console.log("Skipping player");
       socket.emit("updateIndex", this.pollId)
       socket.emit("getIndex", this.pollId )
     },
 
     sendToLossView () {
       if (this.correctguesses == this.enteredword.length) {
+        console.log("Navigating to loss view");
         this.$router.push('/lossView/'+ this.pollId + '/' + this.hostName)
     }
   }}

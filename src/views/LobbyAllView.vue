@@ -59,12 +59,18 @@
           console.log("Uppdateringen ignorerades för pollId:", data.pollId);
         }
       });
-      socket.on( "startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
+      socket.on("startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
       socket.on("pollData", data => this.hostUserName = data.userName );
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
       socket.emit("getParticipants", { pollId: this.pollId });
     },
+    unmounted() {
+  socket.off("startPoll");
+  console.log("unmounted");
+},
+    
+
     methods: {
  
  
