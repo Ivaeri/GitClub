@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Logo />
+  </div>
     <HomeButton :text="uiLabels.goHome"/>
     <h1 class="congrats"> {{ uiLabels.newHost }} </h1>
     <h2> {{ uiLabels.chooseNewWord }}</h2>
@@ -23,6 +26,7 @@
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
@@ -31,7 +35,8 @@ export default {
     name: 'WinView',
     components: {
         HomeButton,
-        InputField
+        InputField, 
+        Logo
     },
     data: function () {
         return {

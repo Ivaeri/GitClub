@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Logo />
     lang: {{ lang }}
     {{ question.q }}
   </div>
@@ -10,6 +11,7 @@
 
 <script>
 // @ is an alias to /src
+import Logo from "@/components/Logo.vue";
 import BarsComponent from '@/components/BarsComponent.vue';
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
@@ -17,6 +19,7 @@ const socket = io("localhost:3000");
 export default {
   name: 'ResultView',
   components: {
+    Logo,
     BarsComponent
   },
   data: function () {
@@ -34,6 +37,10 @@ export default {
     socket.on("questionUpdate", update => this.question = update );
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
+    socket.on("connect_error", (err) => {
+      console.error("Connection error:", err);
+      alert("Kunde inte ansluta till servern.");
+    });
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
     <header>
+        <Logo />
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }}</div>
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win2 }}</div>
     </header>
@@ -15,12 +16,14 @@
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
 export default {
     name: 'WinView',
     components: {
+        Logo, 
         HomeButton
     },
     data: function () {

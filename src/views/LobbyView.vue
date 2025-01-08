@@ -1,6 +1,7 @@
 <template>
   <div clas="lobby-container">
   <header>
+    <Logo />
     <h1>
       {{ uiLabels.participateGame }}
     </h1>
@@ -64,6 +65,7 @@
 </template> 
 
 <script>
+import Logo from "@/components/Logo.vue";
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
@@ -72,6 +74,7 @@ const socket = io("localhost:3000");
 export default {
   name: 'LobbyView',
   components: {
+    Logo, 
     InputField,
     HomeButton
   },
