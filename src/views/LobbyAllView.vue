@@ -1,5 +1,6 @@
 <template>
     <div>
+      <Logo />
       {{ this.uiLabels.id }}{{this.pollId}}
       <h1>{{ hostUserName }}{{ uiLabels.idButton }}</h1>
       <div class="homebutton">
@@ -25,6 +26,7 @@
 </template>
   
   <script>
+  import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
   import InputField from '../components/InputField.vue';
   import HomeButton from '../components/HomeButton.vue';
@@ -33,6 +35,7 @@
   export default {
     name: 'LobbyAll',
     components: {
+      Logo, 
       InputField,
       HomeButton
     },

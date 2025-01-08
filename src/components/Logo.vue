@@ -21,10 +21,10 @@ export default {
     font-family: 'Sue Ellen Francisco', cursive;
     text-transform: uppercase; 
     letter-spacing: 0.1em;
-    font-size: 2em;
+    font-size: 1.5em;
     color: rgb(4, 16, 131); 
     position: absolute; 
-    top: 40%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, -40%);
     /*margin: 1rem auto; */

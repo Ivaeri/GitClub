@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Logo />
+  </div>
     <h1>{{ uiLabels.titlegame }}</h1>
     <div class="skipPlayer">
         <h3> {{ uiLabels.tooSlow }}</h3>
@@ -37,6 +40,7 @@
     </template>
     
     <script>
+    import Logo from "@/components/Logo.vue";
     import io from 'socket.io-client';
     import HomeButton from '../components/HomeButton.vue';
     const socket = io("localhost:3000");
@@ -45,6 +49,7 @@
     export default {
       name: 'lobbyForHost',
       components: {
+        Logo, 
         HomeButton,
         HangPerson
       },

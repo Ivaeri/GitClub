@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Logo />
+  </div>
   <h1>{{uiLabels.coop}}</h1>
   <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
@@ -29,6 +32,7 @@
 </template>
   
   <script>
+  import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
   import NewPageButton from '../components/NewPageButton.vue';
   import InputField from '../components/InputField.vue';
@@ -40,6 +44,7 @@
   export default {
     name: 'wordSubmission',
     components: {
+      Logo, 
       NewPageButton,
       InputField,
       HomeButton

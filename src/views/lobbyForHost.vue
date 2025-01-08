@@ -1,5 +1,6 @@
 <template>
   <header>
+    <Logo />
   <h1>{{ uiLabels.awaitingPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
@@ -38,6 +39,7 @@
   </template>
   
   <script>
+  import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
   import HomeButton from '../components/HomeButton.vue';
   const socket = io("localhost:3000");
@@ -45,6 +47,7 @@
   export default {
     name: 'LobbyForHost',
     components: {
+      Logo, 
       HomeButton
     },
     data: function () {
