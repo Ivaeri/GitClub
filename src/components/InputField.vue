@@ -52,8 +52,8 @@ export default {
   margin: 0.5em auto;
   cursor: text;
   height: auto; /* Justera höjden för att kompensera för större text */
-  width: 90%; /* Justera bredden om nödvändigt */
-  max-width: 20em;
+  width: 100%; /* Justera bredden om nödvändigt */
+  max-width: 7000em;
   box-sizing: border-box;
 }
 
