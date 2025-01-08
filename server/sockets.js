@@ -103,7 +103,7 @@ function sockets(io, socket, data) {
 
   socket.on("getIndex", function(pollId) {
     let index = data.getIndex(pollId);
-    io.emit('index', index);
+    io.emit('index', {index: index, pollId: pollId});
   });
 
   socket.on("getWord", function(pollId) {
@@ -159,12 +159,12 @@ function sockets(io, socket, data) {
 
   socket.on("getAmountWrongLetters", function(pollId){
     let amount = data.getAmountWrongLetters(pollId)
-    io.emit("amountWrongLetters", amount)
+    io.emit("amountWrongLetters", {amount: amount, pollId: pollId})
   })
 
   socket.on("getGuessedLetters", function(pollId){
     let letters = data.getGuessedLetter(pollId);
-    io.emit("letters", letters);
+    io.emit("letters", {letters: letters, pollId: pollId});
   })
 
   socket.on("StartNewGame", function(d) {

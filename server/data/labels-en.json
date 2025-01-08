@@ -22,7 +22,7 @@
 	"id": "Game-id: ",
 	"fillName": "Please enter a username before continuing",
 	"fillNumber": "Please enter a valid game-id before continuing",
-	"welcome": "Welcome to the game ",
+	"welcome": "Welcome to ",
 	"activeGames": "Active games",
 	"goHome": "Go to home page",
 	"GameRules": "Show gamerules",

@@ -9,9 +9,9 @@
     <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
     </div>
-    <!--<button class="restartButton" v-on:click="goToGameLobby">
+    <button class="restartButton" v-on:click="goToGameLobby">
         Play Again?
-    </button>-->
+    </button>
 </template>
 
 <script>
