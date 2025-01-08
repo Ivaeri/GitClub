@@ -140,8 +140,11 @@ export default {
     console.log("Uppdateringen ignorerades för pollId:", data.pollId);
   }
 });
-    socket.on( "index", index => {
-      this.index = index });
+socket.on( "index", (data) => {
+      if (data.pollId === this.pollId) {
+        this.index = data.index;
+      }
+      });
     
    // socket.on( "letters", letters => this.allGuessedLetters = letters );
 

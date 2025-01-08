@@ -103,7 +103,7 @@ function sockets(io, socket, data) {
 
   socket.on("getIndex", function(pollId) {
     let index = data.getIndex(pollId);
-    io.emit('index', index);
+    io.emit('index', {index: index, pollId: pollId});
   });
 
   socket.on("getWord", function(pollId) {

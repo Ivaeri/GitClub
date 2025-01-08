@@ -105,8 +105,12 @@ socket.on("amountWrongLetters", (data) => {
 
   }
 });
-    socket.on( "index", index => {
-      this.index = index });
+    socket.on( "index", (data) => {
+      if (data.pollId === this.pollId) {
+        this.index = data.index;
+      }
+      });
+      
 
     socket.on("wonOrNot", (isWon) => {
     this.sendToLossView();
