@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="logo">
     <Logo />
   </div>
-  <h1>{{uiLabels.coop}}</h1>
-  <div class="homebutton">
+  <div class="homeButton">
       <HomeButton :text="uiLabels.goHome"/> 
   </div> 
+  <h1>{{uiLabels.coop}}</h1>
   <div class="container">
     <div class="item">
       <InputField
@@ -140,27 +140,38 @@
 
   body {
     overflow-x: hidden; 
-    overflow-y: hidden;
     margin: 0;
-    padding: 0;/* Förhindra horisontell scroll */
+    padding: 0;
+    box-sizing: border-box;
   }
 
   h1{
     font-size: 5rem;
-    max-width: 80%;
+    margin: 0.6em;
   }
 
   .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
     align-items: center; 
     margin: 2em 2em;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
   }
+
+  .logo {
+  text-align: center;
+  margin: 2em auto; /* Ger avstånd ovanför och under logon */
+  position: relative; /* Säkerställ att z-index fungerar */
+  z-index: 1; /* Placera logon ovanpå andra element om de överlappar */
+}
+
 
   .item {
     flex: 1 1 100%; 
-    max-width: 20em;
+    max-width: 40em;
     flex-direction: column;
     justify-content: center;
     }
@@ -168,17 +179,17 @@
     flex: 1 1 40%;
     display: flex;
     flex-direction: column;
-    height: 70%;
-    max-height: 12em;
-    width: 60%;
-    max-width:8em;
+    width: 10em;
+    height: 8em;
+    max-width: 9rem;
+    max-height: 10rem;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     background-color: #cf84a9;
     border-radius: 0.5em;
-    margin: 2em;  
-    padding: 1em;
+    margin: 2em;
+    padding: 0.5em;
     color: white;
     border: none;
     box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
@@ -188,7 +199,42 @@
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }
+  @media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Lägg elementen i en kolumn */
+    margin: 1em; /* Mindre marginaler */
+  }
 
+  .item {
+    flex: 1 1 100%; /* Varje element tar upp hela bredden */
+    max-width: none; /* Ta bort maxbreddsbegränsning */
+    margin: 0.5em 0; /* Mindre mellanrum mellan element */
+    width: 100%;
+  }
+  .logo{
+    position: relative;
+    margin-top: 1em;
+    margin-bottom: 0.1em;
+  }
+  .homeButton{
+    position: relative;
+    margin-top: 0em;
+    margin-bottom: 1em;
+  }
+  .inputField {
+    width: 90%; /* Fyll 90% av skärmen */
+    font-size: 1.2rem; /* Mindre textstorlek */
+    padding: 0.8em; /* Anpassa padding för mobil */
+  }
+
+  .item button {
+    width: 82%; /* Gör knapparna lika breda som skärmen */
+    max-width: none; /* Ingen maxbreddsbegränsning */
+    padding: 0.8em; /* Anpassa padding */
+    margin-right: 30em;
+  }
+  
+}
 
 
   

@@ -1,18 +1,41 @@
 <template>
     <div class="logo" :class="{ 'is-startpage': isStartPage}">
-        Häng Person
+        {{ text }}
     </div>
 </template>
 
 <script>
+
+
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000'); 
+
 export default {
     name: "Logo", 
     props: {
+        text: {
+            type: String,
+            default: ""
+        },
         isStartPage: {
             type: Boolean, 
             default: false, 
         }, 
     }, 
+
+    data: function () {
+    return {
+      uiLabels: {},
+      lang: localStorage.getItem( "lang") || "en"
+      }
+    },
+ 
+  created() {
+    socket.on("uiLabels", (labels) => {
+        this.uiLabels = labels;
+      });
+    socket.emit("getUILabels", this.lang);
+  },
 };
 </script>
 
