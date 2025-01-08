@@ -269,7 +269,7 @@ header h2{
   align-items: center;
   padding: 1em;
   box-sizing: 1em;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .poll-button:hover {
@@ -292,7 +292,7 @@ header h2{
   border-radius: 10px;
   color: white;
   border: none;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   margin: 1em;
   }
   .joinGameButton:hover{
