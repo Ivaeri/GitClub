@@ -1,5 +1,6 @@
 <template>
     <header>
+        <Logo />
         <div class="animate__animated animate__zoomInDown gameover">{{ uiLabels.gameOver }}!
             <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
         </div>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
 import HangPerson from '../components/HangPerson.vue';
@@ -21,8 +23,9 @@ const socket = io("localhost:3000");
 export default {
     name: 'LossView',
     components: {
+        Logo, 
         HomeButton,
-        HangPerson
+        HangPerson, 
     },
     data: function () {
         return {

@@ -1,6 +1,10 @@
 <template>
+  
     <h1>{{uiLabels.coop}}</h1>
     <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
+    <div> 
+      <Logo />
+    </div>
     <div class="homebutton">
         <HomeButton :text="uiLabels.goHome" v-on:click="this.leavePoll"/> 
     </div>
@@ -77,7 +81,7 @@
 
 <script>
 // @ is an alias to /src
-
+import Logo from "@/components/Logo.vue";
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
@@ -86,7 +90,8 @@ const socket = io("localhost:3000");
 
 export default {
   name: 'lobbyForHost',
-  components: {
+  components: { 
+    Logo, 
     HomeButton,
     InputField,
     HangPerson
@@ -142,7 +147,6 @@ export default {
 });
     socket.on( "index", index => {
       this.index = index });
-    
     socket.on( "letters", letters => this.allGuessedLetters = letters );
     socket.on("word", word => this.trueWord = word );
     socket.on("wonOrNot", (isWon) => {
@@ -154,8 +158,9 @@ export default {
       this.ammountWrongLetters = wrongGuesses;
       this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
     });
-
-
+    socket.on('connect_error', () => {
+      alert('Anslutningen till servern tappades. Försök igen senare.');
+    });
     
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );

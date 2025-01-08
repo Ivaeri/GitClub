@@ -1,6 +1,7 @@
 <template>
   <div clas="lobby-container">
   <header>
+    <Logo />
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
@@ -65,6 +66,7 @@
 </template> 
 
 <script>
+import Logo from "@/components/Logo.vue";
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
@@ -73,6 +75,7 @@ const socket = io("localhost:3000");
 export default {
   name: 'LobbyView',
   components: {
+    Logo, 
     InputField,
     HomeButton
   },
@@ -283,7 +286,7 @@ h2{
   align-items: center;
   padding: 1em;
   box-sizing: 1em;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .poll-button:hover {
@@ -306,7 +309,7 @@ h2{
   border-radius: 10px;
   color: white;
   border: none;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   margin: 1em;
   }
   .joinGameButton:hover{

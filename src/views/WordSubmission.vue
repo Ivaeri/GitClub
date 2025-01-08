@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Logo />
+  </div>
   <h1>{{uiLabels.coop}}</h1>
   <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
@@ -29,6 +32,7 @@
 </template>
   
   <script>
+  import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
   import NewPageButton from '../components/NewPageButton.vue';
   import InputField from '../components/InputField.vue';
@@ -40,6 +44,7 @@
   export default {
     name: 'wordSubmission',
     components: {
+      Logo, 
       NewPageButton,
       InputField,
       HomeButton
@@ -132,41 +137,58 @@
   
   <style scoped>
 
+
+  body {
+    overflow-x: hidden; 
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;/* Förhindra horisontell scroll */
+  }
+
   h1{
-    font-size: 9em;
+    font-size: 5rem;
+    max-width: 80%;
   }
 
   .container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center; 
     align-items: center; 
+    margin: 2em 2em;
   }
 
   .item {
-    display: flex;
+    flex: 1 1 100%; 
+    max-width: 20em;
     flex-direction: column;
     justify-content: center;
     }
   .item button{
+    flex: 1 1 40%;
     display: flex;
     flex-direction: column;
-    height: 4em;
+    height: 70%;
+    max-height: 12em;
+    width: 60%;
+    max-width:8em;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     background-color: #cf84a9;
-    border-radius: 5px;
+    border-radius: 0.5em;
     margin: 2em;  
     padding: 1em;
     color: white;
     border: none;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
   .item button:hover{
     background-color: #a02666;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }
+
 
 
   
