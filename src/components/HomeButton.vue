@@ -44,7 +44,7 @@ const socket = io('http://localhost:3000');
   background-color: #f8f9fa;
 }*/
  .homeButton {
-  position: fixed;
+  position: absolute;
   top: 2em;
   left: 5em;
   background-color: #007bff;
@@ -53,7 +53,6 @@ const socket = io('http://localhost:3000');
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  position: fixed;
   margin-top: 5px;
   margin-left: 3em;
 }
