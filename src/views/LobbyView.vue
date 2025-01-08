@@ -28,16 +28,19 @@
     </div>
     <div class="userNameDiv" v-if="this.anyIdIsClicked">
     <h3>{{ this.uiLabels.enterUsername }}</h3>
+      <div class="userNameInput">
         <InputField 
           v-model="userName" 
           :placeholder="uiLabels.name" 
           id="username"
+          class="enterGameInput"
           @keydown.enter="validateAndParticipate">
         </InputField>
         <button class="joinGameButton" @click="validateAndParticipate">
            {{ uiLabels.participateGame }}
         </button>
       </div>
+    </div>
     <h2  v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.manualEnter }}</h2>
     <div class="manualJoin" v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">
       <label for="pollIdInput"> 
@@ -180,9 +183,6 @@ export default {
 </script>
 <style scoped>
 
-header{
-  /*height: 7em;*/
-}
 
 header h1{
   font-size: 6em;
@@ -301,16 +301,15 @@ h2{
 }
 
 .joinGameButton {
-  width: 6em;
-  height: 5em;
+  width: 5em;
+  height: 3em;
   background-color: #cf84a9;
   cursor: pointer;
-  margin-left: 1em;
+  margin-left: 0.5em;
   border-radius: 10px;
   color: rgb(3, 3, 3);
   border: 1px solid black;
-  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
-  margin: 1em;
+  
   }
   .joinGameButton:hover{
     background-color: #a02666;
@@ -324,6 +323,20 @@ h2{
     margin-top: 1em;
     border: 0.2em solid black; 
   }
+
+  .userNameDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userNameInput {
+    display: flex;
+    align-items: center;
+
+  }
+
+  
   @media (max-width: 768px) {
 
   header h1 {
@@ -362,7 +375,7 @@ h2{
   }
 
   .joinGameButton {
-    width: 5em;
+    width: 6em;
     height: 4em;
   }
 
@@ -384,7 +397,7 @@ h2{
 }
 
   .logostyle {
-    margin-left: 1em;
+    margin-left: 1.3em;
     margin-top: 0.5em;
   }
 
@@ -403,8 +416,6 @@ h2{
   .joinGameButton {
     
     font-size: 0.5em;
-    width: 4em;
-    height: 3em;
   }
 }
 </style>
