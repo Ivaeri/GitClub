@@ -201,6 +201,11 @@ socket.on( "index", (data) => {
     socket.emit("getAmountWrongLetters", this.pollId );
   },
 
+  unmounted() {
+  socket.off("wonOrNot");
+  socket.off("amountWrongLetters");
+},
+
 
   methods: {
 

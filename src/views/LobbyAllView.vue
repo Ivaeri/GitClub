@@ -77,7 +77,6 @@
     },
     unmounted() {
   socket.off("startPoll");
-  console.log("unmounted");
 },
     
 
