@@ -143,17 +143,42 @@ export default {
     socket.on( "index", index => {
       this.index = index });
     
-    socket.on( "letters", letters => this.allGuessedLetters = letters );
+   // socket.on( "letters", letters => this.allGuessedLetters = letters );
+
+    socket.on("letters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
+    console.log("gissade bokstäver uppdaterades för pollId:", data.pollId);
+  } else {
+    console.log("nya bokstäver ignorerades för pollId:", data.pollId);
+  }
+});
+
     socket.on("word", word => this.trueWord = word );
     socket.on("wonOrNot", (isWon) => {
       this.isGameWon = isWon;
       this.setGameToWonViaData();
       console.log("isGameWon?", this.isGameWon);
     });    
+    /*
     socket.on("amountWrongLetters", (wrongGuesses) => {
       this.ammountWrongLetters = wrongGuesses;
       this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
-    });
+    });*/
+
+    socket.on("amountWrongLetters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.ammountWrongLetters = data.amount;
+    this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+
+  }
+});
+/*
+    socket.on("amountWrongLetters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.ammountWrongLetters = wrongGuesses;
+  }
+});*/
 
 
     

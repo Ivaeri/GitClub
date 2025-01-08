@@ -73,11 +73,21 @@
     socket.on("uiLabels", (labels) => {
       this.uiLabels = labels;
     });
-
+/*
     socket.on("letters", (letters) => {
       this.allGuessedLetters = letters;
-      this.updateCorrectGuesses();
-    });
+      
+    });*/
+
+    socket.on("letters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
+    this.updateCorrectGuesses();
+    console.log("gissade bokstäver uppdaterades för pollId:", data.pollId);
+  } else {
+    console.log("nya bokstäver ignorerades för pollId:", data.pollId);
+  }
+});
     socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
@@ -87,10 +97,14 @@
   }
 });
 
-    socket.on("amountWrongLetters", (wrongGuesses) => {
-      this.ammountWrongLetters = wrongGuesses;
-      this.gameIsWon(); // Kontrollera om spelet är vunnet för hosten efter uppdatering
-    });
+socket.on("amountWrongLetters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.ammountWrongLetters = data.amount;
+    console.log("Antal felaktiga bokstäver uppdaterades för pollId:", this.ammountWrongLetters);
+    this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+
+  }
+});
     socket.on( "index", index => {
       this.index = index });
 
