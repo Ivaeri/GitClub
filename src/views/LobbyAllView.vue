@@ -1,27 +1,34 @@
 <template>
     <div>
-      <Logo />
-      {{ this.uiLabels.id }}{{this.pollId}}
-      <h1>{{ hostUserName }}{{ uiLabels.idButton }}</h1>
+      <Logo class="logoStyle"/>
+      <h1>
+        {{ hostUserName }}{{ uiLabels.idButton }}
+      </h1>
       <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
       </div>
-      </div>
+    </div>
       
+    <div>
       <div>
-        <div>{{ uiLabels.welcome }} {{ userName }}!</div>
-          <div>{{ this.uiLabels.awaitingHost1 }}{{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}</div>
-        </div>
-        <div v-if="participants.length > 0"  class="participants-list">
-          <h2>{{ uiLabels.joinedPlayers }}</h2>
-          <ul>
-            <div class="player" v-for="participant in participants" :key="participant.name">
-              {{ participant.name }}
-        </div>
-  </ul>
-</div>
+        {{ uiLabels.welcome }} {{ this.uiLabels.id }}{{this.pollId}} {{ userName }}!
+      </div>
+      <div>
+        {{ this.uiLabels.awaitingHost1 }}{{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}
+      </div>
+      </div>
+    <div v-if="participants.length > 0"  class="participants-list">
+      <h2>
+        {{ uiLabels.joinedPlayers }}
+      </h2>
+        <ul>
+          <div class="player" v-for="participant in participants" :key="participant.name">
+            {{ participant.name }}
+          </div>
+        </ul>
+    </div>
 
-   
+    
 
 </template>
   
@@ -85,7 +92,7 @@
     width: 5em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
-    font-size: 1.5em; 
+    font-size: 2em; 
     margin-bottom: 0.5em; 
     display: flex;
     align-items: center;
@@ -95,8 +102,19 @@
 
   .participants-list{
     display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    .player{
+      font-size: 1.5em;
+    }
+
+    .logoStyle{
+      margin-left: 3%;
+      margin-top: 0.5em;
+    }
   }
 </style>
