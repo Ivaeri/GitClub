@@ -1,12 +1,13 @@
 <template>
   <div clas="lobby-container">
   <header>
-    <h1>
-      {{ uiLabels.participateGame }}
-    </h1>
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
+    <h1>
+      {{ uiLabels.participateGame }}
+    </h1>
+
   </header>
   <h2 v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked">{{ uiLabels.activeGames }}</h2>
     <div v-if="activePolls.length - inActivePolls.length > 0 && !anyIdIsClicked" class="gamesContainer">
@@ -16,7 +17,7 @@
       class="poll-item"
      >
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
-          <span :style="{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '5px' }">
+          <span class="idPollStyle">
             {{ poll.hostName }}
           </span><br/>
           {{ poll.pollId}}
@@ -177,17 +178,30 @@ export default {
 <style scoped>
 
 header{
-  height: 7em;
+  /*height: 7em;*/
 }
 
 header h1{
-  margin-top: 0em;
   font-size: 6em;
+  text-align: center;
 }
 
-header h2{
+h2{
+  font-size: 3em;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.homebutton{
   margin-top: 1em;
 }
+
+.idPollstyle { 
+  font-size: '1.5em';
+  font-weight: 'bold';
+  margin-bottom: '5px';
+  }
+
 .enterGameInput{
   width: 8em;
   height: 2em;
@@ -201,13 +215,14 @@ header h2{
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
   overflow: hidden;
 }
 
 .gamesContainer{
   background-color: lightblue;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     color:black;
     justify-content: center;
     padding: 1em;
@@ -226,7 +241,7 @@ header h2{
 }
 
 .gamesContainer::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: lightblue; 
   border-radius: 10px; 
 }
 
@@ -238,6 +253,8 @@ header h2{
 .gamesContainer::-webkit-scrollbar-thumb:hover {
   background: hotpink; 
 }
+
+
 
 
 .manualJoin {
@@ -299,11 +316,83 @@ header h2{
   }
 
   .mrBean{
-    width: 70em;
-    height: auto;
+    width: 35%;
+    height: 35%;
     margin-top: 1em;
     border: 0.2em solid black; 
   }
+  @media (max-width: 768px) {
 
+  header h1 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  header h1 {
+    font-size: 4em;
+    text-align: center;
+  }
+
+  h2{
+  font-size: 2em;
+  margin-top: 1em;
+  text-align: center;
+  }
+
+  .homebutton{
+    align-self: flex-end;
+    margin-right: 0;
+  }
+
+  .gamesContainer {
+  
+    width: 90vh;
+    height: auto;
+  }
+
+  .poll-button {
+    width: 90%;
+    height: auto;
+    font-size: 1.2em;
+  }
+
+  .joinGameButton {
+    width: 5em;
+    height: 4em;
+  }
+
+  .mrBean {
+    width: 75%;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 2em;
+    text-align: center;
+  }
+
+  h2{
+  font-size: 1em;
+  margin-top: 1em;
+  text-align: center;
+}
+
+  .gamesContainer {
+    width: 100%; /* Justera bredden ytterligare för mindre skärmar */
+    height: auto;
+    padding: 0.5em;
+  }
+  
+
+  .poll-button {
+    font-size: 1em;
+    padding: 0.5em 1em;
+  }
+
+  .joinGameButton {
+    width: 4em;
+    height: 3em;
+  }
+}
 </style>
