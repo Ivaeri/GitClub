@@ -322,7 +322,7 @@ h2 {
   }
 
   .hangPerson {
-    padding-bottom: 3em;
+    padding-top: 10em;
     scale: 0.6;
   }
   .lettersGuessed {
