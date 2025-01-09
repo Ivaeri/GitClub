@@ -77,6 +77,7 @@
     },
     unmounted() {
   socket.off("startPoll");
+  socket.off("participantsUpdate");
 },
     
 

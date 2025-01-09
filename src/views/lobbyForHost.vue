@@ -83,6 +83,11 @@ socket.emit( "getUILabels", this.lang );
 socket.emit("getParticipants", { pollId: this.pollId });
 },
 
+unmounted() {
+  socket.off("startPoll");
+  socket.off("participantsUpdate");
+},
+
 
 methods: {
   startGamee: function () {
@@ -97,17 +102,6 @@ methods: {
   },
   
 
-  /*validateAndParticipate() {
-    if (!this.userName.trim()) {
-      alert(this.uiLabels.fillName);
-    } else {
-      this.participateInPoll();
-    }
-  },
-  participateInPoll: function () {
-    socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-    this.joined = true;
-  },*/
   alertErrorMessage(){
   this.noPlayers = true;
 }

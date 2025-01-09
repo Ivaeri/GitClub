@@ -33,7 +33,6 @@ function sockets(io, socket, data) {
  
   socket.on("generateId", function(d) {
     socket.emit('setPollId', data.setPollId(d))
-    //io.emit("generateId",  { pollId: d });
     io.emit("activePollsUpdate", Object.keys(data.polls));
   });
 
@@ -42,11 +41,6 @@ function sockets(io, socket, data) {
     data.createPoll(d.pollId, d.lang, d.userName);
     socket.emit('pollData', data.getPoll(d.pollId));
     io.emit('activePollsUpdate', Object.keys(data.polls));
-  });
-
-  socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a});
-    socket.emit('questionUpdate', data.activateQuestion(d.pollId));
   });
 
   socket.on("removePollIdFromList", function(pollId) {
@@ -82,8 +76,7 @@ function sockets(io, socket, data) {
 
   socket.on('participateInPoll', function(d) {
     data.participateInPoll(d.pollId, d.name);
-   // io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
-   // io.emit('participantsUpdate', data.getParticipants(d.pollId));
+   
     
   });
   socket.on('leavePoll', function(d) {
@@ -128,11 +121,7 @@ function sockets(io, socket, data) {
   socket.on('startPoll', function(pollId) {
     io.to(pollId).emit('startPoll');
   })
-  socket.on('runQuestion', function(d) {
-    let question = data.activateQuestion(d.pollId, d.questionNumber);
-    io.to(d.pollId).emit('questionUpdate', question);
-    io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-  });
+
 
   socket.on('NailInCoffin' , function(d) {
     data.nailInCoffin(d.userName, d.pollId);
@@ -142,11 +131,6 @@ function sockets(io, socket, data) {
   socket.on('getNailInCoffin', function(pollId) {
     let nail = data.getNailInCoffin(pollId);
     io.emit("nail", nail);
-  });
-
-  socket.on('submitAnswer', function(d) {
-    data.submitAnswer(d.pollId, d.answer);
-    io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
 
   socket.on("updateGuessedLetters", function(d){
