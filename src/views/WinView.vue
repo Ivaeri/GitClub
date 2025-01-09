@@ -1,17 +1,14 @@
 <template>
     <header>
-        <Logo />
-        <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }}</div>
-        <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win2 }}</div>
-    </header>
-    <div class="homeButtonContainer">
+        <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
-    </div>
-    <!-- <header>
-        <div class="animate__animated animate__zoomInDown">But at what cost?</div>
-    </header> -->
+        </div>
+        <Logo />
+        <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }} {{ uiLabels.win2 }}</div>
+        <!--<div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win2 }}</div> -->
+    </header>
     <button class="restartButton" v-on:click="goToGameLobby">
-        Play Again?
+        {{ uiLabels.playAgain }}
     </button>
 </template>
 
@@ -57,7 +54,7 @@ export default {
         console.log( "scoobydoo",this.nailer, this.userName);
         if (this.nailer === this.userName) {
             console.log( "scoobydoo2",this.nailer, this.userName);
-            this.$router.push("/ChooseNewWord/" + this.$route.params.id+ "/" + this.$route.params.id2);
+            this.$router.push("/ChooseNewWord/" + this.pollId+ "/" + this.userName);
         } else {
 
             if(!this.newGameIsStarted) {
@@ -65,7 +62,7 @@ export default {
             }
             else {
                 socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-                this.$router.push("/lobbyAll/" + this.pollId + "/" + this.$route.params.id2);
+                this.$router.push("/lobbyAll/" + this.pollId + "/" + this.userName);
             }
 
            
@@ -86,7 +83,7 @@ export default {
     justify-content: center; 
     align-items: center; 
     top:0;
-    font-size: 12em;
+    font-size: 7em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;
     word-break: break-all;
@@ -103,11 +100,37 @@ export default {
     width: 15em;
     height: 6em;
     box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+    margin-top: 5em;
+    margin-left: 1em;
 }
 
 .restartButton:hover{
     background-color: #a02666;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
+}
+
+@media (max-width: 740px)  {
+    .congrats{
+        font-size: 4em;
+        margin-left: 0.5em;
+    }
+    .restartButton{
+        width: 10em;
+        height: 4em;
+    }
+    
+}
+@media (max-width: 414px)  {
+    .congrats{
+        font-size: 3em;
+        margin-left: 0.5em;
+    }
+    .restartButton{
+        width: 9em;
+        height: 4em;
+        margin-bottom: 1em;
+    }
+    
 }
 </style>
