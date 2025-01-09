@@ -67,7 +67,6 @@ Data.prototype.updateWord = function (word, pollId, hostName) {
   if (this.polls[pollId]) {
       this.polls[pollId].enteredWord = word;
       this.polls[pollId].hostName.name = hostName;
-      console.log('hostName', this.polls[pollId].hostName)
       this.polls[pollId].NailInCoffin = hostName;
   }
   

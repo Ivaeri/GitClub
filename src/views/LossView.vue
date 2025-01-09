@@ -11,6 +11,7 @@
             {{ uiLabels.playAgain }}
         </button>
     </div>
+    <LeaderBoard :players="leaderboard" />
 </template>
 
 <script>
@@ -18,13 +19,15 @@ import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
 import HangPerson from '../components/HangPerson.vue';
+import LeaderBoard from "../components/LeaderBoard.vue";
 const socket = io(sessionStorage.getItem("dataServer"));
 export default {
     name: 'LossView',
     components: {
         Logo, 
         HomeButton,
-        HangPerson, 
+        HangPerson,
+        LeaderBoard
     },
     data: function () {
         return {
@@ -33,6 +36,7 @@ export default {
             ammountWrongLetters: 8,
             newGameIsStarted: false,
             wins: 0,
+            leaderboard: [],
         }
     },
     created: function () {
@@ -46,9 +50,7 @@ export default {
         console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
     socket.on("leaderboard", (data) => {
-        this.leaderboard = data;
-       // this.leaderboard.slice().sort((a, b) => b.wins - a.wins);
-        //calculate.wins
+        this.leaderboard = data.slice().sort((a, b) => b.wins - a.wins);
         this.getMyWins(this.leaderboard);
         console.log("leaderboard", data);
     });

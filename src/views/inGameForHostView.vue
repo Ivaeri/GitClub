@@ -185,7 +185,7 @@ h2 {
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; /* Fyll hela skärmen */
-    margin-top: 6em;
+    margin-top: 4em;
     font-size: 2em;
 }
 

@@ -5,33 +5,25 @@
         </div>
         <Logo />
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }} {{ uiLabels.win2 }}</div>
-        <!--<div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win2 }}</div> -->
     </header>
     <button class="restartButton" v-on:click="goToGameLobby">
         {{ uiLabels.playAgain }}
     </button>
-    <div class="leaderboard">
-        <h2> Leaderboard:</h2>
-        <div>
-            <ul v-for="player in leaderboard" > 
-                <li>
-                    {{ player.name }}: {{ player.wins }}
-                </li>
-            </ul>
-        </div>
-    </div>
+    <LeaderBoard :players="leaderboard" />
 </template>
 
 <script>
 import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
+import LeaderBoard from "../components/LeaderBoard.vue";
 const socket = io(sessionStorage.getItem("dataServer"));
 export default {
     name: 'WinView',
     components: {
         Logo, 
-        HomeButton
+        HomeButton,
+        LeaderBoard
     },
     data: function () {
         return {
@@ -59,9 +51,7 @@ export default {
         console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
     socket.on("leaderboard", (data) => {
-        this.leaderboard = data;
-        this.leaderboard.slice().sort((a, b) => b.wins - a.wins);
-        //calculate.wins
+        this.leaderboard = data.slice().sort((a, b) => b.wins - a.wins);;
         this.getMyWins(this.leaderboard);
     });
     socket.emit("getUILabels", this.lang);
