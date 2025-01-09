@@ -7,12 +7,11 @@
     <h2> {{ uiLabels.chooseNewWord }}</h2>
     <div class="chooseWord">
     <div>
-        <InputField
+        <InputField class="wordInput"
         v-bind:label="uiLabels.enterWord"
         v-model="enteredword" 
         :placeholder="uiLabels.enterWord" 
         id="enter-word">
-
         </InputField>
     </div>
     <div class="item">
@@ -147,6 +146,7 @@ export default {
  }
 
  .congrats {
+  padding-left: 1em;
   font-size: 4em;
  }
 
@@ -156,4 +156,20 @@ export default {
   justify-content: center;
   gap: 1em;
  }
+ 
+ @media (max-width: 650px) {
+  .congrats {
+    font-size: 2em;
+  }
+  .sendWordButton {
+    width: 8em;
+    height: 4em;
+  }
+  .chooseWord {
+    flex-direction: column;
+  }
+  .wordInput {
+    width: 10em;
+  }
+}
 </style>
