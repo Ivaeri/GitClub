@@ -1,7 +1,7 @@
 {
 	"invite": "Bjud in deltagare med den här länken:",
 	"createGame": "Skapa spel",
-	"participateGame": "Gå med i ett spel",
+	"participateGame": "Anslut",
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"about": "Om oss",
@@ -43,7 +43,7 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
-	"wrongGuess": "Fel gissning, försök igen",
+	"wrongGuesses": "felgissningar",
 	"win1": "Grattis!",
 	"win2": "Du vann! 🎉",
 	"newHost": "Grattis, du är ny spelledare!",
@@ -52,6 +52,6 @@
 	"skipPlayer": "Hoppa över spelare!",
 	"tooSlow": "För långsam?",
 	"noGames": "Inga aktiva spel just nu",
-	"logo": "HÄNGA PERSON",
+	"logo": "HÄNG PERSON",
 	"playAgain": "Spela igen?"
 }

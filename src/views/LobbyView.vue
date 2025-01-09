@@ -276,6 +276,7 @@ h2{
   padding: 1em;
   box-sizing: 1em;
   box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+  border: none;
 }
 
 .poll-button:hover {
