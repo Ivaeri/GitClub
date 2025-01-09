@@ -43,7 +43,7 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
-	"wrongGuess": "Fel gissning, försök igen",
+	"wrongGuesses": "felgissningar",
 	"win1": "Grattis!",
 	"win2": "Du vann! 🎉",
 	"newHost": "Grattis, du är ny spelledare!",
