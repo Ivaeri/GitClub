@@ -81,7 +81,7 @@ const router = createRouter({
       component: () => import('../views/ResultView.vue')
     },
     {
-    path: '/ChooseNewWord/:id/:id2',
+    path: '/ChooseNewWord/:id/:id2/',
     name: 'ChooseNewWord',
     component: () => import('../views/ChooseNewWord.vue')
     }

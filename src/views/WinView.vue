@@ -10,6 +10,16 @@
     <button class="restartButton" v-on:click="goToGameLobby">
         {{ uiLabels.playAgain }}
     </button>
+    <div class="leaderboard">
+        <h2> Leaderboard:</h2>
+        <div>
+            <ul v-for="player in leaderboard" > 
+                <li>
+                    {{ player.name }}: {{ player.wins }}
+                </li>
+            </ul>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -29,7 +39,9 @@ export default {
             lang: localStorage.getItem( "lang") || "en",
             nailer: "",
             userName: "",
-            newGameIsStarted: false
+            newGameIsStarted: false,
+            leaderboard: [],
+            wins: 0
         }
     },
     created: function () {
@@ -46,8 +58,15 @@ export default {
         this.newGameIsStarted = true;
         console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
+    socket.on("leaderboard", (data) => {
+        this.leaderboard = data;
+        this.leaderboard.slice().sort((a, b) => b.wins - a.wins);
+        //calculate.wins
+        this.getMyWins(this.leaderboard);
+    });
     socket.emit("getUILabels", this.lang);
     socket.emit("getNailInCoffin", this.pollId);
+    socket.emit("getLeaderboard", this.pollId);
 },
     methods: {
     goToGameLobby: function() {
@@ -61,12 +80,19 @@ export default {
                 alert("Hold your horses, the new host is thinking of a word...");
             }
             else {
-                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
+                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )
                 this.$router.push("/lobbyAll/" + this.pollId + "/" + this.userName);
             }
 
            
 }
+    },
+    getMyWins: function(leaderboard) {
+        for (let i = 0; i < leaderboard.length; i++) {
+            if (leaderboard[i].name === this.userName) {
+                this.wins = leaderboard[i].wins;
+            }
+        }
     }
 }}
 

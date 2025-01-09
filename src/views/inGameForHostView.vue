@@ -150,6 +150,7 @@ socket.on("amountWrongLetters", (data) => {
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
         console.log("Game is won, navigating to win view");
+        socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.hostName});
         this.sendToWinView();
       }
     },

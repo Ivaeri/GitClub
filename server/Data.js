@@ -47,11 +47,11 @@ Data.prototype.getPoll = function(pollId) {
   return {};
 }
 
-Data.prototype.participateInPoll = function(pollId, name) {
+Data.prototype.participateInPoll = function(pollId, name, wins) {
   if (this.pollExists(pollId)) {
-    this.polls[pollId].participants.push({name: name, answers: []})
+    this.polls[pollId].participants.push({name: name, wins: wins});
   }
- // console.log('körs från participate in poll', this.polls[pollId].participants)
+ console.log('körs från participate in poll', this.polls[pollId].participants)
 }
 
 Data.prototype.getParticipants = function(pollId) {
@@ -115,7 +115,8 @@ Data.prototype.submitAnswer = function(pollId, answer) {
 Data.prototype.updateWord = function (word, pollId, hostName) {
   if (this.polls[pollId]) {
       this.polls[pollId].enteredWord = word;
-      this.polls[pollId].hostName = hostName;
+      this.polls[pollId].hostName.name = hostName;
+      console.log('hostName', this.polls[pollId].hostName)
       this.polls[pollId].NailInCoffin = hostName;
   }
   
@@ -166,8 +167,10 @@ Data.prototype.findIfWon = function (pollId) {
 
 Data.prototype.nailInCoffin = function (userName, pollId) {
   if (this.polls[pollId]) {
+    const participant = this.polls[pollId].participants.find(p => p.name === userName);
     this.polls[pollId].NailInCoffin = userName;
-    console.log("nail in coffin", this.polls[pollId].NailInCoffin)
+    if (participant) {participant.wins += 0.5;}
+    else  {this.polls[pollId].hostName.wins += 1;}
   }
 }
 
@@ -176,24 +179,28 @@ Data.prototype.getNailInCoffin = function (pollId) {
     return this.polls[pollId].NailInCoffin
   }
 }
+Data.prototype.getLeaderboard = function (pollId) {
+  if (this.polls[pollId]) {
+    console.log("testavfuck",this.polls[pollId].hostName)
+    const leaderboard = this.polls[pollId].participants.slice()
+    leaderboard.push(this.polls[pollId].hostName)
+    console.log('körs från getLeaderboard i data', leaderboard)
+    return leaderboard;
+  }
+}
 
 Data.prototype.getInActivePolls = function (pollId) {
-  console.log('körs från getInActivePolls i data', this.inActivePolls)
   return this.inActivePolls;
 };
 
 Data.prototype.addToInActivePolls = function (pollId) {
-  console.log('körs från addToInActivePolls i data', pollId)
   if (this.polls[pollId]) { 
-    console.log('körs från if satsen i addToInActivePolls i data', pollId)
     this.inActivePolls.push(pollId)
    }
 };
 
 Data.prototype.reActivatePollId = function (pollId) {
-  console.log('körs från reActivePolls i data', pollId)
   if (this.polls[pollId]) { 
-    console.log('körs från if satsen i addToInActivePolls i data', pollId)
     this.inActivePolls = this.inActivePolls.filter(id => id !== pollId);
     return this.inActivePolls;
    }
@@ -235,7 +242,6 @@ Data.prototype.updateIndex = function (pollId) {
       Data.prototype.removeGame = function(pollId) {
         if (this.polls[pollId]) {
           delete this.polls[pollId];
-          console.log(`Poll with ID ${pollId} has been removed.`);
         } else {
           console.log(`Poll with ID ${pollId} does not exist.`);
         }
@@ -244,7 +250,7 @@ Data.prototype.updateIndex = function (pollId) {
 Data.prototype.setPollId = function (pollId) {
   if (!this.polls[pollId]) {
     this.polls[pollId] = {
-      hostName: "",
+      hostName: {name: "", wins: 0},
       enteredWord: "",
       pollId: pollId,
       participants: [],
@@ -264,11 +270,19 @@ Data.prototype.setPollId = function (pollId) {
 };
 
 Data.prototype.startNewGame = function (pollId, hostname, word) {
- //let oldHost = this.polls[pollId].hostName
- // this.polls[pollId].participants.push({name: oldHost, answers: []})
+ /*let oldHost = this.polls[pollId].hostName
+ this.polls[pollId].participants.push(oldHost) //ivar läggs till i participants
+ const participant = this.polls[pollId].participants.find(p => p.name === hostname);
+ this.polls[pollId].participants = this.polls[pollId].participants.filter(p => p.name !== hostname);*/
+ if (hostname === this.polls[pollId].hostName.name) {
+  hostname = this.polls[pollId].hostName
+ }
+ const participant = this.polls[pollId].participants.find(p => p.name === hostname);
+  if (participant) {hostname = participant}
   if (this.polls[pollId]) {
+    console.log('körs från startNewGame i data', hostname)
     this.polls[pollId] = {
-      hostName: hostname,
+      hostName: hostname, 
       enteredWord: word,
       pollId: pollId,
       participants: [],

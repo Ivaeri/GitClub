@@ -32,6 +32,7 @@ export default {
             lang: localStorage.getItem( "lang") || "en",
             ammountWrongLetters: 8,
             newGameIsStarted: false,
+            wins: 0,
         }
     },
     created: function () {
@@ -44,6 +45,14 @@ export default {
         this.newGameIsStarted = true;
         console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
+    socket.on("leaderboard", (data) => {
+        this.leaderboard = data;
+       // this.leaderboard.slice().sort((a, b) => b.wins - a.wins);
+        //calculate.wins
+        this.getMyWins(this.leaderboard);
+        console.log("leaderboard", data);
+    });
+    socket.emit("getLeaderboard", this.pollId);
     socket.emit("getUILabels", this.lang);
 },
     methods: {
@@ -52,11 +61,19 @@ export default {
                 alert("Hold your horses, the new host is thinking of a word...");
             }
             else {
-                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
+                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )
                 this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
             }   
 
+    },
+    getMyWins: function(leaderboard) {
+        for (let i = 0; i < leaderboard.length; i++) {
+            if (leaderboard[i].name === this.userName) {
+                this.wins = leaderboard[i].wins;
+            }
+        }
     }
+
 }}
 
 

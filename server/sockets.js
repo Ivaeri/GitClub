@@ -38,11 +38,11 @@ function sockets(io, socket, data) {
   });
 
  
-  socket.on('createPoll', function(d) {
+  /*socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang, d.userName);
     socket.emit('pollData', data.getPoll(d.pollId));
     io.emit('activePollsUpdate', Object.keys(data.polls));
-  });
+  });*/
 
   socket.on('addQuestion', function(d) {
     data.addQuestion(d.pollId, {q: d.q, a: d.a});
@@ -71,7 +71,6 @@ function sockets(io, socket, data) {
 
   socket.on("newGameHasStarted", function(pollId) {
   io.emit("newGameIsStarted", pollId)
-  console.log("newGameHasStarted in sockets", pollId)
   });
 
   socket.on('joinPoll', function(pollId) {
@@ -81,7 +80,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('participateInPoll', function(d) {
-    data.participateInPoll(d.pollId, d.name);
+    data.participateInPoll(d.pollId, d.name, d.wins);
    // io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
    // io.emit('participantsUpdate', data.getParticipants(d.pollId));
     
@@ -117,7 +116,6 @@ function sockets(io, socket, data) {
 
   socket.on("setGameToWon", function(pollId){
     data.setGameToWon(pollId)
-    console.log("game is won")
   })
 
   socket.on("findIfWon", function(pollId) {
@@ -136,9 +134,14 @@ function sockets(io, socket, data) {
 
   socket.on('NailInCoffin' , function(d) {
     data.nailInCoffin(d.userName, d.pollId);
-    console.log("nail in coffin", d.userName, d.pollId)
-  });
 
+  });
+  socket.on('getLeaderboard', function(pollId) {
+    let leaderboard = data.getLeaderboard(pollId);
+    console.log( "leaderboard", leaderboard)
+    io.emit("leaderboard", leaderboard);
+
+  });
   socket.on('getNailInCoffin', function(pollId) {
     let nail = data.getNailInCoffin(pollId);
     io.emit("nail", nail);
