@@ -50,13 +50,12 @@ export default {
     top: 5%;
     left: 50%;
     transform: translate(-50%, -40%);
-    /*margin: 1rem auto; */
     text-align: center; 
 }
 
 .logo.is-startpage {
     font-size: 5rem; 
-    padding-top: 2rem;
+    padding-top: 10rem;
     position: absolute;
     top: 30%;
     left: 50%;

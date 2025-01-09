@@ -49,8 +49,8 @@
 	"newHost": "Congratulations, you are the new host!",
 	"chooseNewWord": "Choose a new word:",
 	"nameTaken": "Come on the name is already taken BE ORIGINAL!",
-	"skipPlayer": "Skip player",
-	"tooSlow": "Too slow? Press to skip player!",
+	"skipPlayer": "Skip player!",
+	"tooSlow": "Too slow?",
 	"noGames": "No active games right now",
 	"logo": "HANG PERSON",
 	"playAgain": "Play again?"
