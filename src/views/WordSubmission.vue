@@ -35,7 +35,6 @@
   <script>
   import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
-  import NewPageButton from '../components/NewPageButton.vue';
   import InputField from '../components/InputField.vue';
   import HomeButton from '../components/HomeButton.vue';
   const socket = io(sessionStorage.getItem("dataServer"));
@@ -46,7 +45,6 @@
     name: 'wordSubmission',
     components: {
       Logo, 
-      NewPageButton,
       InputField,
       HomeButton
     },

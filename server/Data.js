@@ -15,231 +15,181 @@ prototype of the Data object/class
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 ***********************************************/
 
-Data.prototype.pollExists = function (pollId) {
-  return typeof this.polls[pollId] !== "undefined"
-}
-
-
-Data.prototype.getUILabels = function (lang) {
-  //check if lang is valid before trying to load the dictionary file
-  if (!["en", "sv"].some( el => el === lang))
-    lang = "en";
-  const labels = readFileSync("./server/data/labels-" + lang + ".json");
-  return JSON.parse(labels);
-}
-
-Data.prototype.createPoll = function(pollId, lang="en") {
-  if (!this.pollExists(pollId)) {
-    let poll = {};
-    poll.lang = lang; 
-    poll.hostName = hostName; 
-    poll.participants = [];
-    poll.currentQuestion = 0;              
-    this.polls[pollId] = poll;
-  }
-  return this.polls[pollId];
-}
-
-Data.prototype.getPoll = function(pollId) {
-  if (this.pollExists(pollId)) {
-    return this.polls[pollId];
-  }
-  return {};
-}
-
-Data.prototype.participateInPoll = function(pollId, name) {
-  if (this.pollExists(pollId)) {
-    this.polls[pollId].participants.push({name: name, answers: []})
-  }
- // console.log('körs från participate in poll', this.polls[pollId].participants)
-}
-
-Data.prototype.getParticipants = function(pollId) {
-  const poll = this.polls[pollId];
-  if (this.pollExists(pollId)) { 
-    return this.polls[pollId].participants;
-  }
-  return [];
-}
-
-Data.prototype.addQuestion = function(pollId, q) {
-  if (this.pollExists(pollId)) {
-    this.polls[pollId].questions.push(q);
-  }
-}
-
-Data.prototype.activateQuestion = function(pollId, qId = null) {
-  if (this.pollExists(pollId)) {
-    const poll = this.polls[pollId];
-    if (qId !== null) {
-      poll.currentQuestion = qId;
+    Data.prototype.pollExists = function (pollId) {
+      return typeof this.polls[pollId] !== "undefined"
     }
-    return poll.questions[poll.currentQuestion];
-  }
-  return {}
-}
 
-Data.prototype.getSubmittedAnswers = function(pollId) {
-  if (this.pollExists(pollId)) {
-    const poll = this.polls[pollId];
-    const answers = poll.answers[poll.currentQuestion];
-    if (typeof poll.questions[poll.currentQuestion] !== 'undefined') {
-      return answers;
+
+    Data.prototype.getUILabels = function (lang) {
+      //check if lang is valid before trying to load the dictionary file
+      if (!["en", "sv"].some( el => el === lang))
+        lang = "en";
+      const labels = readFileSync("./server/data/labels-" + lang + ".json");
+      return JSON.parse(labels);
     }
-  }
-  return {}
-}
 
-Data.prototype.submitAnswer = function(pollId, answer) {
-  if (this.pollExists(pollId)) {
-    const poll = this.polls[pollId];
-    let answers = poll.answers[poll.currentQuestion];
-    // create answers object if no answers have yet been submitted
-    if (typeof answers !== 'object') {
-      answers = {};
-      answers[answer] = 1;
-      poll.answers.push(answers);
-    }
-    // create answer property if that specific answer has not yet been submitted
-    else if (typeof answers[answer] === 'undefined') {
-      answers[answer] = 1;
-    }
-    // if the property already exists, increase the number
-    else
-      answers[answer] += 1
-  
-
-  }
-}
-
-Data.prototype.updateWord = function (word, pollId, hostName) {
-  if (this.polls[pollId]) {
-      this.polls[pollId].enteredWord = word;
-      this.polls[pollId].hostName = hostName;
-      this.polls[pollId].NailInCoffin = hostName;
-  }
-  
-};
-
-Data.prototype.updateGuessedLetters = function (pollId, key) {
-  if (this.polls[pollId]) {
-      this.polls[pollId].guessedLetters.push(key);
-  }
-};
-
-
-Data.prototype.leaveGame = function (pollId, userName) {
-  if (this.polls[pollId]) {
-    this.polls[pollId].participants = this.polls[pollId].participants.filter(participant => participant.name !== userName);
-  }
-};
-
-
-Data.prototype.setGameToWon = function (pollId) {
-  if (this.polls[pollId]) {
-      this.polls[pollId].isGameWon = true;
-  }
-};
-
-Data.prototype.setAmountWrongLetters = function (pollId) {
-  if (this.polls[pollId]) {
-        this.polls[pollId].amountWrongLetters += 1;
+    Data.prototype.createPoll = function(pollId, lang="en") {
+      if (!this.pollExists(pollId)) {
+        let poll = {};
+        poll.lang = lang; 
+        poll.hostName = hostName; 
+        poll.participants = [];
+        poll.currentQuestion = 0;              
+        this.polls[pollId] = poll;
       }
-  };
+      return this.polls[pollId];
+    }
 
-  Data.prototype.getAmountWrongLetters = function (pollId) {
-    if (this.polls[pollId]) {
-          return this.polls[pollId].amountWrongLetters
-        }
+    Data.prototype.getPoll = function(pollId) {
+      if (this.pollExists(pollId)) {
+        return this.polls[pollId];
+      }
+      return {};
+    }
+
+    Data.prototype.participateInPoll = function(pollId, name) {
+      if (this.pollExists(pollId)) {
+        this.polls[pollId].participants.push({name: name, answers: []})
+      }
+    // console.log('körs från participate in poll', this.polls[pollId].participants)
+    }
+
+    Data.prototype.getParticipants = function(pollId) {
+      const poll = this.polls[pollId];
+      if (this.pollExists(pollId)) { 
+        return this.polls[pollId].participants;
+      }
+      return [];
+    }
+    Data.prototype.updateWord = function (word, pollId, hostName) {
+      if (this.polls[pollId]) {
+          this.polls[pollId].enteredWord = word;
+          this.polls[pollId].hostName = hostName;
+          this.polls[pollId].NailInCoffin = hostName;
+      }
       
     };
 
-
-Data.prototype.findIfWon = function (pollId) {
-  if (this.polls[pollId]) {
-      return this.polls[pollId].isGameWon;
-  }
-  else {
-    return false
-  }
-};
-
-Data.prototype.nailInCoffin = function (userName, pollId) {
-  if (this.polls[pollId]) {
-    this.polls[pollId].NailInCoffin = userName;
-    console.log("nail in coffin", this.polls[pollId].NailInCoffin)
-  }
-}
-
-Data.prototype.getNailInCoffin = function (pollId) {
-  if (this.polls[pollId]) {
-    return this.polls[pollId].NailInCoffin
-  }
-}
-
-Data.prototype.getInActivePolls = function (pollId) {
-  console.log('körs från getInActivePolls i data', this.inActivePolls)
-  return this.inActivePolls;
-};
-
-Data.prototype.addToInActivePolls = function (pollId) {
-  console.log('körs från addToInActivePolls i data', pollId)
-  if (this.polls[pollId]) { 
-    console.log('körs från if satsen i addToInActivePolls i data', pollId)
-    this.inActivePolls.push(pollId)
-   }
-};
-
-Data.prototype.reActivatePollId = function (pollId) {
-  console.log('körs från reActivePolls i data', pollId)
-  if (this.polls[pollId]) { 
-    console.log('körs från if satsen i addToInActivePolls i data', pollId)
-    this.inActivePolls = this.inActivePolls.filter(id => id !== pollId);
-    return this.inActivePolls;
-   }
-};
-
-
-Data.prototype.getGuessedLetter = function (pollId) {
-  if (this.pollExists(pollId)) { 
-    return this.polls[pollId].guessedLetters;
-  }
-  return [];
-};
-
-Data.prototype.updateIndex = function (pollId) {
-  if (this.polls[pollId]) {
-
-      if(this.polls[pollId].participants.length -1 == this.polls[pollId].index){
-        this.polls[pollId].index = 0;
+    Data.prototype.updateGuessedLetters = function (pollId, key) {
+      if (this.polls[pollId]) {
+          this.polls[pollId].guessedLetters.push(key);
       }
-      else{
-        this.polls[pollId].index += 1;
-            }
-         }
-        
     };
+
+
+    Data.prototype.leaveGame = function (pollId, userName) {
+      if (this.polls[pollId]) {
+        this.polls[pollId].participants = this.polls[pollId].participants.filter(participant => participant.name !== userName);
+      }
+    };
+
+
+    Data.prototype.setGameToWon = function (pollId) {
+      if (this.polls[pollId]) {
+          this.polls[pollId].isGameWon = true;
+      }
+    };
+
+    Data.prototype.setAmountWrongLetters = function (pollId) {
+      if (this.polls[pollId]) {
+            this.polls[pollId].amountWrongLetters += 1;
+          }
+      };
+
+    Data.prototype.getAmountWrongLetters = function (pollId) {
+      if (this.polls[pollId]) {
+            return this.polls[pollId].amountWrongLetters
+          }
+        
+      };
+
+
+  Data.prototype.findIfWon = function (pollId) {
+    if (this.polls[pollId]) {
+        return this.polls[pollId].isGameWon;
+    }
+    else {
+      return false
+    }
+  };
+
+  Data.prototype.nailInCoffin = function (userName, pollId) {
+    if (this.polls[pollId]) {
+      this.polls[pollId].NailInCoffin = userName;
+      console.log("nail in coffin", this.polls[pollId].NailInCoffin)
+    }
+  }
+
+  Data.prototype.getNailInCoffin = function (pollId) {
+    if (this.polls[pollId]) {
+      return this.polls[pollId].NailInCoffin
+    }
+  }
+
+  Data.prototype.getInActivePolls = function (pollId) {
+    console.log('körs från getInActivePolls i data', this.inActivePolls)
+    return this.inActivePolls;
+  };
+
+  Data.prototype.addToInActivePolls = function (pollId) {
+    console.log('körs från addToInActivePolls i data', pollId)
+    if (this.polls[pollId]) { 
+      console.log('körs från if satsen i addToInActivePolls i data', pollId)
+      this.inActivePolls.push(pollId)
+    }
+  };
+
+  Data.prototype.reActivatePollId = function (pollId) {
+    console.log('körs från reActivePolls i data', pollId)
+    if (this.polls[pollId]) { 
+      console.log('körs från if satsen i addToInActivePolls i data', pollId)
+      this.inActivePolls = this.inActivePolls.filter(id => id !== pollId);
+      return this.inActivePolls;
+    }
+  };
+
+
+  Data.prototype.getGuessedLetter = function (pollId) {
+    if (this.pollExists(pollId)) { 
+      return this.polls[pollId].guessedLetters;
+    }
+    return [];
+  };
+
+  Data.prototype.updateIndex = function (pollId) {
+    if (this.polls[pollId]) {
+
+        if(this.polls[pollId].participants.length -1 == this.polls[pollId].index){
+          this.polls[pollId].index = 0;
+        }
+        else{
+          this.polls[pollId].index += 1;
+              }
+          }
+          
+      };
   Data.prototype.getIndex = function (pollId) {
 
     if (this.pollExists(pollId)) {
       return this.polls[pollId].index
       };
     };
-    Data.prototype.getWord = function (pollId) {
-      if (this.pollExists(pollId)) {
-        return this.polls[pollId].enteredWord
-        };
-        return ""
+  
+  Data.prototype.getWord = function (pollId) {
+    if (this.pollExists(pollId)) {
+      return this.polls[pollId].enteredWord
       };
-    
-      Data.prototype.removeGame = function(pollId) {
-        if (this.polls[pollId]) {
-          delete this.polls[pollId];
-          console.log(`Poll with ID ${pollId} has been removed.`);
-        } else {
-          console.log(`Poll with ID ${pollId} does not exist.`);
-        }
-      };
+      return ""
+    };
+  
+    Data.prototype.removeGame = function(pollId) {
+      if (this.polls[pollId]) {
+        delete this.polls[pollId];
+        console.log(`Poll with ID ${pollId} has been removed.`);
+      } else {
+        console.log(`Poll with ID ${pollId} does not exist.`);
+      }
+    };
 
 Data.prototype.setPollId = function (pollId) {
   if (!this.polls[pollId]) {
