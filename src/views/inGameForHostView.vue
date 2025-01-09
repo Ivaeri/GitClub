@@ -78,11 +78,7 @@
     socket.on("uiLabels", (labels) => {
       this.uiLabels = labels;
     });
-/*
-    socket.on("letters", (letters) => {
-      this.allGuessedLetters = letters;
-      
-    });*/
+
 
     socket.on("letters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
@@ -106,7 +102,6 @@ socket.on("amountWrongLetters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.ammountWrongLetters = data.amount;
     console.log("Antal felaktiga bokstäver uppdaterades för pollId:", this.ammountWrongLetters);
-   // this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
    this.gameIsWon();
 
   }
@@ -119,7 +114,7 @@ socket.on("amountWrongLetters", (data) => {
       
 
     socket.on("wonOrNot", (isWon) => {
-    this.sendToLossView(); //kanske man kan lägga den i amountwrongletters istället
+    this.sendToLossView(); 
     
     console.log("isGameWon?", this.isGameWon);
   });  

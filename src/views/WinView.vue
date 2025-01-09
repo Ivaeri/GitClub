@@ -52,6 +52,11 @@ export default {
     socket.emit("getUILabels", this.lang);
     socket.emit("getNailInCoffin", this.pollId);
 },
+    unmounted() {
+        socket.off("nail");
+        socket.off("newGameIsStarted");
+    },
+
     methods: {
     goToGameLobby: function() {
         console.log( "scoobydoo",this.nailer, this.userName);
