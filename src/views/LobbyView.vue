@@ -1,7 +1,7 @@
 <template>
   <div clas="lobby-container">
   <header>
-    <Logo class="logostyle"/>
+    <Logo :text="uiLabels.logo" class="logostyle"/>
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
@@ -198,10 +198,6 @@ h2{
   
 }
 
-.homebutton{
-  margin-top: 1em;
-}
-
 .idPollstyle { 
   font-size: '1.5em';
   font-weight: 'bold';
@@ -395,11 +391,6 @@ h2{
   margin-top: 1em;
   text-align: center;
 }
-
-  .logostyle {
-    margin-left: 1.3em;
-    margin-top: 0.5em;
-  }
 
   .gamesContainer {
     width: 70%; /* Justera bredden ytterligare för mindre skärmar */

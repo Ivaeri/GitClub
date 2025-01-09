@@ -62,4 +62,26 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.2em; 
+    }
+    .logo.is-startpage {
+        font-size: 3rem; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1em; 
+        width: 100%;
+        text-align: center;
+    }
+    .logo.is-startpage {
+        font-size: 2rem; 
+    }
+    
+}
 </style>

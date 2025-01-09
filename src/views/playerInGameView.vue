@@ -1,13 +1,12 @@
 <template>
   
-    <h1>{{uiLabels.coop}}</h1>
-    <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
     <div> 
-      <Logo />
+      <Logo :text="uiLabels.logo"/>
     </div>
     <div class="homebutton">
         <HomeButton :text="uiLabels.goHome" v-on:click="this.leavePoll"/> 
     </div>
+    <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
     <hr>
     <span v-for="letter in trueWord" class="trueWord">
         <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
@@ -338,14 +337,18 @@ socket.on( "index", (data) => {
   
 </script>
 <style scoped>
+
+
 .participants-container {
-    color: darkgray;
+  display: flex; /* Ändra till flex om du inte vill använda grid */
+    flex-wrap: wrap; /* Tillåter elementen att brytas om de inte får plats */
+    justify-content: center; /* Centrerar barn horisontellt */
+    align-items: center; /* Centrerar barn vertikalt */
+    gap: calc(100% - 80%); /* Mellanrum mellan elementen */
     padding: 1em;
-    display: grid;
-    grid-gap: 1em;
-    grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-    width: 100%; /* Fyll hela skärmen */
-    margin-top: 3em;
+    width: 100%;
+    margin: auto;
+    
 }
 
 .player {
@@ -364,7 +367,6 @@ socket.on( "index", (data) => {
     align-items: center;
     border-radius: 5px; 
     background-color: pink; 
-    background-size: 2em 2em;
     color: black;
   }
 
@@ -397,6 +399,10 @@ socket.on( "index", (data) => {
 
   .key:hover {
     background-color:#0056b3;
+  }
+
+  hr {
+    width: 100%;
   }
 
   .wrongKey {
@@ -520,6 +526,17 @@ socket.on( "index", (data) => {
     align-items: center;
     border-radius: 5px; 
     background-color: pink; 
+  }
+  @media (max-width: 700px) {
+    .hangMan {
+      scale: 0.7;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hangMan {
+      scale: 0.5;
+    }
   }
 
  
