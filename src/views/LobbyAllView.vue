@@ -1,6 +1,6 @@
 <template>
     <div>
-      <Logo class="logoStyle"/>
+      <Logo :text="uiLabels.logo" class="logoStyle"/>
       <h1>
         {{ hostUserName }}{{ uiLabels.idButton }}
       </h1>
@@ -37,7 +37,7 @@
   import io from 'socket.io-client';
   import InputField from '../components/InputField.vue';
   import HomeButton from '../components/HomeButton.vue';
-  const socket = io("localhost:3000");
+  const socket = io(sessionStorage.getItem("dataServer"));
   
   export default {
     name: 'LobbyAll',
@@ -77,7 +77,6 @@
     },
     unmounted() {
   socket.off("startPoll");
-  console.log("unmounted");
 },
     
 

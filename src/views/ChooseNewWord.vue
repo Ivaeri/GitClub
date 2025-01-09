@@ -30,7 +30,7 @@ import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("dataServer"));
 export default {
     name: 'WinView',
     components: {

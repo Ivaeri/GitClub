@@ -43,7 +43,7 @@
     import Logo from "@/components/Logo.vue";
     import io from 'socket.io-client';
     import HomeButton from '../components/HomeButton.vue';
-    const socket = io("localhost:3000");
+    const socket = io(sessionStorage.getItem("dataServer"));
     import HangPerson from '../components/HangPerson.vue';
     
     export default {
@@ -106,7 +106,8 @@ socket.on("amountWrongLetters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.ammountWrongLetters = data.amount;
     console.log("Antal felaktiga bokstäver uppdaterades för pollId:", this.ammountWrongLetters);
-    this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+   // this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+   this.gameIsWon();
 
   }
 });
@@ -118,7 +119,8 @@ socket.on("amountWrongLetters", (data) => {
       
 
     socket.on("wonOrNot", (isWon) => {
-    this.sendToLossView();
+    this.sendToLossView(); //kanske man kan lägga den i amountwrongletters istället
+    
     console.log("isGameWon?", this.isGameWon);
   });  
 
@@ -128,6 +130,11 @@ socket.on("amountWrongLetters", (data) => {
     socket.emit("getGuessedLetters",  this.pollId );
     socket.emit("getAmountWrongLetters", this.pollId );
   },
+
+  unmounted() {
+  socket.off("wonOrNot");
+  socket.off("amountWrongLetters");
+},
   
   methods: {
 

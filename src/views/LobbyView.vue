@@ -1,7 +1,7 @@
 <template>
   <div clas="lobby-container">
   <header>
-    <Logo class="logostyle"/>
+    <Logo :text="uiLabels.logo" class="logostyle"/>
     <div class="homebutton">
       <HomeButton :text="uiLabels.goHome"/> 
    </div> 
@@ -73,7 +73,7 @@ import Logo from "@/components/Logo.vue";
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
   name: 'LobbyView',
@@ -196,10 +196,6 @@ h2{
   margin-top: 0.5em;
   text-align: center;
   
-}
-
-.homebutton{
-  margin-top: 1em;
 }
 
 .idPollstyle { 
@@ -395,11 +391,6 @@ h2{
   margin-top: 1em;
   text-align: center;
 }
-
-  .logostyle {
-    margin-left: 1.3em;
-    margin-top: 0.5em;
-  }
 
   .gamesContainer {
     width: 70%; /* Justera bredden ytterligare för mindre skärmar */
