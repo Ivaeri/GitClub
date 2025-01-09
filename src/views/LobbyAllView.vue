@@ -1,6 +1,6 @@
 <template>
     <div>
-      <Logo class="logoStyle"/>
+      <Logo :text="uiLabels.logo" class="logoStyle"/>
       <h1>
         {{ hostUserName }}{{ uiLabels.idButton }}
       </h1>

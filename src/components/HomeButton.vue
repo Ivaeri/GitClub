@@ -44,16 +44,16 @@ const socket = io('http://localhost:3000');
 }
  .homeButton {
   position: relative;
-  background-color: #007bff;
-  color: white;
+  color: rgb(4, 16, 131); 
   padding: 10px 20px;
-  border: none;
+  border: solid 2px #0056b3;
   border-radius: 5px;
   cursor: pointer;
   margin-left: calc(100% - 3em);
+  margin-top: 0.5em;
 }
  .homeButton:hover {
-  background-color: #0056b3;
+  border: solid 2px rgb(4, 16, 131); 
 }
 
 /* Media Queries for responsiveness */
@@ -61,13 +61,15 @@ const socket = io('http://localhost:3000');
   .homeButton {
     padding: 8px 16px;
     font-size: 0.9em;  
+    scale: 0.9;
   }
 }
 
 @media (max-width: 480px) {
   .homeButton {
-    padding: 6px 12px; 
+    padding: 3px 8px; 
     font-size: 0.8em;  
+    scale: 0.6;
   }
 }
 
