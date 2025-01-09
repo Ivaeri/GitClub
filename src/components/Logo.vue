@@ -50,16 +50,37 @@ export default {
     top: 5%;
     left: 50%;
     transform: translate(-50%, -40%);
-    /*margin: 1rem auto; */
     text-align: center; 
 }
 
 .logo.is-startpage {
     font-size: 5rem; 
-    padding-top: 2rem;
+    padding-top: 10rem;
     position: absolute;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.2em; 
+    }
+    .logo.is-startpage {
+        font-size: 3rem; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1em; 
+        width: 100%;
+        text-align: center;
+    }
+    .logo.is-startpage {
+        font-size: 2rem; 
+    }
+    
 }
 </style>
