@@ -52,5 +52,6 @@
 	"skipPlayer": "Skip player",
 	"tooSlow": "Too slow? Press to skip player!",
 	"noGames": "No active games right now",
-	"logo": "HANG PERSON"
+	"logo": "HANG PERSON",
+	"playAgain": "Play again?"
 }

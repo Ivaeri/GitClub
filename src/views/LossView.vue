@@ -1,17 +1,16 @@
 <template>
     <header>
-        <Logo />
-        <div class="animate__animated animate__zoomInDown gameover">{{ uiLabels.gameOver }}!
-            <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
+        <div class="homeButtonContainer">
+            <HomeButton :text="uiLabels.goHome"/>
         </div>
-
+        <Logo />
     </header>
-    <div class="homeButtonContainer">
-        <HomeButton :text="uiLabels.goHome"/>
+    <div class="animate__animated animate__zoomInDown gameover">{{ uiLabels.gameOver }}!
+        <HangPerson class="hangPerson" v-bind:wrongGuesses="ammountWrongLetters" />
+        <button class="restartButton" v-on:click="goToGameLobby">
+            {{ uiLabels.playAgain }}
+        </button>
     </div>
-    <button class="restartButton" v-on:click="goToGameLobby">
-        Play Again?
-    </button>
 </template>
 
 <script>
@@ -55,8 +54,7 @@ export default {
             else {
                 socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
                 this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
-            }
-       
+            }   
 
     }
 }}
@@ -67,31 +65,42 @@ export default {
 <style scoped>
 
 .gameover {
-
     text-align: center; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    top:0;
-    font-size: 9.5em;
+    font-size: 5em;
     color: rgb(163, 31, 31);
     text-shadow: 2px 2px 4px #000000;
-    padding-left: 0.5em;
-    padding-top: 0.3em;
 }
 .restartButton {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     margin: auto;
+    margin-top: auto;
     width: 30%;
     height: 10vh;
     background-color: pink;
-    color: black;
-    font-size: 2em;
+    color:rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    font-style: italic;
+    font-size: 0.4em;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.hangPerson{
+    margin:auto;
+    scale: 0.9;
+}
+
+@media (max-width: 700px) {
+
+    .restartButton {
+        width: 50%;
+        height: 10vh;
+    }
+    .gameover {
+        font-size: 3em;
+    }  
+    .hangPerson{
+        scale: 0.8;
+    } 
 }
 
 
