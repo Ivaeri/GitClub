@@ -73,7 +73,7 @@ import Logo from "@/components/Logo.vue";
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
   name: 'LobbyView',
