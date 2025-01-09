@@ -45,11 +45,13 @@
 	"host": "spelvärden",
 	"wrongGuess": "Fel gissning, försök igen",
 	"win1": "Grattis!",
-	"win2": "Du vann 🎉",
+	"win2": "Du vann! 🎉",
 	"newHost": "Grattis, du är ny spelledare!",
 	"chooseNewWord": "Välj ett nytt ord:",
 	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
-	"skipPlayer": "Hoppa över spelare",
-	"tooSlow": "För långsam? Tryck för att hoppa över spelare!",
-	"noGames": "Inga aktiva spel just nu"
+	"skipPlayer": "Hoppa över spelare!",
+	"tooSlow": "För långsam?",
+	"noGames": "Inga aktiva spel just nu",
+	"logo": "HÄNGA PERSON",
+	"playAgain": "Spela igen?"
 }

@@ -1,33 +1,37 @@
 <template>
+  <div class="homeButton">
+    <HomeButton :text="uiLabels.goHome"/> 
+  </div>
   <div>
     <Logo />
   </div>
-    <h1>{{ uiLabels.titlegame }}</h1>
+  <h1>{{ uiLabels.titlegame }}</h1>
     <div class="skipPlayer">
         <h3> {{ uiLabels.tooSlow }}</h3>
-        <button class="skipPlayerButton" v-on:click="skipPlayer">{{ uiLabels.skipPlayer }}</button>
+        <button class="skipPlayerButton" v-on:click="skipPlayer">
+          {{ uiLabels.skipPlayer }}
+        </button>
     </div>
     <div class="wordBox">
       <h2>{{ uiLabels.wordRecieved }}</h2>
-      <h2 v-for="letter in enteredword">
-        <span v-if="allGuessedLetters.includes(letter)" class="greenLetter"> {{ letter }} </span>
-        <span v-else> {{ letter }} </span>
-      </h2>
-      <div> 
-        <h3>{{ uiLabels.guessedLetters }}</h3>
-        <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
-          <span v-if="enteredword.includes(letter)" class="guessedCorrectLetter"> {{ letter }} </span>
-          <span v-else class="guessedWrongLetter"> {{ letter }}</span>
+        <h2 v-for="letter in enteredword">
+          <span v-if="allGuessedLetters.includes(letter)" class="greenLetter"> {{ letter }} </span>
+          <span v-else> {{ letter }} </span>
+        </h2>
+        <div class="disappearWithSmallWindow">
+        <div> 
+          <h3>{{ uiLabels.guessedLetters }}</h3>
+          <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
+            <span v-if="enteredword.includes(letter)" class="guessedCorrectLetter"> {{ letter }} </span>
+            <span v-else class="guessedWrongLetter"> {{ letter }}</span>
+          </div>
         </div>
       </div>
-    </div>
+    </div> <!-- wordBox stängs här-->
     <div class="graveYard">
       <div>
-        <HangPerson  v-bind:wrongGuesses="ammountWrongLetters" />
+        <HangPerson class="hangPerson"  v-bind:wrongGuesses="ammountWrongLetters" />
       </div>
-    </div>
-    <div class="homebutton">
-        <HomeButton :text="uiLabels.goHome"/> 
     </div>
     <div class="participants-container">
       <div v-for="participant in participants" :key="participant.name" class="player">
@@ -43,7 +47,7 @@
     import Logo from "@/components/Logo.vue";
     import io from 'socket.io-client';
     import HomeButton from '../components/HomeButton.vue';
-    const socket = io("localhost:3000");
+    const socket = io(sessionStorage.getItem("dataServer"));
     import HangPerson from '../components/HangPerson.vue';
     
     export default {
@@ -106,7 +110,8 @@ socket.on("amountWrongLetters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.ammountWrongLetters = data.amount;
     console.log("Antal felaktiga bokstäver uppdaterades för pollId:", this.ammountWrongLetters);
-    this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+   // this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+   this.gameIsWon();
 
   }
 });
@@ -118,7 +123,8 @@ socket.on("amountWrongLetters", (data) => {
       
 
     socket.on("wonOrNot", (isWon) => {
-    this.sendToLossView();
+    this.sendToLossView(); //kanske man kan lägga den i amountwrongletters istället
+    
     console.log("isGameWon?", this.isGameWon);
   });  
 
@@ -128,6 +134,11 @@ socket.on("amountWrongLetters", (data) => {
     socket.emit("getGuessedLetters",  this.pollId );
     socket.emit("getAmountWrongLetters", this.pollId );
   },
+
+  unmounted() {
+  socket.off("wonOrNot");
+  socket.off("amountWrongLetters");
+},
   
   methods: {
 
@@ -245,6 +256,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 .skipPlayer{
   position: absolute;
@@ -264,6 +276,64 @@ h2 {
 
 .skipPlayerButton:hover {
   background-color: #a02666;
+}
+.homeButton{
+  position: relative;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  .skipPlayer{
+    right: 0.5em;
+  }
+  .skipPlayerButton {
+    padding: 0.5em;
+    font-size: 0.8em;
+  }
+  .participants-container {
+    font-size: 1.5em;
+  }
+
+  .hangPerson {
+    scale: 0.8;
+  }
+}
+
+@media (max-width: 600px) {
+
+  h1 {
+    font-size: 3em;
+  }
+  h3{
+    font-size: 1em;
+  }
+  .skipPlayer{
+    margin-top: 8em;
+    right: 0.5em;
+  }
+  .skipPlayerButton {
+    padding: 0.4em;
+    font-size: 0.7em;
+  }
+  .participants-container {
+    padding-top: 10em;
+    padding-left: 2.3em;
+    font-size: 0.8em;
+  }
+
+  .hangPerson {
+    padding-top: 10em;
+    scale: 0.6;
+  }
+  .lettersGuessed {
+    font-size: 0.8em;
+  }
+  .disappearWithSmallWindow{
+    display: none;
+  }
+  .wordBox{
+    padding-bottom: 4em;
+  }
 }
 
 </style>

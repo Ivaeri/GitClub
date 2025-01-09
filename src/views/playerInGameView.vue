@@ -1,13 +1,12 @@
 <template>
   
-    <h1>{{uiLabels.coop}}</h1>
-    <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
     <div> 
-      <Logo />
+      <Logo :text="uiLabels.logo"/>
     </div>
     <div class="homebutton">
         <HomeButton :text="uiLabels.goHome" v-on:click="this.leavePoll"/> 
     </div>
+    <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
     <hr>
     <span v-for="letter in trueWord" class="trueWord">
         <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
@@ -86,7 +85,7 @@ import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
 import HangPerson from '../components/HangPerson.vue';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
   name: 'lobbyForHost',
@@ -200,6 +199,11 @@ socket.on( "index", (data) => {
     socket.emit("findIfWon", this.pollId) 
     socket.emit("getAmountWrongLetters", this.pollId );
   },
+
+  unmounted() {
+  socket.off("wonOrNot");
+  socket.off("amountWrongLetters");
+},
 
 
   methods: {
@@ -333,35 +337,21 @@ socket.on( "index", (data) => {
   
 </script>
 <style scoped>
+
+
 .participants-container {
-    color: darkgray;
-    padding: 1em;
-    display: grid;
-    grid-gap: 1em;
-    grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-    width: 100%; /* Fyll hela skärmen */
-    margin-top: 3em;
+  color: black;
+  padding: 1em;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
+  width: 100%; /* Fyll hela skärmen */
+  margin-top: 6em;
+  font-size: 2em;
+
 }
 
-.player {
-    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
-    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-position-x: 0.5em;
-    height: 3em;
-    width: 5em;
-    background-size: 2em 2em; 
-    padding: 1.5em; 
-    font-size: 2em; 
-    margin-bottom: 0.5em; 
-    display: flex;
-    align-items: center;
-    border-radius: 5px; 
-    background-color: pink; 
-    background-size: 2em 2em;
-    color: black;
-  }
+
 
 .keyboard {
     display: flex;
@@ -392,6 +382,10 @@ socket.on( "index", (data) => {
 
   .key:hover {
     background-color:#0056b3;
+  }
+
+  hr {
+    width: 100%;
   }
 
   .wrongKey {
@@ -474,6 +468,8 @@ socket.on( "index", (data) => {
   }
   .inGame {
     position: relative;
+    margin: 0;
+    padding: 0;
 
   }
   .letterBoxContainer {
@@ -500,7 +496,8 @@ socket.on( "index", (data) => {
     font-size: 10em
   }
 
-  .player{
+  .player {
+    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
     background-repeat: no-repeat;
     background-position: left center;
@@ -515,6 +512,31 @@ socket.on( "index", (data) => {
     align-items: center;
     border-radius: 5px; 
     background-color: pink; 
+  }
+
+
+
+  @media (max-width: 700px) {
+    .hangMan {
+      scale: 0.8;
+    }
+    .participants-container {
+      gap: 0.5em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hangMan {
+      scale: 0.5;
+    }
+
+    .participants-container {
+      padding-top: 10em;
+      padding-left: 2.3em;
+      font-size: 0.8em;
+    }
+
+
   }
 
  
