@@ -340,35 +340,18 @@ socket.on( "index", (data) => {
 
 
 .participants-container {
-  display: flex; /* Ändra till flex om du inte vill använda grid */
-    flex-wrap: wrap; /* Tillåter elementen att brytas om de inte får plats */
-    justify-content: center; /* Centrerar barn horisontellt */
-    align-items: center; /* Centrerar barn vertikalt */
-    gap: calc(100% - 80%); /* Mellanrum mellan elementen */
-    padding: 1em;
-    width: 100%;
-    margin: auto;
-    
+  color: black;
+  padding: 1em;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
+  width: 100%; /* Fyll hela skärmen */
+  margin-top: 6em;
+  font-size: 2em;
+
 }
 
-.player {
-    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
-    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-position-x: 0.5em;
-    height: 3em;
-    width: 5em;
-    background-size: 2em 2em; 
-    padding: 1.5em; 
-    font-size: 2em; 
-    margin-bottom: 0.5em; 
-    display: flex;
-    align-items: center;
-    border-radius: 5px; 
-    background-color: pink; 
-    color: black;
-  }
+
 
 .keyboard {
     display: flex;
@@ -485,6 +468,8 @@ socket.on( "index", (data) => {
   }
   .inGame {
     position: relative;
+    margin: 0;
+    padding: 0;
 
   }
   .letterBoxContainer {
@@ -511,7 +496,8 @@ socket.on( "index", (data) => {
     font-size: 10em
   }
 
-  .player{
+  .player {
+    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
     background-repeat: no-repeat;
     background-position: left center;
@@ -527,9 +513,15 @@ socket.on( "index", (data) => {
     border-radius: 5px; 
     background-color: pink; 
   }
+
+
+
   @media (max-width: 700px) {
     .hangMan {
-      scale: 0.7;
+      scale: 0.8;
+    }
+    .participants-container {
+      gap: 0.5em;
     }
   }
 
@@ -537,6 +529,14 @@ socket.on( "index", (data) => {
     .hangMan {
       scale: 0.5;
     }
+
+    .participants-container {
+      padding-top: 10em;
+      padding-left: 2.3em;
+      font-size: 0.8em;
+    }
+
+
   }
 
  
