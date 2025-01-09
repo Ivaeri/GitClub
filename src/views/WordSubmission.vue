@@ -4,7 +4,7 @@
       <HomeButton :text="uiLabels.goHome"/> 
   </div>
   <div class="logo">
-    <Logo />
+    <Logo :text="uiLabels.logo" class="logostyle"/>
   </div> 
   </div>
   <div class="container">
