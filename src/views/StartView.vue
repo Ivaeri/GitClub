@@ -1,10 +1,8 @@
 <template>
   <header>
+    <Logo :text="uiLabels.logo" :isStartPage="true"/>
     <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
-    </div>
-    <div class="logo" >
-      {{ uiLabels.titlegame }}
     </div>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
@@ -40,6 +38,7 @@
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
 import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
@@ -51,6 +50,7 @@ const socket = io(sessionStorage.getItem("dataServer"));
 export default {
   name: 'StartView',
   components: {
+    Logo,
     ResponsiveNav,
     HangPerson
   },
@@ -119,16 +119,6 @@ header {
   align-items: center;
 }
 
-.logo {
-  font-family: 'Sue Ellen Francisco', cursive;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: 5rem;
-  color: rgb(4, 16, 131);
-  padding-top: 2.5em;
-  vertical-align: bottom;
-  align-items: center;
-}
 
 .create-join {
   background-color: transparent;
@@ -264,7 +254,7 @@ header {
 
   .close::before {
     content: "✕";
-    color: black;
+    color: rgb(60, 35, 35);
   }
   .hide {
     left: -12em;

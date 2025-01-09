@@ -1,6 +1,10 @@
 <template>
+  
     <h1>{{uiLabels.coop}}</h1>
     <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
+    <div> 
+      <Logo />
+    </div>
     <div class="homebutton">
         <HomeButton :text="uiLabels.goHome" v-on:click="this.leavePoll"/> 
     </div>
@@ -77,7 +81,7 @@
 
 <script>
 // @ is an alias to /src
-
+import Logo from "@/components/Logo.vue";
 import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
@@ -86,7 +90,8 @@ const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
   name: 'lobbyForHost',
-  components: {
+  components: { 
+    Logo, 
     HomeButton,
     InputField,
     HangPerson
@@ -140,22 +145,51 @@ export default {
     console.log("Uppdateringen ignorerades för pollId:", data.pollId);
   }
 });
-    socket.on( "index", index => {
-      this.index = index });
+socket.on( "index", (data) => {
+      if (data.pollId === this.pollId) {
+        this.index = data.index;
+      }
+      });
     
-    socket.on( "letters", letters => this.allGuessedLetters = letters );
+   // socket.on( "letters", letters => this.allGuessedLetters = letters );
+
+    socket.on("letters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
+    console.log("gissade bokstäver uppdaterades för pollId:", data.pollId);
+  } else {
+    console.log("nya bokstäver ignorerades för pollId:", data.pollId);
+  }
+});
+
     socket.on("word", word => this.trueWord = word );
     socket.on("wonOrNot", (isWon) => {
       this.isGameWon = isWon;
       this.setGameToWonViaData();
       console.log("isGameWon?", this.isGameWon);
     });    
+    /*
     socket.on("amountWrongLetters", (wrongGuesses) => {
       this.ammountWrongLetters = wrongGuesses;
       this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+    });*/
+
+    socket.on("amountWrongLetters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.ammountWrongLetters = data.amount;
+    this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+
+  }
+});
+/*
+    socket.on("amountWrongLetters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.ammountWrongLetters = wrongGuesses;
+  }
+});*/
+    socket.on('connect_error', () => {
+      alert('Anslutningen till servern tappades. Försök igen senare.');
     });
-
-
     
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
@@ -166,6 +200,11 @@ export default {
     socket.emit("findIfWon", this.pollId) 
     socket.emit("getAmountWrongLetters", this.pollId );
   },
+
+  unmounted() {
+  socket.off("wonOrNot");
+  socket.off("amountWrongLetters");
+},
 
 
   methods: {
@@ -233,10 +272,13 @@ export default {
     console.log("emit sent to update win status");
     //socket.emit("removeGame", this.pollId)
     
-    
-    this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
-      
+    if (this.isGameWon) {
+      this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
+    }
     },
+   
+      
+    
   
 
     findIfGameIsWonViaData () {
@@ -280,18 +322,19 @@ export default {
 
     gameIsLost () {
       if (this.ammountWrongLetters > 6) { 
-        this.gameIsLostFlag = true;
+       // this.gameIsLostFlag = true;
         this.sendToLossView();
       }
     },
     sendToLossView () {
-      if (this.gameIsLostFlag) {
+     // if (this.gameIsLostFlag) {
         this.$router.push('/lossView/'+ this.pollId+ '/' + this.userName)
-      }
+    //  }
     }
     
     }
-  }
+}
+  
   
 </script>
 <style scoped>

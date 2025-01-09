@@ -23,7 +23,7 @@
 	"id": "Spel-id: ",
 	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
 	"fillNumber": "vänligen fyll i ett giltigt spel-id innan du fortsätter",
-	"welcome": "Välkommen till spelet ",
+	"welcome": "Välkommen till ",
 	"GameRules":  "Visa spelregler",
 	"HideGameRules": "Dölj spelregler",
 	"activeGames": "Aktiva spel",
@@ -50,5 +50,7 @@
 	"chooseNewWord": "Välj ett nytt ord:",
 	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
 	"skipPlayer": "Hoppa över spelare",
-	"tooSlow": "För långsam? Tryck för att hoppa över spelare!"
+	"tooSlow": "För långsam? Tryck för att hoppa över spelare!",
+	"noGames": "Inga aktiva spel just nu",
+	"logo": "HÄNG PERSON"
 }

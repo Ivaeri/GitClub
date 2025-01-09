@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Logo />
+  </div>
     <HomeButton :text="uiLabels.goHome"/>
     <h1 class="congrats"> {{ uiLabels.newHost }} </h1>
     <h2> {{ uiLabels.chooseNewWord }}</h2>
@@ -23,6 +26,7 @@
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
 import io from 'socket.io-client';
@@ -31,7 +35,8 @@ export default {
     name: 'WinView',
     components: {
         HomeButton,
-        InputField
+        InputField, 
+        Logo
     },
     data: function () {
         return {
@@ -132,7 +137,7 @@ export default {
   transition: transform 0.3s ease;
   width: 10em;
   height: 5em;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .sendWordButton:hover {

@@ -1,6 +1,7 @@
 <template>
   <div class="createContainer">
   <header>
+    <Logo />
     <h1>{{uiLabels.createGame}}</h1>
   </header>
   <div class="homebutton">
@@ -15,6 +16,7 @@
  
  
  <script>
+ import Logo from "@/components/Logo.vue";
  import newPageButton from '../components/NewPageButton.vue';
  import HomeButton from '../components/HomeButton.vue';
  import io from 'socket.io-client';
@@ -24,6 +26,7 @@
  export default {
   name: 'CreateView',
   components: {
+    Logo, 
     newPageButton,
     HomeButton
   },

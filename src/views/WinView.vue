@@ -1,5 +1,6 @@
 <template>
     <header>
+        <Logo />
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }}</div>
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win2 }}</div>
     </header>
@@ -15,12 +16,14 @@
 </template>
 
 <script>
+import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
 const socket = io(sessionStorage.getItem("dataServer"));
 export default {
     name: 'WinView',
     components: {
+        Logo, 
         HomeButton
     },
     data: function () {
@@ -99,7 +102,7 @@ export default {
     transition: transform 0.3s ease;
     width: 15em;
     height: 6em;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .restartButton:hover{

@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Logo />
+  </div>
     <h1>{{ uiLabels.titlegame }}</h1>
     <div class="skipPlayer">
         <h3> {{ uiLabels.tooSlow }}</h3>
@@ -37,6 +40,7 @@
     </template>
     
     <script>
+    import Logo from "@/components/Logo.vue";
     import io from 'socket.io-client';
     import HomeButton from '../components/HomeButton.vue';
     const socket = io(sessionStorage.getItem("dataServer"));
@@ -45,6 +49,7 @@
     export default {
       name: 'lobbyForHost',
       components: {
+        Logo, 
         HomeButton,
         HangPerson
       },
@@ -73,11 +78,21 @@
     socket.on("uiLabels", (labels) => {
       this.uiLabels = labels;
     });
-
+/*
     socket.on("letters", (letters) => {
       this.allGuessedLetters = letters;
-      this.updateCorrectGuesses();
-    });
+      
+    });*/
+
+    socket.on("letters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
+    this.updateCorrectGuesses();
+    console.log("gissade bokstäver uppdaterades för pollId:", data.pollId);
+  } else {
+    console.log("nya bokstäver ignorerades för pollId:", data.pollId);
+  }
+});
     socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
@@ -87,15 +102,25 @@
   }
 });
 
-    socket.on("amountWrongLetters", (wrongGuesses) => {
-      this.ammountWrongLetters = wrongGuesses;
-      this.gameIsWon(); // Kontrollera om spelet är vunnet för hosten efter uppdatering
-    });
-    socket.on( "index", index => {
-      this.index = index });
+socket.on("amountWrongLetters", (data) => {
+  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+    this.ammountWrongLetters = data.amount;
+    console.log("Antal felaktiga bokstäver uppdaterades för pollId:", this.ammountWrongLetters);
+   // this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+   this.gameIsWon();
+
+  }
+});
+    socket.on( "index", (data) => {
+      if (data.pollId === this.pollId) {
+        this.index = data.index;
+      }
+      });
+      
 
     socket.on("wonOrNot", (isWon) => {
-    this.sendToLossView();
+    this.sendToLossView(); //kanske man kan lägga den i amountwrongletters istället
+    
     console.log("isGameWon?", this.isGameWon);
   });  
 
@@ -105,6 +130,11 @@
     socket.emit("getGuessedLetters",  this.pollId );
     socket.emit("getAmountWrongLetters", this.pollId );
   },
+
+  unmounted() {
+  socket.off("wonOrNot");
+  socket.off("amountWrongLetters");
+},
   
   methods: {
 
@@ -115,21 +145,25 @@
 
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
+        console.log("Game is won, navigating to win view");
         this.sendToWinView();
       }
     },
     
     sendToWinView () {
+        console.log("Navigating to win view");
         this.$router.push('/winView/'+ this.pollId+ '/' + this.hostName)
     },
 
     skipPlayer () {
+      console.log("Skipping player");
       socket.emit("updateIndex", this.pollId)
       socket.emit("getIndex", this.pollId )
     },
 
     sendToLossView () {
       if (this.correctguesses == this.enteredword.length) {
+        console.log("Navigating to loss view");
         this.$router.push('/lossView/'+ this.pollId + '/' + this.hostName)
     }
   }}

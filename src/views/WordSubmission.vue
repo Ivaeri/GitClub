@@ -1,8 +1,11 @@
 <template>
-  <h1>{{uiLabels.coop}}</h1>
-  <div class="homebutton">
+  <div class="logo">
+    <Logo />
+  </div>
+  <div class="homeButton">
       <HomeButton :text="uiLabels.goHome"/> 
   </div> 
+  <h1>{{uiLabels.coop}}</h1>
   <div class="container">
     <div class="item">
       <InputField
@@ -29,6 +32,7 @@
 </template>
   
   <script>
+  import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
   import NewPageButton from '../components/NewPageButton.vue';
   import InputField from '../components/InputField.vue';
@@ -40,6 +44,7 @@
   export default {
     name: 'wordSubmission',
     components: {
+      Logo, 
       NewPageButton,
       InputField,
       HomeButton
@@ -132,41 +137,104 @@
   
   <style scoped>
 
+
+  body {
+    overflow-x: hidden; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   h1{
-    font-size: 9em;
+    font-size: 5rem;
+    margin: 0.6em;
   }
 
   .container {
     display: flex;
-    justify-content: center; 
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center; 
+    margin: 2em 2em;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
   }
 
+  .logo {
+  text-align: center;
+  margin: 2em auto; /* Ger avstånd ovanför och under logon */
+  position: relative; /* Säkerställ att z-index fungerar */
+  z-index: 1; /* Placera logon ovanpå andra element om de överlappar */
+}
+
+
   .item {
-    display: flex;
+    flex: 1 1 100%; 
+    max-width: 40em;
     flex-direction: column;
     justify-content: center;
     }
   .item button{
+    flex: 1 1 40%;
     display: flex;
     flex-direction: column;
-    height: 4em;
+    width: 10em;
+    height: 8em;
+    max-width: 9rem;
+    max-height: 10rem;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     background-color: #cf84a9;
-    border-radius: 5px;
-    margin: 2em;  
-    padding: 1em;
+    border-radius: 0.5em;
+    margin: 2em;
+    padding: 0.5em;
     color: white;
     border: none;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
   .item button:hover{
     background-color: #a02666;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }
+  @media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Lägg elementen i en kolumn */
+    margin: 1em; /* Mindre marginaler */
+  }
+
+  .item {
+    flex: 1 1 100%; /* Varje element tar upp hela bredden */
+    max-width: none; /* Ta bort maxbreddsbegränsning */
+    margin: 0.5em 0; /* Mindre mellanrum mellan element */
+    width: 100%;
+  }
+  .logo{
+    position: relative;
+    margin-top: 1em;
+    margin-bottom: 0.1em;
+  }
+  .homeButton{
+    position: relative;
+    margin-top: 0em;
+    margin-bottom: 1em;
+  }
+  .inputField {
+    width: 90%; /* Fyll 90% av skärmen */
+    font-size: 1.2rem; /* Mindre textstorlek */
+    padding: 0.8em; /* Anpassa padding för mobil */
+  }
+
+  .item button {
+    width: 82%; /* Gör knapparna lika breda som skärmen */
+    max-width: none; /* Ingen maxbreddsbegränsning */
+    padding: 0.8em; /* Anpassa padding */
+    margin-right: 30em;
+  }
+  
+}
 
 
   

@@ -1,5 +1,6 @@
 <template>
   <header>
+    <Logo />
   <h1>{{ uiLabels.awaitingPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
@@ -19,7 +20,7 @@
     </div>
     <div class="buttonContainer">
       <div v-if="participants.length > 0">
-        <button v-on:click="startGame" class="startGameButtonPink">
+        <button v-on:click="startGamee" class="startGameButtonPink">
             {{uiLabels.start}}
         </button>
       </div>
@@ -38,6 +39,7 @@
   </template>
   
   <script>
+  import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
   import HomeButton from '../components/HomeButton.vue';
   const socket = io(sessionStorage.getItem("dataServer"));
@@ -45,6 +47,7 @@
   export default {
     name: 'LobbyForHost',
     components: {
+      Logo, 
       HomeButton
     },
     data: function () {
@@ -80,8 +83,9 @@ socket.emit( "getUILabels", this.lang );
 socket.emit("getParticipants", { pollId: this.pollId });
 },
 
+
 methods: {
-  startGame: function () {
+  startGamee: function () {
     socket.emit("startPoll", this.pollId);
     this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword+ '/' + this.hostName);
     console.log("reached startGame with values:", this.pollId, this.enteredword, this.hostName);
@@ -89,7 +93,9 @@ methods: {
     socket.emit("getInActivePolls", this.pollId)
     //socket.emit("deletePollId", this.pollId);
    // socket.emit("removeGame", this.pollId)
+   
   },
+  
 
   /*validateAndParticipate() {
     if (!this.userName.trim()) {
@@ -141,7 +147,7 @@ methods: {
     border: none;
     border-radius: 10%;
     cursor: pointer;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
   .startGameButtonPink:hover{
  background-color: #a02666;
