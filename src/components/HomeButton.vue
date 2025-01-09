@@ -1,9 +1,7 @@
 <template>
   <div class="toppbar">
     <RouterLink to="/">
-      <button class="homeButton">
-        {{ text }}
-      </button>
+        <img src="https://static.vecteezy.com/system/resources/previews/047/429/171/non_2x/flat-house-icon-free-png.png" alt="Home" class="homeIcon" />
     </RouterLink>
   </div>
 </template>
@@ -11,7 +9,7 @@
 import io from 'socket.io-client';
 const socket = io('http://localhost:3000'); 
  export default {
-  name: 'HomeButton',
+  name: 'HomeIcon',
   props: {
     text: {
       type: String,
@@ -36,38 +34,48 @@ const socket = io('http://localhost:3000');
 }
 </script>
  <style scoped>
+
   .toppbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-}
- .homeButton {
-  position: relative;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: calc(100% - 3em);
-}
- .homeButton:hover {
-  background-color: #0056b3;
 }
 
-/* Media Queries for responsiveness */
+  .homeIcon {
+    height: 4em;
+    width: 4em;
+    margin-left: 4em;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    background-color: rgba(55,139,248,255);
+    pointer-events: auto;
+    border-radius: 100%;
+    background-size: 1em;
+  }
+  
+  .homeIcon:hover {
+    transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+  }
+
+  body, html {
+  margin: 0;
+  padding: 0;
+}
+
 @media (max-width: 768px) {
-  .homeButton {
-    padding: 8px 16px;
-    font-size: 0.9em;  
+  .homeIcon {
+    height: 3em;
+    width: 3em; 
   }
 }
 
 @media (max-width: 480px) {
-  .homeButton {
-    padding: 6px 12px; 
-    font-size: 0.8em;  
+  .homeIcon {
+    height: 2em;
+    width: 2em;
   }
 }
 

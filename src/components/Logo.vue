@@ -1,6 +1,6 @@
 <template>
     <div class="logo" :class="{ 'is-startpage': isStartPage}">
-        Häng Person
+        Häng person
     </div>
 </template>
 
