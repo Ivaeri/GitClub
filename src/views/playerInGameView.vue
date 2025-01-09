@@ -132,10 +132,7 @@ export default {
     
     
     window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
-    // window.addEventListener('keydown', this.handleKeydown); //denna lyssnar på när någon trycker på en tangent
-        // Registrera beforeunload och unload händelser
-   // window.addEventListener("beforeunload", this.handleBeforeUnload);
-    //window.addEventListener("unload", this.handleUnload);
+    
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
@@ -167,11 +164,7 @@ socket.on( "index", (data) => {
       this.setGameToWonViaData();
       console.log("isGameWon?", this.isGameWon);
     });    
-    /*
-    socket.on("amountWrongLetters", (wrongGuesses) => {
-      this.ammountWrongLetters = wrongGuesses;
-      this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
-    });*/
+  
 
     socket.on("amountWrongLetters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
@@ -180,12 +173,7 @@ socket.on( "index", (data) => {
 
   }
 });
-/*
-    socket.on("amountWrongLetters", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
-    this.ammountWrongLetters = wrongGuesses;
-  }
-});*/
+
     socket.on('connect_error', () => {
       alert('Anslutningen till servern tappades. Försök igen senare.');
     });
@@ -240,7 +228,6 @@ socket.on( "index", (data) => {
       this.setAmountWrongLetters();
       this.sendAmountWrongLetters();
       this.toggleIndexViaData();
-      /*this.sendToWinView();*/
       }
   },
     
@@ -269,7 +256,6 @@ socket.on( "index", (data) => {
     }
     socket.emit("setGameToWon", this.pollId);
     console.log("emit sent to update win status");
-    //socket.emit("removeGame", this.pollId)
     
     if (this.isGameWon) {
       this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
@@ -293,24 +279,13 @@ socket.on( "index", (data) => {
     socket.emit("getIndex", this.pollId )
     },
 
-    /*handleKeydown(event) {
-      const key = event.key.toUpperCase();
-      const validKeys = [...this.row1e, ...this.row2e, ...this.row3, ...this.row1s, ...this.row2s];
-      if (validKeys.includes(key)) {
-        this.keyPressed(key);
-      } else if (event.key === 'Enter') {
-        this.handleSubmit();
-      }
-    },*/
-
+   
     
    
     keyPressed: function (key) {
       this.key = key;
       this.current_letter = key;
-      /*
-      socket.emit("updateGuessedLetters", {pollId: this.pollId, key: key})
-      socket.emit("getGuessedLetters", this.pollId)*/
+    
     },
     isWrongKey(key) {
       return this.allGuessedLetters.includes(key) && !this.trueWord.includes(key);
@@ -321,14 +296,14 @@ socket.on( "index", (data) => {
 
     gameIsLost () {
       if (this.ammountWrongLetters > 6) { 
-       // this.gameIsLostFlag = true;
+     
         this.sendToLossView();
       }
     },
     sendToLossView () {
-     // if (this.gameIsLostFlag) {
+   
         this.$router.push('/lossView/'+ this.pollId+ '/' + this.userName)
-    //  }
+  
     }
     
     }

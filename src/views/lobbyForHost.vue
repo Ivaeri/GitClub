@@ -1,13 +1,15 @@
 <template>
   <header>
-    <Logo />
+    <div class="headerContainer">
+      <Logo :text="uiLabels.logo" class="logostyle"/>
+  <div class="homebutton">
+      <HomeButton :text="uiLabels.goHome"/> 
+  </div>
+</div>
   <h1>{{ uiLabels.awaitingPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
   </header>
-  <div class="homebutton">
-      <HomeButton :text="uiLabels.goHome"/> 
-  </div>
   <div class="participantsLobby">
     <h2 class="lobbyHeader">{{ uiLabels.joinedPlayers }}</h2>
     <div class="gridContainer">
@@ -83,6 +85,11 @@ socket.emit( "getUILabels", this.lang );
 socket.emit("getParticipants", { pollId: this.pollId });
 },
 
+unmounted() {
+  socket.off("startPoll");
+  socket.off("participantsUpdate");
+},
+
 
 methods: {
   startGamee: function () {
@@ -97,17 +104,6 @@ methods: {
   },
   
 
-  /*validateAndParticipate() {
-    if (!this.userName.trim()) {
-      alert(this.uiLabels.fillName);
-    } else {
-      this.participateInPoll();
-    }
-  },
-  participateInPoll: function () {
-    socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
-    this.joined = true;
-  },*/
   alertErrorMessage(){
   this.noPlayers = true;
 }
@@ -138,7 +134,12 @@ methods: {
     margin-right: 1em;
 
   }
-
+  .headerContainer {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 1em; 
+}
   .startGameButtonPink{
     width: 10em;
     height: 6em;

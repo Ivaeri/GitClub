@@ -1,7 +1,7 @@
 {
 	"invite": "Bjud in deltagare med den här länken:",
 	"createGame": "Skapa spel",
-	"participateGame": "Gå med i ett spel",
+	"participateGame": "Anslut",
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"about": "Om oss",
@@ -52,6 +52,6 @@
 	"skipPlayer": "Hoppa över spelare!",
 	"tooSlow": "För långsam?",
 	"noGames": "Inga aktiva spel just nu",
-	"logo": "HÄNGA PERSON",
+	"logo": "HÄNG PERSON",
 	"playAgain": "Spela igen?"
 }
