@@ -15,7 +15,7 @@
     <div class="inGame" v-if="!isGameWon">
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="failedLettersContainer">
-        <h3>{{ uiLabels.wrongGuess }}</h3>
+        <h3>{{ uiLabels.wrongGuesses }}</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}
@@ -132,10 +132,7 @@ export default {
     
     
     window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
-    // window.addEventListener('keydown', this.handleKeydown); //denna lyssnar på när någon trycker på en tangent
-        // Registrera beforeunload och unload händelser
-   // window.addEventListener("beforeunload", this.handleBeforeUnload);
-    //window.addEventListener("unload", this.handleUnload);
+    
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
@@ -167,11 +164,7 @@ socket.on( "index", (data) => {
       this.setGameToWonViaData();
       console.log("isGameWon?", this.isGameWon);
     });    
-    /*
-    socket.on("amountWrongLetters", (wrongGuesses) => {
-      this.ammountWrongLetters = wrongGuesses;
-      this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
-    });*/
+  
 
     socket.on("amountWrongLetters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
@@ -180,12 +173,7 @@ socket.on( "index", (data) => {
 
   }
 });
-/*
-    socket.on("amountWrongLetters", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
-    this.ammountWrongLetters = wrongGuesses;
-  }
-});*/
+
     socket.on('connect_error', () => {
       alert('Anslutningen till servern tappades. Försök igen senare.');
     });
@@ -240,7 +228,6 @@ socket.on( "index", (data) => {
       this.setAmountWrongLetters();
       this.sendAmountWrongLetters();
       this.toggleIndexViaData();
-      /*this.sendToWinView();*/
       }
   },
     
@@ -269,7 +256,6 @@ socket.on( "index", (data) => {
     }
     socket.emit("setGameToWon", this.pollId);
     console.log("emit sent to update win status");
-    //socket.emit("removeGame", this.pollId)
     
     if (this.isGameWon) {
       this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
@@ -293,24 +279,13 @@ socket.on( "index", (data) => {
     socket.emit("getIndex", this.pollId )
     },
 
-    /*handleKeydown(event) {
-      const key = event.key.toUpperCase();
-      const validKeys = [...this.row1e, ...this.row2e, ...this.row3, ...this.row1s, ...this.row2s];
-      if (validKeys.includes(key)) {
-        this.keyPressed(key);
-      } else if (event.key === 'Enter') {
-        this.handleSubmit();
-      }
-    },*/
-
+   
     
    
     keyPressed: function (key) {
       this.key = key;
       this.current_letter = key;
-      /*
-      socket.emit("updateGuessedLetters", {pollId: this.pollId, key: key})
-      socket.emit("getGuessedLetters", this.pollId)*/
+    
     },
     isWrongKey(key) {
       return this.allGuessedLetters.includes(key) && !this.trueWord.includes(key);
@@ -321,14 +296,14 @@ socket.on( "index", (data) => {
 
     gameIsLost () {
       if (this.ammountWrongLetters > 6) { 
-       // this.gameIsLostFlag = true;
+     
         this.sendToLossView();
       }
     },
     sendToLossView () {
-     // if (this.gameIsLostFlag) {
+   
         this.$router.push('/lossView/'+ this.pollId+ '/' + this.userName)
-    //  }
+  
     }
     
     }
@@ -340,15 +315,15 @@ socket.on( "index", (data) => {
 
 
 .participants-container {
-  display: flex; /* Ändra till flex om du inte vill använda grid */
-    flex-wrap: wrap; /* Tillåter elementen att brytas om de inte får plats */
-    justify-content: center; /* Centrerar barn horisontellt */
-    align-items: center; /* Centrerar barn vertikalt */
-    gap: calc(100% - 80%); /* Mellanrum mellan elementen */
-    padding: 1em;
-    width: 100%;
-    margin: auto;
-    
+  color: black;
+  padding: 1em;
+  padding-top: 0;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
+  width: 100%; /* Fyll hela skärmen */
+  font-size: 2em;
+
 }
 
 .player {
@@ -360,15 +335,16 @@ socket.on( "index", (data) => {
     height: 3em;
     width: 5em;
     background-size: 2em 2em; 
-    padding: 1.5em; 
-    font-size: 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.5em; 
     margin-bottom: 0.5em; 
     display: flex;
     align-items: center;
     border-radius: 5px; 
     background-color: pink; 
-    color: black;
   }
+
+
 
 .keyboard {
     display: flex;
@@ -462,16 +438,6 @@ socket.on( "index", (data) => {
     background-color: coral
   }
 
-  .speechBubble {
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 5rem;
-    color: black;
-    size: 0.5em;
-    width: 1em;
-    height: auto;
-  }
-
   .failedLettersContainer {
 
     margin-left: 1.5em;
@@ -485,8 +451,9 @@ socket.on( "index", (data) => {
   }
   .inGame {
     position: relative;
-
-  }
+    margin: 0;
+    padding: 0;
+    }
   .letterBoxContainer {
     display: flex;
     justify-content: center;
@@ -500,44 +467,73 @@ socket.on( "index", (data) => {
     font-size: 2em;
   }
 
-  .winContainer {
-    color: #0056b3;
-    font-size: 10em;
 
-  }
-  
-  .winText {
-    color: #0056b3;
-    font-size: 10em
+
+  .speechBubble {
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 5rem;
+    color: black;
+    size: 0.5em;
+    width: 1em;
+    height: auto;
   }
 
-  .player{
-    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-position-x: 0.5em;
-    height: 3em;
-    width: 5em;
-    background-size: 2em 2em; 
-    padding-left: 2.5em; 
-    font-size: 1.5em; 
-    margin-bottom: 0.5em; 
-    display: flex;
-    align-items: center;
-    border-radius: 5px; 
-    background-color: pink; 
-  }
+
+
+
+
   @media (max-width: 700px) {
     .hangMan {
-      scale: 0.7;
+      scale: 0.8;
     }
+    .participants-container {
+      gap: 0.5em;
+    }
+
+    .guessingcontainer {
+      scale: 0.7;
+      transform: translateX(calc(1em - 60%));
+    }
+
+    .failedLettersContainer {
+      display: none; 
   }
+  }
+
+  
 
   @media (max-width: 480px) {
     .hangMan {
+      position: relative;
+      scale: 0.5;
+      
+    }
+
+    .keyboardhangman {
+      position: relative;
+      scale: 0.5;
+      transform: translateX(calc(1em - 323%)) translateY(calc(1em - 90%));
+
+    }
+
+    .guessingcontainer {
       scale: 0.5;
     }
+
+    .participants-container {
+      position: relative;
+      padding-left: 2.3em;
+      font-size: 0.5em;
+      
+    }
+
+    .speechBubble{
+      scale: 0.3;
+      position: relative;
+      right: 33%;
   }
+}
 
  
 </style>

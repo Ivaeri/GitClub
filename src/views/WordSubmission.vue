@@ -1,11 +1,12 @@
 <template>
-  <div class="logo">
-    <Logo />
-  </div>
+  <div class="headerContainer">
   <div class="homeButton">
       <HomeButton :text="uiLabels.goHome"/> 
+  </div>
+  <div class="logo">
+    <Logo :text="uiLabels.logo" class="logostyle"/>
   </div> 
-  <h1>{{uiLabels.coop}}</h1>
+  </div>
   <div class="container">
     <div class="item">
       <InputField
@@ -34,7 +35,6 @@
   <script>
   import Logo from "@/components/Logo.vue";
   import io from 'socket.io-client';
-  import NewPageButton from '../components/NewPageButton.vue';
   import InputField from '../components/InputField.vue';
   import HomeButton from '../components/HomeButton.vue';
   const socket = io(sessionStorage.getItem("dataServer"));
@@ -45,7 +45,6 @@
     name: 'wordSubmission',
     components: {
       Logo, 
-      NewPageButton,
       InputField,
       HomeButton
     },
@@ -144,13 +143,18 @@
     padding: 0;
     box-sizing: border-box;
   }
-
+  .headerContainer {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 1em; 
+}
   h1{
     font-size: 5rem;
     margin: 0.6em;
   }
-
   .container {
+    overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -162,10 +166,13 @@
   }
 
   .logo {
+  font-size: 2em;
+  padding: 0em;
   text-align: center;
-  margin: 2em auto; /* Ger avstånd ovanför och under logon */
-  position: relative; /* Säkerställ att z-index fungerar */
-  z-index: 1; /* Placera logon ovanpå andra element om de överlappar */
+  margin: 0.5em auto; 
+  position: relative; 
+  z-index: 1;
+  margin-top: 1em;
 }
 
 
@@ -215,6 +222,8 @@
     position: relative;
     margin-top: 1em;
     margin-bottom: 0.1em;
+    font-size: 1.5em;
+    margin-top: 0.6em;
   }
   .homeButton{
     position: relative;

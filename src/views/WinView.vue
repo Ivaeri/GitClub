@@ -68,6 +68,11 @@ export default {
     socket.emit("getNailInCoffin", this.pollId);
     socket.emit("getLeaderboard", this.pollId);
 },
+    unmounted() {
+        socket.off("nail");
+        socket.off("newGameIsStarted");
+    },
+
     methods: {
     goToGameLobby: function() {
         console.log( "scoobydoo",this.nailer, this.userName);

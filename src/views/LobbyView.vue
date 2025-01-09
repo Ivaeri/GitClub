@@ -107,13 +107,7 @@ export default {
       this.activePolls = polls; });
     socket.on("inActivePolls", (polls) => {
       this.inActivePolls = polls; });
-    /*
-    socket.on("removePollId", (oldPollId) => {
-      this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
-
-      socket.on("removeGameFromList", (oldPollId) => {
-        this.activePolls = this.activePolls.filter(poll => poll.pollId !== oldPollId)});
-    */
+ 
     socket.emit("getInActivePolls", this.pollId)
      
 
@@ -124,9 +118,9 @@ export default {
   },
 
   beforeDestroy() {
-    // Stoppa bildspelet när komponenten förstörs
     this.stopSlideshow();
   },
+  
 
   methods: {
 
@@ -283,6 +277,7 @@ h2{
   padding: 1em;
   box-sizing: 1em;
   box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+  border: none;
 }
 
 .poll-button:hover {
