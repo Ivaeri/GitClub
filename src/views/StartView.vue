@@ -23,18 +23,20 @@
     </div>
   </header>
 
-  <!-- Hängda gubben -->
-  <HangPerson :wrongGuesses="wrongGuesses" :scale="0.5" />
+  <main class="main-content">
+    <!-- Hängda gubben -->
+    <HangPerson :wrongGuesses="wrongGuesses" :scale="0.5" />
 
 
     <div class="create-join">
       <router-link to="/submitword/">
-      <button>{{ uiLabels.createGame }}</button>
-    </router-link>
-    <router-link to="/lobby/">
-      <button>{{ uiLabels.participateGame }}</button>
-    </router-link>
-  </div>
+        <button>{{ uiLabels.createGame }}</button>
+      </router-link>
+      <router-link to="/lobby/">
+        <button>{{ uiLabels.participateGame }}</button>
+      </router-link>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -113,19 +115,31 @@ export default {
 header {
   position: relative;
   width: 100%;
-  height: 25em;
+  height: 15vh;
   display: grid;
-  grid-template-columns: 2em auto;
+  grid-template-columns: auto;
   align-items: center;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; /* Justera huvudinnehållets höjd */
+  margin-top: 2em; /* Avstånd från header */
+}
 
 .create-join {
-  background-color: transparent;
   display: flex;
+  flex-direction: row;
+  gap: 2em;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 2em; 
+  background-color: transparent;
   color: white;
   border: none;
-  gap: 3em;
   border-radius: 10px;
   transition: background-color 0.3s ease;
   margin: auto;
