@@ -70,8 +70,6 @@ function sockets(io, socket, data) {
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
-    socket.emit('questionUpdate', data.activateQuestion(pollId))
-    socket.emit('submittedAnswersUpdate', data.getSubmittedAnswers(pollId));
   });
 
   socket.on('participateInPoll', function(d) {

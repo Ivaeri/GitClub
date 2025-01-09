@@ -48,12 +48,6 @@ const router = createRouter({
 
     },
 
-    
-    {
-      path: '/create/',
-      name: 'CreateView',
-      component: () => import('../views/CreateView.vue')
-    },
     {
       path: '/submitword/',
       name: 'WordSubmission',
@@ -75,11 +69,7 @@ const router = createRouter({
       name: 'LossView',
       component: () => import('../views/LossView.vue')
     },
-    {
-      path: '/result/:id',
-      name: 'ResultView',
-      component: () => import('../views/ResultView.vue')
-    },
+    
     {
     path: '/ChooseNewWord/:id/:id2',
     name: 'ChooseNewWord',
