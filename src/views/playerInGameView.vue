@@ -490,13 +490,35 @@ socket.on( "index", (data) => {
     .participants-container {
       gap: 0.5em;
     }
+
+    .guessingcontainer {
+      scale: 0.7;
+      transform: translateX(calc(1em - 60%));
+    }
+
+    .failedLettersContainer {
+      display: none; 
   }
+  }
+
+  
 
   @media (max-width: 480px) {
     .hangMan {
       position: relative;
-      scale: 0.7;
+      scale: 0.5;
       
+    }
+
+    .keyboardhangman {
+      position: relative;
+      scale: 0.5;
+      transform: translateX(calc(1em - 323%)) translateY(calc(1em - 90%));
+
+    }
+
+    .guessingcontainer {
+      scale: 0.5;
     }
 
     .participants-container {
@@ -510,11 +532,6 @@ socket.on( "index", (data) => {
       scale: 0.3;
       position: relative;
       right: 33%;
-  }
-
-    .failedLettersContainer {
-      display: none;
-    
   }
 }
 
