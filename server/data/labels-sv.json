@@ -54,5 +54,6 @@
 	"noGames": "Inga aktiva spel just nu",
 	"logo": "HÄNG PERSON",
 	"playAgain": "Spela igen?",
-	"leaderBoard": "Topplista:"
+	"leaderBoard": "Topplista:",
+	"correctWord": "Det korrekta ordet var: "
 }
