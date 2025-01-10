@@ -168,7 +168,7 @@ export default {
       this.validateAndParticipate();
     },
       participateInPoll: function () {
-        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName} )
+        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName, wins: 0} )
       }
   
    }
