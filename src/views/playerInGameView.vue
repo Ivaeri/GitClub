@@ -319,7 +319,7 @@ socket.on( "index", (data) => {
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
   width: 100%; /* Fyll hela skärmen */
-  font-size: 2em;
+  font-size: 1.5em;
 
 }
 
@@ -329,11 +329,11 @@ socket.on( "index", (data) => {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 3em;
-    width: 5em;
+    height: 2em;
+    width: 4em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
-    font-size: 1.5em; 
+    font-size: 1.2em; 
     margin-bottom: 0.5em; 
     display: flex;
     align-items: center;
@@ -474,6 +474,7 @@ socket.on( "index", (data) => {
     size: 0.5em;
     width: 1em;
     height: auto;
+    scale: 0.75;
   }
 
 
@@ -484,15 +485,27 @@ socket.on( "index", (data) => {
     .hangMan {
       scale: 0.8;
     }
+    .player{
+      font-size: 1em;
+   }
+
+    .speechBubble{
+      scale: 0.35;
+      position: relative;
+      right: 15%;
+  }
+
     .participants-container {
       gap: 0.5em;
+      position: relative;
+      padding-left: 2.3em;
+      font-size: 1em;
     }
 
     .guessingcontainer {
       scale: 0.7;
-      transform: translateX(calc(1em - 60%));
+      
     }
-
     .failedLettersContainer {
       display: none; 
   }
@@ -500,7 +513,10 @@ socket.on( "index", (data) => {
 
   
 
-  @media (max-width: 480px) {
+  @media (max-width: 350px) {
+    .player{
+      font-size: 1em;
+    }
     .hangMan {
       position: relative;
       scale: 0.5;
@@ -510,12 +526,13 @@ socket.on( "index", (data) => {
     .keyboardhangman {
       position: relative;
       scale: 0.5;
-      transform: translateX(calc(1em - 323%)) translateY(calc(1em - 90%));
+      transform: translateX(calc(1em - 300%)) translateY(calc(1em - 90%));
 
     }
 
     .guessingcontainer {
       scale: 0.5;
+      transform: translateX(calc(1em - 45%));
     }
 
     .participants-container {
@@ -526,9 +543,14 @@ socket.on( "index", (data) => {
     }
 
     .speechBubble{
-      scale: 0.3;
+      scale: 0.15;
       position: relative;
       right: 33%;
+  }
+
+  .homebutton {
+    margin-left: -2em;
+    margin-top: 0.5em;
   }
 }
 
