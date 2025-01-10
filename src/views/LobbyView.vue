@@ -298,7 +298,8 @@ h2{
   margin-left: 0.5em;
   border-radius: 10px;
   color: rgb(3, 3, 3);
-  border: 1px solid black;
+  border: none;
+  color: white;
   box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   
   }
@@ -388,7 +389,7 @@ h2{
 }
 
   .gamesContainer {
-    width: 70%; /* Justera bredden ytterligare för mindre skärmar */
+    width: 70%; 
     height: auto;
     padding: 0.5em;
   }
@@ -400,8 +401,7 @@ h2{
   }
 
   .joinGameButton {
-    
-    font-size: 0.5em;
+    font-size: 0.6em;
   }
 }
 </style>
