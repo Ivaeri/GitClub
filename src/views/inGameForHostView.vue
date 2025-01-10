@@ -156,7 +156,6 @@ socket.on("amountWrongLetters", (data) => {
     },
 
     skipPlayer () {
-      console.log("Skipping player");
       socket.emit("updateIndex", this.pollId)
       socket.emit("getIndex", this.pollId )
     },
@@ -174,18 +173,20 @@ socket.on("amountWrongLetters", (data) => {
 
 h1 {
     font-size: 4em;
+    margin-top: -0.5em
 }
 h2 {
     display: inline-block;
 }
 .participants-container {
+    position: absolute;
+    bottom: 0;
     color: black;
     padding: 1em;
     display: grid;
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; /* Fyll hela skärmen */
-    margin-top: 4em;
     font-size: 2em;
 }
 
@@ -254,9 +255,15 @@ h2 {
   align-items: center;
   z-index: 1;
 }
+
+.hangPerson{
+  position: absolute;
+  top: calc(27%); 
+  left: 40%;
+}
 .skipPlayer{
   position: absolute;
-  right: 2em;
+  right: 10%;
   top: 5em;
   z-index: 100;
 
@@ -288,11 +295,13 @@ h2 {
   }
   .participants-container {
     font-size: 1.5em;
+    margin-bottom: 2em;
   }
 
-  .hangPerson {
-    scale: 0.8;
+  .speechBubble{
+    scale: 0.7;
   }
+
 }
 
 @media (max-width: 600px) {
@@ -303,24 +312,13 @@ h2 {
   h3{
     font-size: 1em;
   }
-  .skipPlayer{
-    margin-top: 8em;
-    right: 0.5em;
-  }
-  .skipPlayerButton {
-    padding: 0.4em;
-    font-size: 0.7em;
-  }
+
   .participants-container {
-    padding-top: 10em;
-    padding-left: 2.3em;
-    font-size: 0.8em;
+    padding-bottom: 5em;
+    font-size: 0.7em;
+    flex-wrap: wrap;
   }
 
-  .hangPerson {
-    padding-top: 10em;
-    scale: 0.6;
-  }
   .lettersGuessed {
     font-size: 0.8em;
   }
@@ -329,6 +327,9 @@ h2 {
   }
   .wordBox{
     padding-bottom: 4em;
+  }
+  .speechBubble{
+    scale: 0.5;
   }
 }
 
