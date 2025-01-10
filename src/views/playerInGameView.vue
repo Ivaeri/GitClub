@@ -7,7 +7,6 @@
         <HomeButton :text="uiLabels.goHome" v-on:click="this.leavePoll"/> 
     </div>
     <h3> {{ uiLabels.id }} {{ this.pollId }}</h3>
-    <hr>
     <span v-for="letter in trueWord" class="trueWord">
         <span v-if="allGuessedLetters.includes(letter)"> {{ letter }} </span> 
         <span v-else> _ </span>
