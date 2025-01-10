@@ -54,5 +54,6 @@
 	"noGames": "No active games right now",
 	"logo": "HANG PERSON",
 	"playAgain": "Play again?",
-	"leaderBoard": "Leaderboard:"
+	"leaderBoard": "Leaderboard:",
+	"correctWord": "The correct word was: "
 }
