@@ -428,11 +428,18 @@ socket.on( "index", (data) => {
   }
 
   .submitButton {
-    background-color: lightcoral
+    background-color: #cf84a9;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
   }
 
   .submitButton:hover {
-    background-color: coral
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
   }
 
   .failedLettersContainer {
