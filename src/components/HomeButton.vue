@@ -53,6 +53,7 @@ const socket = io('http://localhost:3000');
     pointer-events: auto;
     border-radius: 100%;
     background-size: 1em;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
   
   .homeIcon:hover {

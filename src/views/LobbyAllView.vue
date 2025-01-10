@@ -2,7 +2,7 @@
     <div>
       <Logo :text="uiLabels.logo" class="logoStyle"/>
       <h1>
-        {{ hostUserName }}{{ uiLabels.idButton }}
+        {{ pollId.hostName }}{{ uiLabels.idButton }}
       </h1>
       <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
@@ -49,7 +49,7 @@
     data: function () {
       return {
         userName: "",
-        hostUserName: "",
+        hostName: "",
         pollId: "inactive poll",
         uiLabels: {},
         joined: false,
@@ -70,7 +70,7 @@
         }
       });
       socket.on("startPoll", () => this.$router.push("/playerInGame/" + this.pollId + '/' + this.userName) ); 
-      socket.on("pollData", data => this.hostUserName = data.userName );
+      socket.on("pollData", data => this.hostName = data.userName );
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
       socket.emit("getParticipants", { pollId: this.pollId });
@@ -104,6 +104,7 @@
     align-items: center;
     border-radius: 5px; 
     background-color: pink; 
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
 
   .participants-list{
