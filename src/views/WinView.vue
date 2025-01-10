@@ -9,7 +9,7 @@
     <button class="restartButton" v-on:click="goToGameLobby">
         {{ uiLabels.playAgain }}
     </button>
-    <LeaderBoard :players="leaderboard" />
+    <LeaderBoard :players="leaderboard" :text="uiLabels.leaderBoard"/>
 </template>
 
 <script>

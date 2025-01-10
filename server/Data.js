@@ -119,8 +119,15 @@ Data.prototype.nailInCoffin = function (userName, pollId) {
   if (this.polls[pollId]) {
     const participant = this.polls[pollId].participants.find(p => p.name === userName);
     this.polls[pollId].NailInCoffin = userName;
-    if (participant) {participant.wins += 0.5;}
-    else  {this.polls[pollId].hostName.wins += 1;}
+    if (participant) {
+      for (let i = 0; i < this.polls[pollId].participants.length; i++) {
+          this.polls[pollId].participants[i].wins += 0.5;
+          if (participant === this.polls[pollId].participants[i]) {
+            this.polls[pollId].participants[i].wins += 0.5;
+          }
+      }
+      ;}
+    else  {this.polls[pollId].hostName.wins += 2;}
   }
 }
 
