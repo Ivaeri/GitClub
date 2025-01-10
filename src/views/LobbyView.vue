@@ -198,8 +198,8 @@ h2{
   }
 
 .enterGameInput{
-  width: 8em;
-  height: 2em;
+  width: 25em;
+  height: 3.5em;
   text-align: center;
   font-size: larger;
   background-color: pink;
@@ -291,8 +291,9 @@ h2{
 }
 
 .joinGameButton {
-  width: 5em;
-  height: 3em;
+  width: 3.2em;
+  height: 2.3em;
+  font-size: 1.8em;
   background-color: #cf84a9;
   cursor: pointer;
   margin-left: 0.5em;
