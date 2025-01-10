@@ -11,7 +11,7 @@
             {{ uiLabels.playAgain }}
         </button>
     </div>
-    <LeaderBoard :players="leaderboard" />
+    <LeaderBoard :players="leaderboard" :text="uiLabels.leaderBoard"/>
 </template>
 
 <script>
