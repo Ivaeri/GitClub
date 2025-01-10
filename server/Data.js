@@ -151,17 +151,24 @@ Data.prototype.getInActivePolls = function (pollId) {
 };
 
 Data.prototype.addToInActivePolls = function (pollId) {
-  if (this.polls[pollId]) { 
+  if (this.polls[pollId] && !this.inActivePolls.includes(pollId)) { 
     this.inActivePolls.push(pollId)
    }
 };
 
+Data.prototype.inActivateIfFull = function (pollId) {
+  if (this.polls[pollId] && this.polls[pollId].participants.length > 3) { 
+      this.inActivePolls.push(pollId);
+   }
+};
+
 Data.prototype.reActivatePollId = function (pollId) {
-  if (this.polls[pollId]) { 
+  if (this.polls[pollId] && this.polls[pollId].participants.length < 4) { 
     this.inActivePolls = this.inActivePolls.filter(id => id !== pollId);
     return this.inActivePolls;
    }
 };
+
 
 
   Data.prototype.getGuessedLetter = function (pollId) {
