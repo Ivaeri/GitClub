@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="info">
     <div class="headerContainer">
       <Logo :text="uiLabels.logo" class="logostyle"/>
   <div class="homebutton">
@@ -20,6 +20,7 @@
           {{ participant.name }}
       </p>
     </div>
+  </div>
     <div class="buttonContainer">
       <div v-if="participants.length > 0">
         <button v-on:click="startGamee" class="startGameButtonPink">
@@ -33,7 +34,7 @@
         <p v-if="noPlayers":class="{ active1: noPlayers }"> {{ uiLabels.waitForPlayers }}</p>
       </div>
     </div>
-  </div>
+  
       
 
 
@@ -119,46 +120,45 @@ methods: {
     position: relative;
     font-size: 1.5em;
     padding: 20px;
-    border: 1px solid #ccc;
-    height: 400px;
-    background-color: lightblue;
+    border: none;
+    height: auto;
+    background-color: transparent;
     z-index: 6;
     margin-left: 2em;
     }
 
   .buttonContainer{
-    position: absolute;
+    position: relative;
     bottom: 10px;
     right: 10px; 
     font-size: 0.8em;
     margin-right: 1em;
-
   }
   .headerContainer {
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  padding: 1em; 
-}
+  padding: 1em;     
+  }
   .startGameButtonPink{
     width: 10em;
     height: 6em;
     background-color: #cf84a9;
     color: white;
     border: none;
-    border-radius: 10%;
+    border-radius: 1em;
     cursor: pointer;
     box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
   .startGameButtonPink:hover{
- background-color: #a02666;
- transform: rotate(1deg) scale(1.1);
- transition: transform 0.2s ease-in-out;
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
  }
   .startGameButtonGray{
     width: 10em;
     height: 6em;
-    border-radius: 10%;
+    border-radius: 1em;
   }
   .lobbyHeader{
     text-align: left;
@@ -166,13 +166,12 @@ methods: {
   }
   .gridContainer{
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* skapar 3 kolumner */
+    grid-template-columns: repeat(3, 1fr); 
     grid-auto-rows: 100px;
     gap: 20px; 
     justify-items: center;
     align-items: center; 
     padding: 20px;
-
   }
   
   .active1{
@@ -189,13 +188,57 @@ methods: {
     height: 3em;
     width: 5em;
     background-size: 2em 2em; 
-    padding-left: 2.5em; 
+    padding-left: 3em; 
+    padding-right: 0em;
     font-size: 1.5em; 
     margin-bottom: 0.5em; 
     display: flex;
     align-items: center;
-    border-radius: 5px; 
+    border-radius: 0.5em; 
     background-color: pink; 
+  }
+
+  @media (max-width: 768px) {
+    .player{
+      width: 1.5em;
+      height: 0.4em;
+      background-size: 1.2em 1.2em;
+      font-size: 1em;
+      gap: 1em;
+      padding: 1em 2em;
+    }
+    .gridContainer{
+      display: inline-table;
+      
+    }
+    .info h1{
+      padding: 0;
+      font-size: 1.3em;
+    }
+    .info h2{
+      font-size: 1em;
+    }
+    .lobbyHeader{
+      font-size: 0.8em;
+      margin-bottom: 0.1em;
+    }
+    .buttonContainer{
+      position: relative;
+      margin-bottom: 1em;
+    }
+    .logostyle{
+    font-size: 1.1em;
+    }
+
+    .startGameButtonPink{
+      width: 80%;
+      margin-left: 3em;
+    }
+    .startGameButtonGray{
+      width: 80%;
+      margin-left: 3em;
+    }
+
   }
   
   </style>

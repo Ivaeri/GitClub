@@ -34,7 +34,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
         poll.lang = lang; 
         poll.hostName = hostName; 
         poll.participants = [];
-        poll.currentQuestion = 0;              
+          
         this.polls[pollId] = poll;
       }
       return this.polls[pollId];
@@ -211,9 +211,7 @@ Data.prototype.setPollId = function (pollId) {
       enteredWord: "",
       pollId: pollId,
       participants: [],
-      questions: [],
       answers: [],
-      currentQuestion: 0,
       index: 0,
       guessedLetters: [],
       isGameWon: false,
@@ -239,9 +237,7 @@ Data.prototype.startNewGame = function (pollId, hostname, word) {
       enteredWord: word,
       pollId: pollId,
       participants: [],
-      questions: [],
       answers: [],
-      currentQuestion: 0,
       index: 0,
       guessedLetters: [],
       isGameWon: false,

@@ -155,7 +155,7 @@ export default {
         console.log(this.hostName, "host")
         if (!this.userName.trim()) {
           alert(this.uiLabels.fillName);
-        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName.name) {
+        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName) {
           alert(this.uiLabels.nameTaken);
         } else {
           this.participateInPoll();
@@ -168,8 +168,7 @@ export default {
       this.validateAndParticipate();
     },
       participateInPoll: function () {
-        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName, wins: 0} )
-        //this.joined = true;
+        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName} )
       }
   
    }
@@ -300,6 +299,7 @@ h2{
   border-radius: 10px;
   color: rgb(3, 3, 3);
   border: 1px solid black;
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   
   }
   .joinGameButton:hover{

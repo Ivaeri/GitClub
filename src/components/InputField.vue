@@ -55,6 +55,20 @@ export default {
   width: 100%; /* Justera bredden om nödvändigt */
   max-width: 7000em;
   box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+  .inputField {
+    height: 3em;
+    width: 3em; 
+  }
+}
+
+@media (max-width: 480px) {
+  .inputField {
+    height: 2em;
+    width: 2em;
+  }
 }
 
     </style>

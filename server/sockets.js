@@ -44,10 +44,7 @@ function sockets(io, socket, data) {
   });
   
 
-  socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a});
-    socket.emit('questionUpdate', data.activateQuestion(d.pollId));
-  });
+
 
   socket.on("removePollIdFromList", function(pollId) {
     console.log("removePollIdFromList körs i sockets.js", pollId)
