@@ -8,6 +8,7 @@
     <div class="chooseWord">
     <div>
         <InputField class="wordInput"
+        @keydown.enter="handleClick"
         v-bind:label="uiLabels.enterWord"
         v-model="enteredword" 
         :placeholder="uiLabels.enterWord" 
@@ -42,7 +43,7 @@ export default {
             uiLabels: {},
             lang: localStorage.getItem( "lang") || "en",
             enteredword: "",
-            swe_wordlist: new Set()
+            swe_wordlist: new Set(),
         }
     },
     created:  async function () {
@@ -116,7 +117,7 @@ export default {
 
       startNewGame(){
         console.log("startNewGame körs");
-        socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName: this.hostName});
+        socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName: this.hostName,});
         socket.emit("newGameHasStarted", this.pollId);
       }
   }}

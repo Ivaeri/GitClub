@@ -43,7 +43,7 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
-	"wrongGuess": "Fel gissning, försök igen",
+	"wrongGuesses": "Felgissningar:",
 	"win1": "Grattis!",
 	"win2": "Du vann! 🎉",
 	"newHost": "Grattis, du är ny spelledare!",
@@ -53,5 +53,7 @@
 	"tooSlow": "För långsam?",
 	"noGames": "Inga aktiva spel just nu",
 	"logo": "HÄNG PERSON",
-	"playAgain": "Spela igen?"
+	"playAgain": "Spela igen?",
+	"leaderBoard": "Topplista:",
+	"correctWord": "Det korrekta ordet var: "
 }

@@ -14,7 +14,7 @@
     <div class="inGame" v-if="!isGameWon">
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="failedLettersContainer">
-        <h3>{{ uiLabels.wrongGuess }}</h3>
+        <h3>{{ uiLabels.wrongGuesses }}</h3>
         <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
           <div v-if="!trueWord.includes(letter)" class="failedLetter">
             {{ letter }}
@@ -131,6 +131,7 @@ export default {
     
     
     window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
+    window.addEventListener('keydown', this.handleKeydown);
     
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
@@ -278,9 +279,16 @@ socket.on( "index", (data) => {
     socket.emit("getIndex", this.pollId )
     },
 
-   
-    
-   
+    handleKeydown(event) {
+      const key = event.key.toUpperCase();
+      const validKeys = [...this.row1e, ...this.row2e, ...this.row3, ...this.row1s, ...this.row2s];
+      if (validKeys.includes(key)) {
+        this.keyPressed(key);
+      } else if (event.key === 'Enter') {
+        this.handleSubmit();
+      }
+    },
+
     keyPressed: function (key) {
       this.key = key;
       this.current_letter = key;
@@ -316,14 +324,32 @@ socket.on( "index", (data) => {
 .participants-container {
   color: black;
   padding: 1em;
+  padding-top: 0;
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
   width: 100%; /* Fyll hela skärmen */
-  margin-top: 6em;
   font-size: 2em;
 
 }
+
+.player {
+    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
+    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 0.5em;
+    height: 3em;
+    width: 5em;
+    background-size: 2em 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.5em; 
+    margin-bottom: 0.5em; 
+    display: flex;
+    align-items: center;
+    border-radius: 5px; 
+    background-color: pink; 
+  }
 
 
 
@@ -419,16 +445,6 @@ socket.on( "index", (data) => {
     background-color: coral
   }
 
-  .speechBubble {
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 5rem;
-    color: black;
-    size: 0.5em;
-    width: 1em;
-    height: auto;
-  }
-
   .failedLettersContainer {
 
     margin-left: 1.5em;
@@ -444,8 +460,7 @@ socket.on( "index", (data) => {
     position: relative;
     margin: 0;
     padding: 0;
-
-  }
+    }
   .letterBoxContainer {
     display: flex;
     justify-content: center;
@@ -459,34 +474,19 @@ socket.on( "index", (data) => {
     font-size: 2em;
   }
 
-  .winContainer {
-    color: #0056b3;
-    font-size: 10em;
 
-  }
-  
-  .winText {
-    color: #0056b3;
-    font-size: 10em
+
+  .speechBubble {
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 5rem;
+    color: black;
+    size: 0.5em;
+    width: 1em;
+    height: auto;
   }
 
-  .player {
-    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
-    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-position-x: 0.5em;
-    height: 3em;
-    width: 5em;
-    background-size: 2em 2em; 
-    padding-left: 2.5em; 
-    font-size: 1.5em; 
-    margin-bottom: 0.5em; 
-    display: flex;
-    align-items: center;
-    border-radius: 5px; 
-    background-color: pink; 
-  }
+
 
 
 
@@ -497,21 +497,50 @@ socket.on( "index", (data) => {
     .participants-container {
       gap: 0.5em;
     }
+
+    .guessingcontainer {
+      scale: 0.7;
+      transform: translateX(calc(1em - 60%));
+    }
+
+    .failedLettersContainer {
+      display: none; 
   }
+  }
+
+  
 
   @media (max-width: 480px) {
     .hangMan {
+      position: relative;
+      scale: 0.5;
+      
+    }
+
+    .keyboardhangman {
+      position: relative;
+      scale: 0.5;
+      transform: translateX(calc(1em - 323%)) translateY(calc(1em - 90%));
+
+    }
+
+    .guessingcontainer {
       scale: 0.5;
     }
 
     .participants-container {
-      padding-top: 10em;
+      position: relative;
       padding-left: 2.3em;
-      font-size: 0.8em;
+      font-size: 0.5em;
+      
     }
 
-
+    .speechBubble{
+      scale: 0.3;
+      position: relative;
+      right: 33%;
   }
+}
 
  
 </style>

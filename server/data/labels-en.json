@@ -43,7 +43,7 @@
 	"manualEnter": "You can also join a game by entering the game-ID below:",
 	"guessedLetters": "Guessed letters: ",
 	"host": "the host",
-	"wrongGuess": "Wrong guess, try again",
+	"wrongGuesses": "Wrong guesses: ",
 	"win1": "Congratulations!",
 	"win2": "You Won! 🎉",
 	"newHost": "Congratulations, you are the new host!",
@@ -53,5 +53,7 @@
 	"tooSlow": "Too slow?",
 	"noGames": "No active games right now",
 	"logo": "HANG PERSON",
-	"playAgain": "Play again?"
+	"playAgain": "Play again?",
+	"leaderBoard": "Leaderboard:",
+	"correctWord": "The correct word was: "
 }

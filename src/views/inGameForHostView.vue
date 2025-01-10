@@ -145,6 +145,7 @@ socket.on("amountWrongLetters", (data) => {
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
         console.log("Game is won, navigating to win view");
+        socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.hostName});
         this.sendToWinView();
       }
     },
@@ -184,7 +185,7 @@ h2 {
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; /* Fyll hela skärmen */
-    margin-top: 6em;
+    margin-top: 4em;
     font-size: 2em;
 }
 

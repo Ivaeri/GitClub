@@ -19,7 +19,7 @@
      >
         <button class="poll-button" :class="{ 'clicked-button': chosenPollId === poll.pollId }" @click="joinPoll(poll.pollId)">
           <span class="idPollStyle">
-            {{ poll.hostName }}
+            {{ poll.hostName.name }}
           </span><br/>
           {{ poll.pollId}}
         </button>
@@ -155,7 +155,7 @@ export default {
         console.log(this.hostName, "host")
         if (!this.userName.trim()) {
           alert(this.uiLabels.fillName);
-        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName) {
+        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName.name) {
           alert(this.uiLabels.nameTaken);
         } else {
           this.participateInPoll();
@@ -168,7 +168,8 @@ export default {
       this.validateAndParticipate();
     },
       participateInPoll: function () {
-        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName} )
+        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName, wins: 0} )
+        //this.joined = true;
       }
   
    }

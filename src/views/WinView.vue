@@ -5,23 +5,25 @@
         </div>
         <Logo />
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }} {{ uiLabels.win2 }}</div>
-        <!--<div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win2 }}</div> -->
     </header>
     <button class="restartButton" v-on:click="goToGameLobby">
         {{ uiLabels.playAgain }}
     </button>
+    <LeaderBoard :players="leaderboard" :text="uiLabels.leaderBoard"/>
 </template>
 
 <script>
 import Logo from "@/components/Logo.vue";
 import HomeButton from '../components/HomeButton.vue';
 import io from 'socket.io-client';
+import LeaderBoard from "../components/LeaderBoard.vue";
 const socket = io(sessionStorage.getItem("dataServer"));
 export default {
     name: 'WinView',
     components: {
         Logo, 
-        HomeButton
+        HomeButton,
+        LeaderBoard
     },
     data: function () {
         return {
@@ -29,7 +31,9 @@ export default {
             lang: localStorage.getItem( "lang") || "en",
             nailer: "",
             userName: "",
-            newGameIsStarted: false
+            newGameIsStarted: false,
+            leaderboard: [],
+            wins: 0
         }
     },
     created: function () {
@@ -46,8 +50,13 @@ export default {
         this.newGameIsStarted = true;
         console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
+    socket.on("leaderboard", (data) => {
+        this.leaderboard = data.slice().sort((a, b) => b.wins - a.wins);;
+        this.getMyWins(this.leaderboard);
+    });
     socket.emit("getUILabels", this.lang);
     socket.emit("getNailInCoffin", this.pollId);
+    socket.emit("getLeaderboard", this.pollId);
 },
     unmounted() {
         socket.off("nail");
@@ -66,12 +75,19 @@ export default {
                 alert("Hold your horses, the new host is thinking of a word...");
             }
             else {
-                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
+                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )
                 this.$router.push("/lobbyAll/" + this.pollId + "/" + this.userName);
             }
 
            
 }
+    },
+    getMyWins: function(leaderboard) {
+        for (let i = 0; i < leaderboard.length; i++) {
+            if (leaderboard[i].name === this.userName) {
+                this.wins = leaderboard[i].wins;
+            }
+        }
     }
 }}
 

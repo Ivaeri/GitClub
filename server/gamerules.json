@@ -5,7 +5,9 @@
         "Gissa en bokstav i taget för att försöka lista ut ordet.",
         "Om ni gissar rätt, visas bokstaven på rätt plats i ordet.",
         "Om ni gissar fel, ritas en del av häng-personen.",
-        "Spelet är över när ni antingen har gissat hela ordet eller häng-personen är komplett."
+        "Spelet är över när ni antingen har gissat hela ordet eller häng-personen är komplett.",
+        "Om ni kommer på ordet så får alla 1 poäng, och den som gissade sista bokstaven får en extra poäng.",
+        "Om häng-personen är komplett så får spelledaren 2 poäng."
 
 ],
 
@@ -15,6 +17,8 @@
     "You have a limited number of guesses before the game is over.",
     "If you guess correctly, the letter will appear in the correct place in the word.",
     "If you guess incorrectly, a part of the hang-person is drawn.",
-    "The game is over when you either guess the entire word or the hang-person is complete."
+    "The game is over when you either guess the entire word or the hang-person is complete.",
+    "If you guess the word, everyone gets 1 point, and the person who guessed the last letter gets an extra point.",
+    "If the Hang-Person is complete, the gameleader gets 2 points."
 ]
 }
