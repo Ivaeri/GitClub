@@ -132,7 +132,6 @@ export default {
     
     
     window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
-    window.addEventListener('keydown', this.handleKeydown);
     
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
@@ -280,15 +279,6 @@ socket.on( "index", (data) => {
     socket.emit("getIndex", this.pollId )
     },
 
-    handleKeydown(event) {
-      const key = event.key.toUpperCase();
-      const validKeys = [...this.row1e, ...this.row2e, ...this.row3, ...this.row1s, ...this.row2s];
-      if (validKeys.includes(key)) {
-        this.keyPressed(key);
-      } else if (event.key === 'Enter') {
-        this.handleSubmit();
-      }
-    },
 
     keyPressed: function (key) {
       this.key = key;
