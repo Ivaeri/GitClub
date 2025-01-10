@@ -187,7 +187,7 @@ h2 {
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; /* Fyll hela skärmen */
-    font-size: 2em;
+    font-size: 1.3em;
 }
 
 .player {
@@ -205,7 +205,7 @@ h2 {
   display: flex;
   align-items: center;
   border-radius: 5px; 
-  background-color: pink; 
+  background-color: pink;
 }
 
 .speechBubble {
@@ -263,7 +263,7 @@ h2 {
 }
 .skipPlayer{
   position: absolute;
-  right: 10%;
+  right: 5em;
   top: 5em;
   z-index: 100;
 
@@ -271,7 +271,6 @@ h2 {
 .skipPlayerButton {
   background-color: #cf84a9;
   color: black;
-  padding: 1em;
   font-size: 1em;
   border-radius: 5px;
   cursor: pointer;
@@ -291,10 +290,9 @@ h2 {
   }
   .skipPlayerButton {
     padding: 0.5em;
-    font-size: 0.8em;
   }
   .participants-container {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-bottom: 2em;
   }
 
@@ -308,15 +306,18 @@ h2 {
 
   h1 {
     font-size: 3em;
+    margin-top: 0.05em;
   }
   h3{
     font-size: 1em;
   }
 
   .participants-container {
-    padding-bottom: 5em;
-    font-size: 0.7em;
+    padding-bottom: 7em;
+    font-size: 0.6em;
     flex-wrap: wrap;
+    gap:30px;
+    width: 100%;
   }
 
   .lettersGuessed {
@@ -329,7 +330,16 @@ h2 {
     padding-bottom: 4em;
   }
   .speechBubble{
-    scale: 0.5;
+    scale: 0.3;
+    position: relative;
+    right: 33%;
+  }
+  .hangPerson{
+    top: calc(35%);
+    left: 30%;
+  }
+  .skipPlayer{
+    margin-top: 1em;
   }
 }
 
