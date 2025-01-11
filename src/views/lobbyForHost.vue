@@ -17,7 +17,7 @@
     <div class="gridContainer">
       <p v-if="participants.length > 0" v-for="(participant, index) in participants" 
         v-bind:key="participant.name"
-        v-bind:style="{gridColumnStart: (index % 3) + 1, gridRowStart: Math.floor(index / 3) + 1}"
+        v-bind:style="{gridColumnStart: (index % 2) + 1, gridRowStart: Math.floor(index / 2) + 1}"
         class="player">
           {{ participant.name }}
       </p>
@@ -189,12 +189,15 @@ methods: {
   .lobbyHeader{
     text-align: left;
     font-size: 1.5em;
+    padding: 0;
+    margin: 0;
   }
   .gridContainer{
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
     grid-auto-rows: 100px;
-    gap: 20px; 
+    gap: 0.1em; 
     justify-items: center;
     align-items: center; 
     padding: 20px;
@@ -211,8 +214,8 @@ methods: {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 2.2em;
-    width: 3.5em;
+    height: 3em;
+    width: 5em;
     background-size: 1.8em 1.8em; 
     padding-left: 3em; 
     padding-right: 0em;
