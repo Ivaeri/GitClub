@@ -1,4 +1,5 @@
 <template>
+    <div class="fix">
     <div> 
         <Logo :text="uiLabels.logo" class="logostyle"/>
     </div>
@@ -14,6 +15,7 @@
         </button>
     </div>
     <LeaderBoard class="leaderBoard" :players="leaderboard" :text="uiLabels.leaderBoard"/>
+</div>   
 </template>
 
 <script>
@@ -90,6 +92,14 @@ export default {
 
 <style scoped>
 
+.fix {
+    overflow-y: hidden; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+  }
+
 .gameover {
     text-align: center; 
     font-size: 5em;
@@ -127,6 +137,7 @@ export default {
   position: relative;
   top: -4.7em;
 }
+
 
 @media (max-width: 1040px) {
     .restartButton {
