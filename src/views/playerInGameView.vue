@@ -157,7 +157,11 @@ socket.on( "index", (data) => {
   }
 });
 
-    socket.on("word", word => this.trueWord = word );
+    socket.on("word", data => {
+      if (data.pollId === this.pollId) {
+        console.log("true word", data.word);
+      this.trueWord = data.word } 
+    });
     socket.on("wonOrNot", (isWon) => {
       this.isGameWon = isWon;
       this.setGameToWonViaData();
