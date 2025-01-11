@@ -251,6 +251,14 @@
       .logo {
         margin-left: 3.35em;
       }
+      .homeButton{
+        margin-top: 0;
+        padding-top: 0;
+        margin-bottom: 7em;
+      }
+      .headerContainer{
+        padding-top: 0;
+      }
   }
 
 
