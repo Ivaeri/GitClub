@@ -1,6 +1,6 @@
 <template>
   <header>
-    <Logo :text="uiLabels.logo" :isStartPage="true"/>
+    <Logo :text="uiLabels.logo" :isStartPage="true" class="logo"/>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
     </div>
@@ -175,6 +175,7 @@ header {
   width: 20%;
   height: 90%;
   color: white;
+  margin-top: 2em;
 }
 
 .gameRules button {
@@ -198,8 +199,10 @@ header {
 .gameRules div {
   background-color: pink;
   margin-left: 5px;
-  border-radius: 10%;
-  margin-left:2em;
+  border-radius: 1em;
+  margin-left: 2em;
+  margin-top: 1em;
+  position: absolute;
 }
 
 .gameRules ul {
@@ -243,12 +246,13 @@ header {
     width: 12vw;
     height: 8vw;
   }
+  
 
 }
 
 @media screen and (max-width: 900px) {
   .gameRules {
-    margin-top: 10em;
+    margin-top: 3em;
     margin-right:4em;
     width: 20%;
     min-width: 200px;
@@ -256,9 +260,15 @@ header {
     
   }
   .gameRules div {
-    width: 150px;
-    height: 300px;
+    width: 20em;
+    height: 30em;
     overflow: scroll;
+    font-size: 0.8em;
+  }
+  
+  .gameRules button {
+    font-size: 0.7em;
+    width: 50%
   }
 
   
@@ -285,32 +295,37 @@ header {
     width: 17vw;
     height: 8vw;
     grid-column: 2;
+    border-radius: 0.32em;
   }
 
   .gameRules {
-    margin-top: 22em;
-    margin-right:4em;
+    margin-top: 2em;
+    margin-right: 2em;
     width: 20%;
     min-width: 200px;
     z-index: 100;
-    
+    padding-bottom: 1em;
   }
 
   .gameRules button {
-    width: 20vw;
-    height:10vw;
-    min-width: 90px;
-    min-height: 55px;
+    width: 40%;
+    height: 40%;
+    min-width: 2em;
+    min-height: 1.5em;
     z-index: 100;
-
+    font-size: 0.6em;
+    padding-top: 0;
+    margin-top: 1em;
   }
   .main-content{
     margin-top: 7em;
   }
   .gameRules div {
-    width: 150px;
-    height: 200px;
+    margin-top: 0.5em;
+    width: 12em;
+    height: 18em;
     overflow: scroll;
+    font-size: 0.85em;
   }
 
 
