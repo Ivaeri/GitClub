@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="keyboardhangman">
-            <HangPerson v-bind:wrongGuesses="ammountWrongLetters" :scale="0.5"/> 
+            <HangPerson v-bind:wrongGuesses="ammountWrongLetters" /> 
           </div>
       </div> <!-- Här stängs guessingcontainer-diven-->
 
@@ -423,6 +423,7 @@ socket.on( "index", (data) => {
     align-items: center;
     position: relative;
     top: 2em;
+    scale: 0.8;
   }
 
   .guessingcontainer {
@@ -450,7 +451,9 @@ socket.on( "index", (data) => {
     border: none;
     border-radius: 0.5em;
     cursor: pointer;
-    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    height: 4em;
+    width: 8em;
   }
 
   .submitButton:hover {
@@ -565,13 +568,13 @@ socket.on( "index", (data) => {
     .keyboardhangman {
       position: relative;
       scale: 0.5;
-      transform: translateX(calc(1em - 31%)) translateY(calc(1em - 90%));
+      transform: translateX(calc(1em - 310%)) translateY(calc(1em - 80%));
 
     }
 
     .guessingcontainer {
       scale: 0.5;
-      transform: translateX(calc(1em - 54%));
+      transform: translateX(calc(1em - 54%)) translateY(calc(1em + 30%));
     }
 
     .participants-container {
