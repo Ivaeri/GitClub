@@ -1,9 +1,6 @@
 <template>
   <header>
     <Logo :text="uiLabels.logo" :isStartPage="true"/>
-    <div v-bind:class="['hamburger', {'close': !hideNav}]"
-         v-on:click="toggleNav">
-    </div>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
       <div class="switchLanguageDiv" v-on:click="switchLanguage">
@@ -24,10 +21,7 @@
   </header>
 
   <main class="main-content">
-    <!-- Hängda gubben -->
     <HangPerson :wrongGuesses="wrongGuesses" :scale="0.7" />
-
-
     <div class="create-join">
       <router-link to="/submitword/">
         <button>{{ uiLabels.createGame }}</button>
@@ -41,7 +35,6 @@
 
 <script>
 import Logo from "@/components/Logo.vue";
-import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
 import HangPerson from "@/components/HangPerson.vue";
@@ -53,7 +46,6 @@ export default {
   name: 'StartView',
   components: {
     Logo,
-    ResponsiveNav,
     HangPerson
   },
   data: function () {
@@ -126,8 +118,8 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 70vh; /* Justera huvudinnehållets höjd */
-  margin-top: 3.5em; /* Avstånd från header */
+  min-height: 70vh; 
+  margin-top: 3.5em;
 }
 
 .create-join {
@@ -340,20 +332,6 @@ header {
 }
 
 @media screen and (max-width: 50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .close::before {
-    content: "✕";
-    color: rgb(60, 35, 35);
-  }
-  .hide {
-    left: -12em;
-  }
   .languagecontainer {
     width: 10em;
     height: 7em;

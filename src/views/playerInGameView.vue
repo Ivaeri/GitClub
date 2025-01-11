@@ -1,5 +1,4 @@
 <template>
-  
     <div> 
       <Logo :text="uiLabels.logo"/>
     </div>
@@ -14,13 +13,13 @@
     <div class="inGame" v-if="!isGameWon">
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
         <div class="failedLettersContainer">
-        <h3>{{ uiLabels.wrongGuesses }}</h3>
-        <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
-          <div v-if="!trueWord.includes(letter)" class="failedLetter">
-            {{ letter }}
-          </div> 
-        </div>
-      </div> 
+          <h3>{{ uiLabels.wrongGuesses }}</h3>
+          <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
+            <div v-if="!trueWord.includes(letter)" class="failedLetter">
+              {{ letter }}
+            </div> 
+          </div>
+        </div> 
         <div class="guessingcontainer">
           <div class="guesspart">
             <div class="letterBoxContainer">
@@ -48,12 +47,12 @@
             <button class="submitButton" v-on:click="handleSubmit">
               {{ uiLabels.submit }}
             </button>
-            </div>
           </div>
-            <div class="keyboardhangman">
-              <HangPerson v-bind:wrongGuesses="ammountWrongLetters" :scale="0.5"/> 
-            </div>
-    </div>
+        </div> <!-- Här stängs guessingcontainer-diven-->
+          <div class="keyboardhangman">
+            <HangPerson v-bind:wrongGuesses="ammountWrongLetters" :scale="0.5"/> 
+          </div>
+      </div>
 
         <div v-else class="hangMan">
           <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
@@ -146,13 +145,10 @@ socket.on( "index", (data) => {
         this.index = data.index;
       }
       });
-    
-   // socket.on( "letters", letters => this.allGuessedLetters = letters );
 
     socket.on("letters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
-    console.log("gissade bokstäver uppdaterades för pollId:", data.pollId);
   } else {
     console.log("nya bokstäver ignorerades för pollId:", data.pollId);
   }
