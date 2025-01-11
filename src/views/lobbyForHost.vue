@@ -229,16 +229,19 @@ methods: {
 
   @media (max-width: 768px) {
     .player{
-      width: 1.5em;
+      width: 3em;
       height: 0.4em;
       background-size: 1.2em 1.2em;
       font-size: 0.8em;
       gap: 1em;
       padding: 1em 2em;
+      margin-left: 0;
     }
     .gridContainer{
       display: inline-table;
       overflow-y: scroll;
+      margin-left: 0;
+      padding-left: 0;
     }
     .info h1{
       padding: 0.4em;
