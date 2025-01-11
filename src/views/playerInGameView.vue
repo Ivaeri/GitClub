@@ -439,7 +439,7 @@ socket.on( "index", (data) => {
     border: none;
     border-radius: 0.5em;
     cursor: pointer;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   }
 
   .submitButton:hover {
