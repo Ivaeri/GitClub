@@ -1,9 +1,6 @@
 <template>
   <header>
     <Logo :text="uiLabels.logo" :isStartPage="true"/>
-    <div v-bind:class="['hamburger', {'close': !hideNav}]"
-         v-on:click="toggleNav">
-    </div>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
     </div>
@@ -21,10 +18,7 @@
   </header>
 
   <main class="main-content">
-    <!-- Hängda gubben -->
     <HangPerson :wrongGuesses="wrongGuesses" :scale="0.7" />
-
-
     <div class="create-join">
       <router-link to="/submitword/">
         <button>{{ uiLabels.createGame }}</button>
@@ -38,11 +32,10 @@
 
 <script>
 import Logo from "@/components/Logo.vue";
-import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
 import HangPerson from "@/components/HangPerson.vue";
-//sessionStorage.setItem("dataServer", "192.168.0.182:3000")
+//sessionStorage.setItem("dataServer", "172.20.10.2:3000")
 sessionStorage.setItem("dataServer", "localhost:3000")
 const socket = io(sessionStorage.getItem("dataServer"));
 
@@ -50,7 +43,6 @@ export default {
   name: 'StartView',
   components: {
     Logo,
-    ResponsiveNav,
     HangPerson
   },
   data: function () {
@@ -74,7 +66,6 @@ export default {
     const interval = setInterval(() => {
       if (this.wrongGuesses < maxGuesses) {
         this.wrongGuesses++;
-        console.log(`wrongGuesses: ${this.wrongGuesses}`); // Debug-logg
       } else {
         clearInterval(interval);
       }
@@ -123,8 +114,8 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 70vh; /* Justera huvudinnehållets höjd */
-  margin-top: 3.5em; /* Avstånd från header */
+  min-height: 70vh; 
+  margin-top: 3.5em;
 }
 
 .create-join {
@@ -277,9 +268,8 @@ header {
   }
 
   .create-join button {
-    margin-top: 2em;
-    width: 45vw;
-    height: 25vw;
+    width: 35vw;
+    height: 17vw;
   }
 
   .switchLanguageDiv{
@@ -324,20 +314,6 @@ header {
 }
 
 @media screen and (max-width: 50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .close::before {
-    content: "✕";
-    color: rgb(60, 35, 35);
-  }
-  .hide {
-    left: -12em;
-  }
   .languagecontainer {
     width: 10em;
     height: 7em;
