@@ -171,7 +171,7 @@ header {
 
 
 .gameRules {
-  margin-left: 5px;
+  margin-left: 0.5em;
   width: 20%;
   height: 90%;
   color: white;
@@ -198,11 +198,12 @@ header {
 
 .gameRules div {
   background-color: pink;
-  margin-left: 5px;
+  margin-left: 0.5em;
   border-radius: 1em;
   margin-left: 2em;
   margin-top: 1em;
   position: absolute;
+  width: 23em;
 }
 
 .gameRules ul {
@@ -253,10 +254,10 @@ header {
 @media screen and (max-width: 900px) {
   .gameRules {
     margin-top: 3em;
-    margin-right:4em;
+    margin-right: 4em;
     width: 20%;
     min-width: 200px;
-    z-index: 100;
+    z-index: 1000000;
     
   }
   .gameRules div {
@@ -265,7 +266,7 @@ header {
     overflow: scroll;
     font-size: 0.8em;
   }
-  
+
   .gameRules button {
     font-size: 0.7em;
     width: 50%
@@ -296,11 +297,12 @@ header {
     height: 8vw;
     grid-column: 2;
     border-radius: 0.32em;
+    margin-right: 0.2em;
   }
 
   .gameRules {
     margin-top: 2em;
-    margin-right: 2em;
+    margin-right: 1em;
     width: 20%;
     min-width: 200px;
     z-index: 100;
@@ -316,6 +318,7 @@ header {
     font-size: 0.6em;
     padding-top: 0;
     margin-top: 1em;
+    margin-left: 0;
   }
   .main-content{
     margin-top: 7em;
