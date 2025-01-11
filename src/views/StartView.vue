@@ -45,7 +45,7 @@ import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
 import HangPerson from "@/components/HangPerson.vue";
-//sessionStorage.setItem("dataServer", "192.168.0.182:3000")
+//sessionStorage.setItem("dataServer", "192.168.1.37:3000")
 sessionStorage.setItem("dataServer", "localhost:3000")
 const socket = io(sessionStorage.getItem("dataServer"));
 
@@ -294,9 +294,8 @@ header {
   }
 
   .create-join button {
-    margin-top: 2em;
-    width: 45vw;
-    height: 25vw;
+    width: 35vw;
+    height: 17vw;
   }
 
   .switchLanguageDiv{
