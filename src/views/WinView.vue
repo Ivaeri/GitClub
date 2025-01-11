@@ -3,7 +3,7 @@
         <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
         </div>
-        <Logo />
+        <Logo :text="uiLabels.logo" class="logostyle"/>
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }} {{ uiLabels.win2 }}</div>
     </header>
     <button class="restartButton" v-on:click="goToGameLobby">
@@ -103,7 +103,6 @@ export default {
     text-align: center;
     justify-content: center; 
     align-items: center; 
-    top:0;
     font-size: 7em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;

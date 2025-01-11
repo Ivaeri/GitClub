@@ -3,9 +3,8 @@
     <HomeButton :text="uiLabels.goHome"/> 
   </div>
   <div>
-    <Logo />
+    <Logo :text="uiLabels.logo" class="logostyle"/>
   </div>
-  <h1>{{ uiLabels.titlegame }}</h1>
     <div class="skipPlayer">
         <h3> {{ uiLabels.tooSlow }}</h3>
         <button class="skipPlayerButton" v-on:click="skipPlayer">
@@ -18,7 +17,6 @@
           <span v-if="allGuessedLetters.includes(letter)" class="greenLetter"> {{ letter }} </span>
           <span v-else> {{ letter }} </span>
         </h2>
-        <div class="disappearWithSmallWindow">
         <div> 
           <h3>{{ uiLabels.guessedLetters }}</h3>
           <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
@@ -26,7 +24,6 @@
             <span v-else class="guessedWrongLetter"> {{ letter }}</span>
           </div>
         </div>
-      </div>
     </div> <!-- wordBox stängs här-->
     <div class="graveYard">
       <div>
@@ -264,7 +261,7 @@ h2 {
 .skipPlayer{
   position: absolute;
   right: 5em;
-  top: 5em;
+  top: calc(10%);
   z-index: 100;
 
 }
@@ -323,11 +320,9 @@ h2 {
   .lettersGuessed {
     font-size: 0.8em;
   }
-  .disappearWithSmallWindow{
-    display: none;
-  }
+
   .wordBox{
-    padding-bottom: 4em;
+    padding-bottom: 1em;
   }
   .speechBubble{
     scale: 0.3;
@@ -339,7 +334,8 @@ h2 {
     left: 30%;
   }
   .skipPlayer{
-    margin-top: 8em;
+    right: 0.5em;
+    top: calc(15%);
   }
 }
 

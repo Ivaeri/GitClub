@@ -157,6 +157,9 @@ header {
 }
 
 .languagecontainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   position: absolute;
   width: 15em;
   height: 10em;
