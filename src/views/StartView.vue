@@ -3,9 +3,6 @@
     <Logo :text="uiLabels.logo" :isStartPage="true"/>
     <div class="languagecontainer">
       <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="switchLanguage"> </button>
-      <div class="switchLanguageDiv" v-on:click="switchLanguage">
-        {{ uiLabels.languagebox }}
-      </div>
     </div>
     <div class="gameRules">
         <button v-on:click="showGameRules">
@@ -150,7 +147,7 @@ header {
   transition: transform 0.3s ease;
   width: 20vw;
   height: 13vw;
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .create-join button:hover {
@@ -160,35 +157,15 @@ header {
 }
 
 .languagecontainer {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
   position: absolute;
   width: 15em;
   height: 10em;
   margin-top: 10px;
-  right: 0px;
-  top: 0em;
+  right: 0.1em;
+  top: 1em;
 }
 
-.switchLanguageDiv {
-  grid-row: 1;
-  grid-column: 2;
-  width: 4em;
-  height: 1.7em;
-  right: 0;
-  background-color: #cf84a9;
-  border-radius: 10%;
-  cursor: pointer;
-  color: white;
-  display: flex;
-  font-size: 2em;
-  box-sizing: border-box;
-  padding: 0;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
+
 
 .gameRules {
   margin-left: 5px;
@@ -205,6 +182,8 @@ header {
   padding: 0.3em;
   margin-left:5em;
   width: 10vw;
+  border: none;
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .gameRules button:hover {
@@ -229,17 +208,21 @@ header {
 }
 
 .languagecontainer button {
-  grid-row: 1;
-  grid-column: 1;
   height: 4em;
   width: 8em;
   background-size: cover;
   background-position: center;
   left: 0;
   cursor: pointer;
-  border-radius: 10%;
+  border-radius: 0.5em;
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+  border: none;
 }
 
+.languagecontainer button:hover {
+  transform: rotate(1deg) scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
 .swedishbutton {
   background-image: url("/img/svenskflagga.jpg");
 }
