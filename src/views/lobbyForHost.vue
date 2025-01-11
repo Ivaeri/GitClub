@@ -1,4 +1,5 @@
 <template>
+  <div class="fixer">
   <header class="info">
     <div class="headerContainer">
       <Logo :text="uiLabels.logo" class="logostyle"/>
@@ -10,6 +11,7 @@
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
   </header>
+  <div class="makeBlue">
   <div class="participantsLobby">
     <h2 class="lobbyHeader">{{ uiLabels.joinedPlayers }}</h2>
     <div class="gridContainer">
@@ -34,6 +36,8 @@
         <p v-if="noPlayers":class="{ active1: noPlayers }"> {{ uiLabels.waitForPlayers }}</p>
       </div>
     </div>
+  </div>
+</div>
   
       
 
@@ -119,18 +123,39 @@ methods: {
   .participantsLobby{
     position: relative;
     font-size: 1.5em;
-    padding: 20px;
+    padding: 0.1em;
     border: none;
+    border-radius: 0.5em;
     height: auto;
     background-color: transparent;
     z-index: 6;
     margin-left: 2em;
+    margin-right: 1em;
     }
+  
+  .makeBlue{
+    position: relative;
+    font-size: 1.5em;
+    padding: 20px;
+    border: none;
+    border-radius: 0.5em;
+    height: auto;
+    background-color: lightblue;
+    z-index: 6;
+    margin-left: 2em;
+    margin-right: 1em;
+    margin-bottom: 3em;
+  }
+
+  .fixer {
+    overflow-x: hidden; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
   .buttonContainer{
     position: relative;
-    bottom: 10px;
-    right: 10px; 
     font-size: 0.8em;
     margin-right: 1em;
   }
@@ -149,6 +174,7 @@ methods: {
     border-radius: 1em;
     cursor: pointer;
     box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+    margin-top: 2em;
   }
   .startGameButtonPink:hover{
     background-color: #a02666;
@@ -185,12 +211,12 @@ methods: {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 3em;
-    width: 5em;
-    background-size: 2em 2em; 
+    height: 2.2em;
+    width: 3.5em;
+    background-size: 1.8em 1.8em; 
     padding-left: 3em; 
     padding-right: 0em;
-    font-size: 1.5em; 
+    font-size: 1.2em; 
     margin-bottom: 0.5em; 
     display: flex;
     align-items: center;
@@ -203,23 +229,25 @@ methods: {
       width: 1.5em;
       height: 0.4em;
       background-size: 1.2em 1.2em;
-      font-size: 1em;
+      font-size: 0.8em;
       gap: 1em;
       padding: 1em 2em;
     }
     .gridContainer{
       display: inline-table;
-      
+      overflow-y: scroll;
     }
     .info h1{
-      padding: 0;
+      padding: 0.4em;
       font-size: 1.3em;
+      margin: 0;
     }
     .info h2{
       font-size: 1em;
+      margin: 0.3em;
     }
     .lobbyHeader{
-      font-size: 0.8em;
+      font-size: 0.5em;
       margin-bottom: 0.1em;
     }
     .buttonContainer{
@@ -230,6 +258,14 @@ methods: {
     font-size: 1.1em;
     }
 
+    .headerContainer{
+      padding: 0.2em;
+    }
+    .homebutton{
+      margin-left: 0;
+      padding: 0;
+    }
+
     .startGameButtonPink{
       width: 80%;
       margin-left: 3em;
@@ -238,7 +274,12 @@ methods: {
       width: 80%;
       margin-left: 3em;
     }
-
+    .makeBlue{
+      background-color: transparent;
+    }
+    .participantsLobby{
+      margin-left: 0;
+      padding-left: 0;
+    }
   }
-  
   </style>

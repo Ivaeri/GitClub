@@ -9,23 +9,23 @@
       <div class="switchLanguageDiv" v-on:click="switchLanguage">
         {{ uiLabels.languagebox }}
       </div>
-      <div class="gameRules">
-        <h5 v-on:click="showGameRules">
+    </div>
+    <div class="gameRules">
+        <button v-on:click="showGameRules">
           <p v-if="gameRules"> {{ uiLabels.HideGameRules }}</p>
           <p v-else> {{ uiLabels.GameRules }}</p>
-        </h5>
+        </button>
         <div v-if="gameRules" class="animate__animated animate__backInUp">
           <ul>
             <li v-for="rule in currentGameRules" v-bind:key="rule">{{ rule }}</li>
           </ul>
         </div>
       </div>
-    </div>
   </header>
 
   <main class="main-content">
     <!-- Hängda gubben -->
-    <HangPerson :wrongGuesses="wrongGuesses" :scale="0.5" />
+    <HangPerson :wrongGuesses="wrongGuesses" :scale="0.7" />
 
 
     <div class="create-join">
@@ -45,7 +45,7 @@ import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
 import HangPerson from "@/components/HangPerson.vue";
-//sessionStorage.setItem("dataServer", "192.168.0.182:3000")
+//sessionStorage.setItem("dataServer", "192.168.1.37:3000")
 sessionStorage.setItem("dataServer", "localhost:3000")
 const socket = io(sessionStorage.getItem("dataServer"));
 
@@ -127,7 +127,7 @@ header {
   justify-content: center;
   align-items: center;
   min-height: 70vh; /* Justera huvudinnehållets höjd */
-  margin-top: 2em; /* Avstånd från header */
+  margin-top: 3.5em; /* Avstånd från header */
 }
 
 .create-join {
@@ -157,8 +157,8 @@ header {
   gap: 7em;
   font-size: 1em;
   transition: transform 0.3s ease;
-  width: 20em;
-  height: 10em;
+  width: 20vw;
+  height: 13vw;
   box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -176,7 +176,6 @@ header {
   width: 15em;
   height: 10em;
   margin-top: 10px;
-  margin-right: 10px;
   right: 0px;
   top: 0em;
 }
@@ -201,33 +200,33 @@ header {
 }
 
 .gameRules {
-  grid-row: 2;
-  grid-column: 1 / span 2;
-  width: 8em;
-  height: 1em;
+  margin-left: 5px;
+  width: 20%;
+  height: 90%;
   color: white;
 }
 
-.gameRules h5 {
+.gameRules button {
   cursor: pointer;
   background-color: #cf84a9;
+  color:white;
   border-radius: 5px;
   padding: 0.3em;
+  margin-left:5em;
+  width: 10vw;
 }
 
-.gameRules h5:hover {
+.gameRules button:hover {
   background-color: #a02666;
   transform: rotate(1deg) scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
 
 .gameRules div {
-  position: absolute;
   background-color: pink;
   margin-left: 5px;
-  grid-row: 3;
-  grid-column: 1;
   border-radius: 10%;
+  margin-left:2em;
 }
 
 .gameRules ul {
@@ -258,6 +257,88 @@ header {
   background-image: url("/img/uk.png");
 }
 
+@media screen and (max-width: 930px) {
+  .create-join button{
+    width: 30vw;
+    height: 20vw;
+  }
+  .languagecontainer {
+    width: 12vw;
+    height: 8vw;
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+  .gameRules {
+    margin-top: 10em;
+    margin-right:4em;
+    width: 20%;
+    min-width: 200px;
+    z-index: 100;
+    
+  }
+  .gameRules div {
+    width: 150px;
+    height: 300px;
+    overflow: scroll;
+  }
+
+  
+}
+
+@media screen and (max-width: 630px) {
+  .create-join {
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  .create-join button {
+    width: 35vw;
+    height: 17vw;
+  }
+
+  .switchLanguageDiv{
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .languagecontainer button {
+    width: 17vw;
+    height: 8vw;
+    grid-column: 2;
+  }
+
+  .gameRules {
+    margin-top: 22em;
+    margin-right:4em;
+    width: 20%;
+    min-width: 200px;
+    z-index: 100;
+    
+  }
+
+  .gameRules button {
+    width: 20vw;
+    height:10vw;
+    min-width: 90px;
+    min-height: 55px;
+    z-index: 100;
+
+  }
+  .main-content{
+    margin-top: 7em;
+  }
+  .gameRules div {
+    width: 150px;
+    height: 200px;
+    overflow: scroll;
+  }
+
+
+}
+
 @media screen and (max-width: 50em) {
   .logo {
     font-size: 5vw;
@@ -273,5 +354,10 @@ header {
   .hide {
     left: -12em;
   }
+  .languagecontainer {
+    width: 10em;
+    height: 7em;
+  }
+
 }
 </style>

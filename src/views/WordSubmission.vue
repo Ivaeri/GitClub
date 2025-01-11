@@ -1,4 +1,5 @@
 <template>
+  <div class="fixer">
   <div class="headerContainer">
   <div class="homeButton">
       <HomeButton :text="uiLabels.goHome"/> 
@@ -30,6 +31,7 @@
       </Button>
     </div>
   </div>
+</div>
 </template>
   
   <script>
@@ -137,7 +139,7 @@
   <style scoped>
 
 
-  body {
+  .fixer {
     overflow-x: hidden; 
     margin: 0;
     padding: 0;
@@ -209,7 +211,7 @@
   @media (max-width: 768px) {
   .container {
     flex-direction: column; /* Lägg elementen i en kolumn */
-    margin: 1em; /* Mindre marginaler */
+    margin: 1em; 
   }
 
   .item {
@@ -222,7 +224,7 @@
     position: relative;
     margin-top: 1em;
     margin-bottom: 0.1em;
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-top: 0.6em;
   }
   .homeButton{
@@ -231,19 +233,33 @@
     margin-bottom: 1em;
   }
   .inputField {
-    width: 90%; /* Fyll 90% av skärmen */
-    font-size: 1.2rem; /* Mindre textstorlek */
-    padding: 0.8em; /* Anpassa padding för mobil */
+    width: 70%; 
+    font-size: 1.2rem; 
+    padding: 0.8em; 
+    margin-left: 0;
   }
 
   .item button {
-    width: 82%; /* Gör knapparna lika breda som skärmen */
-    max-width: none; /* Ingen maxbreddsbegränsning */
-    padding: 0.8em; /* Anpassa padding */
+    width: 70%; 
+    max-width: none; 
+    padding: 0.8em; 
     margin-right: 30em;
   }
-  
 }
+
+@media (min-width: 1000px) {
+      .logo {
+        margin-left: 3.35em;
+      }
+      .homeButton{
+        margin-top: 0;
+        padding-top: 0;
+        margin-bottom: 7em;
+      }
+      .headerContainer{
+        padding-top: 0;
+      }
+  }
 
 
   

@@ -62,11 +62,12 @@
     </div> <!-- Här Stängs inGame-diven-->
 
     <div class="participants-container">
-
       <div v-for="participant in this.participants" :key="participant.name" class="player">
-        {{ participant.name }}
-        <div v-if="participant.name == this.participants[this.index].name">
-          <img src="/img/speechbubble.png" class="speechBubble"> 
+        <div class="name-wrapper">
+          <div v-if="participant.name == this.participants[this.index].name">
+            <img src="/img/speechbubble.png" class="speechBubble"> 
+          </div>
+            {{ participant.name }}
         </div>
       </div>
     </div>
@@ -324,6 +325,8 @@ socket.on( "index", (data) => {
   grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
   width: 100%; /* Fyll hela skärmen */
   font-size: 1.5em;
+  margin-top: 3em;
+  margin-left: 1em;
 
 }
 
@@ -334,7 +337,7 @@ socket.on( "index", (data) => {
     background-position: left center;
     background-position-x: 0.5em;
     height: 2em;
-    width: 4em;
+    width: 3.5em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
     font-size: 1.2em; 
@@ -345,6 +348,9 @@ socket.on( "index", (data) => {
     background-color: pink; 
   }
 
+  .name-wrapper {
+    position: relative;
+  }
 
 
 .keyboard {
@@ -432,11 +438,18 @@ socket.on( "index", (data) => {
   }
 
   .submitButton {
-    background-color: lightcoral
+    background-color: #cf84a9;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
   }
 
   .submitButton:hover {
-    background-color: coral
+    background-color: #a02666;
+    transform: rotate(1deg) scale(1.1);
+    transition: transform 0.2s ease-in-out;
   }
 
   .failedLettersContainer {
@@ -471,14 +484,11 @@ socket.on( "index", (data) => {
 
 
   .speechBubble {
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 5rem;
-    color: black;
-    size: 0.5em;
-    width: 1em;
-    height: auto;
-    scale: 0.75;
+    position: absolute;
+    top: -2em; /* Justera detta värde för att placera bubblan ovanför namnet */
+    left: 50%;
+    transform: translateY(-15%) translateX(-100%);
+    width: 2em; /* Justera bredden efter behov */
   }
 
 
@@ -493,17 +503,13 @@ socket.on( "index", (data) => {
       font-size: 1em;
    }
 
-    .speechBubble{
-      scale: 0.35;
-      position: relative;
-      right: 15%;
-  }
-
     .participants-container {
       gap: 0.5em;
       position: relative;
       padding-left: 2.3em;
+      width: 95%;
       font-size: 1em;
+      margin-top: 0;
     }
 
     .guessingcontainer {
@@ -519,7 +525,7 @@ socket.on( "index", (data) => {
 
   @media (max-width: 350px) {
     .player{
-      font-size: 1em;
+      font-size: 0.9em;
     }
     .hangMan {
       position: relative;
@@ -542,15 +548,11 @@ socket.on( "index", (data) => {
     .participants-container {
       position: relative;
       padding-left: 2.3em;
-      font-size: 0.5em;
+      font-size: 0.7em;
+      margin-top: 0;
+      width: 85%;
       
     }
-
-    .speechBubble{
-      scale: 0.15;
-      position: relative;
-      right: 33%;
-  }
 
   .homebutton {
     margin-left: -2em;

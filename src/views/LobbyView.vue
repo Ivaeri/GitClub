@@ -168,7 +168,7 @@ export default {
       this.validateAndParticipate();
     },
       participateInPoll: function () {
-        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName} )
+        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName, wins: 0} )
       }
   
    }
@@ -198,8 +198,8 @@ h2{
   }
 
 .enterGameInput{
-  width: 8em;
-  height: 2em;
+  width: 25em;
+  height: 3.5em;
   text-align: center;
   font-size: larger;
   background-color: pink;
@@ -291,14 +291,16 @@ h2{
 }
 
 .joinGameButton {
-  width: 5em;
-  height: 3em;
+  width: 3.2em;
+  height: 2.3em;
+  font-size: 1.8em;
   background-color: #cf84a9;
   cursor: pointer;
   margin-left: 0.5em;
   border-radius: 10px;
   color: rgb(3, 3, 3);
-  border: 1px solid black;
+  border: none;
+  color: white;
   box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
   
   }
@@ -334,7 +336,10 @@ h2{
     flex-direction: column;
     align-items: flex-start;
   }
-
+  .enterGameInput{
+    width: 8em;
+    height: 2em;
+  }
   header h1 {
     font-size: 4em;
     text-align: center;
@@ -388,7 +393,7 @@ h2{
 }
 
   .gamesContainer {
-    width: 70%; /* Justera bredden ytterligare för mindre skärmar */
+    width: 70%; 
     height: auto;
     padding: 0.5em;
   }
@@ -400,8 +405,10 @@ h2{
   }
 
   .joinGameButton {
-    
-    font-size: 0.5em;
+    font-size: 0.6em;
+  }
+  .userNameDiv {
+    margin-left: 1.2em;
   }
 }
 </style>
