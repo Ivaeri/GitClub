@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Logo />
+    <Logo :text="uiLabels.logo" class="logostyle"/>
   </div>
     <HomeButton :text="uiLabels.goHome"/>
     <h1 class="congrats"> {{ uiLabels.newHost }} </h1>
@@ -35,7 +35,7 @@ export default {
     name: 'WinView',
     components: {
         HomeButton,
-        InputField, 
+        InputField,
         Logo
     },
     data: function () {

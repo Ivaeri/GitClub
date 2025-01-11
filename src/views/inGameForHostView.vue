@@ -3,9 +3,8 @@
     <HomeButton :text="uiLabels.goHome"/> 
   </div>
   <div>
-    <Logo />
+    <Logo :text="uiLabels.logo" class="logostyle"/>
   </div>
-  <h1>{{ uiLabels.titlegame }}</h1>
     <div class="skipPlayer">
         <h3> {{ uiLabels.tooSlow }}</h3>
         <button class="skipPlayerButton" v-on:click="skipPlayer">
@@ -339,7 +338,7 @@ h2 {
     left: 30%;
   }
   .skipPlayer{
-    margin-top: 1em;
+    margin-top: 8em;
   }
 }
 
