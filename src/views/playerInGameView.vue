@@ -553,7 +553,7 @@ socket.on( "index", (data) => {
 
   
 
-  @media (max-width: 350px) {
+  @media (max-width: 420px) {
     .player{
       font-size: 0.9em;
     }

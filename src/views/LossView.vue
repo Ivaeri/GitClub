@@ -8,7 +8,7 @@
         <div class="gameOverText">
             {{ uiLabels.gameOver }}!
         </div>
-        <p> {{ uiLabels.correctWord }}{{ this.word }}</p>
+        <p> {{ uiLabels.correctWord }}{{ this.word.word }}</p>
         <HangPerson class="hangPerson" v-bind:wrongGuesses="ammountWrongLetters" />
         <button class="restartButton" v-on:click="goToGameLobby">
             {{ uiLabels.playAgain }}
