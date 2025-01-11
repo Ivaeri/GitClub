@@ -34,11 +34,14 @@
     </div>
     <div class="participants-container">
       <div v-for="participant in participants" :key="participant.name" class="player">
-        {{ participant.name }}
+        <div class="name-wraper">
+          
         <div v-if="participant.name == participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
+        {{ participant.name }}
       </div>
+    </div>
   </div>
     </template>
     
@@ -178,45 +181,46 @@ h2 {
     display: inline-block;
 }
 .participants-container {
-    position: absolute;
-    bottom: 0;
-    color: black;
-    padding: 1em;
-    display: grid;
-    grid-gap: 1em;
-    grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-    width: 100%; /* Fyll hela skärmen */
-    font-size: 1.3em;
+  color: black;
+  padding: 1em;
+  padding-top: 0;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
+  width: 100%; /* Fyll hela skärmen */
+  font-size: 1.5em;
+  margin-top: 3em;
+  margin-left: 1em;
+  transform: translateY(300%);
 }
 
 .player {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
-  background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-position-x: 0.5em;
-  height: 3em;
-  width: 5em;
-  background-size: 2em 2em; 
-  padding-left: 2.5em; 
-  font-size: 1.5em; 
-  margin-bottom: 0.5em; 
-  display: flex;
-  align-items: center;
-  border-radius: 5px; 
-  background-color: pink;
+    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 0.5em;
+    height: 2em;
+    width: 3.5em;
+    background-size: 2em 2em; 
+    padding-left: 2.5em; 
+    font-size: 1.2em; 
+    margin-bottom: 0.5em; 
+    display: flex;
+    align-items: center;
+    border-radius: 5px; 
+    background-color: pink; 
 }
 
 .speechBubble {
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 5rem;
-    color: black;
-    size: 0.5em;
-    width: 1em;
-    height: auto;
+  position: absolute;
+    top: -1.55em; /* Justera detta värde för att placera bubblan ovanför namnet */
+    transform: translateY(-15%) translateX(-100%);
+    width: 2em; /* Justera bredden efter behov */
   }
-
+  .name-wrapper {
+    position: relative;
+  }
 .greenLetter {
   color: green;
 }
@@ -299,6 +303,17 @@ h2 {
     scale: 0.7;
   }
 
+
+    .participants-container {
+      gap: 0.5em;
+      position: relative;
+      padding-left: 2.3em;
+      width: 95%;
+      font-size: 1em;
+      margin-top: 0;
+      transform: translateY(450%);
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -312,11 +327,17 @@ h2 {
   }
 
   .participants-container {
-    padding-bottom: 7em;
-    font-size: 0.6em;
-    flex-wrap: wrap;
-    gap:30px;
-    width: 100%;
+    
+      padding-left: 2.3em;
+      font-size: 0.7em;
+      margin-top: 0;
+      width: 85%;
+      transform: translateY(650%);
+    
+  }
+
+  .player{
+    font-size: 1.2em;
   }
 
   .lettersGuessed {
@@ -328,11 +349,7 @@ h2 {
   .wordBox{
     padding-bottom: 4em;
   }
-  .speechBubble{
-    scale: 0.3;
-    position: relative;
-    right: 33%;
-  }
+
   .hangPerson{
     top: calc(35%);
     left: 30%;
