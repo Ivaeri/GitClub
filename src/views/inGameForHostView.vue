@@ -339,7 +339,7 @@ h2 {
     left: 30%;
   }
   .skipPlayer{
-    margin-top: 1em;
+    margin-top: 8em;
   }
 }
 
