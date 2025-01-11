@@ -103,7 +103,6 @@ export default {
     text-align: center;
     justify-content: center; 
     align-items: center; 
-    top:0;
     font-size: 7em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;

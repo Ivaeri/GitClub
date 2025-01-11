@@ -7,7 +7,7 @@
         <div class="gameOverText">
             {{ uiLabels.gameOver }}!
         </div>
-        <p> {{ uiLabels.correctWord }}{{ this.word.word }}</p>
+        <p> {{ uiLabels.correctWord }}{{ this.word }}</p>
         <HangPerson class="hangPerson" v-bind:wrongGuesses="ammountWrongLetters" />
         <button class="restartButton" v-on:click="goToGameLobby">
             {{ uiLabels.playAgain }}
@@ -96,6 +96,7 @@ export default {
     color: rgb(163, 31, 31);
     text-shadow: 2px 2px 4px #000000;
     transform: translateY(-1em);
+    margin-top: auto;
 
 }
 .gameover p {
@@ -113,7 +114,6 @@ export default {
     background-color: pink;
     color:rgba(0, 0, 0, 0.8);
     font-weight: bold;
-    font-style: italic;
     font-size: 0.4em;
     border-radius: 10px;
     cursor: pointer;
