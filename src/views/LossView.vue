@@ -1,4 +1,7 @@
 <template>
+    <div> 
+        <Logo :text="uiLabels.logo" class="logostyle"/>
+    </div>
     <HomeButton/>
     <div class="animate__animated animate__zoomInDown gameover">
         <div class="gameOverText">

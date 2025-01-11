@@ -126,8 +126,8 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 70vh; /* Justera huvudinnehållets höjd */
-  margin-top: 3.5em; /* Avstånd från header */
+  min-height: 70vh; 
+  margin-top: 3.5em; 
 }
 
 .create-join {

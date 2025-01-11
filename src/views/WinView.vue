@@ -3,7 +3,7 @@
         <div class="homeButtonContainer">
         <HomeButton :text="uiLabels.goHome"/>
         </div>
-        <Logo />
+        <Logo :text="uiLabels.logo" class="logostyle"/>
         <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }} {{ uiLabels.win2 }}</div>
     </header>
     <button class="restartButton" v-on:click="goToGameLobby">
