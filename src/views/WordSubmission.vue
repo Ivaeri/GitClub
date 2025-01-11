@@ -211,7 +211,6 @@
   @media (max-width: 768px) {
   .container {
     flex-direction: column; /* Lägg elementen i en kolumn */
-    margin-left: 0;
     margin: 1em; 
   }
 
@@ -246,8 +245,13 @@
     padding: 0.8em; 
     margin-right: 30em;
   }
-  
 }
+
+@media (min-width: 1000px) {
+      .logo {
+        margin-left: 3.35em;
+      }
+  }
 
 
   
