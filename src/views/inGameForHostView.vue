@@ -20,8 +20,8 @@
         <div> 
           <h3>{{ uiLabels.guessedLetters }}</h3>
           <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
-            <span v-if="enteredword.includes(letter)" class="guessedCorrectLetter"> {{ letter }} </span>
-            <span v-else class="guessedWrongLetter"> {{ letter }}</span>
+            <p v-if="enteredword.includes(letter)" class="guessedCorrectLetter"> {{ letter }} </p>
+            <p v-else class="guessedWrongLetter"> {{ letter }}</p>
           </div>
         </div>
     </div> <!-- wordBox stängs här-->
@@ -32,14 +32,11 @@
     </div>
     <div class="participants-container">
       <div v-for="participant in participants" :key="participant.name" class="player">
-        <div class="name-wraper">
-          
+        {{ participant.name }}
         <div v-if="participant.name == participants[this.index].name">
           <img src="/img/speechbubble.png" class="speechBubble"> 
         </div>
-        {{ participant.name }}
       </div>
-    </div>
   </div>
     </template>
     
@@ -179,46 +176,45 @@ h2 {
     display: inline-block;
 }
 .participants-container {
-  color: black;
-  padding: 1em;
-  padding-top: 0;
-  display: grid;
-  grid-gap: 1em;
-  grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-  width: 100%; /* Fyll hela skärmen */
-  font-size: 1.5em;
-  margin-top: 3em;
-  margin-left: 1em;
-  transform: translateY(300%);
+    position: absolute;
+    bottom: 0;
+    color: black;
+    padding: 1em;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
+    width: 100%; /* Fyll hela skärmen */
+    font-size: 1.3em;
 }
 
 .player {
   margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
-    background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-position-x: 0.5em;
-    height: 2em;
-    width: 3.5em;
-    background-size: 2em 2em; 
-    padding-left: 2.5em; 
-    font-size: 1.2em; 
-    margin-bottom: 0.5em; 
-    display: flex;
-    align-items: center;
-    border-radius: 5px; 
-    background-color: pink; 
+  background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-position-x: 0.5em;
+  height: 3em;
+  width: 5em;
+  background-size: 2em 2em; 
+  padding-left: 2.5em; 
+  font-size: 1.5em; 
+  margin-bottom: 0.5em; 
+  display: flex;
+  align-items: center;
+  border-radius: 5px; 
+  background-color: pink;
 }
 
 .speechBubble {
-  position: absolute;
-    top: -1.55em; /* Justera detta värde för att placera bubblan ovanför namnet */
-    transform: translateY(-15%) translateX(-100%);
-    width: 2em; /* Justera bredden efter behov */
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 5rem;
+    color: black;
+    size: 0.5em;
+    width: 1em;
+    height: auto;
   }
-  .name-wrapper {
-    position: relative;
-  }
+
 .greenLetter {
   color: green;
 }
@@ -301,17 +297,6 @@ h2 {
     scale: 0.7;
   }
 
-
-    .participants-container {
-      gap: 0.5em;
-      position: relative;
-      padding-left: 2.3em;
-      width: 95%;
-      font-size: 1em;
-      margin-top: 0;
-      transform: translateY(450%);
-    }
-
 }
 
 @media (max-width: 600px) {
@@ -325,17 +310,11 @@ h2 {
   }
 
   .participants-container {
-    
-      padding-left: 2.3em;
-      font-size: 0.7em;
-      margin-top: 0;
-      width: 85%;
-      transform: translateY(650%);
-    
-  }
-
-  .player{
-    font-size: 1.2em;
+    padding-bottom: 7em;
+    font-size: 0.6em;
+    flex-wrap: wrap;
+    gap:30px;
+    width: 100%;
   }
 
   .lettersGuessed {
@@ -345,14 +324,18 @@ h2 {
   .wordBox{
     padding-bottom: 1em;
   }
-
+  .speechBubble{
+    scale: 0.3;
+    position: relative;
+    right: 33%;
+  }
   .hangPerson{
     top: calc(35%);
     left: 30%;
   }
   .skipPlayer{
     right: 0.5em;
-    top: calc(15%);
+    top: calc(13%);
   }
 }
 
