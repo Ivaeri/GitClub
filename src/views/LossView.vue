@@ -96,7 +96,7 @@ export default {
     color: rgb(163, 31, 31);
     text-shadow: 2px 2px 4px #000000;
     transform: translateY(-1em);
-    margin-top: auto;
+    margin-top: 1em;
 
 }
 .gameover p {
