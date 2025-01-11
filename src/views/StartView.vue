@@ -115,11 +115,7 @@ header {
   justify-content: center;
   align-items: center;
   min-height: 70vh; 
-<<<<<<< HEAD
-  margin-top: 3.5em; 
-=======
   margin-top: 3.5em;
->>>>>>> 2b144c014852f124a195cba6cc257f27822d8330
 }
 
 .create-join {
@@ -161,6 +157,9 @@ header {
 }
 
 .languagecontainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   position: absolute;
   width: 15em;
   height: 10em;
