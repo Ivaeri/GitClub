@@ -16,7 +16,7 @@
       <div>
         {{ this.uiLabels.awaitingHost1 }}{{ uiLabels.host }} {{ this.uiLabels.awaitingHost2 }}
       </div>
-      </div>
+    </div>
     <div v-if="participants.length > 0"  class="participants-list">
       <h2>
         {{ uiLabels.joinedPlayers }}
@@ -64,7 +64,6 @@
       socket.on("participantsUpdate", (data) => {
         if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
           this.participants = data.participants; // Uppdatera deltagarlistan
-          console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
         } else {
           console.log("Uppdateringen ignorerades för pollId:", data.pollId);
         }
@@ -74,17 +73,14 @@
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
       socket.emit("getParticipants", { pollId: this.pollId });
+      socket.emit("inActivateIfFull", this.pollId);
+      socket.emit("getInActivePolls");
     },
     unmounted() {
-  socket.off("startPoll");
-  socket.off("participantsUpdate");
-},
+      socket.off("startPoll");
+      socket.off("participantsUpdate");
+  },
     
-
-    methods: {
- 
- 
-    }
   }
   </script>
   <style scoped>

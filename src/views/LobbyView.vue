@@ -109,8 +109,6 @@ export default {
       this.inActivePolls = polls; });
  
     socket.emit("getInActivePolls", this.pollId)
-     
-
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getActivePolls");
