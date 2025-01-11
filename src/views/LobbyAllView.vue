@@ -73,6 +73,8 @@
       socket.emit( "joinPoll", this.pollId );
       socket.emit( "getUILabels", this.lang );
       socket.emit("getParticipants", { pollId: this.pollId });
+      socket.emit("inActivateIfFull", this.pollId);
+      socket.emit("getInActivePolls");
     },
     unmounted() {
       socket.off("startPoll");

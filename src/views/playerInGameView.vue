@@ -47,17 +47,28 @@
             <button class="submitButton" v-on:click="handleSubmit">
               {{ uiLabels.submit }}
             </button>
+            </div>
           </div>
-        </div> <!-- Här stängs guessingcontainer-diven-->
           <div class="keyboardhangman">
             <HangPerson v-bind:wrongGuesses="ammountWrongLetters" :scale="0.5"/> 
           </div>
-      </div>
+      </div> <!-- Här stängs guessingcontainer-diven-->
 
-        <div v-else class="hangMan">
+      <div v-else  class="specView"> <!-- Här börjar vyn för dens tur det är-->
+        <div class="failedLettersSpecView">
+          <h3>
+            {{ uiLabels.wrongGuesses }}
+          </h3>
+          <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
+            <div v-if="!trueWord.includes(letter)" class="failedLetter">
+              {{ letter }}
+            </div> 
+          </div>
+        </div>  
+        <div class="hangMan">
           <HangPerson v-bind:wrongGuesses="ammountWrongLetters"/>
         </div>
-      
+      </div>
     </div> <!-- Här Stängs inGame-diven-->
 
     <div class="participants-container">
@@ -154,7 +165,11 @@ socket.on( "index", (data) => {
   }
 });
 
-    socket.on("word", word => this.trueWord = word );
+    socket.on("word", data => {
+      if (data.pollId === this.pollId) {
+        console.log("true word", data.word);
+      this.trueWord = data.word } 
+    });
     socket.on("wonOrNot", (isWon) => {
       this.isGameWon = isWon;
       this.setGameToWonViaData();
@@ -450,6 +465,12 @@ socket.on( "index", (data) => {
     position: relative;
     left: 3em;
   }
+
+  .failedLettersSpecView {
+    position: relative;
+    transform: translateX(calc(1em + 100%));
+  }
+
   .failedLetters {
     top: 2em;
     width: 5em;
@@ -473,6 +494,15 @@ socket.on( "index", (data) => {
     font-size: 2em;
   }
 
+  .specView {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    top: 2em;
+    gap: 6em;
+    transform: translateX(-20%);
+  }
+
 
 
   .speechBubble {
@@ -493,7 +523,7 @@ socket.on( "index", (data) => {
     }
     .player{
       font-size: 1em;
-   }
+    }
 
     .participants-container {
       gap: 0.5em;
@@ -505,12 +535,17 @@ socket.on( "index", (data) => {
     }
 
     .guessingcontainer {
-      scale: 0.7;
-      
+      scale: 0.7;  
     }
+
     .failedLettersContainer {
       display: none; 
-  }
+    }
+
+    .specView {
+      transform: translateX(-10%);
+    }
+
   }
 
   
@@ -521,20 +556,22 @@ socket.on( "index", (data) => {
     }
     .hangMan {
       position: relative;
-      scale: 0.5;
+      scale: 0.7;
+      transform: translateY(-25%) translateX(-15%);
+  
       
     }
 
     .keyboardhangman {
       position: relative;
       scale: 0.5;
-      transform: translateX(calc(1em - 300%)) translateY(calc(1em - 90%));
+      transform: translateX(calc(1em - 31%)) translateY(calc(1em - 90%));
 
     }
 
     .guessingcontainer {
       scale: 0.5;
-      transform: translateX(calc(1em - 45%));
+      transform: translateX(calc(1em - 54%));
     }
 
     .participants-container {
