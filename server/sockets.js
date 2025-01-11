@@ -43,7 +43,10 @@ function sockets(io, socket, data) {
     io.emit('activePollsUpdate', Object.keys(data.polls));
   });
   
-
+  socket.on("inActivateIfFull", function(pollId) {
+    console.log("inActivateIfFull körs i sockets.js", pollId)
+    data.inActivateIfFull(pollId)
+  });
 
 
   socket.on("removePollIdFromList", function(pollId) {
@@ -104,7 +107,7 @@ function sockets(io, socket, data) {
 
   socket.on("getWord", function(pollId) {
     let word = data.getWord(pollId);
-    io.emit("word", word);
+    io.emit("word", {word: word, pollId: pollId});
   });
 
   socket.on("updateIndex", function(pollId) {

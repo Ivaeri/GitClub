@@ -168,7 +168,7 @@ export default {
       this.validateAndParticipate();
     },
       participateInPoll: function () {
-        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName} )
+        socket.emit( "participateInPoll", {pollId: this.chosenPollId, name: this.userName, wins: 0} )
       }
   
    }
@@ -336,7 +336,10 @@ h2{
     flex-direction: column;
     align-items: flex-start;
   }
-
+  .enterGameInput{
+    width: 8em;
+    height: 2em;
+  }
   header h1 {
     font-size: 4em;
     text-align: center;
@@ -403,6 +406,9 @@ h2{
 
   .joinGameButton {
     font-size: 0.6em;
+  }
+  .userNameDiv {
+    margin-left: 1.2em;
   }
 }
 </style>
