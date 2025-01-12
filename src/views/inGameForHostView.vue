@@ -324,7 +324,6 @@ h2 {
   }
 
   .participants-container {
-    padding-bottom: 7em;
     font-size: 0.6em;
     flex-wrap: wrap;
     gap:30px;
@@ -344,12 +343,14 @@ h2 {
     right: 33%;
   }
   .hangPerson{
-    top: calc(35%);
+    top: calc(40%);
     left: 30%;
+    scale: 0.6;
   }
   .skipPlayer{
-    right: 0.5em;
-    top: calc(13%);
+    right: 1.5em;
+    top: calc(5%);
+    width: 15%;
   }
   .guess-counter {
     font-size: 1em;
