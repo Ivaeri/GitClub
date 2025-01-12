@@ -550,10 +550,6 @@ socket.on( "index", (data) => {
       scale: 0.7;  
     }
 
-    .failedLettersContainer {
- 
-    }
-
     .specView {
       transform: translateX(-10%) translateY(25%);
       
