@@ -12,14 +12,18 @@
     </span>
     <div class="inGame" v-if="!isGameWon">
       <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
-        <div class="failedLettersContainer">
-          <h3>{{ uiLabels.wrongGuesses }}</h3>
-          <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
-            <div v-if="!trueWord.includes(letter)" class="failedLetter">
-              {{ letter }}
-            </div> 
-          </div>
-        </div> 
+
+        <div class="guessing-container">
+          <GuessCounter :wrongGuesses="ammountWrongLetters" :maxGuesses="7" :labels="uiLabels" />
+          <div class="failedLettersContainer">
+            <h3>{{ uiLabels.wrongGuesses }}</h3>
+            <div v-for="letter in allGuessedLetters" :key="letter" class="failedLetters">
+              <div v-if="!trueWord.includes(letter)" class="failedLetter">
+                {{ letter }}
+              </div> 
+            </div>
+          </div> 
+        </div>
         <div class="guessingcontainer">
           <div class="guesspart">
             <div class="letterBoxContainer">
@@ -81,11 +85,6 @@
         </div>
       </div>
     </div>
-
-
-
- 
-
 </template>
 
 <script>
@@ -95,6 +94,7 @@ import io from 'socket.io-client';
 import HomeButton from '../components/HomeButton.vue';
 import InputField from '../components/InputField.vue';
 import HangPerson from '../components/HangPerson.vue';
+import GuessCounter from "../components/GuessCounter.vue";
 const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
@@ -103,7 +103,8 @@ export default {
     Logo, 
     HomeButton,
     InputField,
-    HangPerson
+    HangPerson,
+    GuessCounter
   },
   data: function () {
     return {
@@ -141,11 +142,11 @@ export default {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     
     
-    window.addEventListener('popstate', this.leavePoll); //denna lyssnar på när någon lämnar sidan via frameller bakåtknapp
+    window.addEventListener('popstate', this.leavePoll); 
     
    socket.on("participantsUpdate", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
-    this.participants = data.participants; // Uppdatera deltagarlistan
+  if (data.pollId === this.pollId) { 
+    this.participants = data.participants; 
     console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
   } else {
     console.log("Uppdateringen ignorerades för pollId:", data.pollId);
@@ -158,8 +159,8 @@ socket.on( "index", (data) => {
       });
 
     socket.on("letters", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
-    this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
+  if (data.pollId === this.pollId) { 
+    this.allGuessedLetters = data.letters; 
   } else {
     console.log("nya bokstäver ignorerades för pollId:", data.pollId);
   }
@@ -178,9 +179,9 @@ socket.on( "index", (data) => {
   
 
     socket.on("amountWrongLetters", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+  if (data.pollId === this.pollId) { 
     this.ammountWrongLetters = data.amount;
-    this.gameIsLost(); //Kontrollera om spelet är förlorat efter uppdatering
+    this.gameIsLost(); 
 
   }
 });
@@ -317,12 +318,10 @@ socket.on( "index", (data) => {
     
     }
 }
-  
-  
 </script>
+
+
 <style scoped>
-
-
 .participants-container {
   color: black;
   padding: 1em;
@@ -330,7 +329,7 @@ socket.on( "index", (data) => {
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-  width: 100%; /* Fyll hela skärmen */
+  width: 100%; 
   font-size: 1.5em;
   margin-top: 3em;
   margin-left: 1em;
@@ -338,7 +337,7 @@ socket.on( "index", (data) => {
 }
 
 .player {
-    margin-right: 0.1em; /* Justera avståndet mellan deltagarna */
+    margin-right: 0.1em; 
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
     background-repeat: no-repeat;
     background-position: left center;
@@ -411,10 +410,10 @@ socket.on( "index", (data) => {
 }
 
   .keyboardContainer {
-    display: flex; /* Ändra till flex för att placera elementen på samma rad */
-    flex-direction: row; /* Säkerställ att barnen ligger på rad */
-    justify-content: space-evenly; /* Skapa mellanrum mellan keyboard och hangman */
-    align-items: center; /* Justera vertikalt så att elementen är centrerade */
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly; 
+    align-items: center; 
   }
 
   .keyboardhangman {
@@ -427,12 +426,12 @@ socket.on( "index", (data) => {
   }
 
   .guessingcontainer {
-    
-    display: flex; /* Flexbox för inre strukturering */
-    justify-content: center; /* Centrera innehållet horisontellt */
-    align-items: center; /* Centrera innehållet vertikalt */
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
     position: relative;
-    left: 3em;
+    left: 1.5em;
     
     }
 
@@ -440,9 +439,9 @@ socket.on( "index", (data) => {
     height: 1.8em;
     width: 1.5em;
     border: solid black;
-    border: 0.2em solid black; /* Lägg till en kantlinje */
-    justify-content: center; /* Centrera innehållet horisontellt */
-    align-items: center; /* Centrera innehållet vertikalt */
+    border: 0.2em solid black;
+    justify-content: center; 
+    align-items: center; 
   }
 
   .submitButton {
@@ -463,10 +462,13 @@ socket.on( "index", (data) => {
   }
 
   .failedLettersContainer {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-left: 1.5em;
     position: relative;
-    left: 3em;
+    left: 0em;
+    top: -4em;
   }
 
   .failedLettersSpecView {
@@ -484,6 +486,7 @@ socket.on( "index", (data) => {
     margin: 0;
     padding: 0;
     }
+
   .letterBoxContainer {
     display: flex;
     justify-content: center;
@@ -516,6 +519,11 @@ socket.on( "index", (data) => {
     width: 2em; /* Justera bredden efter behov */
   }
 
+  .guess-counter {
+    margin-left: 1em;
+    margin-bottom: 3em;
+}
+
 
 
 
@@ -540,10 +548,6 @@ socket.on( "index", (data) => {
 
     .guessingcontainer {
       scale: 0.7;  
-    }
-
-    .failedLettersContainer {
-      display: none; 
     }
 
     .specView {

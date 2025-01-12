@@ -84,6 +84,10 @@ export default {
       type: Number,
       default: 1,
     },
+    maxguesses: {
+      type: Number,      
+      default: 7, 
+    },
   },
 };
 </script>

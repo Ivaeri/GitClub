@@ -56,5 +56,6 @@
 	"playAgain": "Play again?",
 	"leaderBoard": "Leaderboard:",
 	"correctWord": "The correct word was: ",
+	"guessesRemaining": "Guesses Remaining",
 	"enterUsernameAndWord": "Please enter your username and the word you want to use"
 }

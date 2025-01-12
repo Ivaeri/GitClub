@@ -56,5 +56,6 @@
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
 	"correctWord": "Det korrekta ordet var: ",
+	"guessesRemaining": "Återstående gissningar",
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda"
 }
