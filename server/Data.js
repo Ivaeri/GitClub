@@ -159,6 +159,7 @@ Data.prototype.addToInActivePolls = function (pollId) {
 Data.prototype.inActivateIfFull = function (pollId) {
   if (this.polls[pollId] && this.polls[pollId].participants.length > 3) { 
       this.inActivePolls.push(pollId);
+      
    }
 };
 

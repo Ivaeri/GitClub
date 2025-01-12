@@ -54,7 +54,7 @@
           </div>
       </div> <!-- Här stängs guessingcontainer-diven-->
 
-      <div v-else  class="specView"> <!-- Här börjar vyn för dens tur det är-->
+      <div v-else  class="specView"> <!-- Här börjar vyn för dens tur det inte är-->
         <div class="failedLettersSpecView">
           <h3>
             {{ uiLabels.wrongGuesses }}
