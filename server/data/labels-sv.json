@@ -56,5 +56,6 @@
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
 	"correctWord": "Det korrekta ordet var: ",
-	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit"
+	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
+	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord..."
 }

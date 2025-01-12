@@ -56,5 +56,6 @@
 	"playAgain": "Play again?",
 	"leaderBoard": "Leaderboard:",
 	"correctWord": "The correct word was: ",
-	"reachedMaxPlayers": "Max limit on number of players reached"
+	"reachedMaxPlayers": "Max limit on number of players reached",
+	"waitForNewWord": "Hold your horses! The host is choosing a new word..."
 }
