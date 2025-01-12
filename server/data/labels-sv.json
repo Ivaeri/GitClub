@@ -55,5 +55,6 @@
 	"logo": "HÄNG PERSON",
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
-	"correctWord": "Det korrekta ordet var: "
+	"correctWord": "Det korrekta ordet var: ",
+	"guessesRemaining": "Återstående gissningar"
 }

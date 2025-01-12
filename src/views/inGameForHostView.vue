@@ -17,6 +17,9 @@
           <span v-if="allGuessedLetters.includes(letter)" class="greenLetter"> {{ letter }} </span>
           <span v-else> {{ letter }} </span>
         </h2>
+        
+        <GuessCounter :wrongGuesses="ammountWrongLetters" :maxGuesses="7" :labels="uiLabels" />
+        
         <div> 
           <h3>{{ uiLabels.guessedLetters }}</h3>
           <div v-for="letter in allGuessedLetters" :key="letter" class="lettersGuessed">
@@ -29,6 +32,7 @@
       <div>
         <HangPerson class="hangPerson"  v-bind:wrongGuesses="ammountWrongLetters" />
       </div>
+
     </div>
     <div class="participants-container">
       <div v-for="participant in participants" :key="participant.name" class="player">
@@ -46,13 +50,15 @@
     import HomeButton from '../components/HomeButton.vue';
     const socket = io(sessionStorage.getItem("dataServer"));
     import HangPerson from '../components/HangPerson.vue';
+    import GuessCounter from "../components/GuessCounter.vue";
     
     export default {
       name: 'lobbyForHost',
       components: {
         Logo, 
         HomeButton,
-        HangPerson
+        HangPerson, 
+        GuessCounter
       },
       data: function () {
         return {
@@ -281,6 +287,12 @@ h2 {
   z-index: 100;
 }
 
+.guess-counter {
+  position: relative;
+  text-align: left;
+  margin-left: 0em;
+}
+
 @media (max-width: 768px) {
   .skipPlayer{
     right: 0.5em;
@@ -296,7 +308,9 @@ h2 {
   .speechBubble{
     scale: 0.7;
   }
-
+  .guess-counter {
+    font-size: 1.2em;
+  }
 }
 
 @media (max-width: 600px) {
@@ -337,6 +351,10 @@ h2 {
     right: 0.5em;
     top: calc(13%);
   }
+  .guess-counter {
+    font-size: 1em;
+  }
+  
 }
 
 </style>

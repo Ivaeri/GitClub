@@ -55,5 +55,7 @@
 	"logo": "HANG PERSON",
 	"playAgain": "Play again?",
 	"leaderBoard": "Leaderboard:",
-	"correctWord": "The correct word was: "
+	"correctWord": "The correct word was: ",
+	"guessesRemaining": "Guesses Remaining"
+
 }
