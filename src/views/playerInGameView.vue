@@ -535,6 +535,7 @@ socket.on( "index", (data) => {
       width: 95%;
       font-size: 1em;
       margin-top: 0;
+      
     }
 
     .guessingcontainer {
@@ -546,7 +547,8 @@ socket.on( "index", (data) => {
     }
 
     .specView {
-      transform: translateX(-10%);
+      transform: translateX(-10%) translateY(25%);
+      
     }
 
   }
@@ -566,7 +568,7 @@ socket.on( "index", (data) => {
     }
 
     .keyboardhangman {
-      position: relative;
+      
       scale: 0.5;
       transform: translateX(calc(1em - 310%)) translateY(calc(1em - 80%));
 
@@ -578,11 +580,11 @@ socket.on( "index", (data) => {
     }
 
     .participants-container {
-      position: relative;
+      
       padding-left: 2.3em;
-      font-size: 0.7em;
       margin-top: 0;
       width: 85%;
+      transform: translateY(150%);
       
     }
 
