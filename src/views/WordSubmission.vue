@@ -1,37 +1,37 @@
 <template>
-  <div class="fixer">
-  <div class="headerContainer">
-  <div class="homeButton">
-      <HomeButton :text="uiLabels.goHome"/> 
-  </div>
-  <div class="logo">
-    <Logo :text="uiLabels.logo" class="logostyle"/>
-  </div> 
-  </div>
-  <div class="container">
-    <div class="item">
-      <InputField
-          v-model="hostName"
-          :placeholder="uiLabels.name"
-          id="hostname">
-      </InputField>
-      <InputField
-        v-bind:label="uiLabels.enterWord"
-        v-model="enteredword" 
-        :placeholder="uiLabels.enterWord" 
-        id="enter-word"
-        @keydown.enter="handleClick">
-      </InputField>
+    <div class="headerContainer">
+      <div class="homeButton">
+        <HomeButton :text="uiLabels.goHome"/> 
+      </div>
+      <div class="logo">
+        <Logo :text="uiLabels.logo" class="logostyle"/>
+      </div> 
     </div>
-    <div class="item">
-      <Button 
-        v-bind:text="uiLabels.sendWord" 
-        v-on:click="handleClick">
-        {{ uiLabels.sendWord }}
-      </Button>
+    <h2> {{ uiLabels.enterUsernameAndWord }}</h2>
+    <div class="container">
+      <div class="item">
+        <InputField class="inputField"
+            v-model="hostName"
+            :placeholder="uiLabels.name"
+            id="hostname">
+        </InputField>
+        <InputField class="inputField"
+          v-bind:label="uiLabels.enterWord"
+          v-model="enteredword" 
+          :placeholder="uiLabels.enterWord" 
+          id="enter-word"
+          @keydown.enter="handleClick">
+        </InputField>
+      </div>
+      <div class="item">
+        <Button 
+          v-bind:text="uiLabels.sendWord" 
+          v-on:click="handleClick">
+          {{ uiLabels.sendWord }}
+        </Button>
+      </div>
     </div>
-  </div>
-</div>
+
 </template>
   
   <script>
@@ -137,13 +137,8 @@
   </script>
   
   <style scoped>
-
-
-  .fixer {
-    overflow-x: hidden; 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  .homeButton{
+    margin-bottom: 10em;
   }
   .headerContainer {
   display: flex;
@@ -151,25 +146,22 @@
   align-items: center;
   padding: 1em; 
 }
-  h1{
-    font-size: 5rem;
-    margin: 0.6em;
+  h2{
+    padding-left: 2em;
   }
   .container {
     overflow-x: hidden;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center; 
     margin: 2em 2em;
-    padding-left: 10%;
-    padding-right: 10%;
     width: 100%;
   }
 
   .logo {
   font-size: 2em;
-  padding: 0em;
   text-align: center;
   margin: 0.5em auto; 
   position: relative; 
@@ -177,31 +169,35 @@
   margin-top: 1em;
 }
 
-
   .item {
+    display: flex;
     flex: 1 1 100%; 
     max-width: 40em;
+    width: 100%;
     flex-direction: column;
-    justify-content: center;
-    }
-  .item button{
-    flex: 1 1 40%;
-    display: flex;
-    flex-direction: column;
-    width: 10em;
-    height: 8em;
-    max-width: 9rem;
-    max-height: 10rem;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    background-color: #cf84a9;
-    border-radius: 0.5em;
-    margin: 2em;
-    padding: 0.5em;
-    color: white;
-    border: none;
-    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+    }
+
+  .inputField {
+  width: 100%;
+  max-width: 20em;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  font-size: 2em;
+}
+  .item button{
+  width: 100%;
+  max-width: 10em;
+  padding: 0.5em;
+  font-size: 1em;
+  background-color: #cf84a9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+    
   }
   .item button:hover{
     background-color: #a02666;
@@ -209,57 +205,20 @@
     transition: transform 0.2s ease-in-out;
   }
   @media (max-width: 768px) {
-  .container {
-    flex-direction: column; /* Lägg elementen i en kolumn */
-    margin: 1em; 
-  }
 
-  .item {
-    flex: 1 1 100%; /* Varje element tar upp hela bredden */
-    max-width: none; /* Ta bort maxbreddsbegränsning */
-    margin: 0.5em 0; /* Mindre mellanrum mellan element */
-    width: 100%;
-  }
-  .logo{
-    position: relative;
-    margin-top: 1em;
-    margin-bottom: 0.1em;
-    font-size: 1.3em;
-    margin-top: 0.6em;
-  }
-  .homeButton{
-    position: relative;
-    margin-top: 0em;
-    margin-bottom: 1em;
-  }
-  .inputField {
-    width: 70%; 
-    font-size: 1.2rem; 
-    padding: 0.8em; 
-    margin-left: 0;
-  }
+    h2 {
+      font-size: 1em;
+    }
+    .logo{
+      font-size: 1.5em;
+    }
 
-  .item button {
-    width: 70%; 
-    max-width: none; 
-    padding: 0.8em; 
-    margin-right: 30em;
-  }
+    .inputField {
+      font-size: 1.5em;
+      width: 70%;
+    }
 }
 
-@media (min-width: 1000px) {
-      .logo {
-        margin-left: 3.35em;
-      }
-      .homeButton{
-        margin-top: 0;
-        padding-top: 0;
-        margin-bottom: 7em;
-      }
-      .headerContainer{
-        padding-top: 0;
-      }
-  }
 
 
   

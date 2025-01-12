@@ -122,43 +122,28 @@ methods: {
   <style scoped>
 
   .participantsLobby{
-    position: relative;
     font-size: 1.5em;
     padding: 0.1em;
-    border: none;
-    border-radius: 0.5em;
-    height: auto;
-    background-color: transparent;
-    z-index: 6;
     margin-left: 2em;
     margin-right: 1em;
     }
   
   .makeBlue{
-    position: relative;
-    font-size: 1.5em;
-    padding: 20px;
-    border: none;
+    font-size: 1.34em;
+    padding: 10px;
     border-radius: 0.5em;
-    height: auto;
     background-color: lightblue;
-    z-index: 6;
     margin-left: 2em;
     margin-right: 1em;
-    margin-bottom: 3em;
   }
 
   .fixer {
     overflow-x: hidden; 
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
 
   .buttonContainer{
-    position: relative;
     font-size: 0.8em;
-    margin-right: 1em;
   }
   .headerContainer {
   display: flex;
@@ -197,11 +182,9 @@ methods: {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     grid-template-rows: repeat(2, 1fr); 
-    grid-auto-rows: 100px;
-    gap: 0.1em; 
+    gap: 0.05em; 
     justify-items: center;
     align-items: center; 
-    padding: 20px;
   }
   
   .active1{
@@ -215,11 +198,10 @@ methods: {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 3em;
-    width: 5em;
+    height: 2em;
+    width: 4em;
     background-size: 1.8em 1.8em; 
     padding-left: 3em; 
-    padding-right: 0em;
     font-size: 1.2em; 
     margin-bottom: 0.5em; 
     display: flex;

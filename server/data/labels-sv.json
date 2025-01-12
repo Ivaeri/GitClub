@@ -56,6 +56,9 @@
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
 	"correctWord": "Det korrekta ordet var: ",
+	"guessesRemaining": "Återstående gissningar",
+	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda"
+	"correctWord": "Det korrekta ordet var: ",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord..."
 }
