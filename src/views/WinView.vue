@@ -4,12 +4,14 @@
         <HomeButton :text="uiLabels.goHome"/>
         </div>
         <Logo :text="uiLabels.logo" class="logostyle"/>
-        <div class="animate__animated animate__zoomInDown congrats"> {{ uiLabels.win1 }} {{ uiLabels.win2 }}</div>
+        <div class="animate__animated animate__zoomInDown congrats"> 
+            {{ uiLabels.win1 }} {{ uiLabels.win2 }}
+        </div>
     </header>
     <button class="restartButton" v-on:click="goToGameLobby">
         {{ uiLabels.playAgain }}
     </button>
-    <LeaderBoard :players="leaderboard" :text="uiLabels.leaderBoard"/>
+    <LeaderBoard class="leaderboard-container" :players="leaderboard" :text="uiLabels.leaderBoard"/>
 </template>
 
 <script>
@@ -130,6 +132,7 @@ export default {
     transition: transform 0.2s ease-in-out;
 }
 
+
 @media (max-width: 740px)  {
     .congrats{
         font-size: 4em;
@@ -138,6 +141,10 @@ export default {
     .restartButton{
         width: 10em;
         height: 4em;
+    }
+    .leaderboard-container {
+        justify-content: center; 
+        margin-top: 1em;
     }
     
 }

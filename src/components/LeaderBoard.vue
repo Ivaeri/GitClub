@@ -37,6 +37,7 @@ export default {
         list-style-type: none;
         padding: 0;
         text-align: center;
+        margin-top: 0;
     }
 
     .leaderboard li {
@@ -45,8 +46,8 @@ export default {
         align-items: center;
         background-color: #ffffff;
         padding: 10px 20px;
-        margin-bottom: 10px;
-        border-radius: 20px;
+        margin-bottom: 5px;
+        border-radius: 15px;
         height: 10px; 
     }
     .leaderboard li:nth-child(1) {
@@ -58,7 +59,7 @@ export default {
     }
 
     .leaderboard li:nth-child(3) {
-        background-color: #cd7f32; 
+        background-color: rgb(205, 127, 50); 
         }
 
 </style>

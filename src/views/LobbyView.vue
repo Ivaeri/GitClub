@@ -212,9 +212,10 @@ h2{
 }
 
 .gamesContainer{
-  background-color: lightblue;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    background-color: lightblue;
+    display: inline-block;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr);
     color:black;
     justify-content: center;
     padding: 1em;
@@ -224,8 +225,8 @@ h2{
     overflow-y: auto;
     overflow-x: hidden;
     margin: 0 auto;
-    border: 0.2em solid black; 
-    border-radius: 10px; 
+    border: none;
+    border-radius: 1em; 
 }
 
 .gamesContainer::-webkit-scrollbar {
@@ -356,7 +357,6 @@ h2{
   }
 
   .gamesContainer {
-  
     width: 75vh;
     height: auto;
 
