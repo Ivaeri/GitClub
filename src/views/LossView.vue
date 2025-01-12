@@ -69,7 +69,7 @@ export default {
     methods: {
     goToGameLobby: function() {
         if(!this.newGameIsStarted) {
-                alert("Hold your horses, the new host is thinking of a word...");
+                alert(this.uiLabels.waitForNewWord);
             }
             else {
                 socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )

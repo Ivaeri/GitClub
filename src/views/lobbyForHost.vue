@@ -7,7 +7,8 @@
       <HomeButton :text="uiLabels.goHome"/> 
   </div>
 </div>
-  <h1>{{ uiLabels.awaitingPlayers }}</h1>
+  <h1 v-if="participants.length < 4">{{ uiLabels.awaitingPlayers }}</h1>
+  <h1 v-else>{{ uiLabels.reachedMaxPlayers }}</h1>
   <h2>{{ uiLabels.wordRecieved }} {{enteredword}}</h2>
   <h2>{{ uiLabels.id }}{{ pollId }}</h2>
   </header>

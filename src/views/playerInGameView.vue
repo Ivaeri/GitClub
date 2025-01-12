@@ -48,9 +48,14 @@
                 <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
               </div>
             </div> <!-- Här stängs keyboard-diven-->
+            <div class="buttons">
             <button class="submitButton" v-on:click="handleSubmit">
               {{ uiLabels.submit }}
             </button>
+            <div class="languagecontainer">
+              <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="toggleLang"> </button>
+            </div>
+          </div>
             </div>
           </div>
           <div class="keyboardhangman">
@@ -58,7 +63,7 @@
           </div>
       </div> <!-- Här stängs guessingcontainer-diven-->
 
-      <div v-else  class="specView"> <!-- Här börjar vyn för dens tur det är-->
+      <div v-else  class="specView"> <!-- Här börjar vyn för dens tur det inte är-->
         <div class="failedLettersSpecView">
           <h3>
             {{ uiLabels.wrongGuesses }}
@@ -208,6 +213,13 @@ socket.on( "index", (data) => {
 
   methods: {
 
+    toggleLang: function () {
+      if (this.lang == "en") {
+        this.lang = "sv";
+      } else {
+        this.lang = "en";
+      }},
+
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
@@ -322,6 +334,40 @@ socket.on( "index", (data) => {
 
 
 <style scoped>
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 25%;
+}
+
+.languagecontainer button {
+  height: 2em;
+  width: 4em;
+  background-size: cover;
+  background-position: center;
+  left: 0;
+  cursor: pointer;
+  border-radius: 0.5em;
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.languagecontainer button:hover {
+  transform: rotate(1deg) scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.swedishbutton {
+  background-image: url("/img/svenskflagga.jpg");
+}
+
+.englishbutton {
+  background-image: url("/img/uk.png");
+}
+
+
 .participants-container {
   color: black;
   padding: 1em;
@@ -453,6 +499,7 @@ socket.on( "index", (data) => {
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
     height: 4em;
     width: 8em;
+    margin-right: 3em;
   }
 
   .submitButton:hover {
