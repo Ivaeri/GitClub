@@ -88,7 +88,7 @@
 
 
     socket.on("letters", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+  if (data.pollId === this.pollId) { 
     this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
     this.updateCorrectGuesses();
   } else {
@@ -132,7 +132,6 @@ socket.on("amountWrongLetters", (data) => {
   socket.emit("getLang", this.pollId);
 
     socket.emit("getIndex", this.pollId )
-   // socket.emit( "getUILabels", this.lang );
     socket.emit("getParticipants", { pollId: this.pollId });
     socket.emit("getGuessedLetters",  this.pollId );
     socket.emit("getAmountWrongLetters", this.pollId );
@@ -190,7 +189,7 @@ h2 {
     display: grid;
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-    width: 100%; /* Fyll hela skärmen */
+    width: 100%; 
     font-size: 1.3em;
 }
 
