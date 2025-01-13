@@ -16,7 +16,7 @@
 	"awaitingHost": "Waiting for host to start the game",
 	"awaitingPlayers": "Waiting for all the players to join",
 	"wordRecieved": "Your word: ",
-	"id": "Game ID: ",
+	"id": "Game-ID: ",
 	"fillName": "Please enter a username before continuing",
 	"fillNumber": "Please enter a valid game ID before continuing",
 	"welcome": "Welcome to ",
