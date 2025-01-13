@@ -208,6 +208,7 @@ socket.on( "index", (data) => {
   unmounted() {
   socket.off("wonOrNot");
   socket.off("amountWrongLetters");
+  socket.off("lang");
 },
 
 

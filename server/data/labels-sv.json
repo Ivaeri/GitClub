@@ -1,9 +1,7 @@
 {
 	"invite": "Bjud in deltagare med den här länken:",
-	"invite": "Bjud in deltagare med den här länken:",
 	"createGame": "Skapa spel",
 	"participateGame": "Anslut",
-	"question": "Fråga",
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"about": "Om oss",
@@ -23,8 +21,6 @@
 	"awaitingPlayers": "Inväntar att alla spelare ansluter",
 	"wordRecieved": "Ditt ord: ",
 	"id": "Spel-id: ",
-	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
-	"fillNumber": "vänligen fyll i ett giltigt spel-id innan du fortsätter",
 	"fillName": "vänligen fyll i ett användarnamn innan du fortsätter",
 	"fillNumber": "vänligen fyll i ett giltigt spel-id innan du fortsätter",
 	"welcome": "Välkommen till ",
@@ -57,14 +53,11 @@
 	"tooSlow": "För långsam?",
 	"noGames": "Inga aktiva spel just nu...",
 	"logo": "HÄNGA PERSON",
-	"noGames": "Inga aktiva spel just nu",
-	"logo": "HÄNG PERSON",
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
 	"correctWord": "Det korrekta ordet var: ",
 	"guessesRemaining": "Liv kvar",
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
-	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord..."
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord..."
 }
