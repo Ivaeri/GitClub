@@ -51,7 +51,7 @@ export default {
         height: 10px; 
     }
     .leaderboard li:nth-child(1) {
-        background-color: gold;
+        background-color: rgb(219, 186, 1);
     }
 
     .leaderboard li:nth-child(2) {

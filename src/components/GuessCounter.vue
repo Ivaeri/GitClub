@@ -36,7 +36,6 @@ export default {
     font-size: 1.2em;
     font-weight: bold;
     text-align: center;
-    color: #88154f;
     margin: 1em 0;
 }
 </style>

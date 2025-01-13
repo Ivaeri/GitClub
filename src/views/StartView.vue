@@ -140,7 +140,7 @@ header {
 }
 
 .create-join button:hover {
-  background-color: #a02666;
+  background-color: #975f7b;
   transform: rotate(1deg) scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
@@ -175,13 +175,13 @@ header {
 }
 
 .gameRules button:hover {
-  background-color: #a02666;
+  background-color: #975f7b;
   transform: rotate(1deg) scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
 
 .gameRules div {
-  background-color: pink;
+  background-color: #D4C2AD;
   margin-left: 0.5em;
   border-radius: 1em;
   margin-left: 2em;

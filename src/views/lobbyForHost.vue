@@ -128,7 +128,7 @@ methods: {
     font-size: 1.34em;
     padding: 10px;
     border-radius: 0.5em;
-    background-color: lightblue;
+    background-color: #D4C2AD;
     margin-left: 2em;
     margin-right: 1em;
   }
@@ -159,7 +159,7 @@ methods: {
     margin-top: 2em;
   }
   .startGameButtonPink:hover{
-    background-color: #a02666;
+    background-color: #975f7b;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
  }
@@ -204,7 +204,7 @@ methods: {
     display: flex;
     align-items: center;
     border-radius: 0.5em; 
-    background-color: pink; 
+    background-color: #cca5bc; 
   }
 
   @media (max-width: 768px) {

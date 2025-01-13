@@ -208,7 +208,7 @@ h2 {
   display: flex;
   align-items: center;
   border-radius: 5px; 
-  background-color: pink;
+  background-color: #cca5bc;
 }
 
 .speechBubble {
@@ -222,7 +222,7 @@ h2 {
   }
 
 .greenLetter {
-  color: green;
+  color: rgb(49, 142, 49);
 }
 
 .wordBox {
@@ -237,13 +237,13 @@ h2 {
 
 .guessedCorrectLetter{
   font-size: 1em;
-  color: green;
+  color: rgb(49, 142, 49);
   padding: 0.3em;
 }
 
 .guessedWrongLetter{
   font-size: 1em;
-  color: red;
+  color: rgb(188, 0, 0);
   padding: 0.3em;
 
 }
@@ -280,7 +280,7 @@ h2 {
 }
 
 .skipPlayerButton:hover {
-  background-color: #a02666;
+  background-color: #975f7b;
 }
 .homeButton{
   position: relative;

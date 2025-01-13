@@ -364,7 +364,7 @@ socket.on( "index", (data) => {
     display: flex;
     align-items: center;
     border-radius: 5px; 
-    background-color: pink; 
+    background-color: #cca5bc; 
   }
 
   .name-wrapper {
@@ -376,7 +376,6 @@ socket.on( "index", (data) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: blue;
     
   }
   
@@ -391,7 +390,7 @@ socket.on( "index", (data) => {
     font-size: 1em;
     cursor: pointer;
     color: white;
-    background-color: #007bff;
+    background-color: #489bbe;
     width: 2em;
     height: 2.5em;
     align-items: center;
@@ -400,7 +399,7 @@ socket.on( "index", (data) => {
   }
 
   .key:hover {
-    background-color:#0056b3;
+    background-color:#34587e;
   }
 
   hr {
@@ -408,18 +407,18 @@ socket.on( "index", (data) => {
   }
 
   .wrongKey {
-  background-color: red
+  background-color: rgb(188, 0, 0)
 }
 
 .correctKey {
-  background-color: green
+  background-color: rgb(69, 192, 69)
 }
 
 .correctKey:hover {
-  background-color: rgb(21, 69, 21);
+  background-color: rgb(41, 110, 41);
 }
 .wrongKey:hover {
-  background-color: rgb(143, 27, 27)
+  background-color: rgb(117, 0, 0)
 }
 
   .keyboardContainer {
@@ -467,7 +466,7 @@ socket.on( "index", (data) => {
   }
 
   .submitButton:hover {
-    background-color: #a02666;
+    background-color: #975f7b;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }
@@ -490,7 +489,7 @@ socket.on( "index", (data) => {
   .failedLetters {
     top: 2em;
     width: 5em;
-    color: red
+    color: rgb(188, 0, 0)
   }
   .inGame {
     position: relative;
@@ -507,7 +506,7 @@ socket.on( "index", (data) => {
   }
 
   .trueWord {
-    color: rgb(42, 205, 20);
+    color: rgb(49, 142, 49);
     font-size: 2em;
   }
 

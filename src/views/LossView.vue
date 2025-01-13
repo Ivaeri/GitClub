@@ -101,8 +101,8 @@ export default {
 .gameover {
     text-align: center; 
     font-size: 4em;
-    color: rgb(163, 31, 31);
-    text-shadow: 2px 2px 4px #000000;
+    color: #a21414;
+    text-shadow: 2px 2px 4px #410101;
     transform: translateY(-1em);
     margin-top: 1em;
 
@@ -119,14 +119,17 @@ export default {
     margin-top: auto;
     width: 30%;
     height: 10vh;
-    background-color: pink;
-    color:rgba(0, 0, 0, 0.8);
+    background-color: #cf84a9;
+    color:rgba(255, 255, 255, 0.8);
     font-weight: bold;
     font-size: 0.4em;
     border-radius: 10px;
     cursor: pointer;
 }
 
+.restartButton:hover {
+    background-color: #975f7b;
+}
 .hangPerson{
     margin:auto;
     scale: 0.9;
