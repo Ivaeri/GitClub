@@ -137,9 +137,6 @@
   </script>
   
   <style scoped>
-  .homeButton{
-
-  }
   .headerContainer {
   display: flex;
   justify-content: space-between; 
