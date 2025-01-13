@@ -138,7 +138,7 @@ export default {
 }
 
 .sendWordButton:hover {
- background-color: #a02666;
+ background-color: #975f7b;
  transform: rotate(1deg) scale(1.1);
  transition: transform 0.2s ease-in-out;
  }

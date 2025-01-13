@@ -100,7 +100,7 @@
     display: flex;
     align-items: center;
     border-radius: 5px; 
-    background-color: pink; 
+    background-color: #cca5bc; 
   }
 
   .participants-list{

@@ -104,8 +104,8 @@ export default {
     justify-content: center; 
     align-items: center; 
     font-size: 6.5em;
-    color: pink;
-    text-shadow: 2px 2px 4px #000000;
+    color: #e5aa34;
+    text-shadow: 2px 2px 4px #6a4f18;
     word-break: break-all;
 }
 .restartButton {
@@ -125,7 +125,7 @@ export default {
 }
 
 .restartButton:hover{
-    background-color: #a02666;
+    background-color: #975f7b;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
 }

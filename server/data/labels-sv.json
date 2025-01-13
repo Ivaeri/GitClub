@@ -55,7 +55,7 @@
 	"logo": "HÄNGA PERSON",
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
-	"correctWord": "Det korrekta ordet var: ",
+	"correctWord": "Ordet var: ",
 	"guessesRemaining": "Felgissningar kvar",
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",

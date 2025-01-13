@@ -202,7 +202,7 @@ h2{
   height: 3.5em;
   text-align: center;
   font-size: larger;
-  background-color: pink;
+  background-color: #D4C2AD;
   color: black;
 }
 .lobby-container {
@@ -214,7 +214,7 @@ h2{
 }
 
 .gamesContainer{
-    background-color: lightblue;
+    background-color: #D4C2AD;
     display: inline-block;
     grid-template-columns: repeat(2, 1fr); 
     grid-template-rows: repeat(2, 1fr);
@@ -235,18 +235,11 @@ h2{
   width: 0.5em; 
 }
 
-.gamesContainer::-webkit-scrollbar-track {
-  background: lightblue; 
-  border-radius: 10px; 
-}
 
 .gamesContainer::-webkit-scrollbar-thumb {
-  background: #c888b1; 
+  background: #a59889; 
   border-radius: 10px; 
-}
-
-.gamesContainer::-webkit-scrollbar-thumb:hover {
-  background: hotpink; 
+  cursor: pointer;
 }
 
 
@@ -259,7 +252,7 @@ h2{
 }
 
 .poll-button {
-  background-color: pink; 
+  background-color: #cf84a9; 
   color: black; 
   font-size: 1.5em; 
   padding: 1em 2em; 
@@ -281,15 +274,12 @@ h2{
 }
 
 .poll-button:hover {
-  background-color: hotpink; 
+  background-color: #975f7b; 
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
 
-.clicked-button {
-  background-color: rgb(149, 42, 95); 
-  border: 0.2em solid blue; 
-}
+
 
 .joinGameButton {
   width: 3.2em;
@@ -307,7 +297,7 @@ h2{
   
   }
   .joinGameButton:hover{
-    background-color: #a02666;
+    background-color: #975f7b;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }

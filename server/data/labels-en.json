@@ -54,7 +54,7 @@
 	"leaderBoard": "Leaderboard:",
 	"guessesRemaining": "Wrong guesses remaining",
 	"enterUsernameAndWord": "Please enter your username and the word you want to use",
-	"correctWord": "The correct word was: ",
+	"correctWord": "The word was: ",
 	"reachedMaxPlayers": "Max limit on number of players reached",
 	"waitForNewWord": "Hold your horses! The host is choosing a new word...",
 	"createTitle": "Create game",
