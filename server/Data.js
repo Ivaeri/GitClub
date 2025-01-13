@@ -72,6 +72,17 @@ Data.prototype.updateWord = function (word, pollId, hostName) {
   
 };
 
+Data.prototype.setLang = function (pollId, lang) {
+  if (this.polls[pollId]) {
+      this.polls[pollId].lang = lang;      
+  }
+};
+
+Data.prototype.getLang = function (pollId, lang) {
+  if (this.polls[pollId]) {
+      return this.polls[pollId].lang      
+  }
+};
     Data.prototype.updateGuessedLetters = function (pollId, key) {
       if (this.polls[pollId]) {
           this.polls[pollId].guessedLetters.push(key);
@@ -250,7 +261,8 @@ Data.prototype.startNewGame = function (pollId, hostname, word) {
       guessedLetters: [],
       isGameWon: false,
       amountWrongLetters: 0,
-      NailInCoffin: hostname
+      NailInCoffin: hostname,
+      lang: "en"
     };
 
   }

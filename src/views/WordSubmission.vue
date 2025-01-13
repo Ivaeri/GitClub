@@ -124,6 +124,7 @@
         this.generateId();
         this.sendWord();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
+        socket.emit("setLang", {lang: this.lang, pollId: this.pollId});
       },
       sendWord: function () {
         socket.emit( "setWordAndGenerateGameInfo", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )
