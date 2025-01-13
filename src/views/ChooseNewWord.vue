@@ -57,8 +57,6 @@ export default {
         const response = await fetch("/server/data/swe_wordlist.txt");
         const text = await response.text();
         this.swe_wordlist = new Set(text.split("\n").map(word => word.trim().toLowerCase()));
-        console.log("Svenska ordlistan laddad med", this.swe_wordlist.size, "ord");
-        //console.error("Fel vid inläsning av ordlistan:", error); //bort??
     }
     socket.emit("getUILabels", this.lang);
     },
@@ -116,7 +114,6 @@ export default {
       },
 
       startNewGame(){
-        console.log("startNewGame körs");
         socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName: this.hostName,});
         socket.emit("newGameHasStarted", this.pollId);
       }

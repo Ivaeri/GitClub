@@ -15,10 +15,6 @@ prototype of the Data object/class
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 ***********************************************/
 
-    Data.prototype.pollExists = function (pollId) {
-      return typeof this.polls[pollId] !== "undefined"
-    }
-
 
     Data.prototype.getUILabels = function (lang) {
       //check if lang is valid before trying to load the dictionary file
@@ -51,7 +47,6 @@ Data.prototype.participateInPoll = function(pollId, name, wins) {
   if (this.pollExists(pollId)) {
     this.polls[pollId].participants.push({name: name, wins: wins});
   }
- console.log('körs från participate in poll', this.polls[pollId].participants)
 }
 
 Data.prototype.getParticipants = function(pollId) {
@@ -61,6 +56,11 @@ Data.prototype.getParticipants = function(pollId) {
   }
   return [];
 }
+
+Data.prototype.pollExists = function (pollId) {
+  return typeof this.polls[pollId] !== "undefined"
+}
+
 
 
 Data.prototype.updateWord = function (word, pollId, hostName) {
@@ -149,10 +149,8 @@ Data.prototype.getNailInCoffin = function (pollId) {
 }
 Data.prototype.getLeaderboard = function (pollId) {
   if (this.polls[pollId]) {
-    console.log("testavfuck",this.polls[pollId].hostName)
     const leaderboard = this.polls[pollId].participants.slice()
     leaderboard.push(this.polls[pollId].hostName)
-    console.log('körs från getLeaderboard i data', leaderboard)
     return leaderboard;
   }
 }
@@ -214,14 +212,6 @@ Data.prototype.reActivatePollId = function (pollId) {
         };
         return ""
       };
-    
-      Data.prototype.removeGame = function(pollId) {
-        if (this.polls[pollId]) {
-          delete this.polls[pollId];
-        } else {
-          console.log(`Poll with ID ${pollId} does not exist.`);
-        }
-      };
 
 Data.prototype.setPollId = function (pollId) {
   if (!this.polls[pollId]) {
@@ -240,7 +230,6 @@ Data.prototype.setPollId = function (pollId) {
     };
   }
   this.polls[pollId].pollId = pollId;
-  //console.log('körs från set poll id', this.polls[pollId])
 };
 
 Data.prototype.startNewGame = function (pollId, hostname, word) {
@@ -266,8 +255,6 @@ Data.prototype.startNewGame = function (pollId, hostname, word) {
     };
 
   }
-  console.log("hostNaail", this.polls[pollId].NailInCoffin)
-
 }
 
 export { Data };

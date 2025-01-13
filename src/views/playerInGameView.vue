@@ -147,7 +147,6 @@ export default {
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { 
     this.participants = data.participants; 
-    console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
   } else {
     console.log("Uppdateringen ignorerades för pollId:", data.pollId);
   }
@@ -168,20 +167,17 @@ socket.on( "index", (data) => {
 
     socket.on("word", data => {
       if (data.pollId === this.pollId) {
-        console.log("true word", data.word);
       this.trueWord = data.word } 
     });
     socket.on("wonOrNot", (isWon) => {
       this.isGameWon = isWon;
       this.setGameToWonViaData();
-      console.log("isGameWon?", this.isGameWon);
     });    
 
     socket.on("lang", (data) => {
       if(data.pollId === this.pollId){
         this.lang = data.lang;
         localStorage.setItem("lang", this.lang);
-        console.log("lang updated to", this.lang);
         socket.emit( "getUILabels", this.lang );
 
       }
@@ -272,21 +268,17 @@ socket.on( "index", (data) => {
     },
 
     setGameToWonViaData() {
-      console.log("trueWord", this.trueWord, "allGuessedLetters:", this.allGuessedLetters, "key:", this.key);
       for (let letter of this.trueWord) {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
             this.isGameWon = false;
-            console.log("game not won")
             return;
           }}
       }
     if (this.participants[this.index] && this.userName == this.participants[this.index].name){
       socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.userName})
     }
-    socket.emit("setGameToWon", this.pollId);
-    console.log("emit sent to update win status");
-    
+    socket.emit("setGameToWon", this.pollId);    
     if (this.isGameWon) {
       this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
     }

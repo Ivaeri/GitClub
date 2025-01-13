@@ -3,7 +3,7 @@
         <h1>{{ text}}</h1>
         <ol>
             <li v-for="player in players.slice(0,3)">
-                {{ player.name }}: {{ player.wins }}
+                {{ player.name }}: {{ player.wins }}p
             </li>
         </ol>
     </div>

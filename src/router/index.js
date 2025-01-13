@@ -15,8 +15,6 @@ const router = createRouter({
       name: 'playerInGameView',
       component: () => import('../views/playerInGameView.vue'),
       beforeEnter: (to, from, next) => {
-        console.log('Navigating to playerInGameView with params:', to.params);
-        console.log('Navigating from:', from.fullPath);
         next();
       }
       },
@@ -25,8 +23,6 @@ const router = createRouter({
         name: 'inGameForHostView',
         component: () => import('../views/inGameForHostView.vue'),
         beforeEnter: (to, from, next) => {
-          console.log('Navigating to ingameforhost with params:', to.params);
-          console.log('Navigating from:', from.fullPath);
           next();
         }
         },
@@ -59,8 +55,6 @@ const router = createRouter({
       name: 'WinView',
       component: () => import('../views/WinView.vue'),
       beforeEnter: (to, from, next) => {
-        console.log('Navigating to WinView with params:', to.params);
-        console.log('Navigating from:', from.fullPath);
         next();
       }
     },

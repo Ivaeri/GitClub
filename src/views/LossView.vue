@@ -52,12 +52,10 @@ export default {
     });
     socket.on("newGameIsStarted", () => {
         this.newGameIsStarted = true;
-        console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
     socket.on("leaderboard", (data) => {
         this.leaderboard = data.slice().sort((a, b) => b.wins - a.wins);
         this.getMyWins(this.leaderboard);
-        console.log("leaderboard", data);
     });
     socket.on("word", (word) => {
         this.word = word;
