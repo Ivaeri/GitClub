@@ -5,7 +5,9 @@
         </div>
         <Logo :text="uiLabels.logo" class="logostyle"/>
         <div class="animate__animated animate__zoomInDown congrats"> 
-            {{ uiLabels.win1 }} {{ uiLabels.win2 }}
+            {{ uiLabels.win1 }} 
+            <br>
+            {{ uiLabels.win2 }}
         </div>
     </header>
     <button class="restartButton" v-on:click="goToGameLobby">
@@ -101,7 +103,7 @@ export default {
     text-align: center;
     justify-content: center; 
     align-items: center; 
-    font-size: 7em;
+    font-size: 6.5em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;
     word-break: break-all;
@@ -131,7 +133,7 @@ export default {
 
 @media (max-width: 740px)  {
     .congrats{
-        font-size: 4em;
+        font-size: 3.5em;
         margin-left: 0.5em;
     }
     .restartButton{
@@ -146,7 +148,7 @@ export default {
 }
 @media (max-width: 414px)  {
     .congrats{
-        font-size: 3em;
+        font-size: 2.5em;
         margin-left: 0.5em;
     }
     .restartButton{
