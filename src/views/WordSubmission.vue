@@ -114,6 +114,10 @@
           alert(this.uiLabels.fillName );
           return;
         }
+          if (this.hostName.length > 12) {
+          alert(this.uiLabels.nameTooLong); 
+          return;
+        }
         const validationError = await this.validateWord(this.enteredword, this.lang);
         if (validationError) {
           alert(validationError); 
