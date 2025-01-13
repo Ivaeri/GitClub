@@ -120,7 +120,7 @@ export default {
     width: 30%;
     height: 10vh;
     background-color: #cf84a9;
-    color:rgba(255, 255, 255, 0.8);
+    color:rgb(255, 255, 255);
     font-weight: bold;
     font-size: 0.4em;
     border-radius: 10px;
