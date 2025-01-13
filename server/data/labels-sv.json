@@ -39,7 +39,7 @@
 	"hanging": "s Hängning",
 	"awaitingHost1": "Inväntar att ",
 	"awaitingHost2": " påbörjar avrättningen",
-	"gameOver": "Spelet är över, du förlorade",
+	"gameOver": "Spelet är över, du förlorade...",
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
