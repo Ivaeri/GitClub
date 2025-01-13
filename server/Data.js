@@ -78,7 +78,7 @@ Data.prototype.setLang = function (pollId, lang) {
   }
 };
 
-Data.prototype.getLang = function (pollId, lang) {
+Data.prototype.getLang = function (pollId) {
   if (this.polls[pollId]) {
       return this.polls[pollId].lang      
   }
