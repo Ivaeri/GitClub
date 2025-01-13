@@ -7,7 +7,7 @@
         <Logo :text="uiLabels.logo" class="logostyle"/>
       </div> 
     </div>
-    <h1 class="pageTitle">{{ uiLabels.createTitle }}</h1>
+    <h1 class="pageTitle">{{ uiLabels.createGame }}</h1>
     <h2> {{ uiLabels.enterUsernameAndWord }}</h2>
     <div class="container">
       <div class="item">
