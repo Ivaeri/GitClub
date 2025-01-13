@@ -46,11 +46,9 @@ export default {
     });
     socket.on("nail", nail => {
         this.nailer = nail;
-        console.log("nailern är", this.nailer);
     });
     socket.on("newGameIsStarted", () => {
         this.newGameIsStarted = true;
-        console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
     socket.on("leaderboard", (data) => {
         this.leaderboard = data.slice().sort((a, b) => b.wins - a.wins);;
@@ -67,9 +65,7 @@ export default {
 
     methods: {
     goToGameLobby: function() {
-        console.log( "scoobydoo",this.nailer, this.userName);
         if (this.nailer === this.userName) {
-            console.log( "scoobydoo2",this.nailer, this.userName);
             this.$router.push("/ChooseNewWord/" + this.pollId+ "/" + this.userName);
         } else {
 

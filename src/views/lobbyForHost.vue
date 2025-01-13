@@ -78,9 +78,8 @@ created: function () {
 
 
 socket.on("participantsUpdate", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+  if (data.pollId === this.pollId) { 
     this.participants = data.participants; // Uppdatera deltagarlistan
-    console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
   } else {
     console.log("Uppdateringen ignorerades för pollId:", data.pollId);
   }
@@ -101,11 +100,8 @@ methods: {
   startGamee: function () {
     socket.emit("startPoll", this.pollId);
     this.$router.push('/inGameForHost/' + this.pollId + '/' + this.enteredword+ '/' + this.hostName);
-    console.log("reached startGame with values:", this.pollId, this.enteredword, this.hostName);
     socket.emit("removePollIdFromList", this.pollId);
     socket.emit("getInActivePolls", this.pollId)
-    //socket.emit("deletePollId", this.pollId);
-   // socket.emit("removeGame", this.pollId)
    
   },
   

@@ -88,10 +88,9 @@
 
 
     socket.on("letters", (data) => {
-  if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
+  if (data.pollId === this.pollId) { 
     this.allGuessedLetters = data.letters; // Uppdatera deltagarlistan
     this.updateCorrectGuesses();
-    console.log("gissade bokstäver uppdaterades för pollId:", data.pollId);
   } else {
     console.log("nya bokstäver ignorerades för pollId:", data.pollId);
   }
@@ -99,7 +98,6 @@
     socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.participants = data.participants; // Uppdatera deltagarlistan
-    console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
   } else {
     console.log("Uppdateringen ignorerades för pollId:", data.pollId);
   }
@@ -108,7 +106,6 @@
 socket.on("amountWrongLetters", (data) => {
   if (data.pollId === this.pollId) { // Kontrollera om pollId matchar
     this.ammountWrongLetters = data.amount;
-    console.log("Antal felaktiga bokstäver uppdaterades för pollId:", this.ammountWrongLetters);
    this.gameIsWon();
 
   }
@@ -122,12 +119,19 @@ socket.on("amountWrongLetters", (data) => {
 
     socket.on("wonOrNot", (isWon) => {
     this.sendToLossView(); 
-    
-    console.log("isGameWon?", this.isGameWon);
-  });  
+      });  
+  socket.on("lang", (data) => {
+      if(data.pollId === this.pollId){
+        this.lang = data.lang;
+        localStorage.setItem("lang", this.lang);
+        socket.emit( "getUILabels", this.lang );
+
+      }
+    });
+
+  socket.emit("getLang", this.pollId);
 
     socket.emit("getIndex", this.pollId )
-    socket.emit( "getUILabels", this.lang );
     socket.emit("getParticipants", { pollId: this.pollId });
     socket.emit("getGuessedLetters",  this.pollId );
     socket.emit("getAmountWrongLetters", this.pollId );
@@ -142,19 +146,16 @@ socket.on("amountWrongLetters", (data) => {
 
     updateCorrectGuesses () {
       this.correctguesses = this.enteredword.split('').filter(letter => this.allGuessedLetters.includes(letter)).length;  
-      console.log("correctguesses", this.correctguesses);
     },
 
     gameIsWon () {
       if (this.ammountWrongLetters > 6) {  
-        console.log("Game is won, navigating to win view");
         socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.hostName});
         this.sendToWinView();
       }
     },
     
     sendToWinView () {
-        console.log("Navigating to win view");
         this.$router.push('/winView/'+ this.pollId+ '/' + this.hostName)
     },
 
@@ -165,7 +166,6 @@ socket.on("amountWrongLetters", (data) => {
 
     sendToLossView () {
       if (this.correctguesses == this.enteredword.length) {
-        console.log("Navigating to loss view");
         this.$router.push('/lossView/'+ this.pollId + '/' + this.hostName)
     }
   }}
@@ -189,7 +189,7 @@ h2 {
     display: grid;
     grid-gap: 1em;
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-    width: 100%; /* Fyll hela skärmen */
+    width: 100%; 
     font-size: 1.3em;
 }
 

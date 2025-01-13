@@ -35,27 +35,22 @@
               <div class="row" v-if="this.lang == 'en'">
                 <button class="key" v-for="key in row1e" v-bind:key="key" v-on:click="keyPressed(key)" v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
               </div>
-              <div class="row" v-if="this.lang == 'sv'">
+              <div class="row" v-else="this.lang == 'sv'">
                 <button class="key" v-for="key in row1s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
               </div>
               <div class="row" v-if="this.lang == 'en'">
                 <button class="key" v-for="key in row2e" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
               </div>
-              <div class="row" v-if="this.lang == 'sv'">
+              <div class="row" v-else="this.lang == 'sv'">
                 <button class="key" v-for="key in row2s" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
               </div>
               <div class="row">
                 <button class="key" v-for="key in row3" v-bind:key="key" v-on:click="keyPressed(key)"  v-bind:class="{'wrongKey': isWrongKey(key), 'correctKey': isCorrectKey(key)}">{{ key }}</button>
               </div>
             </div> <!-- Här stängs keyboard-diven-->
-            <div class="buttons">
             <button class="submitButton" v-on:click="handleSubmit">
               {{ uiLabels.submit }}
             </button>
-            <div class="languagecontainer">
-              <button v-bind:class="lang === 'sv' ? 'englishbutton' : 'swedishbutton'" v-on:click="toggleLang"> </button>
-            </div>
-          </div>
             </div>
           </div>
           <div class="keyboardhangman">
@@ -152,7 +147,6 @@ export default {
    socket.on("participantsUpdate", (data) => {
   if (data.pollId === this.pollId) { 
     this.participants = data.participants; 
-    console.log("Deltagarlistan uppdaterades för pollId:", data.pollId);
   } else {
     console.log("Uppdateringen ignorerades för pollId:", data.pollId);
   }
@@ -173,16 +167,22 @@ socket.on( "index", (data) => {
 
     socket.on("word", data => {
       if (data.pollId === this.pollId) {
-        console.log("true word", data.word);
       this.trueWord = data.word } 
     });
     socket.on("wonOrNot", (isWon) => {
       this.isGameWon = isWon;
       this.setGameToWonViaData();
-      console.log("isGameWon?", this.isGameWon);
     });    
-  
 
+    socket.on("lang", (data) => {
+      if(data.pollId === this.pollId){
+        this.lang = data.lang;
+        localStorage.setItem("lang", this.lang);
+        socket.emit( "getUILabels", this.lang );
+
+      }
+    });
+  
     socket.on("amountWrongLetters", (data) => {
   if (data.pollId === this.pollId) { 
     this.ammountWrongLetters = data.amount;
@@ -195,7 +195,6 @@ socket.on( "index", (data) => {
       alert('Anslutningen till servern tappades. Försök igen senare.');
     });
     
-    socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
     socket.emit("getParticipants", { pollId: this.pollId });
     socket.emit("getIndex", this.pollId )
@@ -203,6 +202,7 @@ socket.on( "index", (data) => {
     socket.emit("getWord", this.pollId)
     socket.emit("findIfWon", this.pollId) 
     socket.emit("getAmountWrongLetters", this.pollId );
+    socket.emit("getLang", this.pollId);
   },
 
   unmounted() {
@@ -218,7 +218,9 @@ socket.on( "index", (data) => {
         this.lang = "sv";
       } else {
         this.lang = "en";
-      }},
+      }
+      localStorage.setItem("lang", this.lang);
+    },
 
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
@@ -266,21 +268,17 @@ socket.on( "index", (data) => {
     },
 
     setGameToWonViaData() {
-      console.log("trueWord", this.trueWord, "allGuessedLetters:", this.allGuessedLetters, "key:", this.key);
       for (let letter of this.trueWord) {
         if (!this.allGuessedLetters.includes(letter)) {
           if(this.key !== letter) {
             this.isGameWon = false;
-            console.log("game not won")
             return;
           }}
       }
     if (this.participants[this.index] && this.userName == this.participants[this.index].name){
       socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.userName})
     }
-    socket.emit("setGameToWon", this.pollId);
-    console.log("emit sent to update win status");
-    
+    socket.emit("setGameToWon", this.pollId);    
     if (this.isGameWon) {
       this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
     }
@@ -335,37 +333,6 @@ socket.on( "index", (data) => {
 
 <style scoped>
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 25%;
-}
-
-.languagecontainer button {
-  height: 2em;
-  width: 4em;
-  background-size: cover;
-  background-position: center;
-  left: 0;
-  cursor: pointer;
-  border-radius: 0.5em;
-  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
-  border: none;
-}
-
-.languagecontainer button:hover {
-  transform: rotate(1deg) scale(1.1);
-  transition: transform 0.2s ease-in-out;
-}
-
-.swedishbutton {
-  background-image: url("/img/svenskflagga.jpg");
-}
-
-.englishbutton {
-  background-image: url("/img/uk.png");
-}
 
 
 .participants-container {
@@ -463,9 +430,7 @@ socket.on( "index", (data) => {
   }
 
   .keyboardhangman {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     position: relative;
     top: 2em;
     scale: 0.8;
@@ -499,7 +464,6 @@ socket.on( "index", (data) => {
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.2);
     height: 4em;
     width: 8em;
-    margin-right: 3em;
   }
 
   .submitButton:hover {
@@ -606,23 +570,21 @@ socket.on( "index", (data) => {
 
   
 
-  @media (max-width: 420px) {
+  @media (max-width: 431px) {
+    
     .player{
       font-size: 0.9em;
     }
+
     .hangMan {
       position: relative;
       scale: 0.7;
-      transform: translateY(-25%) translateX(-15%);
-  
-      
+      transform: translateY(-25%) translateX(-15%);    
     }
 
     .keyboardhangman {
-      
       scale: 0.5;
       transform: translateX(calc(1em - 310%)) translateY(calc(1em - 80%));
-
     }
 
     .guessingcontainer {

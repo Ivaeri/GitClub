@@ -70,7 +70,6 @@
         const response = await fetch("/server/data/swe_wordlist.txt");
         const text = await response.text();
         this.swe_wordlist = new Set(text.split("\n").map(word => word.trim().toLowerCase()));
-        console.log("Svenska ordlistan laddad med", this.swe_wordlist.size, "ord");
         console.error("Fel vid inläsning av ordlistan:", error); //bort??
     }},
     methods: {
@@ -111,7 +110,6 @@
         return null; 
       },
       async handleClick() {
-        console.log("handleClick körs");
         if (!this.hostName.trim()) {
           alert(this.uiLabels.fillName );
           return;
@@ -125,6 +123,7 @@
         this.generateId();
         this.sendWord();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
+        socket.emit("setLang", {lang: this.lang, pollId: this.pollId});
       },
       sendWord: function () {
         socket.emit( "setWordAndGenerateGameInfo", {enteredword: this.enteredword.toUpperCase(), pollId: this.pollId, hostName:this.hostName} )

@@ -150,7 +150,6 @@ export default {
     socket.once("participantsUpdate", (data) => { // Lyssna på uppdateringar av deltagarlistan endast en gång
       if (data.pollId === this.chosenPollId) {
         this.participants = data.participants;
-        console.log(this.hostName, "host")
         if (!this.userName.trim()) {
           alert(this.uiLabels.fillName);
         } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName) {

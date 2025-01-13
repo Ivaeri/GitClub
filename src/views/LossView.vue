@@ -52,12 +52,10 @@ export default {
     });
     socket.on("newGameIsStarted", () => {
         this.newGameIsStarted = true;
-        console.log("newGameIsStarted in winview", this.newGameIsStarted);
     });
     socket.on("leaderboard", (data) => {
         this.leaderboard = data.slice().sort((a, b) => b.wins - a.wins);
         this.getMyWins(this.leaderboard);
-        console.log("leaderboard", data);
     });
     socket.on("word", (word) => {
         this.word = word;
@@ -102,7 +100,7 @@ export default {
 
 .gameover {
     text-align: center; 
-    font-size: 5em;
+    font-size: 4em;
     color: rgb(163, 31, 31);
     text-shadow: 2px 2px 4px #000000;
     transform: translateY(-1em);
@@ -146,14 +144,11 @@ export default {
     }
     .gameover {
         font-size: 4em;
-        transform: translateY(0.5em)
     }  
     .hangPerson{
         scale: 0.9;
     }
-    .leaderBoard {
-        top: 3.7em;
-    }
+
 }
 @media (max-width: 700px) {
 
@@ -163,14 +158,14 @@ export default {
     }
     .gameover {
         font-size: 3em;
-        transform: translateY(2em)
     }  
     .hangPerson{
         scale: 0.8;
     }
-    .leaderBoard {
-        top: 4.7em;
+    .leaderBoard{
+        margin-top: 0.5em;
     }
+
 }
 
 

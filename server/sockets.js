@@ -4,9 +4,19 @@ function sockets(io, socket, data) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
 
+  socket.on("setLang", function(d) {
+    data.setLang(d.pollId, d.lang);
+  });
+
+  socket.on("getLang", function(pollId) {
+    let lang = data.getLang(pollId);
+    io.emit("lang", {lang: lang, pollId: pollId});
+  });
+
+
+
   socket.on("setWordAndGenerateGameInfo", function (d) { //pollId hostname?
     const { pollId, enteredword, hostName} = d;
-    console.log(d)
     data.updateWord(d.enteredword, d.pollId, d.hostName);
     const activePolls = Object.keys(data.polls).map(pollId => {
       const poll = data.polls[pollId]; 
@@ -44,26 +54,21 @@ function sockets(io, socket, data) {
   });
   
   socket.on("inActivateIfFull", function(pollId) {
-    console.log("inActivateIfFull körs i sockets.js", pollId)
     data.inActivateIfFull(pollId)
   });
 
 
   socket.on("removePollIdFromList", function(pollId) {
-    console.log("removePollIdFromList körs i sockets.js", pollId)
     data.addToInActivePolls(pollId)
   },);
 
   socket.on("reActivatePollId", function(pollId) {
-  console.log("reActivatePollId körs i sockets.js", pollId)
   const inActivePolls = data.reActivatePollId(pollId)
   io.emit("inActivePolls", inActivePolls)
   });
 
   socket.on("getInActivePolls", function(pollId) {
   const inActivePolls = data.getInActivePolls(pollId)
-  console.log("getInActivePolls körs i sockets.js", inActivePolls)
-
     io.emit("inActivePolls", inActivePolls)
   }) 
 
@@ -86,7 +91,6 @@ function sockets(io, socket, data) {
     
   });
   socket.on('leavePoll', function(d) {
-    console.log("reached leavePoll in sockets.js") 
     const { pollId, userName } = d;
     if (data.polls[pollId]) {
       data.leaveGame(pollId, userName);
@@ -134,7 +138,6 @@ function sockets(io, socket, data) {
   });
   socket.on('getLeaderboard', function(pollId) {
     let leaderboard = data.getLeaderboard(pollId);
-    console.log( "leaderboard", leaderboard)
     io.emit("leaderboard", leaderboard);
 
   });
