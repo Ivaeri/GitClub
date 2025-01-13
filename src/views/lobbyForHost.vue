@@ -168,6 +168,7 @@ methods: {
     transition: transform 0.2s ease-in-out;
  }
   .startGameButtonGray{
+    cursor: pointer;
     width: 10em;
     height: 6em;
     border-radius: 1em;

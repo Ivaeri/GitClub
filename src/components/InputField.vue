@@ -43,18 +43,18 @@ export default {
     
     <style scoped>
   .inputField {
-  background-color: pink;
-  color: black;
-  padding: 0.5em 1em; /* Justera padding för att kompensera för större text */
-  text-align: center;
-  display: inline-block;
-  font-size: 2rem; /* Ändra textstorleken här */
-  margin: 0.5em auto;
-  cursor: text;
-  height: auto; /* Justera höjden för att kompensera för större text */
-  width: 100%; /* Justera bredden om nödvändigt */
-  max-width: 7000em;
-  box-sizing: border-box;
+    background-color: pink;
+    color: black;
+    padding: 0.5em 1em; /* Justera padding för att kompensera för större text */
+    text-align: center;
+    display: inline-block;
+    font-size: 2rem; /* Ändra textstorleken här */
+    margin: 0.5em auto;
+    cursor: text;
+    height: auto; /* Justera höjden för att kompensera för större text */
+    width: 100%; /* Justera bredden om nödvändigt */
+    max-width: 7000em;
+    box-sizing: border-box;
   }
 
   @media (max-width: 768px) {

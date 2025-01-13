@@ -7,6 +7,7 @@
         <Logo :text="uiLabels.logo" class="logostyle"/>
       </div> 
     </div>
+    <h1 class="pageTitle">{{ uiLabels.createTitle }}</h1>
     <h2> {{ uiLabels.enterUsernameAndWord }}</h2>
     <div class="container">
       <div class="item">
@@ -138,32 +139,35 @@
   
   <style scoped>
   .homeButton{
-    margin-bottom: 10em;
+
   }
   .headerContainer {
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  padding: 1em; 
+
+}
+.pageTitle {
+  font-size: 4em;
+  font-weight: bold;
+  text-align: center;
+  color: #4a4a4a; 
+  margin-bottom: 0.5em; 
 }
   h2{
-    padding-left: 2em;
+    padding-left: em;
   }
   .container {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    margin: 2em 2em;
+  
     width: 100%;
   }
 
-  .logo {
-  font-size: 2em;
-  text-align: center;
-  margin: 0.5em auto; 
-  position: relative; 
-  margin-top: 1em;
-}
+  .logostyle{
+    font-size: 1.1em;
+    }
 
   .item {
     max-width: 40em;

@@ -176,14 +176,14 @@ export default {
 
 
 header h1{
-  font-size: 6em;
+  font-size: 4em;
   text-align: center;
-  margin-top: 0em;
+  margin-top: 0.5em;
   margin-bottom: 0em;
 }
 
 h2{
-  font-size: 3em;
+  font-size: 2em;
   margin-top: 0.5em;
   text-align: center;
   
@@ -293,6 +293,7 @@ h2{
   width: 3.2em;
   height: 2.3em;
   font-size: 1.8em;
+  
   background-color: #cf84a9;
   cursor: pointer;
   margin-left: 0.5em;

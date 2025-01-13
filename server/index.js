@@ -10,8 +10,6 @@ const io = new Server(httpServer, {
   }
 });
 
-// Read in the "class" to store all our data on the server side
-// If you need to change how data is handled, check the Data.js file!
 
 import { Data } from "./Data.js";
 
