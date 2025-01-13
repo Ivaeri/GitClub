@@ -118,7 +118,7 @@ methods: {
   <style scoped>
 
   .participantsLobby{
-    font-size: 1.5em;
+    font-size: 1em;
     padding: 0.1em;
     margin-left: 2em;
     margin-right: 1em;
@@ -164,13 +164,12 @@ methods: {
     transition: transform 0.2s ease-in-out;
  }
   .startGameButtonGray{
-    cursor: pointer;
     width: 10em;
     height: 6em;
     border-radius: 1em;
   }
   .lobbyHeader{
-    text-align: left;
+    text-align: center;
     font-size: 1.5em;
     padding: 0;
     margin: 0;
@@ -215,7 +214,7 @@ methods: {
       font-size: 0.8em;
       gap: 1em;
       padding: 1em 2em;
-      margin-left: 0;
+      margin-left: 1em;
     }
     .gridContainer{
       display: inline-table;
@@ -253,12 +252,11 @@ methods: {
     }
 
     .startGameButtonPink{
-      width: 80%;
-      margin-left: 3em;
+      width: 50vw;
+
     }
     .startGameButtonGray{
-      width: 80%;
-      margin-left: 3em;
+      width: 50vw;
     }
     .makeBlue{
       background-color: transparent;

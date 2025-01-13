@@ -468,6 +468,7 @@ socket.on( "index", (data) => {
   .failedLettersSpecView {
     position: relative;
     padding-left: 5em;
+    padding-bottom: 6em;
   }
 
   .failedLetters {
@@ -493,7 +494,6 @@ socket.on( "index", (data) => {
     justify-content: space-evenly;
     position: relative;
     top: 2em;
-    gap: 6em;
     transform: translateX(-20%);
   }
 
@@ -544,7 +544,7 @@ socket.on( "index", (data) => {
     }
 
     .specView {
-      transform: translateX(-10%) translateY(25%);
+      transform: translateX(-10%)
       
     }
     .guesspart{
@@ -575,7 +575,8 @@ socket.on( "index", (data) => {
 
     .hangMan {
       position: relative;
-      scale: 0.7;    
+      scale: 0.7;   
+      margin-right: 1em;
     }
 
     .keyboardHangman {
@@ -600,7 +601,7 @@ socket.on( "index", (data) => {
       margin-top: 9em;
       width: 85%;
       margin-bottom: 0;
-      bottom: 0;
+      bottom: 5em;
       position: relative;
       row-gap: 2em;
     }

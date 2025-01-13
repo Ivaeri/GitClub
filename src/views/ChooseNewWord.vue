@@ -107,7 +107,6 @@ export default {
           alert(validationError); 
           return;
         }
-        //this.generateId();
         socket.emit("reActivatePollId", this.pollId)
         this.startNewGame();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
@@ -167,7 +166,9 @@ export default {
     flex-direction: column;
   }
   .wordInput {
-    width: 10em;
+    width: 60vw;
+    height: 15vw;
+    font-size: 1em;
   }
 }
 </style>

@@ -45,6 +45,7 @@ const socket = io('http://localhost:3000');
     height: 4em;
     width: 4em;
     margin-left: 4em;
+    margin-top: 0.5em;
     padding: 0;
     cursor: pointer;
     display: inline-block;

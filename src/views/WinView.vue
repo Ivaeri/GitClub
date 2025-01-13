@@ -103,7 +103,7 @@ export default {
     text-align: center;
     justify-content: center; 
     align-items: center; 
-    font-size: 6.5em;
+    font-size: 6em;
     color: #e5aa34;
     text-shadow: 2px 2px 4px #6a4f18;
     word-break: break-all;
@@ -120,7 +120,7 @@ export default {
     width: 15em;
     height: 6em;
     box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
-    margin-top: 5em;
+    margin-top: 3em;
     margin-left: 1em;
 }
 
@@ -135,6 +135,7 @@ export default {
     .congrats{
         font-size: 3.5em;
         margin-left: 0.5em;
+        margin-top: 1em;
     }
     .restartButton{
         width: 10em;
@@ -150,6 +151,7 @@ export default {
     .congrats{
         font-size: 2.5em;
         margin-left: 0.5em;
+        margin-top: 1em;
     }
     .restartButton{
         width: 9em;
