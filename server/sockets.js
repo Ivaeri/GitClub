@@ -4,6 +4,17 @@ function sockets(io, socket, data) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
 
+  socket.on("setLang", function(d) {
+    data.setLang(d.pollId, d.lang);
+  });
+
+  socket.on("getLang", function(pollId) {
+    let lang = data.getLang(pollId);
+    io.emit("lang", {lang: lang, pollId: pollId});
+  });
+
+
+
   socket.on("setWordAndGenerateGameInfo", function (d) { //pollId hostname?
     const { pollId, enteredword, hostName} = d;
     console.log(d)

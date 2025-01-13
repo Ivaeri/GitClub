@@ -125,9 +125,20 @@ socket.on("amountWrongLetters", (data) => {
     
     console.log("isGameWon?", this.isGameWon);
   });  
+  socket.on("lang", (data) => {
+      if(data.pollId === this.pollId){
+        this.lang = data.lang;
+        localStorage.setItem("lang", this.lang);
+        console.log("lang updated to", this.lang);
+        socket.emit( "getUILabels", this.lang );
+
+      }
+    });
+
+  socket.emit("getLang", this.pollId);
 
     socket.emit("getIndex", this.pollId )
-    socket.emit( "getUILabels", this.lang );
+   // socket.emit( "getUILabels", this.lang );
     socket.emit("getParticipants", { pollId: this.pollId });
     socket.emit("getGuessedLetters",  this.pollId );
     socket.emit("getAmountWrongLetters", this.pollId );
