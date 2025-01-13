@@ -195,8 +195,8 @@ methods: {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 2em;
-    width: 4em;
+    height: 3em;
+    width: 7.5em;
     background-size: 1.8em 1.8em; 
     padding-left: 3em; 
     font-size: 1.2em; 
@@ -209,7 +209,7 @@ methods: {
 
   @media (max-width: 768px) {
     .player{
-      width: 3em;
+      width: 5.7em;
       height: 0.4em;
       background-size: 1.2em 1.2em;
       font-size: 0.8em;

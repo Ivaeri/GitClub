@@ -191,6 +191,7 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; 
     font-size: 1.3em;
+    margin-left: 1em;
 }
 
 .player {
@@ -231,8 +232,13 @@ h2 {
   margin-left: 4em;
 }
 
+
 .lettersGuessed {
   display: inline-block;
+}
+
+.lettersGuessed p {
+  font-size: 1.5em;
 }
 
 .guessedCorrectLetter{
@@ -328,6 +334,7 @@ h2 {
     flex-wrap: wrap;
     gap:30px;
     width: 100%;
+    margin-left: 3em;
   }
 
   .lettersGuessed {
@@ -349,7 +356,7 @@ h2 {
   }
   .skipPlayer{
     right: 1.5em;
-    top: calc(5%);
+    top: calc(17%);
     width: 15%;
   }
   .guess-counter {

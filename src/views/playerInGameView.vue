@@ -11,9 +11,9 @@
         <span v-else> _ </span>
     </span>
     <div class="inGame" v-if="!isGameWon">
-      <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="keyboardContainer">
+      <div v-if="this.participants[this.index] && userName == this.participants[this.index].name" class="playerActiveWrapper">
 
-        <div class="guessing-container">
+        <div class="failedWrapper">
           <GuessCounter :wrongGuesses="ammountWrongLetters" :maxGuesses="7" :labels="uiLabels" />
           <div class="failedLettersContainer">
             <h3>{{ uiLabels.wrongGuesses }}</h3>
@@ -24,7 +24,7 @@
             </div>
           </div> 
         </div>
-        <div class="guessingcontainer">
+        <div class="guessAndHangman">
           <div class="guesspart">
             <div class="letterBoxContainer">
               <div class="letterBox">
@@ -52,14 +52,15 @@
               {{ uiLabels.submit }}
             </button>
             </div>
+            <div class="keyboardHangman">
+              <HangPerson v-bind:wrongGuesses="ammountWrongLetters" /> 
+            </div>
           </div>
-          <div class="keyboardhangman">
-            <HangPerson v-bind:wrongGuesses="ammountWrongLetters" /> 
-          </div>
-      </div> <!-- Här stängs guessingcontainer-diven-->
+      </div> <!-- Här stängs guessAndHangman-diven-->
 
       <div v-else  class="specView"> <!-- Här börjar vyn för dens tur det inte är-->
         <div class="failedLettersSpecView">
+          <GuessCounter :wrongGuesses="ammountWrongLetters" :maxGuesses="7" :labels="uiLabels" />
           <h3>
             {{ uiLabels.wrongGuesses }}
           </h3>
@@ -75,7 +76,7 @@
       </div>
     </div> <!-- Här Stängs inGame-diven-->
 
-    <div class="participants-container">
+    <div class="participantsContainer">
       <div v-for="participant in this.participants" :key="participant.name" class="player">
         <div class="name-wrapper">
           <div v-if="participant.name == this.participants[this.index].name">
@@ -127,7 +128,7 @@ export default {
       trueWord: "",
       current_letter: "",
       isGameWon: false,
-      lang: localStorage.getItem("lang") || "en",
+      lang: "en",
       ammountWrongLetters: 0,
       gameIsLostFlag: false,
       isLeaving: false
@@ -178,7 +179,7 @@ socket.on( "index", (data) => {
       if(data.pollId === this.pollId){
         this.lang = data.lang;
         localStorage.setItem("lang", this.lang);
-        socket.emit( "getUILabels", this.lang );
+        socket.emit( "getUILabels", data.lang );
 
       }
     });
@@ -208,6 +209,7 @@ socket.on( "index", (data) => {
   unmounted() {
   socket.off("wonOrNot");
   socket.off("amountWrongLetters");
+  socket.off("lang");
 },
 
 
@@ -334,33 +336,28 @@ socket.on( "index", (data) => {
 <style scoped>
 
 
-
-.participants-container {
-  color: black;
+.participantsContainer {
   padding: 1em;
-  padding-top: 0;
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
   width: 100%; 
   font-size: 1.5em;
   margin-top: 3em;
-  margin-left: 1em;
+  margin-left: calc(15px + 1em);
 
 }
 
 .player {
-    margin-right: 0.1em; 
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 2em;
-    width: 3.5em;
+    height: 2.5em;
+    width: 7.5em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
-    font-size: 1.2em; 
-    margin-bottom: 0.5em; 
+    font-size: 1.2em;  
     display: flex;
     align-items: center;
     border-radius: 5px; 
@@ -372,12 +369,6 @@ socket.on( "index", (data) => {
   }
 
 
-.keyboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-  }
   
   .row {
     display: flex;
@@ -402,9 +393,6 @@ socket.on( "index", (data) => {
     background-color:#34587e;
   }
 
-  hr {
-    width: 100%;
-  }
 
   .wrongKey {
   background-color: rgb(188, 0, 0)
@@ -421,37 +409,34 @@ socket.on( "index", (data) => {
   background-color: rgb(117, 0, 0)
 }
 
-  .keyboardContainer {
+  .playerActiveWrapper{
     display: flex;
     flex-direction: row; 
-    justify-content: space-evenly; 
-    align-items: center; 
+    justify-content: center;
+    gap: 5%;
+    align-items: center;
   }
 
-  .keyboardhangman {
+  .keyboardHangman {
 
     position: relative;
     top: 2em;
     scale: 0.8;
   }
 
-  .guessingcontainer {
+  .guessAndHangman {
     display: flex; 
-    flex-direction: column;
-    justify-content: center; 
     align-items: center; 
     position: relative;
     left: 1.5em;
+    gap: 5%;
     
     }
 
   .letterBox {
     height: 1.8em;
     width: 1.5em;
-    border: solid black;
     border: 0.2em solid black;
-    justify-content: center; 
-    align-items: center; 
   }
 
   .submitButton {
@@ -477,7 +462,6 @@ socket.on( "index", (data) => {
     align-items: center;
     margin-left: 1.5em;
     position: relative;
-    left: 0em;
     top: -4em;
   }
 
@@ -489,13 +473,8 @@ socket.on( "index", (data) => {
   .failedLetters {
     top: 2em;
     width: 5em;
-    color: rgb(188, 0, 0)
+    color: red
   }
-  .inGame {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    }
 
   .letterBoxContainer {
     display: flex;
@@ -523,13 +502,13 @@ socket.on( "index", (data) => {
 
   .speechBubble {
     position: absolute;
-    top: -2em; /* Justera detta värde för att placera bubblan ovanför namnet */
+    top: -2.2em; /* Justera detta värde för att placera bubblan ovanför namnet */
     left: 50%;
     transform: translateY(-15%) translateX(-100%);
     width: 2em; /* Justera bredden efter behov */
   }
 
-  .guess-counter {
+  .guess-counter{
     margin-left: 1em;
     margin-bottom: 3em;
 }
@@ -538,7 +517,8 @@ socket.on( "index", (data) => {
 
 
 
-  @media (max-width: 700px) {
+
+  @media (max-width: 860px) {
     .hangMan {
       scale: 0.8;
     }
@@ -546,9 +526,10 @@ socket.on( "index", (data) => {
       font-size: 1em;
     }
 
-    .participants-container {
+    .participantsContainer {
       gap: 0.5em;
-      position: relative;
+      position: absolute;
+      bottom: 0;
       padding-left: 2.3em;
       width: 95%;
       font-size: 1em;
@@ -556,20 +537,37 @@ socket.on( "index", (data) => {
       
     }
 
-    .guessingcontainer {
+    .guessAndHangman {
       scale: 0.7;  
+      flex-direction: column;
+      padding-right: 9em;
+      width: 30vw;
     }
 
     .specView {
       transform: translateX(-10%) translateY(25%);
       
     }
+    .guesspart{
+      order: 2;
+    }
+    .keyboardHangman {
+
+      order: 1;
+    }
+    .playerActiveWrapper{
+      height: 25em;
+    }
+
+    .failedWrapper{
+      padding-bottom: 10em;
+    }
 
   }
 
   
 
-  @media (max-width: 431px) {
+  @media (max-width: 440px) {
     
     .player{
       font-size: 0.9em;
@@ -577,32 +575,44 @@ socket.on( "index", (data) => {
 
     .hangMan {
       position: relative;
+      scale: 0.7;    
+    }
+
+    .keyboardHangman {
+      scale: 0.8;
+
+    }
+
+    .guessAndHangman {
       scale: 0.7;
-      transform: translateY(-25%) translateX(-15%);    
+      display: flex;
+      z-index: 1000;
     }
 
-    .keyboardhangman {
-      scale: 0.5;
-      transform: translateX(calc(1em - 310%)) translateY(calc(1em - 80%));
-    }
-
-    .guessingcontainer {
-      scale: 0.5;
-      transform: translateX(calc(1em - 54%)) translateY(calc(1em + 30%));
-    }
-
-    .participants-container {
+    .participantsContainer {
       
       padding-left: 2.3em;
       margin-top: 0;
       width: 85%;
-      transform: translateY(150%);
       
     }
+
+    .failedWrapper{
+      font-size: 0.7em;
+      margin-left: 1.3em;
+      margin-bottom: 2em;
+      z-index: 1;
+    }
+
 
   .homebutton {
     margin-left: -2em;
     margin-top: 0.5em;
+  }
+
+  .guesspart{
+    padding-right: 4em;
+    z-index: 1000;
   }
 }
 

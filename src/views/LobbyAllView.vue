@@ -1,16 +1,13 @@
 <template>
     <div>
       <Logo :text="uiLabels.logo" class="logoStyle"/>
-      <h1>
-        {{ pollId.hostName }}{{ uiLabels.idButton }}
-      </h1>
       <div class="homebutton">
         <HomeButton :text="uiLabels.goHome"/> 
       </div>
     </div>
       
     <div>
-      <div>
+      <div class="welcomePlayer">
         {{ uiLabels.welcome }} {{ this.uiLabels.id }}{{this.pollId}} {{ userName }}!
       </div>
       <div>
@@ -85,13 +82,17 @@
   </script>
   <style scoped>
  
+  .welcomePlayer {
+    margin-top: 2em;
+  }
+
   .player{
     background-image: url('https://www.svgrepo.com/show/403055/bust-in-silhouette.svg');
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
     height: 3em;
-    width: 5em;
+    width: 7.5em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
     font-size: 2em; 
