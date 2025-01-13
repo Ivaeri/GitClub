@@ -101,7 +101,7 @@ export default {
     text-align: center;
     justify-content: center; 
     align-items: center; 
-    font-size: 7em;
+    font-size: 6.5em;
     color: pink;
     text-shadow: 2px 2px 4px #000000;
     word-break: break-all;
@@ -131,7 +131,7 @@ export default {
 
 @media (max-width: 740px)  {
     .congrats{
-        font-size: 4em;
+        font-size: 3.5em;
         margin-left: 0.5em;
     }
     .restartButton{
