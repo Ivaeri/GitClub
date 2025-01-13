@@ -57,5 +57,6 @@
 	"correctWord": "The correct word was: ",
 	"reachedMaxPlayers": "Max limit on number of players reached",
 	"waitForNewWord": "Hold your horses! The host is choosing a new word...",
-	"createTitle": "Create game"
+	"createTitle": "Create game",
+	"nameTooLong": "the name can be a maximum of twelve characters"
 }

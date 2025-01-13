@@ -337,6 +337,26 @@ h2 {
     margin-left: 3em;
   }
 
+  .participants-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      grid-template-rows: repeat(2, auto); 
+      gap: 1em; 
+      justify-content: center; 
+      align-items: center; 
+      padding-left: 2.3em;
+      margin-top: 20em;
+      width: 85%;
+      margin-bottom: 0;
+      bottom: 0;
+      position: relative;
+      row-gap: 2em;
+    }
+
+    .player{
+      width: 6em;
+    }
+
   .lettersGuessed {
     font-size: 0.8em;
   }

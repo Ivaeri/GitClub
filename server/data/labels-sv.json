@@ -59,5 +59,6 @@
 	"guessesRemaining": "Felgissningar kvar",
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
-	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord..."
+	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord...",
+	"nameTooLong": "namnet får max vara 12 tecken långt"
 }
