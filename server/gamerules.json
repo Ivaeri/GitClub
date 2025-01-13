@@ -8,7 +8,7 @@
         "Spelet är över när ni antingen har gissat hela ordet eller ni gissat fel 7 gånger.",
         "Om ni kommer på ordet så får alla 1 poäng, och den som gissade sista bokstaven får en extra poäng.",
         "Om häng-personen är komplett så får spelledaren 2 poäng.",
-        "Man kan max vara tre spelare utöver spelledaren."
+        "Man kan max vara fyra spelare utöver spelledaren."
 
 ],
 
@@ -21,6 +21,6 @@
     "The game is over when you either guess the entire word or you have guessed incorrectly 7 times.",
     "If you guess the word, everyone gets 1 point, and the person who guessed the last letter gets an extra point.",
     "If the Hang-Person is complete, the gameleader gets 2 points.",
-    "There can be a maximum of three players in addition to the gameleader."
+    "There can be a maximum of four players in addition to the gameleader."
 ]
 }

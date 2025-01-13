@@ -151,11 +151,8 @@
     padding-left: 2em;
   }
   .container {
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center; 
     margin: 2em 2em;
     width: 100%;
@@ -166,32 +163,21 @@
   text-align: center;
   margin: 0.5em auto; 
   position: relative; 
-  z-index: 1;
   margin-top: 1em;
 }
 
   .item {
-    display: flex;
-    flex: 1 1 100%; 
     max-width: 40em;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     }
 
   .inputField {
-  width: 100%;
-  max-width: 20em;
-  padding: 0.5em;
   margin-bottom: 1em;
-  font-size: 2em;
 }
   .item button{
   width: 100%;
   max-width: 10em;
   padding: 0.5em;
-  font-size: 1em;
+  font-size: 1.3em;
   background-color: #cf84a9;
   color: white;
   border: none;
