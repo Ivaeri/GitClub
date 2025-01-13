@@ -55,9 +55,8 @@
 	"logo": "HANG PERSON",
 	"playAgain": "Play again?",
 	"leaderBoard": "Leaderboard:",
-	"correctWord": "The correct word was: ",
-	"guessesRemaining": "Guesses Remaining",
-	"enterUsernameAndWord": "Please enter your username and the word you want to use"
+	"guessesRemaining": "Remaining lives",
+	"enterUsernameAndWord": "Please enter your username and the word you want to use",
 	"correctWord": "The correct word was: ",
 	"reachedMaxPlayers": "Max limit on number of players reached",
 	"waitForNewWord": "Hold your horses! The host is choosing a new word..."
