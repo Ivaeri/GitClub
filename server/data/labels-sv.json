@@ -56,7 +56,11 @@
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
 	"correctWord": "Det korrekta ordet var: ",
+<<<<<<< HEAD
+	"guessesRemaining": "Liv kvar",
+=======
 	"guessesRemaining": "Återstående gissningar",
+>>>>>>> 5399ce42e7831f95d93d8b99edf8acb40a2cdd4b
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord..."
