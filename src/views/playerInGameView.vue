@@ -438,9 +438,7 @@ socket.on( "index", (data) => {
   }
 
   .keyboardhangman {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     position: relative;
     top: 2em;
     scale: 0.8;
@@ -580,23 +578,21 @@ socket.on( "index", (data) => {
 
   
 
-  @media (max-width: 420px) {
+  @media (max-width: 431px) {
+    
     .player{
       font-size: 0.9em;
     }
+
     .hangMan {
       position: relative;
       scale: 0.7;
-      transform: translateY(-25%) translateX(-15%);
-  
-      
+      transform: translateY(-25%) translateX(-15%);    
     }
 
     .keyboardhangman {
-      
       scale: 0.5;
       transform: translateX(calc(1em - 310%)) translateY(calc(1em - 80%));
-
     }
 
     .guessingcontainer {
