@@ -132,7 +132,7 @@ header {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 2em;
   transition: transform 0.3s ease;
   width: 20vw;
   height: 13vw;

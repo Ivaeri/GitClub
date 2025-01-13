@@ -6,7 +6,7 @@
     <HomeButton/>
     <div class="animate__animated animate__zoomInDown gameover">
         <div class="gameOverText">
-            {{ uiLabels.gameOver }}!
+            {{ uiLabels.gameOver }}
         </div>
         <p> {{ uiLabels.correctWord }}{{ this.word.word }}</p>
         <HangPerson class="hangPerson" v-bind:wrongGuesses="ammountWrongLetters" />

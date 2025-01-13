@@ -44,7 +44,7 @@ export default {
     font-family: 'Sue Ellen Francisco', cursive;
     text-transform: uppercase; 
     letter-spacing: 0.1em;
-    color: rgb(4, 16, 131); 
+    color: rgb(1, 1, 114); 
     position: absolute; 
     top: 5%;
     left: 50%;
