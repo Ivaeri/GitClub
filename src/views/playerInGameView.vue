@@ -341,7 +341,7 @@ socket.on( "index", (data) => {
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-  width: 100%; 
+  width: 90vw; 
   font-size: 1.5em;
   margin-top: 3em;
   margin-left: calc(15px + 1em);
@@ -467,13 +467,12 @@ socket.on( "index", (data) => {
 
   .failedLettersSpecView {
     position: relative;
-    transform: translateX(calc(1em + 100%));
+    padding-left: 5em;
   }
 
   .failedLetters {
-    top: 2em;
-    width: 5em;
-    color: red
+    color: red;
+    
   }
 
   .letterBoxContainer {
@@ -518,7 +517,7 @@ socket.on( "index", (data) => {
 
 
 
-  @media (max-width: 860px) {
+  @media (max-width: 1080px) {
     .hangMan {
       scale: 0.8;
     }
