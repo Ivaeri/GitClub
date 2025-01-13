@@ -8,7 +8,7 @@
         "Om ni gissar fel, ritas en del av häng-personen.",
         "Spelet är över när ni antingen har gissat hela ordet eller ni gissat fel 7 gånger.",
         "Om ni kommer på ordet så får alla 1 poäng, och den som gissade sista bokstaven får en extra poäng.",
-        "Om häng-personen är komplett så får spelledaren 2 poäng."
+        "Om den hängda personen hinner bli komplett så får spelledaren 2 poäng."
 
 ],
 
@@ -21,6 +21,6 @@
     "If you guess incorrectly, a part of the hang-person is drawn.",
     "The game is over when you either guess the entire word or you have guessed incorrectly 7 times.",
     "If you guess the word, everyone gets 1 point, and the person who guessed the last letter gets an extra point.",
-    "If the Hang-Person is complete, the gameleader gets 2 points."
+    "If the hanging person is completed, the gameleader gets 2 points."
 ]
 }
