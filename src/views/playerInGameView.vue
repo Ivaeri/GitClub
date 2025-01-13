@@ -128,7 +128,7 @@ export default {
       trueWord: "",
       current_letter: "",
       isGameWon: false,
-      lang: localStorage.getItem("lang") || "en",
+      lang: "en",
       ammountWrongLetters: 0,
       gameIsLostFlag: false,
       isLeaving: false
@@ -179,7 +179,7 @@ socket.on( "index", (data) => {
       if(data.pollId === this.pollId){
         this.lang = data.lang;
         localStorage.setItem("lang", this.lang);
-        socket.emit( "getUILabels", this.lang );
+        socket.emit( "getUILabels", data.lang );
 
       }
     });

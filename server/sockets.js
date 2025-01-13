@@ -165,7 +165,7 @@ function sockets(io, socket, data) {
   })
 
   socket.on("StartNewGame", function(d) {
-    data.startNewGame(d.pollId, d.hostName, d.enteredword);
+    data.startNewGame(d.pollId, d.hostName, d.enteredword, d.lang);
   })
 
 }

@@ -234,7 +234,7 @@ Data.prototype.setPollId = function (pollId) {
   this.polls[pollId].pollId = pollId;
 };
 
-Data.prototype.startNewGame = function (pollId, hostname, word) {
+Data.prototype.startNewGame = function (pollId, hostname, word, lang) {
 
  if (hostname === this.polls[pollId].hostName.name) {
   hostname = this.polls[pollId].hostName
@@ -252,7 +252,8 @@ Data.prototype.startNewGame = function (pollId, hostname, word) {
       guessedLetters: [],
       isGameWon: false,
       amountWrongLetters: 0,
-      NailInCoffin: hostname
+      NailInCoffin: hostname,
+      lang: lang
     };
 
   }

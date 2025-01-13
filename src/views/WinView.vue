@@ -5,7 +5,9 @@
         </div>
         <Logo :text="uiLabels.logo" class="logostyle"/>
         <div class="animate__animated animate__zoomInDown congrats"> 
-            {{ uiLabels.win1 }} {{ uiLabels.win2 }}
+            {{ uiLabels.win1 }} 
+            <br>
+            {{ uiLabels.win2 }}
         </div>
     </header>
     <button class="restartButton" v-on:click="goToGameLobby">
@@ -146,7 +148,7 @@ export default {
 }
 @media (max-width: 414px)  {
     .congrats{
-        font-size: 3em;
+        font-size: 2.5em;
         margin-left: 0.5em;
     }
     .restartButton{

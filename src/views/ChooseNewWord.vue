@@ -114,7 +114,7 @@ export default {
       },
 
       startNewGame(){
-        socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName: this.hostName,});
+        socket.emit("StartNewGame", {pollId: this.pollId, enteredword: this.enteredword.toUpperCase(), hostName: this.hostName, lang: this.lang});
         socket.emit("newGameHasStarted", this.pollId);
       }
   }}

@@ -191,6 +191,7 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
     width: 100%; 
     font-size: 1.3em;
+    margin-left: 1em;
 }
 
 .player {
