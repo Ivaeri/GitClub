@@ -43,7 +43,7 @@
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
-	"wrongGuesses": "Felgissningar:",
+	"wrongGuesses": "Felaktiga bokstäver:",
 	"win1": "Grattis,",
 	"win2": "du vann! 🎉",
 	"newHost": "Grattis, du är ny spelledare!",
@@ -56,7 +56,7 @@
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
 	"correctWord": "Det korrekta ordet var: ",
-	"guessesRemaining": "Liv kvar",
+	"guessesRemaining": "Felgissningar kvar",
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord..."
