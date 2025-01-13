@@ -353,8 +353,8 @@ socket.on( "index", (data) => {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 2em;
-    width: 3.5em;
+    height: 2.5em;
+    width: 7.5em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
     font-size: 1.2em;  
@@ -506,7 +506,7 @@ socket.on( "index", (data) => {
 
   .speechBubble {
     position: absolute;
-    top: -2em; /* Justera detta värde för att placera bubblan ovanför namnet */
+    top: -2.2em; /* Justera detta värde för att placera bubblan ovanför namnet */
     left: 50%;
     transform: translateY(-15%) translateX(-100%);
     width: 2em; /* Justera bredden efter behov */
