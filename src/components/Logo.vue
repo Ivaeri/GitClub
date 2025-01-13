@@ -44,7 +44,6 @@ export default {
     font-family: 'Sue Ellen Francisco', cursive;
     text-transform: uppercase; 
     letter-spacing: 0.1em;
-    font-size: 1.5em;
     color: rgb(4, 16, 131); 
     position: absolute; 
     top: 5%;
@@ -60,6 +59,14 @@ export default {
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 873px) {
+
+    .logo.is-startpage {
+        font-size: 4em; 
+    }
+    
 }
 
 @media (max-width: 768px) {

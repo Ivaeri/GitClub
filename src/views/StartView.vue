@@ -112,26 +112,16 @@ header {
 .main-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-height: 70vh; 
   margin-top: 3.5em;
 }
 
 .create-join {
   display: flex;
-  flex-direction: row;
   gap: 2em;
-  justify-content: center; 
-  align-items: center; 
-  margin-top: 2em; 
   background-color: transparent;
-  color: white;
-  border: none;
-  border-radius: 10px;
   transition: background-color 0.3s ease;
   margin: auto;
-  text-align: left;
   width: fit-content;
   margin-bottom: 10em;
 }
@@ -142,7 +132,6 @@ header {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  gap: 7em;
   font-size: 1em;
   transition: transform 0.3s ease;
   width: 20vw;
@@ -157,14 +146,9 @@ header {
 }
 
 .languagecontainer {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
   position: absolute;
-  width: 15em;
-  height: 10em;
   margin-top: 10px;
-  right: 0.1em;
+  right: 5%;
   top: 1em;
 }
 
@@ -268,7 +252,6 @@ header {
   }
 
   .gameRules button {
-    font-size: 0.7em;
     width: 50%
   }
 
@@ -278,26 +261,19 @@ header {
 @media screen and (max-width: 630px) {
   .create-join {
     flex-direction: column;
-    gap: 2em;
   }
 
   .create-join button {
     width: 35vw;
     height: 17vw;
-  }
-
-  .switchLanguageDiv{
-    display: none;
-    width: 0;
-    height: 0;
+    margin-bottom: 1em;
   }
 
   .languagecontainer button {
     width: 17vw;
     height: 8vw;
-    grid-column: 2;
     border-radius: 0.32em;
-    margin-right: 0.2em;
+    margin-left: 3em;
   }
 
   .gameRules {
@@ -320,9 +296,7 @@ header {
     margin-top: 1em;
     margin-left: 0;
   }
-  .main-content{
-    margin-top: 7em;
-  }
+
   .gameRules div {
     margin-top: 0.5em;
     width: 12em;
