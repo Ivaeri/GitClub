@@ -107,7 +107,6 @@ export default {
           alert(validationError); 
           return;
         }
-        //this.generateId();
         socket.emit("reActivatePollId", this.pollId)
         this.startNewGame();
         this.$router.push('/hostLobby/' + this.pollId + '/' + this.enteredword.toUpperCase()+ '/' + this.hostName);
@@ -138,7 +137,7 @@ export default {
 }
 
 .sendWordButton:hover {
- background-color: #a02666;
+ background-color: #975f7b;
  transform: rotate(1deg) scale(1.1);
  transition: transform 0.2s ease-in-out;
  }
@@ -167,7 +166,9 @@ export default {
     flex-direction: column;
   }
   .wordInput {
-    width: 10em;
+    width: 60vw;
+    height: 15vw;
+    font-size: 1em;
   }
 }
 </style>

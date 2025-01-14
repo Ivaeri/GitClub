@@ -118,7 +118,7 @@ methods: {
   <style scoped>
 
   .participantsLobby{
-    font-size: 1.5em;
+    font-size: 1em;
     padding: 0.1em;
     margin-left: 2em;
     margin-right: 1em;
@@ -128,7 +128,7 @@ methods: {
     font-size: 1.34em;
     padding: 10px;
     border-radius: 0.5em;
-    background-color: lightblue;
+    background-color: #D4C2AD;
     margin-left: 2em;
     margin-right: 1em;
   }
@@ -159,18 +159,17 @@ methods: {
     margin-top: 2em;
   }
   .startGameButtonPink:hover{
-    background-color: #a02666;
+    background-color: #975f7b;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
  }
   .startGameButtonGray{
-    cursor: pointer;
     width: 10em;
     height: 6em;
     border-radius: 1em;
   }
   .lobbyHeader{
-    text-align: left;
+    text-align: center;
     font-size: 1.5em;
     padding: 0;
     margin: 0;
@@ -195,8 +194,8 @@ methods: {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 2em;
-    width: 4em;
+    height: 3em;
+    width: 7.5em;
     background-size: 1.8em 1.8em; 
     padding-left: 3em; 
     font-size: 1.2em; 
@@ -204,18 +203,18 @@ methods: {
     display: flex;
     align-items: center;
     border-radius: 0.5em; 
-    background-color: pink; 
+    background-color: #cca5bc; 
   }
 
   @media (max-width: 768px) {
     .player{
-      width: 3em;
+      width: 5.7em;
       height: 0.4em;
       background-size: 1.2em 1.2em;
       font-size: 0.8em;
       gap: 1em;
       padding: 1em 2em;
-      margin-left: 0;
+      margin-left: 1em;
     }
     .gridContainer{
       display: inline-table;
@@ -253,12 +252,11 @@ methods: {
     }
 
     .startGameButtonPink{
-      width: 80%;
-      margin-left: 3em;
+      width: 50vw;
+
     }
     .startGameButtonGray{
-      width: 80%;
-      margin-left: 3em;
+      width: 50vw;
     }
     .makeBlue{
       background-color: transparent;

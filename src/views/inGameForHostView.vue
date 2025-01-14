@@ -209,7 +209,7 @@ h2 {
   display: flex;
   align-items: center;
   border-radius: 5px; 
-  background-color: pink;
+  background-color: #cca5bc;
 }
 
 .speechBubble {
@@ -223,7 +223,7 @@ h2 {
   }
 
 .greenLetter {
-  color: green;
+  color: rgb(49, 142, 49);
 }
 
 .wordBox {
@@ -243,13 +243,13 @@ h2 {
 
 .guessedCorrectLetter{
   font-size: 1em;
-  color: green;
+  color: rgb(49, 142, 49);
   padding: 0.3em;
 }
 
 .guessedWrongLetter{
   font-size: 1em;
-  color: red;
+  color: rgb(188, 0, 0);
   padding: 0.3em;
 
 }
@@ -286,7 +286,7 @@ h2 {
 }
 
 .skipPlayerButton:hover {
-  background-color: #a02666;
+  background-color: #975f7b;
 }
 .homeButton{
   position: relative;
@@ -330,12 +330,24 @@ h2 {
   }
 
   .participants-container {
-    font-size: 0.6em;
-    flex-wrap: wrap;
-    gap:30px;
-    width: 100%;
-    margin-left: 3em;
-  }
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      grid-template-rows: repeat(2, auto); 
+      gap: 1em; 
+      padding-left: 2.3em;
+      margin-top: 25em;
+      width: 85%;
+      margin-bottom: 0;
+      bottom: 0;
+      position: relative;
+      row-gap: 2em;
+      font-size: 0.6em;
+      margin-left: 3em;
+    }
+
+    .player{
+      width: 6em;
+    }
 
   .lettersGuessed {
     font-size: 0.8em;
@@ -350,12 +362,12 @@ h2 {
     right: 33%;
   }
   .hangPerson{
-    top: calc(40%);
-    left: 30%;
+    top: 30%;
+    left: 25%;
     scale: 0.6;
   }
   .skipPlayer{
-    right: 1.5em;
+    right: 4em;
     top: calc(17%);
     width: 15%;
   }

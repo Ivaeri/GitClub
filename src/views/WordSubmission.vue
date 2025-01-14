@@ -7,7 +7,7 @@
         <Logo :text="uiLabels.logo" class="logostyle"/>
       </div> 
     </div>
-    <h1 class="pageTitle">{{ uiLabels.createTitle }}</h1>
+    <h1 class="pageTitle">{{ uiLabels.createGame }}</h1>
     <h2> {{ uiLabels.enterUsernameAndWord }}</h2>
     <div class="container">
       <div class="item">
@@ -114,6 +114,10 @@
           alert(this.uiLabels.fillName );
           return;
         }
+          if (this.hostName.length > 12) {
+          alert(this.uiLabels.nameTooLong); 
+          return;
+        }
         const validationError = await this.validateWord(this.enteredword, this.lang);
         if (validationError) {
           alert(validationError); 
@@ -147,7 +151,6 @@
   font-size: 4em;
   font-weight: bold;
   text-align: center;
-  color: #4a4a4a; 
   margin-bottom: 0.5em; 
 }
   h2{
@@ -186,7 +189,7 @@
     
   }
   .item button:hover{
-    background-color: #a02666;
+    background-color: #975f7b;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }

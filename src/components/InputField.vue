@@ -43,7 +43,7 @@ export default {
     
     <style scoped>
   .inputField {
-    background-color: pink;
+    background-color: #D4C2AD;
     color: black;
     padding: 0.5em 1em; /* Justera padding för att kompensera för större text */
     text-align: center;

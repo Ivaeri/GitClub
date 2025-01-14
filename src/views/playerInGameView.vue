@@ -341,7 +341,7 @@ socket.on( "index", (data) => {
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
-  width: 100%; 
+  width: 90vw; 
   font-size: 1.5em;
   margin-top: 3em;
   margin-left: calc(15px + 1em);
@@ -353,15 +353,15 @@ socket.on( "index", (data) => {
     background-repeat: no-repeat;
     background-position: left center;
     background-position-x: 0.5em;
-    height: 2em;
-    width: 3.5em;
+    height: 2.5em;
+    width: 7.5em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
     font-size: 1.2em;  
     display: flex;
     align-items: center;
     border-radius: 5px; 
-    background-color: pink; 
+    background-color: #cca5bc; 
   }
 
   .name-wrapper {
@@ -369,10 +369,6 @@ socket.on( "index", (data) => {
   }
 
 
-.keyboard {
-    color: blue;
-    
-  }
   
   .row {
     display: flex;
@@ -385,7 +381,7 @@ socket.on( "index", (data) => {
     font-size: 1em;
     cursor: pointer;
     color: white;
-    background-color: #007bff;
+    background-color: #489bbe;
     width: 2em;
     height: 2.5em;
     align-items: center;
@@ -394,23 +390,23 @@ socket.on( "index", (data) => {
   }
 
   .key:hover {
-    background-color:#0056b3;
+    background-color:#34587e;
   }
 
 
   .wrongKey {
-  background-color: red
+  background-color: rgb(188, 0, 0)
 }
 
 .correctKey {
-  background-color: green
+  background-color: rgb(69, 192, 69)
 }
 
 .correctKey:hover {
-  background-color: rgb(21, 69, 21);
+  background-color: rgb(41, 110, 41);
 }
 .wrongKey:hover {
-  background-color: rgb(143, 27, 27)
+  background-color: rgb(117, 0, 0)
 }
 
   .playerActiveWrapper{
@@ -455,7 +451,7 @@ socket.on( "index", (data) => {
   }
 
   .submitButton:hover {
-    background-color: #a02666;
+    background-color: #975f7b;
     transform: rotate(1deg) scale(1.1);
     transition: transform 0.2s ease-in-out;
   }
@@ -471,13 +467,13 @@ socket.on( "index", (data) => {
 
   .failedLettersSpecView {
     position: relative;
-    transform: translateX(calc(1em + 100%));
+    padding-left: 5em;
+    padding-bottom: 6em;
   }
 
   .failedLetters {
-    top: 2em;
-    width: 5em;
-    color: red
+    color: red;
+    
   }
 
   .letterBoxContainer {
@@ -489,7 +485,7 @@ socket.on( "index", (data) => {
   }
 
   .trueWord {
-    color: rgb(42, 205, 20);
+    color: rgb(49, 142, 49);
     font-size: 2em;
   }
 
@@ -498,7 +494,6 @@ socket.on( "index", (data) => {
     justify-content: space-evenly;
     position: relative;
     top: 2em;
-    gap: 6em;
     transform: translateX(-20%);
   }
 
@@ -506,7 +501,7 @@ socket.on( "index", (data) => {
 
   .speechBubble {
     position: absolute;
-    top: -2em; /* Justera detta värde för att placera bubblan ovanför namnet */
+    top: -2.2em; /* Justera detta värde för att placera bubblan ovanför namnet */
     left: 50%;
     transform: translateY(-15%) translateX(-100%);
     width: 2em; /* Justera bredden efter behov */
@@ -522,7 +517,7 @@ socket.on( "index", (data) => {
 
 
 
-  @media (max-width: 860px) {
+  @media (max-width: 1080px) {
     .hangMan {
       scale: 0.8;
     }
@@ -549,7 +544,7 @@ socket.on( "index", (data) => {
     }
 
     .specView {
-      transform: translateX(-10%) translateY(25%);
+      transform: translateX(-10%)
       
     }
     .guesspart{
@@ -575,11 +570,13 @@ socket.on( "index", (data) => {
     
     .player{
       font-size: 0.9em;
+      height: 3em; 
     }
 
     .hangMan {
       position: relative;
-      scale: 0.7;    
+      scale: 0.7;   
+      margin-right: 1em;
     }
 
     .keyboardHangman {
@@ -594,12 +591,21 @@ socket.on( "index", (data) => {
     }
 
     .participantsContainer {
-      
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      grid-template-rows: repeat(2, auto); 
+      gap: 1em; 
+      justify-content: center; 
+      align-items: center; 
       padding-left: 2.3em;
-      margin-top: 0;
+      margin-top: 9em;
       width: 85%;
-      
+      margin-bottom: 0;
+      bottom: 5em;
+      position: relative;
+      row-gap: 2em;
     }
+
 
     .failedWrapper{
       font-size: 0.7em;

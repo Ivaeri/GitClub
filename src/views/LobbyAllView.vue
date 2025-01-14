@@ -92,7 +92,7 @@
     background-position: left center;
     background-position-x: 0.5em;
     height: 3em;
-    width: 5em;
+    width: 7.5em;
     background-size: 2em 2em; 
     padding-left: 2.5em; 
     font-size: 2em; 
@@ -100,7 +100,7 @@
     display: flex;
     align-items: center;
     border-radius: 5px; 
-    background-color: pink; 
+    background-color: #cca5bc; 
   }
 
   .participants-list{
