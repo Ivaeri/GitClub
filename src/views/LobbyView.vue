@@ -136,6 +136,7 @@ export default {
       alert(this.uiLabels.fillNumber);
     } else {
       this.chosenPollId = this.newPollId; 
+      this.anyIdIsClicked = true;
     }
   },
 
