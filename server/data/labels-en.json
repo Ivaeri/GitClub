@@ -58,5 +58,7 @@
 	"reachedMaxPlayers": "Max limit on number of players reached",
 	"waitForNewWord": "Hold your horses! The host is choosing a new word...",
 	"createTitle": "Create game",
-	"nameTooLong": "the name can be a maximum of twelve characters"
+	"nameTooLong": "the name can be a maximum of twelve characters",
+	"wait1": "Waiting for ",
+	"wait2": " to choose a new word..."
 }

@@ -60,5 +60,7 @@
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord...",
-	"nameTooLong": "namnet får max vara 12 tecken långt"
+	"nameTooLong": "namnet får max vara 12 tecken långt",
+	"wait1": "Väntar på att ",
+	"wait2": "väljer ett nytt ord..."
 }

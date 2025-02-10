@@ -10,9 +10,12 @@
         </div>
         <p> {{ uiLabels.correctWord }}{{ this.word.word }}</p>
         <HangPerson class="hangPerson" v-bind:wrongGuesses="ammountWrongLetters" />
-        <button class="restartButton" v-on:click="goToGameLobby">
+        <button v-if="this.newGameIsStarted" class="restartButton" v-on:click="goToGameLobby">
             {{ uiLabels.playAgain }}
         </button>
+        <p v-if="!this.newGameIsStarted">
+            {{ uiLabels.wait1 }} {{ this.nailer }} {{ uiLabels.wait2 }}
+        </p>
     </div>
     <LeaderBoard class="leaderBoard" :players="leaderboard" :text="uiLabels.leaderBoard"/>
 </div>   
@@ -42,6 +45,7 @@ export default {
             wins: 0,
             leaderboard: [],
             word: "",
+            nailer: "",
         }
     },
     created: function () {
@@ -60,19 +64,23 @@ export default {
     socket.on("word", (word) => {
         this.word = word;
     });
+    socket.on("nail", nail => {
+        this.nailer = nail;
+    });
     socket.emit("getWord", this.pollId);
     socket.emit("getLeaderboard", this.pollId);
     socket.emit("getUILabels", this.lang);
 },
+
+    unmounted() {
+        socket.off("nail");
+        socket.off("newGameIsStarted");
+    },
+
     methods: {
     goToGameLobby: function() {
-        if(!this.newGameIsStarted) {
-                alert(this.uiLabels.waitForNewWord);
-            }
-            else {
-                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )
-                this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
-            }   
+            socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )
+            this.$router.push("/lobbyAll/" + this.pollId + '/' + this.userName);
 
     },
     getMyWins: function(leaderboard) {
