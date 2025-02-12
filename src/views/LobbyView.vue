@@ -156,7 +156,7 @@ export default {
         }
           if (this.userName.length > 12) {
           alert(this.uiLabels.nameTooLong); 
-        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName) {
+        } else if (this.participants.some(participant => participant.name === this.userName) || this.userName === poll.hostName.name) {
           alert(this.uiLabels.nameTaken);
         } else {
           this.participateInPoll();
