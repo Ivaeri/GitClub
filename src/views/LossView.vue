@@ -70,6 +70,7 @@ export default {
     socket.emit("getWord", this.pollId);
     socket.emit("getLeaderboard", this.pollId);
     socket.emit("getUILabels", this.lang);
+    socket.emit("getNailInCoffin", this.pollId);
 },
 
     unmounted() {
