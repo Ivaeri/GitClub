@@ -10,7 +10,13 @@
             {{ uiLabels.win2 }}
         </div>
     </header>
-    <button class="restartButton" v-on:click="goToGameLobby">
+    <button v-if="this.newGameIsStarted" class="restartButton" v-on:click="goToGameLobby">
+        {{ uiLabels.playAgain }}
+    </button>
+    <p v-if="!this.newGameIsStarted && this.nailer !=this.userName">
+        {{ uiLabels.wait1 }} {{ this.nailer }} {{ uiLabels.wait2 }}
+    </p>
+    <button v-if="this.nailer == this.userName" class="restartButton" v-on:click="startNewGame">
         {{ uiLabels.playAgain }}
     </button>
     <LeaderBoard class="leaderboard-container" :players="leaderboard" :text="uiLabels.leaderBoard"/>
@@ -66,21 +72,14 @@ export default {
     },
 
     methods: {
+
+    startNewGame: function() {
+        this.$router.push("/ChooseNewWord/" + this.pollId+ "/" + this.userName);
+    },
+    
     goToGameLobby: function() {
-        if (this.nailer === this.userName) {
-            this.$router.push("/ChooseNewWord/" + this.pollId+ "/" + this.userName);
-        } else {
-
-            if(!this.newGameIsStarted) {
-                alert(this.uiLabels.waitForNewWord);
-            }
-            else {
-                socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )
-                this.$router.push("/lobbyAll/" + this.pollId + "/" + this.userName);
-            }
-
-           
-}
+        socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName, wins: this.wins} )
+        this.$router.push("/lobbyAll/" + this.pollId + "/" + this.userName);
     },
     getMyWins: function(leaderboard) {
         for (let i = 0; i < leaderboard.length; i++) {
@@ -89,7 +88,9 @@ export default {
             }
         }
     }
-}}
+    }
+}
+
 
 
 </script>
