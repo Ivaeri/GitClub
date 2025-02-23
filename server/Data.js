@@ -132,9 +132,9 @@ Data.prototype.nailInCoffin = function (userName, pollId) {
     this.polls[pollId].NailInCoffin = userName;
     if (participant) {
       for (let i = 0; i < this.polls[pollId].participants.length; i++) {
-          this.polls[pollId].participants[i].wins += 0.5;
+          this.polls[pollId].participants[i].wins += 1;
           if (participant === this.polls[pollId].participants[i]) {
-            this.polls[pollId].participants[i].wins += 0.5;
+            this.polls[pollId].participants[i].wins += 1;
           }
       }
       ;}

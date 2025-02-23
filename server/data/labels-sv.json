@@ -60,13 +60,9 @@
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord...",
-<<<<<<< HEAD
-	"nameTooLong": "namnet får max vara 12 tecken långt"
-}
-=======
 	"nameTooLong": "namnet får max vara 12 tecken långt",
 	"wait1": "Väntar på att ",
 	"wait2": "väljer ett nytt ord...",
 	"guessWord": "Vill du gissa hela ordet?"
 }
->>>>>>> 9eaade2c6a5fd1d06a00bcb9e83fe2cfab053b25
+

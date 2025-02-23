@@ -341,7 +341,6 @@ socket.on( "index", (data) => {
         this.isGameWon = true;
         socket.emit("setGameToWon", this.pollId);
         socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.userName})
-        socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.userName})
         socket.emit("findIfWon", this.pollId)
         this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
       } else {
