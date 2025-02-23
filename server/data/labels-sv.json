@@ -5,7 +5,7 @@
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"about": "Om oss",
-	"titlegame": "Hänga Person",
+	"titlegame": "Häng Person",
 	"languagebox": "ENG",
 	"coop": "Samarbete",
 	"enterWordHere": "Skriv in ett ord här",
@@ -14,7 +14,7 @@
 	"typeWordPlaceHolder": "Skriv in ett ord här",
 	"sendWord": "Använd ord",
 	"start": "Starta Spel",
-	"enterWord": "Skriv ord här, (3-12 bokstäver)",
+	"enterWord": "Skriv ord här",
 	"name": "namn",
 	"enterUsername": "Vänligen fyll i ditt användarnamn",
 	"awaitingHost": "Inväntar att värden startar spelet",
@@ -39,20 +39,20 @@
 	"hanging": "s Hängning",
 	"awaitingHost1": "Inväntar att ",
 	"awaitingHost2": " påbörjar avrättningen",
-	"gameOver": "Spelet är över, du förlorade...",
+	"gameOver": "Spelet är över, du förlorade",
 	"manualEnter": "Du kan också gå med i spel genom att ange spel-ID nedan",
 	"guessedLetters": "Gissade bokstäver: ",
 	"host": "spelvärden",
-	"wrongGuesses": "Felaktiga bokstäver:",
-	"win1": "Grattis,",
-	"win2": "du vann! 🎉",
+	"wrongGuesses": "Felgissningar:",
+	"win1": "Grattis!",
+	"win2": "Du vann! 🎉",
 	"newHost": "Grattis, du är ny spelledare!",
 	"chooseNewWord": "Välj ett nytt ord:",
 	"nameTaken": "Kom igen, namnet är redan taget. VAR ORIGINELL!",
 	"skipPlayer": "Hoppa över spelare!",
 	"tooSlow": "För långsam?",
-	"noGames": "Inga aktiva spel just nu...",
-	"logo": "HÄNGA PERSON",
+	"noGames": "Inga aktiva spel just nu",
+	"logo": "HÄNG PERSON",
 	"playAgain": "Spela igen?",
 	"leaderBoard": "Topplista:",
 	"correctWord": "Ordet var: ",
@@ -60,8 +60,13 @@
 	"enterUsernameAndWord": "Vänligen fyll i ditt användarnamn och ordet du vill använda",
 	"reachedMaxPlayers": "Maximalt antal tillåtna spelare har anslutit",
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord...",
+<<<<<<< HEAD
+	"nameTooLong": "namnet får max vara 12 tecken långt"
+}
+=======
 	"nameTooLong": "namnet får max vara 12 tecken långt",
 	"wait1": "Väntar på att ",
 	"wait2": "väljer ett nytt ord...",
 	"guessWord": "Vill du gissa hela ordet?"
 }
+>>>>>>> 9eaade2c6a5fd1d06a00bcb9e83fe2cfab053b25
