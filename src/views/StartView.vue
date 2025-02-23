@@ -35,7 +35,7 @@ import Logo from "@/components/Logo.vue";
 import io from 'socket.io-client';
 import gameRules from '/server/gamerules.json';
 import HangPerson from "@/components/HangPerson.vue";
-//sessionStorage.setItem("dataServer", "172.20.10.2:3000")
+//sessionStorage.setItem("dataServer", "192.168.1.156:3000")
 sessionStorage.setItem("dataServer", "localhost:3000")
 const socket = io(sessionStorage.getItem("dataServer"));
 

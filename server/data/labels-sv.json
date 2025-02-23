@@ -62,5 +62,6 @@
 	"waitForNewWord": "Håll i hatten! Värden väljer ett nytt ord...",
 	"nameTooLong": "namnet får max vara 12 tecken långt",
 	"wait1": "Väntar på att ",
-	"wait2": "väljer ett nytt ord..."
+	"wait2": "väljer ett nytt ord...",
+	"guessWord": "Vill du gissa hela ordet?"
 }

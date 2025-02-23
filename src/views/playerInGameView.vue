@@ -52,6 +52,11 @@
               {{ uiLabels.submit }}
             </button>
             </div>
+            <div class="guessWord">
+              <button class="submitButton" v-on:click="geussWord">
+                {{uiLabels.guessWord}}
+              </button>
+            </div>
             <div class="keyboardHangman">
               <HangPerson v-bind:wrongGuesses="ammountWrongLetters" /> 
             </div>
@@ -172,7 +177,9 @@ socket.on( "index", (data) => {
     });
     socket.on("wonOrNot", (isWon) => {
       this.isGameWon = isWon;
-      this.setGameToWonViaData();
+      if (isWon) {
+        this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
+      }
     });    
 
     socket.on("lang", (data) => {
@@ -261,7 +268,7 @@ socket.on( "index", (data) => {
     
     setAmountWrongLetters(){
       if(!this.trueWord.includes(this.key)) {
-      socket.emit("addAmountWrongLetters", this.pollId);
+        socket.emit("addAmountWrongLetters", this.pollId);
       }
       
     },
@@ -326,6 +333,23 @@ socket.on( "index", (data) => {
    
         this.$router.push('/lossView/'+ this.pollId+ '/' + this.userName)
   
+    },
+
+    geussWord (){
+      let guess = prompt("Vilket ord tror du att det är?").toUpperCase();
+      if (guess == this.trueWord) {
+        this.isGameWon = true;
+        socket.emit("setGameToWon", this.pollId);
+        socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.userName})
+        socket.emit("NailInCoffin", {pollId: this.pollId, userName: this.userName})
+        socket.emit("findIfWon", this.pollId)
+        this.$router.push('/winView/'+ this.pollId+ '/' + this.userName)
+      } else {
+        this.ammountWrongLetters +=1;
+        this.setAmountWrongLetters();
+        this.sendAmountWrongLetters();
+        this.toggleIndexViaData();
+      }
     }
     
     }
@@ -554,6 +578,10 @@ socket.on( "index", (data) => {
 
       order: 1;
     }
+    .guessWord {
+      order: 3;
+      margin-top: 1.5em;
+    }
     .playerActiveWrapper{
       height: 25em;
     }
@@ -621,6 +649,10 @@ socket.on( "index", (data) => {
   }
 
   .guesspart{
+    padding-right: 4em;
+    z-index: 1000;
+  }
+  .guessWord{
     padding-right: 4em;
     z-index: 1000;
   }

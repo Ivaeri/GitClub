@@ -118,7 +118,9 @@ socket.on("amountWrongLetters", (data) => {
       
 
     socket.on("wonOrNot", (isWon) => {
-    this.sendToLossView(); 
+      if (isWon){
+        this.sendToLossView();
+      } 
       });  
   socket.on("lang", (data) => {
       if(data.pollId === this.pollId){
@@ -165,9 +167,8 @@ socket.on("amountWrongLetters", (data) => {
     },
 
     sendToLossView () {
-      if (this.correctguesses == this.enteredword.length) {
         this.$router.push('/lossView/'+ this.pollId + '/' + this.hostName)
-    }
+
   }}
   }
    </script>

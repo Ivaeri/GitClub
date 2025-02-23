@@ -60,5 +60,6 @@
 	"createTitle": "Create game",
 	"nameTooLong": "the name can be a maximum of twelve characters",
 	"wait1": "Waiting for ",
-	"wait2": " to choose a new word..."
+	"wait2": " to choose a new word...",
+	"guessWord": "Wanna guess the word?"
 }

@@ -75,7 +75,6 @@ Data.prototype.updateWord = function (word, pollId, hostName) {
 Data.prototype.setLang = function (pollId, lang) {
   if (this.polls[pollId]) {
       this.polls[pollId].lang = lang;      
-      console.log("lang set to:", lang)
   }
 };
 
